@@ -1,0 +1,22 @@
+.home > .container {
+	margin: 0rem auto 16rem;
+	padding-bottom: 15rem;
+	padding-top: 0;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.home > .menuArea {
+    margin-top: 20rem;
+    width: 10rem;
+    height: 50rem;
+    flex-direction: column;
+    float: left;
+    background-color: #8ECEC2;
+}
+
+.home > .mainArea{
+    margin-top: 20rem;
+    margin-bottom: 20rem;
+    float: left;
+}
