@@ -48,22 +48,6 @@ class Navigation extends Component {
                     className="d-inline-block align-top"
                 />{' '}
             </Navbar.Brand>
-            {/* <Nav className="mr-auto dropdownNav navitem"> */}
-            
-                {/* <Nav>
-                    <NavLink exact to="/home">
-                        <span className={styles.navitem}>
-                            Home
-                        </span>
-                    </NavLink>
-                    <NavLink exact to="/WorkerManage">
-                        <span className={styles.navitem}>
-                            근무자관리
-                        </span>
-                    
-                    </NavLink>
-                
-                </Nav> */}
                 <Nav className={styles.navUtill}>
                     <Nav.Item>
                         {userinfo.id === ""?

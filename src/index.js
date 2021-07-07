@@ -7,7 +7,6 @@ import { BrowserRouter } from 'react-router-dom';
 import reducer from './reducer/index';
 import configureStore from './store/index';
 
-import reportWebVitals from './reportWebVitals';
 
 const store = configureStore(reducer,{});
 
@@ -19,10 +18,6 @@ const render = () => {
       </Provider>
     </BrowserRouter>,
       document.getElementById('root')
-    // <React.StrictMode>
-    //   <App />
-    // </React.StrictMode>,
-    // document.getElementById('root')
   );
 };
 
