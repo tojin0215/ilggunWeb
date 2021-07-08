@@ -2,55 +2,39 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import {Nav, Navbar} from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-import {logoutRequest} from '../../action/authentication';
+import { logoutRequest } from '../../action/authentication';
 import styles from './Navigation.css';
-import imgLogo from '../../img/logo.png';
 
 class Navigation extends Component {
+  constructor(props) {
+    super(props);
+  }
+  handleLogout = () => {
+    this.props.logoutRequest().then(() => {
+      alert('로그아웃 되었습니다.');
 
-    constructor(props){
-        super(props);
-    }
-    handleLogout = () => {
-        this.props.logoutRequest().then(
-            () => {
-                alert('로그아웃 되었습니다.');
- 
-                // EMPTIES THE SESSION
-                let loginData = {
-                    isLoggedIn: false,
-                    username: ''
-                };
- 
-                document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-                
-                this.props.goLogin();
-                
-            }
-        );
-    }
+      // EMPTIES THE SESSION
+      let loginData = {
+        isLoggedIn: false,
+        username: '',
+      };
 
-    render(){
+      document.cookie = 'key=' + btoa(JSON.stringify(loginData));
 
-        const { userinfo } = this.props;
-        return(
+      this.props.goLogin();
+    });
+  };
 
-        <div className="Navigation">
+  render() {
+    const { userinfo } = this.props;
+    return (
+      <div className="Navigation">
         <Navbar className={styles.navbar}>
-            <Navbar.Brand href="/home">
-                <img
-                    alt="일꾼"
-                    src={imgLogo}
-                    width="auto"
-                    height="30"
-                    className="d-inline-block align-top"
-                />{' '}
-            </Navbar.Brand>
-            {/* <Nav className="mr-auto dropdownNav navitem"> */}
-            
-                {/* <Nav>
+          {/* <Nav className="mr-auto dropdownNav navitem"> */}
+
+          {/* <Nav>
                     <NavLink exact to="/home">
                         <span className={styles.navitem}>
                             Home
@@ -64,46 +48,50 @@ class Navigation extends Component {
                     </NavLink>
                 
                 </Nav> */}
-                <Nav className={styles.navUtill}>
-                    <Nav.Item>
-                        {userinfo.id === ""?
-                        null
-                        :
-                        <span className={styles.navitem}>
-                            {userinfo.manager_name}님
-                        </span>
-                        }
-                    </Nav.Item>
-                    <Nav.Item>
-                        {userinfo.id === ""?
-                        null
-                        :
-                        <button className='btnSolid' onClick={this.handleLogout}>
-                            LOG-OUT
-                        </button>
-                        }
-                        
-                    </Nav.Item>
-                </Nav>
-            
+          <Nav className={styles.navUtill}>
+            <Nav.Item style={{ border: '1px solid #000' }}>
+              대분류페이지 이름입니다.
+            </Nav.Item>
+            <Nav.Item style={{ border: '1px solid #000' }}>
+              상세페이지 이름입니다.
+            </Nav.Item>
+            <Nav.Item style={{ border: '1px solid #000' }}>
+                로그인 이름
+              {userinfo.id === '' ? null : (
+                <span className={styles.navitem}>
+                  {userinfo.manager_name}님
+                </span>
+              )}
+            </Nav.Item>
+            <Nav.Item style={{ border: '1px solid #000' }}>
+                로그아웃
+              {userinfo.id === '' ? null : (
+                <button className="btnSolid" onClick={this.handleLogout}>
+                  LOG-OUT
+                </button>
+              )}
+            </Nav.Item>
+          </Nav>
         </Navbar>
-        </div>
-        )
-    }
+      </div>
+    );
+  }
 }
 
 const navigationStateToProps = (state) => {
-    return {
-      userinfo: state.authentication.userinfo
-    }
-}
+  return {
+    userinfo: state.authentication.userinfo,
+  };
+};
 
 const navigationDispatchToProps = (dispatch) => {
-    return {
-        logoutRequest: () => {
-            return dispatch(logoutRequest());
-        }
-    };
+  return {
+    logoutRequest: () => {
+      return dispatch(logoutRequest());
+    },
+  };
 };
-export default connect(navigationStateToProps, navigationDispatchToProps)(Navigation);
-
+export default connect(
+  navigationStateToProps,
+  navigationDispatchToProps,
+)(Navigation);

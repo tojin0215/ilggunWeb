@@ -1,4 +1,10 @@
 export { default as Login } from './login/Login';
 export { default as Home } from './home/Home';
 export { default as WorkerManage } from './workerManage/WorkerManage';
-export { default as Another } from './workerManage/another';
+export { default as TaskManage } from './taskManage/TaskManage';
+export { default as WorkerManageStaff } from './workerManage/WorkerManageStaff';
+export { default as WorkerManageContract } from './workerManage/WorkerManageContract';
+export { default as PayManage } from './payManage/PayManage';
+export { default as PayManageExtra } from './payManage/PayManageExtra';
+export { default as PayDocument } from './payDocument/PayDocument';
+export { default as PayDocumentDetails } from './payDocument/PayDocumentDetails';

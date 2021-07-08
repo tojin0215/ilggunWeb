@@ -9,7 +9,7 @@ import Menu from '../../components/Navigation/Menu';
 
 import '../../styles/home/home.css';
 
-class Another extends Component {
+class Report extends Component {
 
     goLogin = () => {
         this.props.history.push("/");
@@ -30,10 +30,10 @@ class Another extends Component {
                 </div>
             
                 <div style={{flex:3.5, backgroundColor:'#cca9dd'}}>
-                    <h5>업무관리</h5>
-                    <h5>업무관리</h5>
-                    <h5>업무관리</h5>
-                    <h5>업무관리</h5>
+                    <h5>근로자관리</h5>
+                    <h5>근로자관리</h5>
+                    <h5>근로자관리</h5>
+                    <h5>근로자관리</h5>
 
                 </div>
             </div>
@@ -43,11 +43,11 @@ class Another extends Component {
     }
 }
 
-const AnotherStateToProps = (state) => {
+const ReportStateToProps = (state) => {
     return {
       userinfo: state.authentication.userinfo,
       //status: state.authentication.status
     }
 }
 
-export default connect(AnotherStateToProps, undefined)(Another);
+export default connect(ReportStateToProps, undefined)(Report);

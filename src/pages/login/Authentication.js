@@ -116,7 +116,7 @@ class Authentication extends Component {
         );
 
         return (
-          <div className="container auth">
+          <div className="container auth sectionGlass">
               <div className='welcomeMent'>
                   <p>Hello,</p>
                   <p>안녕하세요</p>

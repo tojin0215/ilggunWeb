@@ -1,0 +1,8 @@
+/* 사이드네비게이션의 하위 메뉴 패딩 값입니다. */
+.side-navigation-panel
+  .side-navigation-panel-select
+  .side-navigation-panel-select-inner
+  .side-navigation-panel-select-inner-wrap
+  .side-navigation-panel-select-inner-option {
+  padding: 0.5rem 3rem;
+}
