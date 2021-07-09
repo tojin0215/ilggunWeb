@@ -8,3 +8,5 @@ export { default as PayManage } from './payManage/PayManage';
 export { default as PayManageExtra } from './payManage/PayManageExtra';
 export { default as PayDocument } from './payDocument/PayDocument';
 export { default as PayDocumentDetails } from './payDocument/PayDocumentDetails';
+export { default as Message } from './message/Message';
+export { default as MessageSended } from './message/MessageSended';

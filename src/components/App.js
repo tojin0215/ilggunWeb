@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import { Route } from 'react-router-dom';
-import { Login, Home, WorkerManage, WorkerManageContract, WorkerManageStaff, TaskManage, PayManage, PayManageExtra, PayDocument, PayDocumentDetails } from '../pages';
+import { Login, Home, WorkerManage, WorkerManageContract, WorkerManageStaff, TaskManage, PayManage, PayManageExtra, PayDocument, PayDocumentDetails, Message, MessageSended } from '../pages';
 
 import '../styles/basic/layout.css';
 import '../styles/basic/block.css';
@@ -23,6 +23,8 @@ class App extends Component {
       <Route exact path='/payManage/extra' component={PayManageExtra} />
       <Route exact path='/payDocument' component={PayDocument} />
       <Route exact path='/payDocument/details' component={PayDocumentDetails}/>
+      <Route exact path='/message' component={Message} />
+      <Route exact path='/message/sended' component={MessageSended} />
     </div>
     );
   }

@@ -6,3 +6,14 @@
   .side-navigation-panel-select-inner-option {
   padding: 0.5rem 3rem;
 }
+
+.side-navigation-panel
+  .side-navigation-panel-select
+  .side-navigation-panel-select-wrap
+  .side-navigation-panel-select-option
+  .side-navigation-panel-select-option-wrap
+  .side-navigation-panel-select-option-text {
+  /* color: #fff; */
+  font-weight: 700;
+  font-size: 1.16rem;
+}

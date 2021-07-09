@@ -90,31 +90,35 @@ const Menu = (props) => {
             },
             {
               title: '메시지함',
-              itemId: '/another4',
+              itemId: '/message',
               subNav: [
                 {
                   title: '받은 메시지함',
-                  itemId: '/another4',
+                  itemId: '/message',
                 },
                 {
                   title: '보낸 메시지함',
-                  itemId: '/another4/1',
+                  itemId: '/message/sended',
                 }
               ],
             },
             {
               title: '리포트',
-              itemId: '/another4',
+              itemId: '/',
               subNav: [
                 {
                   title: '자료실',
-                  itemId: '/another4/1',
+                  itemId: '/',
                 },
                 {
                   title: '메일보내기',
-                  itemId: '/another4/2',
+                  itemId: '/',
                 },
               ],
+            },
+            {
+              title: '견적내기 사이트 링크',
+              itemId: '/',
             },
           ]}
         />
