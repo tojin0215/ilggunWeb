@@ -10,3 +10,4 @@ export { default as PayDocument } from './payDocument/PayDocument';
 export { default as PayDocumentDetails } from './payDocument/PayDocumentDetails';
 export { default as Message } from './message/Message';
 export { default as MessageSended } from './message/MessageSended';
+export { default as SendMail } from './message/SendMail';

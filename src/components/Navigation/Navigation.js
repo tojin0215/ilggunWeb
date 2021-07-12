@@ -33,7 +33,6 @@ class Navigation extends Component {
       <div className="Navigation">
         <Navbar className={styles.navbar}>
           {/* <Nav className="mr-auto dropdownNav navitem"> */}
-
           {/* <Nav>
                     <NavLink exact to="/home">
                         <span className={styles.navitem}>
@@ -44,26 +43,27 @@ class Navigation extends Component {
                         <span className={styles.navitem}>
                             근무자관리
                         </span>
-                    
                     </NavLink>
-                
                 </Nav> */}
           <Nav className={styles.navUtill}>
-            <Nav.Item style={{ border: '1px solid #000' }}>
+            <Nav.Item style={{ border: '1px solid #000', marginLeft: '50px', padding:'5px' }}>
               대분류페이지 이름입니다.
             </Nav.Item>
-            <Nav.Item style={{ border: '1px solid #000' }}>
+            <Nav.Item style={{ border: '1px solid #000', marginRight: '700px', padding:'5px' }}>
               상세페이지 이름입니다.
             </Nav.Item>
-            <Nav.Item style={{ border: '1px solid #000' }}>
-                로그인 이름
+            <Nav.Item style={{ border: '1px solid #000', padding:'5px' }}>
+              사업장 선택바 ▼
+            </Nav.Item>
+            <Nav.Item style={{ border: '1px solid #000', padding:'5px' }}>
+                관리자 이름
               {userinfo.id === '' ? null : (
                 <span className={styles.navitem}>
                   {userinfo.manager_name}님
                 </span>
               )}
             </Nav.Item>
-            <Nav.Item style={{ border: '1px solid #000' }}>
+            <Nav.Item style={{ border: '1px solid #000', padding:'5px' }}>
                 로그아웃
               {userinfo.id === '' ? null : (
                 <button className="btnSolid" onClick={this.handleLogout}>

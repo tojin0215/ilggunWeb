@@ -99,22 +99,16 @@ const Menu = (props) => {
                 {
                   title: '보낸 메시지함',
                   itemId: '/message/sended',
+                },
+                {
+                  title: '메일 보내기',
+                  itemId: '/message/sendMail',
                 }
               ],
             },
             {
-              title: '리포트',
-              itemId: '/',
-              subNav: [
-                {
-                  title: '자료실',
-                  itemId: '/',
-                },
-                {
-                  title: '메일보내기',
-                  itemId: '/',
-                },
-              ],
+              title: '자료실',
+              itemId: '/'
             },
             {
               title: '견적내기 사이트 링크',
