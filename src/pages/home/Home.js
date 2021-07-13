@@ -76,13 +76,8 @@ class Home extends Component {
                 <div style={{flex:1}}>
                     <Menu/>
                 </div>
-            
                 <div style={{flex:4, backgroundColor:'#cca9dd'}}>
                     <h5>Home</h5>
-                    <h5>Home</h5>
-                    <h5>Home</h5>
-                    <h5>Home</h5>
-
                 </div>
             </div>
             

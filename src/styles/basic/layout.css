@@ -3,9 +3,10 @@
 }
 
 .wrap {
-  margin-left: 200px;
   width: calc(100% - 200px);
   height: 100vh;
+  padding-top: 60px;
+  margin-left: 200px;
   overflow: scroll;
   border-radius: 58px 0 0 58px;
   background-color: #fff;

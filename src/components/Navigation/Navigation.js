@@ -49,7 +49,7 @@ class Navigation extends Component {
             <Nav.Item style={{ border: '1px solid #000', marginLeft: '50px', padding:'5px' }}>
               대분류페이지 이름입니다.
             </Nav.Item>
-            <Nav.Item style={{ border: '1px solid #000', marginRight: '700px', padding:'5px' }}>
+            <Nav.Item style={{ border: '1px solid #000', padding:'5px' }}>
               상세페이지 이름입니다.
             </Nav.Item>
             <Nav.Item style={{ border: '1px solid #000', padding:'5px' }}>
@@ -78,13 +78,13 @@ class Navigation extends Component {
   }
 }
 
-const navigationStateToProps = (state) => {
+const NavigationStateToProps = (state) => {
   return {
     userinfo: state.authentication.userinfo,
   };
 };
 
-const navigationDispatchToProps = (dispatch) => {
+const NavigationDispatchToProps = (dispatch) => {
   return {
     logoutRequest: () => {
       return dispatch(logoutRequest());
@@ -92,6 +92,6 @@ const navigationDispatchToProps = (dispatch) => {
   };
 };
 export default connect(
-  navigationStateToProps,
-  navigationDispatchToProps,
+  NavigationStateToProps,
+  NavigationDispatchToProps,
 )(Navigation);

@@ -44,29 +44,15 @@ class Login extends Component {
 
     render() {
         return (
-            <div className='wrap loginWrap'>
-                <div className='header'>
-                    <Header />
-                    <Navigation/>
-                </div>
-                <div className='localNavigation'>
-                    <div className='container'>
-                        <h2>
-                            <div className='parallelogram'></div>
-                            로그인
-                            <span>.</span>
-                        </h2>
-                    </div>
-                </div>
+            <div className='wrap'>
+                <Header />
+                <Navigation />
                 <div className='container'>
-                  <Authentication 
-                  mode={true} 
-                  onLogin={this.handleLogin}/>
-                  
+                  <Authentication
+                  mode={ true }
+                  onLogin={ this.handleLogin } />
                 </div>
-                <div className='footer'>
-                    <Footer />
-                </div>
+                <Footer />
             </div>
         );
     }
