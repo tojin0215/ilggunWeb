@@ -9,7 +9,7 @@ import Menu from '../../components/Navigation/Menu';
 
 import '../../styles/home/home.css';
 
-class WorkerManage extends Component {
+class WorkerManageContract extends Component {
   goLogin = () => {
     this.props.history.push('/');
   };
@@ -25,16 +25,25 @@ class WorkerManage extends Component {
         <div className="container">
           <Menu />
           <article style={{ border:'1px solid #000', padding:'10px', margin:'10px' }}>
-            근로계약서-직원 목록 아티클입니다.
+            직원관리/근로계약서의 직원 근로계약서 상세 아티클입니다.<br/>
             <form style={{ border:'1px solid #000', padding:'10px', margin:'10px' }}>
-              <input placeholder="검색 창입니다." />
-              <button>검색 버튼입니다.</button>
+              이름 및 조작 버튼이 들어가는 공간입니다.<br/>
+              <span style={{ border:'1px solid #000', padding:'10px', margin:'10px' }}>
+                직원 이름
+              </span>
+              <button>
+                작성/수정
+              </button>
+              <button>
+                다운로드
+              </button>
+              <button>
+                프린트
+              </button>
             </form>
             <div style={{ border:'1px solid #000', padding:'10px', margin:'10px' }}>
-              직원 목록 표시 공간입니다. 정규직/비정규직, 근로계약서이 표시됩니다.<br/>
-              <span> 사원이름 </span>
-              <span> 정규직/비정규직 </span>
-              <button>근로계약서</button>
+              해당 직원의 근로계약서 내용이 표시됩니다.<br/>
+              작성되지 않은 경우 근로계약서 내에 작성할 수 있는 input 공간이 들어갑니다.<br/>
             </div>
           </article>
         </div>
@@ -44,11 +53,11 @@ class WorkerManage extends Component {
   }
 }
 
-const WorkerManageStateToProps = (state) => {
+const WorkerManageContractStateToProps = (state) => {
   return {
     userinfo: state.authentication.userinfo,
     //status: state.authentication.status
   };
 };
 
-export default connect(WorkerManageStateToProps, undefined)(WorkerManage);
+export default connect(WorkerManageContractStateToProps, undefined)(WorkerManageContract);
