@@ -117,15 +117,6 @@ const Menu = (props) => {
           ]}
         />
       </>
-        // <div>
-        //     <div style={{width:'20vw', marginTop:'4vw'}}>
-        //         <div style={styles.liStyle}><NavLink exact to="/Home" activeStyle={activeStyle} style={styles.textStyle1}>홈</NavLink></div>
-        //         <div style={styles.liStyle}><NavLink exact to="/Workermanage" activeStyle={activeStyle} style={styles.textStyle1}>근로자 관리</NavLink></div> 
-        //         {/*<li><NavLink exact to="/posts" activeStyle={activeStyle}>Posts</NavLink></li>
-        //         <li><NavLink exact to="/Businesslist" activeStyle={activeStyle}>About</NavLink></li>
-        //         <li><NavLink exact to="/Businesslist/foo" activeStyle={activeStyle}>About Foo</NavLink></li>*/}
-        //     </div>
-        // </div>
     );
 };
 
