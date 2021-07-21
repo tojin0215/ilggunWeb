@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 class Authentication extends Component {
   state = {
+    mode: false,
     id: '',
     password: '',
   };
@@ -81,6 +82,7 @@ class Authentication extends Component {
         <div className="card-content">
           <div className="row">
             {inputBoxes}
+            <button onClick={this.handleLogin}>LOGIN</button>
             <a
               className="waves-effect waves-light btn"
               onClick={this.handleLogin}

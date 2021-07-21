@@ -1,5 +1,6 @@
 
 import {SERVER_URL} from '../const/setting';
+import { postUserLogin, getUserStatus, deleteUserStatus } from './api';
 
 export const AUTH_LOGIN = "AUTH_LOGIN";
 export const AUTH_LOGIN_SUCCESS = "AUTH_LOGIN_SUCCESS";
@@ -11,6 +12,7 @@ export const AUTH_GET_STATUS_SUCCESS = "AUTH_GET_STATUS_SUCCESS";
 export const AUTH_GET_STATUS_FAILURE = "AUTH_GET_STATUS_FAILURE";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
+
 const ip = SERVER_URL;
 
 /* LOGIN */
@@ -20,16 +22,7 @@ export function loginRequest(id, password) {
     dispatch(login());
 
     // API REQUEST
-    return fetch(ip+"/user", {
-        method: "POST",
-        credentials: 'include',
-        headers: {
-        'Content-type': 'application/json'
-        },
-        body: JSON.stringify({
-            id, password
-        })
-    })
+    return postUserLogin(id, password)
     .then(response => response.json())
     .then((response) => {
         console.log(response)
@@ -41,7 +34,8 @@ export function loginRequest(id, password) {
             // FAILED
             dispatch(loginFailure());
         }
-    });
+    })
+    .catch(response => console.error(response));
   };
 }
 
@@ -68,7 +62,7 @@ export function loginFailure() {
 
 export function loginWaiting(){
     return{
-        type:AUTH_LOGIN_WAITING
+        type: AUTH_LOGIN_WAITING
     };
 }
 
@@ -80,13 +74,7 @@ export function getStatusRequest() {
         console.log('____getStatus', getStatus())
 
         dispatch(getStatus());
-        return fetch(ip+"/user?type=session", {
-            method: "GET",
-            headers: {
-                'Content-type': 'application/json'
-            },
-            credentials: 'include'
-        })
+        return getUserStatus()
         .then(response => response.json())
         .then((response) => {
             if(response.err==undefined){
@@ -123,14 +111,10 @@ export function getStatusFailure() {
 }
 export function logoutRequest() {
     return (dispatch) => {
-        return fetch(ip+"/user?type=session", {
-            method: "DELETE",
-            credentials: 'include'
-        })
+        return deleteUserStatus()
         .then((response) => {
             dispatch(logout());
         });
-
     };
 }
  
