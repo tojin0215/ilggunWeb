@@ -4,12 +4,13 @@ import './App.css';
 import { Route } from 'react-router-dom';
 import { Login, Home, WorkerManage, WorkerManageContract, WorkerManageStaff, TaskManage, PayManage, PayManageExtra, PayDocument, PayDocumentDetails, Message, MessageSended, SendMail, Download } from '../pages';
 
-import '../styles/basic/layout.css';
-import '../styles/basic/block.css';
 import '../styles/basic/basic.css';
-import '../styles/basic/text.css';
+import '../styles/basic/block.css';
+import '../styles/basic/button.css';
 import '../styles/basic/input.css';
+import '../styles/basic/layout.css';
 import '../styles/basic/sideNavigation.css';
+import '../styles/basic/text.css';
 
 class App extends Component {
   render() {

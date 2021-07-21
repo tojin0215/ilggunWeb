@@ -85,7 +85,7 @@ class Authentication extends Component {
               className="waves-effect waves-light btn"
               onClick={this.handleLogin}
             >
-              <button>LOGIN</button>
+              <button className='button-line text-h4'>LOGIN</button>
             </a>
           </div>
         </div>

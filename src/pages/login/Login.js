@@ -44,6 +44,9 @@ class Login extends Component {
                   <Authentication
                   mode={ true }
                   onLogin={ this.handleLogin } />
+                  <div>
+                      이미지 공간입니다.
+                  </div>
                 </div>
                 <Footer />
             </div>
