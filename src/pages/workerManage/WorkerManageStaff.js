@@ -7,7 +7,13 @@ import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 
+import Table2 from '../../components/Navigation/Table2';
+import data from '../../components/Navigation/data';
+
+
 import '../../styles/home/home.css';
+
+
 
 class WorkerManageStaff extends Component {
   goLogin = () => {
@@ -18,6 +24,8 @@ class WorkerManageStaff extends Component {
     const { userinfo } = this.props;
     console.log('userinfo : ', userinfo);
 
+    const clickhandler = name => console.log("delete", name);
+
     return (
       <div className="wrap">
         <Header />
@@ -26,7 +34,8 @@ class WorkerManageStaff extends Component {
           <Menu />
           <article style={{ border:'1px solid #000', padding:'10px', margin:'10px' }}>
             직원관리/직원관리의 직원 목록 아티클입니다.
-            <form style={{ border:'1px solid #000', padding:'10px', margin:'10px' }}>
+            <Table2 data={data} click={clickhandler}/>
+            {/* <form style={{ border:'1px solid #000', padding:'10px', margin:'10px' }}>
               <input placeholder="검색 창입니다." />
               <button>검색 버튼입니다.</button>
             </form>
@@ -40,7 +49,8 @@ class WorkerManageStaff extends Component {
               <span style={{ border:'1px solid #000', padding:'10px' }}> 입사일 </span>
               <span style={{ border:'1px solid #000', padding:'10px' }}> 직책(업무) </span>
               <button style={{ border:'1px solid #000', padding:'10px' }}> 퇴직처리 </button>
-            </div>
+            </div> */}
+
           </article>
         </div>
         <Footer />

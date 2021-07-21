@@ -7,7 +7,12 @@ import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 
+import Table3 from '../../components/Navigation/Table3';
+import data from '../../components/Navigation/data';
+
+
 import '../../styles/home/home.css';
+
 
 class TaskManage extends Component {
   goLogin = () => {
@@ -17,6 +22,8 @@ class TaskManage extends Component {
   render() {
     const { userinfo } = this.props;
     console.log('userinfo : ', userinfo);
+
+    const clickhandler = name => console.log("delete", name);
 
     return (
       <div className="wrap">
@@ -65,10 +72,11 @@ class TaskManage extends Component {
             }}
           >
             <h4>오늘의 근무자</h4>
-            <span> 사원이름 </span>
+            <Table3 data={data} click={clickhandler}/>
+            {/* <span> 사원이름 </span>
             <span> 출근시간 </span>
             <span> 퇴근시간 </span>
-            <span> 휴가 </span>
+            <span> 휴가 </span> */}
           </div>
         </div>
         <Footer />
