@@ -9,8 +9,9 @@ import Navigation from '../../components/Navigation/Navigation';
 import { connect } from 'react-redux';
 import {loginRequest} from '../../action/authentication';
 
-
 import '../../styles/login/login.css';
+
+import imgloginvisual from '../../img/loginVisual.png';
 
 
 class Login extends Component {
@@ -37,15 +38,15 @@ class Login extends Component {
 
     render() {
         return (
-            <div className='wrap'>
+            <div className='wrap wrap_login'>
                 <Header />
                 <Navigation />
                 <div className='container'>
                   <Authentication
                   mode={ true }
                   onLogin={ this.handleLogin } />
-                  <div>
-                      이미지 공간입니다.
+                  <div className='card-visual'>
+                      <img src={ imgloginvisual } alt='로그인 배경 이미지' />
                   </div>
                 </div>
                 <Footer />

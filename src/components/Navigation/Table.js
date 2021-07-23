@@ -3,6 +3,8 @@ import React, { useMemo } from 'react';
 import DataTable from 'react-data-table-component';
 import FilterComponent from './FilterComponent';
 
+import './table.css';
+import imgsearch from '../../img/search.png'
 
 const Table = props => {
   const columns = [
@@ -17,7 +19,7 @@ const Table = props => {
       grow:2,
       cell: row =>
           row.showButtons ? (
-            <> 
+            <>
               <button>정규직</button>
               <button>비정규직</button>
             </>
@@ -30,10 +32,10 @@ const Table = props => {
       cell: row =>
           row.showButtons ? (
             <>
-              <button>작성</button>            
-              <button>미작성</button>                    
-            </>    
-            ) : null  
+              <button>작성</button>
+              <button>미작성</button>
+            </>
+            ) : null
     },
     {
       name: "근로계약서",
@@ -41,7 +43,7 @@ const Table = props => {
       grow:2,
       cell: row =>
           row.showButtons ? (
-            <>           
+            <>
               <button>근로계약서</button>
             </>
           ) : null
@@ -82,8 +84,8 @@ const Table = props => {
   return (
     <DataTable
       defaultSortField="id"
-      defaultSortAsc={false}               
-      selectableRows
+      defaultSortAsc={false}
+      // selectableRows
       highlightOnHover
       pointerOnHover
       noHeader

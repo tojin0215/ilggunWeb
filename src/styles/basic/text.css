@@ -3,6 +3,7 @@
 html * {
   font-family: 'NanumSquare', sans-serif;
   font-size: 16px;
+  letter-spacing: -0.1rem;
 }
 
 .text-extrabold {
@@ -71,6 +72,6 @@ html * {
   line-height: 1.5rem;
 }
 
-.text-point {
+.color-point {
   color: #67c7b9;
 }

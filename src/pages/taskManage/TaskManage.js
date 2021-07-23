@@ -26,7 +26,7 @@ class TaskManage extends Component {
     const clickhandler = name => console.log("delete", name);
 
     return (
-      <div className="wrap">
+      <div className="wrap warp_taskmanage">
         <Header />
         <Navigation goLogin={this.goLogin} />
         <div className="container">
@@ -63,20 +63,9 @@ class TaskManage extends Component {
                 </div>
             </article>
           </div>
-          <div
-            style={{
-                width:'100%',
-              border: '1px solid #000',
-              padding: '10px',
-              margin: '10px',
-            }}
-          >
+          <div className='sectionShadow'>
             <h4>오늘의 근무자</h4>
             <Table3 data={data} click={clickhandler}/>
-            {/* <span> 사원이름 </span>
-            <span> 출근시간 </span>
-            <span> 퇴근시간 </span>
-            <span> 휴가 </span> */}
           </div>
         </div>
         <Footer />

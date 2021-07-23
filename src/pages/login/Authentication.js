@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import imgPerson from '../../img/person.png';
+import imgPassword from '../../img/password.png';
+
 
 class Authentication extends Component {
   state = {
@@ -52,26 +55,36 @@ class Authentication extends Component {
   render() {
     const inputBoxes = (
       <div>
-        <div className="input-field col s12 id">
-          <label>아이디</label>
-          <input
-            name="id"
-            type="text"
-            className="validate"
-            onChange={this.handleChange}
-            value={this.state.id}
-          />
+        <div className="input-field input-underline input-id">
+          <label>
+            <div className='label-icon'>
+              <img src={ imgPerson } alt='로그인 아이콘'/>
+            </div>
+            <p className='color-point text-h5'>아이디</p>
+            <input
+              name="id"
+              type="text"
+              className="validate text-h5"
+              onChange={this.handleChange}
+              value={this.state.id}
+            />
+          </label>
         </div>
-        <div className="input-field col s12">
-          <label>비밀번호</label>
-          <input
-            name="password"
-            type="password"
-            className="validate"
-            onChange={this.handleChange}
-            value={this.state.password}
-            onKeyPress={this.handleKeyPress}
-          />
+        <div className="input-field input-underline input-password">
+          <label className='color-point text-h5'>
+            <div className='label-icon'>
+              <img src={ imgPassword } alt='비밀번호 아이콘'/>
+            </div>
+            <p className='color-point text-h5'>비밀번호</p>
+            <input
+              name="password"
+              type="password"
+              className="validate"
+              onChange={this.handleChange}
+              value={this.state.password}
+              onKeyPress={this.handleKeyPress}
+            />
+          </label>
         </div>
       </div>
     );
@@ -85,7 +98,7 @@ class Authentication extends Component {
               className="waves-effect waves-light btn"
               onClick={this.handleLogin}
             >
-              <button className='button-line text-h4'>LOGIN</button>
+              <button className='button-solid text-h5'>로그인</button>
             </a>
           </div>
         </div>
@@ -116,10 +129,10 @@ class Authentication extends Component {
 
     return (
       <div className="container auth">
-        <div className="text-h2">
-          <p className='text-bold text-h2'>편리한 근태관리 서비스</p>
-          <p className="text-h2">
-            <span className='text-h1 text-point text-extrabold'>일꾼</span>에 오신 것을 환영합니다.
+        <div>
+          <p className='text-bold text-h4'>편리한 근태관리 서비스</p>
+          <p className="text-h4">
+            <span className='text-h3 color-point text-bold'>일꾼</span>에 오신 것을 환영합니다.
           </p>
         </div>
         <div className="card">
