@@ -10,6 +10,7 @@ import './Navigation.css';
 
 class Navigation extends Component {
   constructor(props) {
+    console.log("render",props);
     super(props);
   }
   handleLogout = () => {
@@ -57,7 +58,7 @@ class Navigation extends Component {
               사업장 선택바 ▼
             </Nav.Item>
             <Nav.Item style={{ border: '1px solid #000', padding:'5px' }}>
-                관리자 이름
+                {/* 관리자 이름 */}
               {userinfo.id === '' ? null : (
                 <span className={styles.navitem}>
                   {userinfo.manager_name}님

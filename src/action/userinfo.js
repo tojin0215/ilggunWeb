@@ -6,7 +6,7 @@ const GET_BUSINESS = 'GET_BUSINESS'
 
 // action creators
 function setUser(text) {
-	return { type: SET_USER,  text};
+	return { type: SET_USER, text };
 }
 
 function setUser2() {

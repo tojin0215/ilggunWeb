@@ -15,18 +15,24 @@ import imgloginvisual from '../../img/loginVisual.png';
 
 
 class Login extends Component {
+    constructor(props) {
+        super(props);
+    }
     handleLogin = (id, pw) => {
         return this.props.loginRequest(id, pw).then(
             () => {
+                console.log(this.props.status)
                 if(this.props.status === "SUCCESS") {
                     // create session data
                     let loginData = {
                         isLoggedIn: true,
-                        id: id
+                        id: id,
+                        pw: pw
                     };
                     document.cookie = 'key=' + btoa(JSON.stringify(loginData));
                     alert(id + '님 반갑습니다.') 
-                    this.props.history.push('/home');
+                    this.props.history.push('/selectBusiness');
+                    // this.props.history.push('/home');
                     return true;
                 } else {
                     alert('ID나 비밀번호를 확인해주세요.');
@@ -53,9 +59,6 @@ class Login extends Component {
             </div>
         );
     }
-
-    
-
 };
 
  

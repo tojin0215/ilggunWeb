@@ -53,6 +53,7 @@ class Authentication extends Component {
       }
     }
   };
+
   render() {
     const inputBoxes = (
       <div>

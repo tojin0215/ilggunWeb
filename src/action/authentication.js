@@ -25,17 +25,22 @@ export function loginRequest(id, password) {
     return postUserLogin(id, password)
     .then(response => response.json())
     .then((response) => {
-        console.log(response)
-        console.log(response.code)
-        if(response.success){
+        console.debug(response);
+        if(response.id){
             // SUCCEED
             dispatch(loginSuccess(response));
-        }else{
+        } else if (response[0].id) {
+            // SUCCEED
+            dispatch(loginSuccess(response[0]));
+        } else{
             // FAILED
             dispatch(loginFailure());
         }
     })
-    .catch(response => console.error(response));
+    .catch(response => {
+        console.error(response);
+        dispatch(loginFailure());
+    });
   };
 }
 
@@ -46,11 +51,13 @@ export function login() {
 }
  
 export function loginSuccess(info) {
+    console.debug("loginSuccess : ", info);
     return {
         type: AUTH_LOGIN_SUCCESS,
-        id:info.id,
-        manager_name:info.manager_name,
-        business_name:info.business_name,
+        id: info.id,
+        manager_name: info.name,
+        // manager_name: info.manager_name,
+        business_name: info.business_name,
     };
 }
  

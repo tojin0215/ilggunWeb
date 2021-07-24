@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import { Route } from 'react-router-dom';
-import { Login, Home, WorkerManage, WorkerManageContract, WorkerManageStaff, TaskManage, PayManage, PayManageExtra, PayDocument, PayDocumentDetails, Message, MessageSended, SendMail, Download } from '../pages';
+import { Login, Home, WorkerManage, WorkerManageContract, WorkerManageStaff, TaskManage, PayManage, PayManageExtra, PayDocument, PayDocumentDetails, Message, MessageSended, SendMail, Download, SelectBusiness } from '../pages';
 
 import '../styles/basic/basic.css';
 import '../styles/basic/block.css';
-import '../styles/basic/button.css';
+// import '../styles/basic/button.css';
 import '../styles/basic/input.css';
 import '../styles/basic/layout.css';
 import '../styles/basic/sideNavigation.css';
@@ -18,6 +18,7 @@ class App extends Component {
     <div>
       <Route exact path="/" component={Login}/>
       <Route exact path="/home" component={Home}/>
+      <Route exact path="/selectBusiness" component={SelectBusiness}/>
       <Route exact path="/workerManage" component={WorkerManage}/>
       <Route exact path='/workerManage/staff' component={WorkerManageStaff}/>
       <Route exact path='/workerManage/contract' component={WorkerManageContract}/>

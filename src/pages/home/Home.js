@@ -6,11 +6,15 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
-import {getStatusRequest} from '../../action/authentication';
+import {loginRequest} from '../../action/authentication';
 
 import '../../styles/home/home.css';
 
 class Home extends Component {
+    constructor(props) {
+      console.log("render",props);
+      super(props);
+    }
 
     goLogin = () => {
         this.props.history.push("/");
@@ -29,7 +33,7 @@ class Home extends Component {
         if(typeof loginData === "undefined"){
             this.props.history.push('/');
             return;
-        } 
+        }
 
         // decode base64 & parse json
         loginData = JSON.parse(atob(loginData));
@@ -37,14 +41,16 @@ class Home extends Component {
         if(!loginData.isLoggedIn){
             this.props.history.push('/');
             return;
-        } 
+        }
 
         // page refreshed & has a session in cookie,
         // check whether this cookie is valid or not
-        this.props.getStatusRequest().then(
+        this.props.loginRequest(loginData.id, loginData.pw).then(
             () => {
+                console.log(this.props.status);
                 // if session is not valid
-                if(!this.props.status.valid) {
+                // if(!this.props.status.valid) {
+                if(!this.props.status.isLoggedIn) {
                     // logout the session
                     loginData = {
                         isLoggedIn: false,
@@ -55,6 +61,14 @@ class Home extends Component {
    
                     // and notify
                     alert("Your session is expired, please log in again")
+                } else {
+                    let loginData2 = {
+                        isLoggedIn: true,
+                        id: loginData.id,
+                        pw: loginData.pw
+                    };
+                    document.cookie = 'key=' + btoa(JSON.stringify(loginData2));
+                    alert(loginData.id + '님 반갑습니다.') 
                 }
                 // else{
                 //     this.cusFetch();//기본값
@@ -65,7 +79,6 @@ class Home extends Component {
 
     render() {
         const { userinfo } = this.props;
-        console.log("userinfo : ", userinfo);
 
       return (
         
@@ -88,6 +101,7 @@ class Home extends Component {
 }
   
 const HomeStateToProps = (state) => {
+    console.debug("userinfo : ", state);
     return {
       userinfo: state.authentication.userinfo,
       status: state.authentication.status
@@ -96,8 +110,8 @@ const HomeStateToProps = (state) => {
 
 const HomeDispatchToProps = (dispatch) => {
     return {
-        getStatusRequest: () => {
-            return dispatch(getStatusRequest());
+        loginRequest: () => {
+            return dispatch(loginRequest());
         },
     };
 };
