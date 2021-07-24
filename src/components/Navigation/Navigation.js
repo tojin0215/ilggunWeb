@@ -6,6 +6,7 @@ import { Nav, Navbar } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import { logoutRequest } from '../../action/authentication';
 import styles from './Navigation.css';
+import './Navigation.css';
 
 class Navigation extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class Navigation extends Component {
   render() {
     const { userinfo } = this.props;
     return (
-      <div className="Navigation">
+      <div className="navigation">
         <Navbar className={styles.navbar}>
           {/* <Nav className="mr-auto dropdownNav navitem"> */}
           {/* <Nav>

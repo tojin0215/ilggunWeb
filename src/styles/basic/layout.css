@@ -5,7 +5,7 @@
 .wrap {
   width: calc(100% - 200px);
   height: 100vh;
-  padding-top: 60px;
+  padding-top: 15px;
   margin-left: 200px;
   overflow: scroll;
   border-radius: 58px 0 0 58px;
@@ -13,8 +13,9 @@
 }
 
 .wrap > .container {
+  position: relative;
   min-height: 1000px;
-  padding-top: 100px;
+  padding-top: 170px;
 }
 
 .side-navigation-panel {
@@ -58,4 +59,8 @@
   width: auto;
   height: 100%;
   margin: 0 auto;
+}
+
+.card-content {
+  padding: 70px 0;
 }

@@ -1,6 +1,6 @@
-.sectionGlass {
-	border-radius: 2.5rem;
-	padding: 4rem 3rem;
-	margin-top: 3rem;
-	box-shadow: 6px 4px 11px rgba(187, 187, 187, 0.75);
+.sectionShadow {
+  border-radius: 25px;
+  padding: 40px 30px;
+  margin: 30px 15px 0 15px;
+  box-shadow: 6px 10px 12.75px 2.25px rgba(87, 178, 163, 0.4);
 }

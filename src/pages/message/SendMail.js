@@ -61,7 +61,7 @@ class SendMail extends Component {
                      첨부파일
                     </span>
                     <span style={{ border:'1px solid #000', padding: '10px' }}>
-                     첨부파일.ecxel
+                     첨부파일.excel
                     </span>
                     <button style={{ border:'1px solid #000', padding: '10px' }}>
                       삭제🗑

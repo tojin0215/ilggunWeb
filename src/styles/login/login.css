@@ -1,7 +1,37 @@
+.wrap_login > .container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.wrap_login > .navigation {
+  display: none;
+}
+
 .auth {
-  width: 700px;
+  width: 450px;
+  margin: 0;
 }
 
 .card {
   border: 0;
+}
+
+.input-id {
+}
+
+.input-password {
+}
+
+.card-visual {
+  width: 200px;
+  height: 100%;
+  padding-top: 90px;
+  margin-left: 50px;
+}
+
+.card-visual > img {
+  width: 100%;
+  height: auto;
 }
