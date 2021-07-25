@@ -5,6 +5,7 @@ import FilterComponent from './FilterComponent';
 
 
 const Table = props => {
+  const { openModal, data, deleteWorker } = props;
   const columns = [
     {
       name: "이름",
@@ -17,28 +18,31 @@ const Table = props => {
     Button: true,
     cell: row =>
         row.showButtons ? (
-          <>           
-            <button>QR</button>
+          <>
+          <button onClick={ () => openModal(row.id) }> QR </button>
           </>
         ) : null
     },
+
     {
       name: "입사일",
       selector: "date",
       sortable: true    
-    }, 
+    },
+
     {
       name: "직책(업무)",
       selector: "work",
       sortable: true
     },
+
     {
       name: "퇴직처리",
       Button: true,
       cell: row =>
           row.showButtons ? (
             <>           
-              <button>Delete</button>              
+              <button onClick={ deleteWorker }>퇴사</button>              
             </>
           ) : null
     },
@@ -51,7 +55,7 @@ const Table = props => {
   // const filteredItems = data.filter(
   //   item => item.name && item.name.includes(filterText)
   // );
-  const filteredItems = props.data.filter(
+  const filteredItems = data.filter(
     item =>
       JSON.stringify(item)
         .toLowerCase()

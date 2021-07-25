@@ -108,7 +108,7 @@ const Menu = (props) => {
             },
             {
               title: '자료실',
-              itemId: '/'
+              itemId: '/library'
             },
             {
               title: '견적내기 사이트 링크',

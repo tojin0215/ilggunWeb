@@ -6,14 +6,27 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
+
+import Table from '../../components/Navigation/Table3';
+
 import {loginRequest} from '../../action/authentication';
 
 import '../../styles/home/home.css';
 
+
+import data from '../../components/Navigation/data';
+const clickhandler = name => console.log("delete", name);
+
 class Home extends Component {
     constructor(props) {
-      console.log("render",props);
       super(props);
+      if (props.location.state) {
+        this.state = {
+          business_id: props.location.state.business_id
+        }
+      } else {
+        this.state = { }
+      }
     }
 
     goLogin = () => {
@@ -26,7 +39,7 @@ class Home extends Component {
             var parts = value.split("; " + name + "="); 
             if (parts.length == 2) return parts.pop().split(";").shift();
         }
-   
+
         // get loginData from cookie
         let loginData = getCookie('key');
         // if loginData is undefined, do nothing
@@ -47,7 +60,7 @@ class Home extends Component {
         // check whether this cookie is valid or not
         this.props.loginRequest(loginData.id, loginData.pw).then(
             () => {
-                console.log(this.props.status);
+                console.log(loginData);
                 // if session is not valid
                 // if(!this.props.status.valid) {
                 if(!this.props.status.isLoggedIn) {
@@ -56,23 +69,19 @@ class Home extends Component {
                         isLoggedIn: false,
                         id: ''
                     };
-   
+
                     document.cookie='key=' + btoa(JSON.stringify(loginData));
-   
                     // and notify
-                    alert("Your session is expired, please log in again")
+                    alert("다시 로그인 바랍니다")
+                    this.props.history.push('/');
                 } else {
-                    let loginData2 = {
-                        isLoggedIn: true,
-                        id: loginData.id,
-                        pw: loginData.pw
-                    };
-                    document.cookie = 'key=' + btoa(JSON.stringify(loginData2));
-                    alert(loginData.id + '님 반갑습니다.') 
+                    if (loginData.business_id) {
+                        this.setState({business_id: loginData.business_id})
+                    } else if(this.state.business_id) {
+                        loginData.business_id = this.state.business_id;
+                        document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+                    }
                 }
-                // else{
-                //     this.cusFetch();//기본값
-                // }
             }
         );
     }
@@ -85,12 +94,17 @@ class Home extends Component {
         <div className='container'>
             <Header />
             <Navigation goLogin={this.goLogin}/>
-            <div style={{marginTop:'10rem', marginBottom:'10rem',display:'flex',width:'67rem',}}>
+            <div style={{marginTop:'10rem', marginBottom:'10rem',display:'flex', width:'100%',}}>
                 <div style={{flex:1}}>
                     <Menu/>
                 </div>
                 <div style={{flex:4, backgroundColor:'#cca9dd'}}>
-                    <h5>Home</h5>
+                    <h4>오늘의 근무자</h4>
+                        <Table data={data} click={clickhandler}/>
+                    {/* <h5>Home</h5>
+                    <div className='sectionShadow'>
+                        
+                    </div> */}
                 </div>
             </div>
             
@@ -101,7 +115,6 @@ class Home extends Component {
 }
   
 const HomeStateToProps = (state) => {
-    console.debug("userinfo : ", state);
     return {
       userinfo: state.authentication.userinfo,
       status: state.authentication.status
@@ -110,9 +123,9 @@ const HomeStateToProps = (state) => {
 
 const HomeDispatchToProps = (dispatch) => {
     return {
-        loginRequest: () => {
-            return dispatch(loginRequest());
-        },
+        loginRequest: (id, pw) => {
+            return dispatch(loginRequest(id,pw));
+        }
     };
 };
 export default connect(HomeStateToProps, HomeDispatchToProps)(Home);

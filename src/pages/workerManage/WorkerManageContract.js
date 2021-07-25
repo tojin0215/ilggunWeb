@@ -10,6 +10,12 @@ import Menu from '../../components/Navigation/Menu';
 import '../../styles/home/home.css';
 
 class WorkerManageContract extends Component {
+  constructor(props) {
+      super(props);
+      console.debug("WorkerManageContract");
+      console.debug(props);
+  }
+
   goLogin = () => {
     this.props.history.push('/');
   };

@@ -25,7 +25,6 @@ export function loginRequest(id, password) {
     return postUserLogin(id, password)
     .then(response => response.json())
     .then((response) => {
-        console.debug(response);
         if(response.id){
             // SUCCEED
             dispatch(loginSuccess(response));
@@ -51,7 +50,6 @@ export function login() {
 }
  
 export function loginSuccess(info) {
-    console.debug("loginSuccess : ", info);
     return {
         type: AUTH_LOGIN_SUCCESS,
         id: info.id,

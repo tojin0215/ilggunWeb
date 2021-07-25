@@ -67,7 +67,7 @@ const mapStateToProps = (state) => {
         status: state.authentication.login.status
     };
 };
- 
+
 const mapDispatchToProps = (dispatch) => {
     return {
         loginRequest: (id, pw) => {

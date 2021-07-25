@@ -7,6 +7,7 @@ const {SET_USER, SET_BUSINESS} = userinfoAction.userinfo;
 const userinfo = (state = [], action) => {
     switch (action.type) {
       case SET_USER:
+        console.log("SET_USER state: ");
         return {
             ...state , username:action.text
         }

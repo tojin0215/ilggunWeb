@@ -21,8 +21,6 @@ class TaskManage extends Component {
 
   render() {
     const { userinfo } = this.props;
-    console.log('userinfo : ', userinfo);
-
     const clickhandler = name => console.log("delete", name);
 
     return (

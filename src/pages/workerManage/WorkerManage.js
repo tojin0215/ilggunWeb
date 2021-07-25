@@ -8,7 +8,7 @@ import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 
-import Table from '../../components/Navigation/Table';
+import Table from '../../components/Navigation/TableWorker';
 import data from '../../components/Navigation/data';
 
 import '../../styles/home/home.css';
@@ -16,13 +16,16 @@ import '../../styles/home/home.css';
 
 
 class WorkerManage extends Component {
+  constructor(props) {
+      super(props);
+  }
+
   goLogin = () => {
     this.props.history.push('/');
   };
   
   render() {
     const { userinfo } = this.props;
-    console.log('userinfo : ', userinfo);
 
     const clickhandler = name => console.log("delete", name);
 
@@ -45,7 +48,7 @@ class WorkerManage extends Component {
 const WorkerManageStateToProps = (state) => {
   return {
     userinfo: state.authentication.userinfo,
-    //status: state.authentication.status
+    status: state.authentication.status
   };
 };
 
