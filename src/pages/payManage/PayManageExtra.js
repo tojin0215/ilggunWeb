@@ -7,6 +7,8 @@ import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 import Calendar from 'react-calendar';
+import TableExtraPay from '../../components/Navigation/TableExtraPay';
+import data from '../../components/Navigation/data';
 
 import '../../styles/home/home.css';
 
@@ -84,7 +86,8 @@ class PayManageExtra extends Component {
                   margin: '10px',
                 }}
               >
-                선택한 월의 추가수당 지급자들이 표시됩니다.
+                <TableExtraPay data={data} />
+                {/* 선택한 월의 추가수당 지급자들이 표시됩니다. */}
               </div>
             </article>
           </div>

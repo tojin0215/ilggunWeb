@@ -8,6 +8,8 @@ import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 import Calendar from 'react-calendar';
 
+import TableVacation from '../../components/Navigation/TableVacation';
+import data from '../../components/Navigation/data';
 import '../../styles/home/home.css';
 
 class PayManage extends Component {
@@ -82,6 +84,7 @@ class PayManage extends Component {
                   margin: '10px',
                 }}
               >
+                <TableVacation data={data} />
                 선택한 날짜의 휴가자 목록이 표시됩니다.
               </div>
             </article>
