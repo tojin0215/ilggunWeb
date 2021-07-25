@@ -142,30 +142,16 @@ class Home extends Component {
     const { userinfo } = this.props;
 
     return (
-      <div className="container">
+      <div className="wrap">
         <Header />
         <Navigation goLogin={this.goLogin} />
-        <div
-          style={{
-            marginTop: '10rem',
-            marginBottom: '10rem',
-            display: 'flex',
-            width: '100%',
-          }}
-        >
-          <div style={{ flex: 1 }}>
-            <Menu />
-          </div>
-          <div style={{ flex: 4, backgroundColor: '#cca9dd' }}>
+        <div className='container'>
+          <Menu />
+          <article className='sectionShadow'>
             <h4>오늘의 근무자</h4>
             <Table data={data} click={clickhandler} />
-            {/* <h5>Home</h5>
-                    <div className='sectionShadow'>
-                        
-                    </div> */}
-          </div>
+          </article>
         </div>
-
         <Footer />
       </div>
     );
