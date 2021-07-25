@@ -50,7 +50,9 @@ class WorkerManage extends Component {
         <div className="container">
           <Menu />
           <article className='sectionShadow'>
-            <Table data={this.state.worker} click={clickhandler}/>
+            {/* <Table data={this.state.worker} click={clickhandler}/> */}
+            
+            <Table data={data} click={clickhandler}/>
           </article>
         </div>
         <Footer />

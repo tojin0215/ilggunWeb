@@ -6,10 +6,18 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
+import Calendar from 'react-calendar';
 
 import '../../styles/home/home.css';
 
 class PayDocumentDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: new Date(),
+      checkEtc: false
+    }
+  }
   goLogin = () => {
     this.props.history.push('/');
   };
@@ -35,8 +43,11 @@ class PayDocumentDetails extends Component {
                 margin: '10px',
               }}
             >
-              <h4>직원 선택</h4>
-              직원 검색 창이 들어옵니다. 해당 직원의 급여명세서를 볼 수 있습니다.
+            <h4>직원 선택</h4>
+            
+            <input ></input>
+            <button >검색</button>
+              {/* 직원 검색 창이 들어옵니다. 해당 직원의 급여명세서를 볼 수 있습니다. */}
             </div>
             <article
               style={{
@@ -48,6 +59,12 @@ class PayDocumentDetails extends Component {
               }}
             >
                 날짜를 선택할 수 있는 캘린더 인풋 창입니다. 년/월 단위까지 선택할 수 있습니다.
+                
+            
+            <Calendar
+        onChange={this.onChange}
+        value={this.state.value}
+      />
             </article>
 						<button>조회</button>
           </div>

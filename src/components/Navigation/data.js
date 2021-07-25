@@ -106,7 +106,23 @@ export const data = [
     showButtons:true,
     openTime: "07:00",
     closeTime:"17:00",
-    vacation: "무급휴가"
+    vacation: "무급휴가",
+    withTax: "50000",
+    withoutTax: "30000",
+    from: "A사원",
+    to: "B과장",
+    title: "제목",
+    read: true,
+    workername: "A사원",
+    workername2: "A사원",
+    type: 2,
+    state: 2,
+    level: "사원",
+    normalPay: "8000",
+    worktime: "288",
+    tax: "20000",
+    realPay: "400000",
+    startdate: "21/07/13"
   },
   
   {
@@ -121,7 +137,22 @@ export const data = [
     showButtons:true,
     openTime: "07:00",
     closeTime:"17:00",
-    vacation: "무급휴가"
+    vacation: "무급휴가",
+    withTax: "50000",
+    withoutTax: "30000",
+    from: "A사원",
+    to: "B과장",
+    title: "제목",
+    read: true,
+    workername: "A사원",
+    workername2: "A사원",
+    type: 2,
+    state: 2,
+    level: "사원",
+    normalPay: "8000",
+    worktime: "288",
+    tax: "20000",
+    realPay: "400000"
   },
   {
     id: 3,
@@ -135,7 +166,22 @@ export const data = [
     showButtons:true,
     openTime: "07:00",
     closeTime:"17:00",
-    vacation: "무급휴가"
+    vacation: "무급휴가",
+    withTax: "50000",
+    withoutTax: "30000",
+    from: "A사원",
+    to: "B과장",
+    title: "제목",
+    read: false,
+    workername: "A사원",
+    workername2: "A사원",
+    type: 2,
+    state: 1,
+    level: "사원",
+    normalPay: "8000",
+    worktime: "288",
+    tax: "20000",
+    realPay: "400000"
   },
   {
     id: 4,
@@ -149,7 +195,22 @@ export const data = [
     showButtons:true,
     openTime: "07:00",
     closeTime:"17:00",
-    vacation: "무급휴가"
+    vacation: "무급휴가",
+    withTax: "50000",
+    withoutTax: "30000",
+    from: "A사원",
+    to: "B과장",
+    title: "제목",
+    read: true,
+    workername: "A사원",
+    workername2: "A사원",
+    type: 1,
+    state: 2,
+    level: "사원",
+    normalPay: "8000",
+    worktime: "288",
+    tax: "20000",
+    realPay: "400000"
   },
   {
     id: 5,
@@ -163,7 +224,13 @@ export const data = [
     showButtons:true,
     openTime: "07:00",
     closeTime:"17:00",
-    vacation: "무급휴가"
+    vacation: "무급휴가",
+    withTax: "50000",
+    withoutTax: "30000",
+    from: "A사원",
+    to: "B과장",
+    title: "제목",
+    read: true
   },
   {
     id: 6,
@@ -177,7 +244,13 @@ export const data = [
     showButtons:true,
     openTime: "07:00",
     closeTime:"17:00",
-    vacation: "무급휴가"
+    vacation: "무급휴가",
+    withTax: "50000",
+    withoutTax: "30000",
+    from: "A사원",
+    to: "B과장",
+    title: "제목",
+    read: false
   },{
     id: 7,
     name: "A사원",

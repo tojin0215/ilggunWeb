@@ -7,6 +7,9 @@ import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 
+
+import TableMessage from '../../components/Navigation/TableMessage';
+import data from '../../components/Navigation/data';
 import '../../styles/home/home.css';
 
 class Message extends Component {
@@ -43,6 +46,7 @@ class Message extends Component {
                   margin: '10px',
                 }}
               >
+                
                 메시지 목록 표시공간입니다. 발신인, 제목, 날짜, 읽음, 삭제(숨김)이 표시됩니다.
                 <br /><br />
                 <span style={{ border: '1px solid #000', padding: '10px' }}>
@@ -61,6 +65,7 @@ class Message extends Component {
                   ❌
                 </span>
               </div>
+              <TableMessage data={data} />
             </article>
           </div>
           <Footer />
