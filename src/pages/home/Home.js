@@ -36,6 +36,15 @@ class Home extends Component {
   };
 
   curFetch = (id, pw) => {
+    // get cookie by name
+    function getCookie(name) {
+      var value = '; ' + document.cookie;
+      var parts = value.split('; ' + name + '=');
+      if (parts.length == 2) return parts.pop().split(';').shift();
+    }
+
+    // get loginData from cookie
+    let loginData = getCookie('key');
     this.props
           .businessRequest(this.props.userinfo.id, loginData.business_id)
           // .then(() => {
