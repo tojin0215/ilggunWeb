@@ -12,6 +12,7 @@ import './Navigation.css';
 
 import {postBusinessGet} from '../../action/api';
 
+
 class Navigation extends Component {
   constructor(props) {
     super(props);
