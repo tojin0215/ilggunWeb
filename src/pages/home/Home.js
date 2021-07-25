@@ -12,7 +12,7 @@ import Table from '../../components/Navigation/Table3';
 import { loginRequest } from '../../action/authentication';
 import { businessRequest } from '../../action/authentication';
 import { setBusiness } from '../../action/userinfo';
-import { postBusinessGet } from '../../action/api';
+import { postBusinessGet, postSelectWorker } from '../../action/api';
 
 import '../../styles/home/home.css';
 
@@ -25,9 +25,13 @@ class Home extends Component {
     if (props.location.state) {
       this.state = {
         business_id: props.location.state.business_id,
+        worker: []
       };
     } else {
-      this.state = {};
+      this.state = {
+        business_id: "",
+        worker: []
+      };
     }
   }
 
@@ -35,39 +39,9 @@ class Home extends Component {
     this.props.history.push('/');
   };
 
-  curFetch = (id, pw) => {
-    // get cookie by name
-    function getCookie(name) {
-      var value = '; ' + document.cookie;
-      var parts = value.split('; ' + name + '=');
-      if (parts.length == 2) return parts.pop().split(';').shift();
-    }
-
-    // get loginData from cookie
-    let loginData = getCookie('key');
-    this.props
-          .businessRequest(this.props.userinfo.id, loginData.business_id)
-          // .then(() => {
-          //   console.debug('this.props.businessRequest', this.props.userinfo);
-          // });
-        postBusinessGet(loginData.id)
-          .then((result) => result.json())
-          .then((result) => {
-            loginData = {
-              isLoggedIn: true,
-              id: loginData.id,
-              pw: loginData.pw,
-              business_id: result ? result[0].id : '',
-            };
-            // this.props.setBusiness((result) ? result[0].id: "");
-            this.setState({ business: result });
-          });
-        if (loginData.business_id) {
-          this.setState({ business_id: loginData.business_id });
-        } else if (this.state.business_id) {
-          loginData.business_id = this.state.business_id;
-          document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-        }
+  curFetchWorker = (id, business_id) => {
+    postSelectWorker(business_id)
+    .then(result => this.setState({ worker: result }))
   }
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인

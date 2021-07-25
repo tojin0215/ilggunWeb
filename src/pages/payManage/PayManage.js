@@ -6,10 +6,17 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
+import Calendar from 'react-calendar';
 
 import '../../styles/home/home.css';
 
 class PayManage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: new Date()
+    }
+  }
   goLogin = () => {
     this.props.history.push('/');
   };
@@ -36,7 +43,9 @@ class PayManage extends Component {
               }}
             >
               <h4>직원 선택</h4>
-              검색 창이 들어옵니다.
+              <input ></input>
+              <button >검색</button>
+              {/* 검색 창이 들어옵니다. */}
             </div>
             <article
               style={{
@@ -57,7 +66,12 @@ class PayManage extends Component {
                   margin: '10px',
                 }}
               >
-                날짜를 선택할 수 있는 캘린더 인풋 창입니다. 년/월/일 단위까지 선택할 수 있습니다.
+                
+              <Calendar
+        onChange={this.onChange}
+        value={this.state.value}
+      />
+                {/* 날짜를 선택할 수 있는 캘린더 인풋 창입니다. 년/월/일 단위까지 선택할 수 있습니다. */}
               </div>
               <div
                 style={{
@@ -85,15 +99,22 @@ class PayManage extends Component {
             <div>
               휴가기간 선택
               <br />
+              
+              <Calendar
+        onChange={this.onChange}
+        value={this.state.value}
+      />
               기간을 선택할 수 있는 캘린더 인풋창입니다.
             </div>
             <div>
-              유급 휴가
+              유급 휴가<input type="checkbox" />
               <br />
-              유급 휴가와 무급 휴가를 체크합니다.
+              무급 휴가<input type="checkbox" />
+              {/* <br />
+              유급 휴가와 무급 휴가를 체크합니다. */}
             </div>
             <div>
-              사유 입력
+              사유 입력: <input ></input>
               <br />
               사유를 기재할 수 있는 인풋창입니다.
             </div>

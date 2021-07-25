@@ -9,15 +9,26 @@ import Menu from '../../components/Navigation/Menu';
 
 import Table3 from '../../components/Navigation/Table3';
 import data from '../../components/Navigation/data';
+import Calendar from 'react-calendar';
 
 
 import '../../styles/home/home.css';
 
 
 class TaskManage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: new Date()
+    }
+  }
   goLogin = () => {
     this.props.history.push('/');
   };
+  onChange = (e) => {
+    this.setState({value: e});
+    console.log(e);
+  }
 
   render() {
     const { userinfo } = this.props;
@@ -42,9 +53,13 @@ class TaskManage extends Component {
                 margin: '10px',
                 }}
             >
-                캘린더 선택 공간입니다.
+              <Calendar
+        onChange={this.onChange}
+        value={this.state.value}
+      />
+                {/* 캘린더 선택 공간입니다.
                 <br />
-                날짜 선택 시 해당 날짜의 정보를 전달합니다.
+                날짜 선택 시 해당 날짜의 정보를 전달합니다. */}
             </div>
             <article
             style={{
