@@ -26,7 +26,7 @@ export function businessRequest(id, business_id) {
     return (dispatch) => {
       // Inform Login API is starting
       dispatch(business_login());
-  
+
       // API REQUEST
       return postBusinessGet(id)
       .then(response => response.json())
