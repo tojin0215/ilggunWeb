@@ -10,14 +10,28 @@ import Menu from '../../components/Navigation/Menu';
 
 import Table from '../../components/Navigation/TableWorker';
 import data from '../../components/Navigation/data';
+import {postSelectWorker} from "../../action/api"
 
 import '../../styles/home/home.css';
-
 
 
 class WorkerManage extends Component {
   constructor(props) {
       super(props);
+      this.state = {
+        worker: []
+      }
+      this.curFetch()
+  }
+
+  curFetch = () => {
+    postSelectWorker(this.props.userinfo.business_name)
+    .then(result => result.json())
+    .then(result => {
+      if (result) this.setState({worker: result})
+      else this.setState({worker: []})
+    })
+    .catch(error => console.error("postSelectWorker",error))
   }
 
   goLogin = () => {
@@ -36,7 +50,7 @@ class WorkerManage extends Component {
         <div className="container">
           <Menu />
           <article className='sectionShadow'>
-            <Table data={data} click={clickhandler}/>
+            <Table data={this.state.worker} click={clickhandler}/>
           </article>
         </div>
         <Footer />
