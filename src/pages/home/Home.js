@@ -86,7 +86,7 @@ class Home extends Component {
         this.props.history.push('/');
       } else {
         this.props
-          .businessRequest(this.props.userinfo.id, loginData.id)
+          .businessRequest(this.props.userinfo.id, loginData.business_id)
           .then(() => {
             console.debug('this.props.businessRequest', this.props.userinfo);
           });
@@ -97,7 +97,7 @@ class Home extends Component {
               isLoggedIn: true,
               id: loginData.id,
               pw: loginData.pw,
-              business_id: result ? result[0].id : '',
+              business_id: (result & result.length > 0) ? result[0].id : '',
             };
             // this.props.setBusiness((result) ? result[0].id: "");
             this.setState({ business: result });
