@@ -100,7 +100,8 @@ class WorkerManageStaff extends Component {
         <div className="container">
           <Menu />
           <article className='sectionShadow'>
-            <Table2 data={this.state.worker} click={clickhandler} openModal={this.openModal} deleteWorker={this.deleteWorker}/>
+            {/* <Table2 data={this.state.worker} click={clickhandler} openModal={this.openModal} deleteWorker={this.deleteWorker}/> */}
+            <Table2 data={data} click={clickhandler} openModal={this.openModal} deleteWorker={this.deleteWorker}/>
           </article>
           <Modal open={ this.state.modalOpen } close={ this.closeModal } title="Create a chat room">
             <QRCode id="QRCode" value={ this.state.modalData } />

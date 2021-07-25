@@ -6,10 +6,18 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
+import TableMessageSended from '../../components/Navigation/TableMessageSended';
+import data from '../../components/Navigation/data';
 
 import '../../styles/home/home.css';
 
 class MessageSended extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      checkDelete: false
+    }
+  }
 
     goLogin = () => {
         this.props.history.push("/");
@@ -36,6 +44,7 @@ class MessageSended extends Component {
               우측 상단의 삭제 버튼을 클릭하면 메시지 목록의 가장 오른편에 삭제 버튼이 나타납니다.<br/>
               <span> 📨받은 메시지함 </span>
               <button> 삭제 </button>
+              <input type="checkbox" value={this.state.checkDelete} onChange={() => this.setState({checkDelete: !this.state.checkDelete})} />
               <div
                 style={{
                   border: '1px solid #000',
@@ -61,6 +70,7 @@ class MessageSended extends Component {
                   ❌
                 </span>
               </div>
+              <TableMessageSended data={data} checkDelete={this.state.checkDelete} deleteMessage={(r) => console.debug(r)} />
             </article>
           </div>
           <Footer />

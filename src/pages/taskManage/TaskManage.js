@@ -7,6 +7,7 @@ import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 
+import TableVacation from '../../components/Navigation/TableVacation';
 import Table3 from '../../components/Navigation/Table3';
 import data from '../../components/Navigation/data';
 import Calendar from 'react-calendar';
@@ -72,7 +73,8 @@ class TaskManage extends Component {
             >
                 <h4>오늘의 휴가자</h4>
                 <div>
-                    해당 날짜 휴가자의 이름, 휴가기간이 표시됩니다.
+                  <TableVacation data={data} />
+                    {/* 해당 날짜 휴가자의 이름, 휴가기간이 표시됩니다. */}
                 </div>
             </article>
           </div>
