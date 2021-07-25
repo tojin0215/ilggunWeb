@@ -7,25 +7,53 @@ import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 import Calendar from 'react-calendar';
+import Picker from 'react-month-picker'
+import "react-month-picker/css/month-picker.css";
 
 import TableVacation from '../../components/Navigation/TableVacation';
 import data from '../../components/Navigation/data';
 import '../../styles/home/home.css';
 
+
+const pickerLang = {
+  months: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+  from: '부터', to: '까지',
+}
+
 class PayManage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: new Date()
+      value: new Date(),
+      yearMonth: {year: 2019, month: 1},
+      year: "2020",
+      month: "1",
+      isVisibleMonthSelector: false
     }
   }
   goLogin = () => {
     this.props.history.push('/');
   };
+  handleAMonthChange = (year, month) => {
+    this.setState({yearMonth: {year, month}});
+    this.setState({isVisibleMonthSelector: false});
+  }
+  handleAMonthDissmis = (e) => {
+    this.setState({isVisibleMonthSelector: false});
+  }
+  handleClickMonthBox = (e) => {
+    this.setState({isVisibleMonthSelector: true});
+    console.debug(this.state.isVisibleMonthSelector);
+  }
 
   render() {
     const { userinfo } = this.props;
     console.log('userinfo : ', userinfo);
+    const makeText = m => {
+      if (m && m.year && m.month) return (pickerLang.months[m.month-1] + '. ' + m.year)
+      return '?'
+  }
+  this.pickAMonth = React.createRef()
 
     return (
       <div className="wrap">
@@ -68,7 +96,21 @@ class PayManage extends Component {
                   margin: '10px',
                 }}
               >
-                
+                <label><b>달을 선택하세요</b></label>
+              {/* <div className="edit">
+                  <Picker
+                      ref={this.pickAMonth}
+                      show={this.state.isVisibleMonthSelector}
+                      years={[2019, 2020, 2021, 2022]}
+                      age={0}
+                      value={this.state.yearMonth}
+                      lang={pickerLang.months}
+                      onChange={this.handleAMonthChange}
+                      onDismiss={this.handleAMonthDissmis}
+                  >
+                      <MonthBox value={makeText({year: 2019, month: 1})} onClick={this.handleClickMonthBox} />
+                  </Picker>
+              </div> */}
               <Calendar
         onChange={this.onChange}
         value={this.state.value}
@@ -85,7 +127,7 @@ class PayManage extends Component {
                 }}
               >
                 <TableVacation data={data} />
-                선택한 날짜의 휴가자 목록이 표시됩니다.
+                {/* 선택한 날짜의 휴가자 목록이 표시됩니다. */}
               </div>
             </article>
           </div>

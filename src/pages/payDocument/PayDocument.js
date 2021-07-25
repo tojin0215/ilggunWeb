@@ -7,9 +7,18 @@ import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 
+import TablePay from '../../components/Navigation/TablePay';
+import data from '../../components/Navigation/data';
+
 import '../../styles/home/home.css';
 
 class PayDocument extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: new Date()
+    }
+  }
   goLogin = () => {
     this.props.history.push('/');
   };
@@ -35,9 +44,9 @@ class PayDocument extends Component {
             <span> 00월 급여대장 </span>
             <button> 엑셀로 다운받기 </button>
             <button> 프린트 </button>
-            <input placeholder='월 선택 캘린더'></input>
+            <input placeholder='월 선택 캘린더' type="date" value={this.state.value} onChange={(v) => this.setState({value: v.target.value})}></input>
             <button> 조회 </button>
-            <div
+            {/* <div
               style={{
                 border: '1px solid #000',
                 padding: '10px',
@@ -70,7 +79,8 @@ class PayDocument extends Component {
               <span style={{ border: '1px solid #000', padding: '10px' }}>
                 실지급액
               </span>
-            </div>
+            </div> */}
+            <TablePay data={data} />
           </article>
         </div>
         <Footer />
