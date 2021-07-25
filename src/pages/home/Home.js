@@ -10,6 +10,9 @@ import Menu from '../../components/Navigation/Menu';
 import Table from '../../components/Navigation/Table3';
 
 import {loginRequest} from '../../action/authentication';
+import { businessRequest } from '../../action/authentication';
+import { setBusiness } from '../../action/userinfo';
+import { postBusinessGet } from '../../action/api';
 
 import '../../styles/home/home.css';
 
@@ -75,6 +78,22 @@ class Home extends Component {
                     alert("다시 로그인 바랍니다")
                     this.props.history.push('/');
                 } else {
+                    this.props.businessRequest(this.props.userinfo.id, loginData.id).then(() => {
+                        console.debug("this.props.businessRequest",this.props.userinfo)
+                    })
+                    postBusinessGet(loginData.id)
+                    .then((result) => result.json())
+                    .then((result) => {
+                    loginData = {
+                        isLoggedIn: true,
+                        id: loginData.id,
+                        pw: loginData.pw,
+                        business_id: (result) ? result[0].id: ""
+                    };
+                    console.debug((result) ? result[0].id: "");
+                    // this.props.setBusiness((result) ? result[0].id: "");
+                    this.setState({ business: result });
+                    });
                     if (loginData.business_id) {
                         this.setState({business_id: loginData.business_id})
                     } else if(this.state.business_id) {
@@ -117,15 +136,19 @@ class Home extends Component {
 const HomeStateToProps = (state) => {
     return {
       userinfo: state.authentication.userinfo,
-      status: state.authentication.status
+      status: state.authentication.status,
+      userinfo_2: state.userinfo,
     }
 }
 
 const HomeDispatchToProps = (dispatch) => {
     return {
-        loginRequest: (id, pw) => {
-            return dispatch(loginRequest(id,pw));
-        }
+      loginRequest: (id, pw) => {
+        return dispatch(loginRequest(id, pw));
+      },
+      businessRequest: (id, business_id) => {
+        return dispatch(businessRequest(id, business_id));
+      },
     };
-};
+  };
 export default connect(HomeStateToProps, HomeDispatchToProps)(Home);

@@ -41,8 +41,8 @@ const Table = props => {
       Button: true,
       cell: row =>
           row.showButtons ? (
-            <>           
-              <button onClick={ deleteWorker }>퇴사</button>              
+            <>
+              <button onClick={ () => deleteWorker(null,row.id) }>퇴사</button>              
             </>
           ) : null
     },

@@ -17,7 +17,8 @@ function setUser2() {
   };
 }
 function setBusiness(text) {
-	return { type: SET_BUSINESS,  text};
+	console.debug("setBusiness",text);
+	return { type: SET_BUSINESS, text };
 }
 
 function setBusiness2() {

@@ -6,6 +6,7 @@ import { Nav, Navbar } from 'react-bootstrap';
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import 'bootstrap/dist/css/bootstrap.css';
 import { logoutRequest } from '../../action/authentication';
+import { businessRequest } from '../../action/authentication';
 import styles from './Navigation.css';
 import './Navigation.css';
 
@@ -21,7 +22,7 @@ class Navigation extends Component {
   }
 
   initPage() {
-    // console.debug(this.props.userinfo.id);
+    this.props.businessRequest(this.props.userinfo.id, null)
     postBusinessGet(this.props.userinfo.id)
     .then(result => result.json())
     .then(result => {
@@ -77,7 +78,8 @@ class Navigation extends Component {
             <Nav.Item style={{ border: '1px solid #000', padding:'5px' }}>
               상세페이지 이름입니다.
             </Nav.Item>
-            <NavDropdown title="사업장 선택바 ▼" id="nav-dropdown" style={{ border: '1px solid #000', padding:'5px' }}>
+            {/* <NavDropdown title="사업장 선택바 ▼" id="nav-dropdown" style={{ border: '1px solid #000', padding:'5px' }}> */}
+            <NavDropdown title={"사업장:" + this.props.userinfo.business_name} id="nav-dropdown" style={{ border: '1px solid #000', padding:'5px' }}>
             {this.state.business.map((business, index) => (
               <NavDropdown.Item eventKey={business.id} title={business.name} key={index}>{business.name}</NavDropdown.Item>
             ))}
@@ -91,7 +93,10 @@ class Navigation extends Component {
               )}
             </Nav.Item>
             <Nav.Item eventKey="logout" style={{ border: '1px solid #000', padding:'5px' }}>
-                로그아웃
+            <button className="btnSolid" onClick={this.handleLogout}>
+                  LOG-OUT
+                </button>
+                {/* 로그아웃 */}
               {/* {userinfo.id === '' ? null : (
                 <button className="btnSolid" onClick={this.handleLogout}>
                   LOG-OUT
@@ -114,6 +119,9 @@ const NavigationDispatchToProps = (dispatch) => {
   return {
     logoutRequest: () => {
       return dispatch(logoutRequest());
+    },
+    businessRequest: (id, business_id) => {
+      return dispatch(businessRequest(id, business_id));
     },
   };
 };

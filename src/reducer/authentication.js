@@ -1,12 +1,13 @@
 import authenticationAction from '../action/index';
 
 const {AUTH_LOGIN, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE,AUTH_LOGIN_WAITING, AUTH_GET_STATUS, AUTH_GET_STATUS_SUCCESS,AUTH_GET_STATUS_FAILURE, AUTH_LOGOUT} = authenticationAction.authentication;
+const { AUTH_BUSINESS, AUTH_BUSINESS_SUCCESS, AUTH_BUSINESS_FAILURE, AUTH_BUSINESS_WAITING}  = authenticationAction.authentication;
 
 
 const authentication = (state =
     {
       userinfo : {
-        id:"", manager_name:"", business_name:""
+        id:"", manager_name:"", business_name:"", business_info:[]
       },
       login : {
         status: 'FAILURE'
@@ -103,6 +104,34 @@ const authentication = (state =
                       currentUser: ''
                     }
               }
+          case AUTH_BUSINESS:
+            return state;
+          
+          case AUTH_BUSINESS_SUCCESS:
+            return {
+                  ...state,
+                  userinfo:{
+                    ...state.userinfo,
+                    business_info: action.business_info,
+                    business_name: action.business_name,
+                  },
+                  status: {
+                    ...state.status
+                  }
+            }
+          
+          case AUTH_BUSINESS_FAILURE:
+            return {
+                  ...state,
+                  userinfo:{
+                    ...state.userinfo,
+                    business_info: [],
+                    business_name: "",
+                  },
+                  status: {
+                    ...state.status
+                  }
+            }
         
         default:
             return state;

@@ -45,6 +45,10 @@ class WorkerManageStaff extends Component {
   }
 
   deleteWorker = (business_id, worker_id) => {
+    const idx = data.findIndex(function(item) {return item.id === worker_id}) // findIndex = find + indexOf
+    if (idx > -1) data.splice(idx, 1)
+    console.log("deleteWorker", business_id, worker_id)
+
     this.setState({
       modalOpen: false,
       modalData: ""
@@ -88,7 +92,7 @@ class WorkerManageStaff extends Component {
         <div className="container">
           <Menu />
           <article className='sectionShadow'>
-            <Table2 data={data} click={clickhandler} openModal={this.openModal} deleteWorker={clickhandler}/>
+            <Table2 data={data} click={clickhandler} openModal={this.openModal} deleteWorker={this.deleteWorker}/>
           </article>
           <Modal open={ this.state.modalOpen } close={ this.closeModal } title="Create a chat room">
             <QRCode id="QRCode" value={ this.state.modalData } />
