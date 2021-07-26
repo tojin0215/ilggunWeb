@@ -31,7 +31,6 @@ export function businessRequest(id, business_id) {
       return postBusinessGet(id)
       .then(response => response.json())
       .then((response) => {
-        console.debug("businessRequest", response)
           if (response[0].id) {
               // SUCCEED
               if (!business_id) business_id = response[0].id

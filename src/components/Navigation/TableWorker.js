@@ -51,7 +51,6 @@ const Table = props => {
         (row.state != 2) ? (
             <>
             <Link to={{ pathname:"/workerManage/contract", state:{ worker: row } }}>근로계약서</Link>
-              {/* <button>근로계약서</button> */}
             </>
           ) : null
     }
