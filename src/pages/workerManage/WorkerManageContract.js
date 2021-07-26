@@ -12,6 +12,7 @@ import '../../styles/home/home.css';
 class WorkerManageContract extends Component {
   constructor(props) {
       super(props);
+      // this.props.location.worker.name
       console.debug("WorkerManageContract");
       console.debug(props);
   }
@@ -35,7 +36,7 @@ class WorkerManageContract extends Component {
             <form style={{ border:'1px solid #000', padding:'10px', margin:'10px' }}>
               이름 및 조작 버튼이 들어가는 공간입니다.<br/>
               <span style={{ border:'1px solid #000', padding:'10px', margin:'10px' }}>
-                직원 이름
+                {this.props.location.state.worker.name}
               </span>
               <button>
                 작성/수정

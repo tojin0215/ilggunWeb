@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button'
 
 import DataTable from 'react-data-table-component';
 import FilterComponent from './FilterComponent';
@@ -36,11 +37,14 @@ const Table = props => {
       cell: row =>
           (row.state == 2) ? (
             <>
-              <button>작성</button>
+            {/* <span>작성</span> */}
+            <Link to={{ pathname:"/workerManage/contract", state:{ worker: row } }}>작성</Link>
+              {/* <Button>작성</Button> */}
             </>
             ) : (
               <>
-                <button>미작성</button>
+              <Link to={{ pathname:"/workerManage/contract", state:{ worker: row } }}>미작성</Link>
+                {/* <Button>미작성</Button> */}
               </>)
     },
     {

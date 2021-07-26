@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import "./Modal.css";
+import Button from 'react-bootstrap/Button'
 
 export class Modal extends Component {
     render() {
@@ -10,15 +11,15 @@ export class Modal extends Component {
             <div className={ open ? 'openModal modal': 'modal' }>
                 { open ? (  
                     <section>
-                        <header>
+                        <header>    
                             { header }
-                            <button className="close" onClick={close}> &times; </button>
+                            <Button variant="secondary" className="close" onClick={close}> &times; </Button>
                         </header>
                         <main>
                             {this.props.children}
                         </main>
                         <footer>
-                            <button className="close" onClick={close}> 닫기 </button>
+                            <Button variant="secondary" className="close" onClick={close}> 닫기 </Button>
                         </footer>
                     </section>
                 ) : null }

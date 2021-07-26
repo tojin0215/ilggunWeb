@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
@@ -15,6 +16,8 @@ import { setBusiness } from '../../action/userinfo';
 import { postBusinessGet, postSelectWorker, selectTimelog } from '../../action/api';
 
 import '../../styles/home/home.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-calendar/dist/Calendar.css';
 
 import data from '../../components/Navigation/data';
 const clickhandler = (name) => console.log('delete', name);

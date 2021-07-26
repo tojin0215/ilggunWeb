@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 
 import DataTable from 'react-data-table-component';
 import FilterComponent from './FilterComponent';
+import Button from 'react-bootstrap/Button'
 
 
 const Table = props => {
@@ -18,7 +19,7 @@ const Table = props => {
     cell: row =>
         (row.state == 2) ? (
           <>
-          <button onClick={ () => openModal(row.workername2) }> QR </button>
+          <Button onClick={ () => openModal(row.workername2) }> QR </Button>
           </>
         ) : null
     },
@@ -41,7 +42,7 @@ const Table = props => {
       cell: row =>
         (row.state == 2) ? (
             <>
-              <button onClick={ () => deleteWorker(null,row.id) }>퇴사</button>              
+              <Button variant="danger" onClick={ () => deleteWorker(null,row.id) }>퇴사</Button>              
             </>
           ) : null
     },

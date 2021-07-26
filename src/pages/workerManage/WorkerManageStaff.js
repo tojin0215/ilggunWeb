@@ -13,6 +13,7 @@ import data from '../../components/Navigation/data';
 import '../../styles/home/home.css';
 import {Modal} from '../../components/Modal/Modal'
 import QRCode from "react-qr-code";
+import Button from 'react-bootstrap/Button'
 
 import {postSelectWorker} from '../../action/api'
 
@@ -105,11 +106,11 @@ class WorkerManageStaff extends Component {
           </article>
           <Modal open={ this.state.modalOpen } close={ this.closeModal } title="Create a chat room">
             <QRCode id="QRCode" value={ this.state.modalData } />
-            <input
-                type="button"
+            <Button
+                // type="button"
                 value="QR 다운로드"
                 onClick={this.onImageCownload}
-              />
+              >"QR 다운로드</Button>
           </Modal>
         </div>
         <Footer />
