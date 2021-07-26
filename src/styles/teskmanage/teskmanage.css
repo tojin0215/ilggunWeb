@@ -1,0 +1,16 @@
+.todayleave {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.todayleave > div {
+  flex: 1;
+  padding: 20px;
+  height: 300px;
+  overflow: scroll;
+  overflow-y: scroll;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  text-align: center;
+}

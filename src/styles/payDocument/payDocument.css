@@ -1,0 +1,7 @@
+.wrap-paydocument .flex {
+  display: flex;
+}
+
+.wrap-paydocument .jf-end {
+  justify-content: flex-end;
+}

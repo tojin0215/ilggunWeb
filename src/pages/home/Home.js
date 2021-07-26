@@ -122,7 +122,16 @@ class Home extends Component {
         <div className='container'>
           <Menu />
           <article className='sectionShadow'>
-            <h4>오늘의 근무자</h4>
+            <h4 className='text-h5'>
+              <span className='color-point text-h5'>✔ </span>
+               알림
+            </h4>
+          </article>
+          <article className='sectionShadow'>
+            <h4 className='text-h5'>
+              <span className='color-point text-h5'>✔ </span>
+              오늘의 근무자
+            </h4>
             <Table data={data} click={clickhandler} />
           </article>
         </div>
