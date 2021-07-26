@@ -4,11 +4,12 @@
   justify-content: flex-start;
   box-shadow: 6px 10px 12.75px 2.25px rgba(87, 178, 163, 0.4);
   width: 400px;
-  height: 60px;
-  position: absolute;
+  height: 50px;
+  /* position: absolute;
   top: 120px;
-  left: 40px;
+  left: 40px; */
   border-radius: 16px;
+  margin-bottom: 30px;
 }
 /* 검색 인풋 */
 .container .jsTYsS {
@@ -30,9 +31,20 @@
 /* 첫번째열 */
 .container .edTgaw {
   font-weight: 600;
-  padding-left: 50px;
+  /* padding-left: 50px; */
+  justify-content: center;
 }
 /* 라벨 */
 .container .csacee {
-  padding-left: 50px;
+  /* padding-left: 50px; */
+  justify-content: center;
+}
+/* 라벨 정렬 */
+.container .kqQCpR {
+  justify-content: center;
+}
+/* 라벨 텍스트 굵기 */
+.container .hkcGBu {
+  font-weight: 600;
+  font-size: 1.2rem;
 }

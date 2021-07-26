@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import FilterComponent from './FilterComponent';
 
-// import './table.css';
+import './table.css';
 import imgsearch from '../../img/search.png'
 
 const Table = props => {

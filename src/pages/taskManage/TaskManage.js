@@ -12,7 +12,7 @@ import Table3 from '../../components/Navigation/Table3';
 import data from '../../components/Navigation/data';
 import Calendar from 'react-calendar';
 
-
+import '../../styles/teskmanage/teskmanage.css';
 import '../../styles/home/home.css';
 
 
@@ -41,47 +41,24 @@ class TaskManage extends Component {
         <Navigation goLogin={this.goLogin} />
         <div className="container">
           <Menu />
-          <p>
-          업무관리 페이지 컨테이너 입니다.
-          </p>
-          <div style={{ display:'flex' }}>
-            <div
-                style={{
-                width: '500px',
-                height: '300px',
-                border: '1px solid #000',
-                padding: '10px',
-                margin: '10px',
-                }}
-            >
-              <Calendar
-        onChange={this.onChange}
-        value={this.state.value}
-      />
-                {/* 캘린더 선택 공간입니다.
-                <br />
-                날짜 선택 시 해당 날짜의 정보를 전달합니다. */}
+          <article className='todayleave'>
+            <h4 className='text-h5 w-100'>
+              <span className='color-point text-h5'>✔ </span>
+              오늘의 휴가자
+            </h4>
+            <Calendar
+              onChange={this.onChange}
+              value={this.state.value}
+              className='sectionShadow'
+            />
+            <div className='sectionShadow'>
+              <TableVacation data={data} />
             </div>
-            <article
-            style={{
-                width: '500px',
-                height: '300px',
-                border: '1px solid #000',
-                padding: '10px',
-                margin: '10px',
-            }}
-            >
-                <h4>오늘의 휴가자</h4>
-                <div>
-                  <TableVacation data={data} />
-                    {/* 해당 날짜 휴가자의 이름, 휴가기간이 표시됩니다. */}
-                </div>
-            </article>
-          </div>
-          <div className='sectionShadow'>
+          </article>
+          <article className='sectionShadow'>
             <h4>오늘의 근무자</h4>
             <Table3 data={data} click={clickhandler}/>
-          </div>
+          </article>
         </div>
         <Footer />
       </div>

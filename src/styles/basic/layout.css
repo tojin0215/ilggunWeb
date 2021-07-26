@@ -15,7 +15,7 @@
 .wrap > .container {
   position: relative;
   min-height: 1000px;
-  padding-top: 170px;
+  padding-top: 70px;
 }
 
 .side-navigation-panel {
@@ -63,4 +63,8 @@
 
 .card-content {
   padding: 70px 0;
+}
+
+.js-sbt {
+  justify-content: space-between;
 }

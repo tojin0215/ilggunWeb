@@ -13,6 +13,7 @@ import "react-month-picker/css/month-picker.css";
 import TableVacation from '../../components/Navigation/TableVacation';
 import data from '../../components/Navigation/data';
 import '../../styles/home/home.css';
+import { dividerClasses } from '@material-ui/core';
 
 
 const pickerLang = {
@@ -61,109 +62,56 @@ class PayManage extends Component {
         <Navigation goLogin={this.goLogin} />
         <div className="container">
           <Menu />
-          <p>급여관리/무급/유급휴가 페이지입니다.</p>
-          <div style={{ display: 'flex' }}>
-            <div
-              style={{
-                width: '500px',
-                height: '100px',
-                border: '1px solid #000',
-                padding: '10px',
-                margin: '10px',
-              }}
-            >
-              <h4>직원 선택</h4>
-              <input ></input>
-              <button >검색</button>
-              {/* 검색 창이 들어옵니다. */}
-            </div>
-            <article
-              style={{
-                width: '500px',
-                height: '300px',
-                border: '1px solid #000',
-                padding: '10px',
-                margin: '10px',
-              }}
-            >
-              <h4>휴가자</h4>
-              <div
-                style={{
-                  width: '450px',
-                  height: '50px',
-                  border: '1px solid #000',
-                  padding: '10px',
-                  margin: '10px',
-                }}
+          <article className='todayleave'>
+            <h4 className='w-100 text-h5'>
+              <span className='color-point text-h5'>✔ </span>
+              휴가 직원
+            </h4>
+            {/*
+            <div className="edit">
+              <Picker
+                ref={this.pickAMonth}
+                show={this.state.isVisibleMonthSelector}
+                years={[2019, 2020, 2021, 2022]}
+                age={0}
+                value={this.state.yearMonth}
+                lang={pickerLang.months}
+                onChange={this.handleAMonthChange}
+                onDismiss={this.handleAMonthDissmis}
               >
-                <label><b>달을 선택하세요</b></label>
-              {/* <div className="edit">
-                  <Picker
-                      ref={this.pickAMonth}
-                      show={this.state.isVisibleMonthSelector}
-                      years={[2019, 2020, 2021, 2022]}
-                      age={0}
-                      value={this.state.yearMonth}
-                      lang={pickerLang.months}
-                      onChange={this.handleAMonthChange}
-                      onDismiss={this.handleAMonthDissmis}
-                  >
-                      <MonthBox value={makeText({year: 2019, month: 1})} onClick={this.handleClickMonthBox} />
-                  </Picker>
-              </div> */}
-              <Calendar
-        onChange={this.onChange}
-        value={this.state.value}
-      />
-                {/* 날짜를 선택할 수 있는 캘린더 인풋 창입니다. 년/월/일 단위까지 선택할 수 있습니다. */}
+                <MonthBox value={makeText({year: 2019, month: 1})} onClick={this.handleClickMonthBox} />
+              </Picker>
+            </div>
+            */}
+            <Calendar
+              onChange={this.onChange}
+              value={this.state.value}
+              className='sectionShadow'
+            />
+            <div className='sectionShadow'>
+              <TableVacation
+                data={data}
+              />
+            </div>
+          </article>
+          <article className='sectionShadow flex todayleave'>
+            <Calendar
+              onChange={this.onChange}
+              value={this.state.value}
+              className='w-50'
+            />
+            <div className='border'>
+              <div className='p-3'>
+                유급 휴가
+                <input type="checkbox" />
               </div>
-              <div
-                style={{
-                  width: '450px',
-                  height: '170px',
-                  border: '1px solid #000',
-                  padding: '10px',
-                  margin: '10px',
-                }}
-              >
-                <TableVacation data={data} />
-                {/* 선택한 날짜의 휴가자 목록이 표시됩니다. */}
+              <div className='p-3'>
+                무급 휴가
+                <input type="checkbox" />
               </div>
-            </article>
-          </div>
-          <div
-            style={{
-              display: 'flex',
-              width: '100%',
-              border: '1px solid #000',
-              padding: '10px',
-              margin: '10px',
-              justifyContent: 'space-around',
-            }}
-          >
-            <div>
-              휴가기간 선택
-              <br />
-              
-              <Calendar
-        onChange={this.onChange}
-        value={this.state.value}
-      />
-              기간을 선택할 수 있는 캘린더 인풋창입니다.
+              <div className='p-3'>사유 입력: <input ></input></div>
             </div>
-            <div>
-              유급 휴가<input type="checkbox" />
-              <br />
-              무급 휴가<input type="checkbox" />
-              {/* <br />
-              유급 휴가와 무급 휴가를 체크합니다. */}
-            </div>
-            <div>
-              사유 입력: <input ></input>
-              <br />
-              사유를 기재할 수 있는 인풋창입니다.
-            </div>
-          </div>
+          </article>
         </div>
         <Footer />
       </div>

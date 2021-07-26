@@ -33,42 +33,11 @@ class MessageSended extends Component {
           <Navigation goLogin={this.goLogin} />
           <div className="container">
             <Menu />
-            <article
-              style={{
-                border: '1px solid #000',
-                padding: '10px',
-                margin: '10px',
-              }}
-            >
-              메시지함/받은 메시지 페이지입니다.
-              우측 상단의 삭제 버튼을 클릭하면 메시지 목록의 가장 오른편에 삭제 버튼이 나타납니다.<br/>
-              <span> 📨받은 메시지함 </span>
-              <button> 삭제 </button>
-              <input type="checkbox" value={this.state.checkDelete} onChange={() => this.setState({checkDelete: !this.state.checkDelete})} />
-              <div
-                style={{
-                  border: '1px solid #000',
-                  padding: '10px',
-                  margin: '10px',
-                }}
-              >
-                메시지 목록 표시공간입니다. 발신인, 제목, 날짜, 읽음, 삭제(숨김)이 표시됩니다.
-                <br /><br />
-                <span style={{ border: '1px solid #000', padding: '10px' }}>
-                  발신인
-                </span>
-                <span style={{ border: '1px solid #000', padding: '10px' }}>
-                  제목
-                </span>
-                <span style={{ border: '1px solid #000', padding: '10px' }}>
-                  날짜
-                </span>
-                <span style={{ border: '1px solid #000', padding: '10px' }}>
-                  읽음
-                </span>
-                <span style={{ border: '1px solid #000', padding: '10px' }}>
-                  ❌
-                </span>
+            <article className='sectionShadow'>
+              <h5 className='text-h5'> 📨보낸 메시지함 </h5>
+              <div className='messagedelete'>
+                삭제하기
+                <input type="checkbox" value={this.state.checkDelete} onChange={() => this.setState({checkDelete: !this.state.checkDelete})} />
               </div>
               <TableMessageSended data={data} checkDelete={this.state.checkDelete} deleteMessage={(r) => console.debug(r)} />
             </article>

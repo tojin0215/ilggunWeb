@@ -7,7 +7,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import 'bootstrap/dist/css/bootstrap.css';
 import { logoutRequest } from '../../action/authentication';
 import { businessRequest } from '../../action/authentication';
-import styles from './Navigation.css';
+// import styles from './Navigation.css';
 import './Navigation.css';
 
 import {postBusinessGet} from '../../action/api';
@@ -72,28 +72,32 @@ class Navigation extends Component {
                         </span>
                     </NavLink>
                 </Nav> */}
-          <Nav className={styles.navUtill} onSelect={this.handleSelect}>
-            <Nav.Item style={{ border: '1px solid #000', marginLeft: '50px', padding:'5px' }}>
+          <Nav className='navUtill' onSelect={this.handleSelect}>
+            <Nav.Item style={{ display:'none' }}>
               대분류페이지 이름입니다.
             </Nav.Item>
-            <Nav.Item style={{ border: '1px solid #000', padding:'5px' }}>
+            <Nav.Item style={{ display:'none' }}>
               상세페이지 이름입니다.
             </Nav.Item>
-            {/* <NavDropdown title="사업장 선택바 ▼" id="nav-dropdown" style={{ border: '1px solid #000', padding:'5px' }}> */}
-            <NavDropdown title={"사업장:" + this.props.userinfo.business_name} id="nav-dropdown" style={{ border: '1px solid #000', padding:'5px' }}>
-            {this.state.business.map((business, index) => (
-              <NavDropdown.Item eventKey={business.id} title={business.name} key={index}>{business.name}</NavDropdown.Item>
-            ))}
+            <NavDropdown 
+              title={"사업장:" + this.props.userinfo.business_name}
+              id="nav-dropdown"
+            >
+              {this.state.business.map((business, index) => (
+                <NavDropdown.Item eventKey={business.id} title={business.name} key={index}>
+                  {business.name}
+                </NavDropdown.Item>
+              ))}
             </NavDropdown>
-            <Nav.Item style={{ border: '1px solid #000', padding:'5px' }}>
+            <Nav.Item>
                 {/* 관리자 이름 */}
               {userinfo.id === '' ? null : (
-                <span className={styles.navitem}>
+                <span className='navitem'>
                   {userinfo.manager_name}님
                 </span>
               )}
             </Nav.Item>
-            <Nav.Item eventKey="logout" style={{ border: '1px solid #000', padding:'5px' }}>
+            <Nav.Item eventKey="logout">
             <button className="btnSolid" onClick={this.handleLogout}>
                   LOG-OUT
                 </button>

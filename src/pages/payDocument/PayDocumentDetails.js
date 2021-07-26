@@ -32,50 +32,19 @@ class PayDocumentDetails extends Component {
         <Navigation goLogin={this.goLogin} />
         <div className="container">
           <Menu />
-          <p>급여서류/급여명세서 페이지입니다.</p>
-          <div style={{ display: 'flex' }}>
-            <div
-              style={{
-                width: '500px',
-                height: '100px',
-                border: '1px solid #000',
-                padding: '10px',
-                margin: '10px',
-              }}
-            >
-            <h4>직원 선택</h4>
-            
-            <input ></input>
-            <button >검색</button>
-              {/* 직원 검색 창이 들어옵니다. 해당 직원의 급여명세서를 볼 수 있습니다. */}
+          <h4 className='text-h5'>급여서류/급여명세서</h4>
+          <article className='flex todayleave sectionShadow'>
+            <div>
+              <h4>직원 선택</h4>
+              <input ></input>
+              <button >검색</button>
             </div>
-            <article
-              style={{
-                width: '500px',
-                height: '100px',
-                border: '1px solid #000',
-                padding: '10px',
-                margin: '10px',
-              }}
-            >
-                날짜를 선택할 수 있는 캘린더 인풋 창입니다. 년/월 단위까지 선택할 수 있습니다.
-                
-            
             <Calendar
-        onChange={this.onChange}
-        value={this.state.value}
-      />
-            </article>
-						<button>조회</button>
-          </div>
-          <div
-            style={{
-              width: '100%',
-              border: '1px solid #000',
-              padding: '10px',
-              margin: '10px'
-            }}
-          >
+              onChange={this.onChange}
+              value={this.state.value}
+            />
+          </article>
+          <div className='sectionShadow'>
 					급여명세서가 표시되는 공간입니다.
 					이름,근무형태,급여신청기간이 표시되며, 다운로드, 프린트, 전체직원 버튼이 있습니다. 전체직원을 클릭하면 전체직원의 엑셀이 다운로드 합니다. 
             <div>
