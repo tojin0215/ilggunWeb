@@ -29,7 +29,11 @@ class PayManage extends Component {
       yearMonth: {year: 2019, month: 1},
       year: "2020",
       month: "1",
-      isVisibleMonthSelector: false
+      isVisibleMonthSelector: false,
+      checkboxGroup:{
+        paid:true,
+        unpaid:false
+      }
     }
   }
   goLogin = () => {
@@ -47,14 +51,26 @@ class PayManage extends Component {
     console.debug(this.state.isVisibleMonthSelector);
   }
 
+  handleCheckbox = (e) => {
+    let obj = {
+      paid:false,
+      unpaid:false,
+    }
+    obj[e.target.id] = e.target.checked
+    console.log(obj);
+    this.setState({
+      checkboxGroup:obj
+    })
+  }
+
   render() {
     const { userinfo } = this.props;
     console.log('userinfo : ', userinfo);
     const makeText = m => {
       if (m && m.year && m.month) return (pickerLang.months[m.month-1] + '. ' + m.year)
       return '?'
-  }
-  this.pickAMonth = React.createRef()
+      }
+    this.pickAMonth = React.createRef()
 
     return (
       <div className="wrap">
@@ -94,22 +110,34 @@ class PayManage extends Component {
               />
             </div>
           </article>
+
+
           <article className='sectionShadow flex todayleave'>
-            <Calendar
-              onChange={this.onChange}
-              value={this.state.value}
-              className='w-50'
-            />
+            
+            
             <div className='border'>
               <div className='p-3'>
-                유급 휴가
-                <input type="checkbox" />
+                <p>휴가기간</p>
+                휴가시작<input type="checkbox"/>
+                휴가끝<input type="checkbox"/>
               </div>
+              
               <div className='p-3'>
+                <p>무/유급 휴가 선택</p>
+                유급 휴가
+                <input type="checkbox" id="paid" name="checkboxGroup"
+                checked={this.state.checkboxGroup['paid']} onChange={this.handleCheckbox}/>              
+
                 무급 휴가
-                <input type="checkbox" />
+                <input type="checkbox" id="unpaid" name="checkboxGroup" 
+                checked={this.state.checkboxGroup['unpaid']} onChange={this.handleCheckbox}/>
               </div>
-              <div className='p-3'>사유 입력: <input ></input></div>
+
+              <div className='p-3'>
+                <p>사유 입력</p>
+                : <input placeholder="사유를 입력하세요"></input>
+              </div>
+              <button>저장하기</button>
             </div>
           </article>
         </div>
