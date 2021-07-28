@@ -63,6 +63,9 @@ class PayManage extends Component {
     })
   }
 
+
+
+
   render() {
     const { userinfo } = this.props;
     console.log('userinfo : ', userinfo);
@@ -71,6 +74,19 @@ class PayManage extends Component {
       return '?'
       }
     this.pickAMonth = React.createRef()
+
+    const a = new Date();
+    const year = a.getFullYear();
+    let month = a.getMonth() + 1;
+    if (String(month).length === 1) {
+      month = "0" + month;
+    }
+    let day = a.getDate();
+    if (String(day).length === 1) {
+      day = "0" + day;
+    }
+    const dateToday = `${year}-${month}-${day}`;
+    const dateToday2 = `${year}-${month}-${day+1}`;
 
     return (
       <div className="wrap">
@@ -118,8 +134,9 @@ class PayManage extends Component {
             <div className='border'>
               <div className='p-3'>
                 <p>휴가기간</p>
-                휴가시작<input type="checkbox"/>
-                휴가끝<input type="checkbox"/>
+                <input type="date" defaultValue={dateToday} min={dateToday} id="startVacation"/>
+                 ~ 
+                <input type="date" min={dateToday2} id="startVacation"/>
               </div>
               
               <div className='p-3'>
