@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
@@ -10,11 +11,13 @@ import Menu from '../../components/Navigation/Menu';
 import Table from '../../components/Navigation/Table3';
 
 import { loginRequest } from '../../action/authentication';
-import { businessRequest } from '../../action/authentication';
+import { businessRequest, businessUpdate } from '../../action/authentication';
 import { setBusiness } from '../../action/userinfo';
-import { postBusinessGet, postSelectWorker } from '../../action/api';
+import { postBusinessGet, postSelectWorker, selectTimelog, selectWorkerByType } from '../../action/api';
 
 import '../../styles/home/home.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-calendar/dist/Calendar.css';
 
 import data from '../../components/Navigation/data';
 const clickhandler = (name) => console.log('delete', name);
@@ -25,12 +28,14 @@ class Home extends Component {
     if (props.location.state) {
       this.state = {
         business_id: props.location.state.business_id,
-        worker: []
+        worker: [],
+        timelog: []
       };
     } else {
       this.state = {
         business_id: "",
-        worker: []
+        worker: [],
+        timelog: []
       };
     }
   }
@@ -40,8 +45,35 @@ class Home extends Component {
   };
 
   curFetchWorker = (id, business_id) => {
-    postSelectWorker(business_id)
-    .then(result => this.setState({ worker: result }))
+    // postSelectWorker(business_id)
+    // .then(result => result.json())
+    // .then(result => {
+    //   console.log(result);
+    //   this.setState({ worker: result })
+    // })
+    
+    selectWorkerByType(this.props.userinfo.business_name, 2)
+    .then(result => result.json())
+    .then(result => {
+      this.setState({ worker: result })
+    })
+
+
+    const d = new Date()
+    selectTimelog(business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
+    .then(result => result.json())
+    .then(result => {
+      // console.log("result", business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
+      // console.log(result, business_id)
+      this.setState({worker: this.state.worker.map((item, index) => {
+         const timelog = result.find((res) => res.workername == item.workername);
+         item["timelog"] = timelog;
+         return item;
+      })})
+    })
+    .catch(error => {
+      console.error("curFetchWorker",error);
+    })
   }
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
@@ -86,28 +118,32 @@ class Home extends Component {
         this.props.history.push('/');
       } else {
         this.props
-          .businessRequest(this.props.userinfo.id, loginData.id)
-          .then(() => {
-            console.debug('this.props.businessRequest', this.props.userinfo);
-          });
+          .businessRequest(this.props.userinfo.id, loginData.business_id)
+
         postBusinessGet(loginData.id)
           .then((result) => result.json())
           .then((result) => {
+            // loginData["business_id"] = (result & result.length > 0) ? result[0].id : ''
             loginData = {
               isLoggedIn: true,
               id: loginData.id,
               pw: loginData.pw,
-              business_id: result ? result[0].id : '',
+              business_id: (result && result.length > 0) ? result[0].id : '',
             };
+            console.log("this.state.worker", result)
+            // console.log("this.state.worker", loginData)
             // this.props.setBusiness((result) ? result[0].id: "");
             this.setState({ business: result });
+
+            if (loginData.business_id) {
+              this.setState({ business_id: loginData.business_id });
+            } else if (this.state.business_id) {
+              loginData.business_id = this.state.business_id;
+            }
+            document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+            this.curFetchWorker(this.props.userinfo.id, this.props.userinfo.business_name)
           });
-        if (loginData.business_id) {
-          this.setState({ business_id: loginData.business_id });
-        } else if (this.state.business_id) {
-          loginData.business_id = this.state.business_id;
-          document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-        }
+        
       }
     });
   }
@@ -132,7 +168,7 @@ class Home extends Component {
               <span className='color-point text-h5'>✔ </span>
               오늘의 근무자
             </h4>
-            <Table data={data} click={clickhandler} />
+            <Table data={this.state.worker} click={clickhandler} />
           </article>
         </div>
         <Footer />
@@ -157,6 +193,9 @@ const HomeDispatchToProps = (dispatch) => {
     businessRequest: (id, business_id) => {
       return dispatch(businessRequest(id, business_id));
     },
+    businessUpdate: (business_id) => {
+      return dispatch(businessUpdate(business_id));
+    }
   };
 };
 export default connect(HomeStateToProps, HomeDispatchToProps)(Home);

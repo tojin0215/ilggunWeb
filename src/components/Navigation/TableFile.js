@@ -13,50 +13,8 @@ const Table = props => {
   const columns = [
     {
       name: "이름",
-      selector: "workername2",
+      selector: "name",
       sortable: true
-    },
-    {
-      name: "정규직/비정규직",
-      selector: "permanent",
-      grow:2,
-      cell: row =>
-          (row.type == 2) ? (
-            <>
-            <Link to={{ pathname:"/workerManage", state:{ worker: row } }}>정규직</Link>
-            </>
-          ) : (
-            <>
-            <Link to={{ pathname:"/workerManage", state:{ worker: row } }}>비정규직</Link>
-            </>)
-    },
-    {
-      name: "근로계약서작성여부",
-      selector: "write",
-      grow:2,
-      cell: row =>
-          (row.state == 2) ? (
-            <>
-            {/* <span>작성</span> */}
-            <Link to={{ pathname:"/workerManage/contract", state:{ worker: row } }}>작성</Link>
-              {/* <Button>작성</Button> */}
-            </>
-            ) : (
-              <>
-              <Link to={{ pathname:"/workerManage/contract", state:{ worker: row } }}>미작성</Link>
-                {/* <Button>미작성</Button> */}
-              </>)
-    },
-    {
-      name: "근로계약서",
-      Button: true,
-      grow:2,
-      cell: row =>
-        (row.state == 2) ? (
-            <>
-            <Link to={{ pathname:"/workerManage/contract", state:{ worker: row } }}>근로계약서</Link>
-            </>
-          ) : null
     }
   ];
 
@@ -75,7 +33,7 @@ const Table = props => {
   // );
   const filteredItems = props.data.filter(
     item =>
-      item.workername2.indexOf(filterText.toLowerCase()) !== -1
+      item.name.indexOf(filterText.toLowerCase()) !== -1
   );
 
   const subHeaderComponent = useMemo(() => {
@@ -97,7 +55,6 @@ const Table = props => {
 
   return (
     <DataTable
-      defaultSortField="id"
       defaultSortAsc={false}
       // selectableRows
       highlightOnHover

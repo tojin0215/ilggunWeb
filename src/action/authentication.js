@@ -12,6 +12,7 @@ export const AUTH_BUSINESS = "AUTH_BUSINESS";
 export const AUTH_BUSINESS_SUCCESS = "AUTH_BUSINESS_SUCCESS";
 export const AUTH_BUSINESS_FAILURE = "AUTH_BUSINESS_FAILURE";
 export const AUTH_BUSINESS_WAITING = "AUTH_BUSINESS_WAITING";
+export const AUTH_BUSINESS_UPDATE = "AUTH_BUSINESS_UPDATE";
 // Check sessions
 export const AUTH_GET_STATUS = "AUTH_GET_STATUS";
 export const AUTH_GET_STATUS_SUCCESS = "AUTH_GET_STATUS_SUCCESS";
@@ -31,10 +32,9 @@ export function businessRequest(id, business_id) {
       return postBusinessGet(id)
       .then(response => response.json())
       .then((response) => {
-        console.debug("businessRequest", response)
           if (response[0].id) {
               // SUCCEED
-              if (!business_id) business_id = response[0].id
+              if (!business_id) business_id = response[0].bname
               dispatch(businessSuccess(response, business_id));
           } else{
               // FAILED
@@ -47,6 +47,13 @@ export function businessRequest(id, business_id) {
       });
     };
   }
+
+export function businessUpdate(business_id) {
+    return {
+        type: AUTH_BUSINESS_UPDATE,
+        business_name: business_id,
+    }
+}
 
   export function business_login() {
     return {

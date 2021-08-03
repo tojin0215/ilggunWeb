@@ -112,7 +112,7 @@ const Menu = (props) => {
             },
             {
               title: '견적내기 사이트 링크',
-              itemId: '/',
+              itemId: 'http://13.124.141.28:9090/',
             },
           ]}
         />

@@ -7,8 +7,8 @@ import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 import Calendar from 'react-calendar';
-import Picker from 'react-month-picker'
-import "react-month-picker/css/month-picker.css";
+// import Picker from 'react-month-picker'
+// import "react-month-picker/css/month-picker.css";
 
 import TableVacation from '../../components/Navigation/TableVacation';
 import data from '../../components/Navigation/data';

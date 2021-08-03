@@ -10,15 +10,38 @@ import Menu from '../../components/Navigation/Menu';
 import TablePay from '../../components/Navigation/TablePay';
 import data from '../../components/Navigation/data';
 
+import Picker from 'react-month-picker'
+import "react-month-picker/css/month-picker.css";
+
 import '../../styles/payDocument/payDocument.css'
 import '../../styles/home/home.css';
+
+const pickerLang = {
+  months: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+  from: '부터', to: '까지',
+}
 
 class PayDocument extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: new Date()
+      value: new Date(),
+      yearMonth: {year: new Date().getFullYear(), month: new Date().getMonth()},
+      year: "2020",
+      month: "1",
+      isVisibleMonthSelector: false
     }
+  }
+  handleAMonthChange = (year, month) => {
+    this.setState({yearMonth: {year, month}});
+    this.setState({isVisibleMonthSelector: false});
+  }
+  handleAMonthDissmis = (e) => {
+    this.setState({isVisibleMonthSelector: false});
+  }
+  handleClickMonthBox = (e) => {
+    this.setState({isVisibleMonthSelector: true});
+    console.debug(this.state.isVisibleMonthSelector);
   }
   goLogin = () => {
     this.props.history.push('/');
@@ -27,6 +50,7 @@ class PayDocument extends Component {
   render() {
     const { userinfo } = this.props;
     console.log('userinfo : ', userinfo);
+    this.pickAMonth = React.createRef()
 
     return (
       <div className="wrap wrap-paydocument">
@@ -35,18 +59,26 @@ class PayDocument extends Component {
         <div className="container">
           <Menu />
           <article className='sectionShadow'>
-            <h4 className='text-h5'>00월 급여대장</h4>
+            <h4 className='text-h5'>{this.state.yearMonth.year}년 {this.state.yearMonth.month}월 급여대장</h4>
             <div className='w-100 flex jf-end'>
               <button> 엑셀로 다운받기 </button>
               <button> 프린트 </button>
-              <input
+              {/* <input
                 placeholder='월 선택 캘린더'
                 type="date"
                 value={this.state.value}
                 onChange={(v) => this.setState({value: v.target.value})}
               >
-              </input>
-              <button> 조회 </button>
+              </input> */}
+              <Picker
+                ref={this.pickAMonth}
+                value={this.state.yearMonth}
+                lang={pickerLang.months}
+                // show={this.state.isVisibleMonthSelector}
+                onChange={this.handleAMonthChange}
+                onDismiss={this.handleAMonthDissmis}
+            >
+            <div onClick={() => this.pickAMonth.current.show()}> {this.state.yearMonth.year}년 {this.state.yearMonth.month}월 </div></Picker>
             </div>
             <TablePay data={data} />
           </article>
