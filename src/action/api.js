@@ -121,10 +121,18 @@ export function selectWorkerAsDayAsWorker(business_id, worker_id, year, month, d
     const body = JSON.stringify({year: year, month: month, date: date, business: business_id, workername: worker_id, day: day})
     return fetch(`${SERVER_URL}/selectWorkerAsDayAsWorker`, _createPostInit(body))
 }
+
+//Allowance
 export function otherAllowance(business_id, worker_id, year, month) {
     const body = JSON.stringify({year: year, month: month, bang: business_id, id: worker_id})
     return fetch(`${SERVER_URL}/otherAllowance`, _createPostInit(body))
 }
+
+export function AditionalAllowance(business_id, worker_id, year, month, day) {
+    const body = JSON.stringify({bang: business_id, id: worker_id, year: year, month: month, day: day})
+    return fetch(`${SERVER_URL}/AditionalAllowance`, _createPostInit(body))
+}
+
 
 // Business
 export function delBusiness(business_id) {

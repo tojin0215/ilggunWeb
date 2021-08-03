@@ -5,6 +5,7 @@ import FilterComponent from './FilterComponent';
 
 
 const Table = props => {
+  const { data } = props;
   const columns = [
     {
       name: "이름",

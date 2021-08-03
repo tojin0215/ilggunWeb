@@ -97,7 +97,7 @@ class PayManage extends Component {
           <article className='todayleave'>
             <h4 className='w-100 text-h5'>
               <span className='color-point text-h5'>✔ </span>
-              휴가 직원
+              휴가
             </h4>
             {/*
             <div className="edit">

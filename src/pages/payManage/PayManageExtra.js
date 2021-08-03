@@ -9,28 +9,17 @@ import Menu from '../../components/Navigation/Menu';
 import Calendar from 'react-calendar';
 import TableExtraPay from '../../components/Navigation/TableExtraPay';
 import data from '../../components/Navigation/data';
+import { AditionalAllowance} from "../../action/api"
+
 
 import '../../styles/home/home.css';
 
 class PayManageExtra extends Component {
   constructor(props) {
     super(props);
-    if (props.location.state) {
-      this.state = {
-        bang: props.location.state.bang,
-        worker: []
-      };
-    } else {
-      this.state = {
-        bang: "",
-        worker: []
-      };
-    }
-
-
-
     this.state = {
       value: new Date(),      
+
       checkboxGroup:{
         position: true,
         bonus: false,
@@ -39,9 +28,32 @@ class PayManageExtra extends Component {
         bob: false,
         oil: false,
         agi: false       
-      }
+      },      
+      AA:[]
     }
+    this.Allowance()
   }
+
+
+
+//AA:Aditional Allowance
+
+  Allowance = () => {
+    const d= new Date()
+    AditionalAllowance(this.props.userinfo.business_name, d.getWorker_id, d.getFullYear(), d.getMonth()+1, d.getDate())
+     .then((result) => result.json())
+     .then((result) => {
+       console.log('________');
+       console.log(result);
+       this.setState({ AA:result })
+     })
+     return
+  };
+
+  
+
+
+
   goLogin = () => {
     this.props.history.push('/');
   };
@@ -56,12 +68,13 @@ class PayManageExtra extends Component {
         oil: false,
         agi: false 
     }
-    if (e.target.id == "etc") {
-      obj[e.target.id] = e.target.checked 
-      this.setState({etc: !this.state.etc}) 
-    }else{
-      obj[e.target.id] = e.target.checked
-    }
+    // if (e.target.id === "etc") {
+    //   obj[e.target.id] = e.target.checked 
+    //   this.setState({etc: !this.state.etc}) 
+    // }else{
+    //   obj[e.target.id] = e.target.checked 
+    // }
+    obj[e.target.id] = e.target.checked 
         
     console.log(obj);      
       this.setState({
@@ -82,20 +95,25 @@ class PayManageExtra extends Component {
         <div className="container">
           <Menu />
           <article className='flex todayleave'>
+            <h4 className='w-100 text-h5'>
+              <span className='color-point text-h5'>✔ </span>
+              추가수당
+            </h4>
             <Calendar
               onChange={this.onChange}
               value={this.state.value}
               className='sectionShadow'
             />
             <div className='sectionShadow'>
-              <TableExtraPay data={data} />
+              <TableExtraPay data={this.state.AA} />
+              {/* this.state.id */}
             </div>
           </article>
 
 
           <div className='border'>
             <div  className='p-3'>
-              <strong>지급월</strong> 
+              <strong>지급일</strong> 
               <input type="date"/>           
 
 							<p>
@@ -112,7 +130,8 @@ class PayManageExtra extends Component {
                   <br />
                   기타 &nbsp; <input type="checkbox" id="etc" name="checkboxGroup"
                   checked={this.state.checkboxGroup['etc']} onChange={this.handleCheckbox}/>              
-                  &nbsp;{(this.state.etc) ? <input/> : null}
+                  &nbsp;<input/>
+                  {/* {(this.state.etc) ? <input/> : null}    */}
                 </div>              
 								<strong>비과세</strong> 
                 <br/>
