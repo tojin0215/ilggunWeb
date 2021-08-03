@@ -10,7 +10,7 @@ import Menu from '../../components/Navigation/Menu';
 
 import Table from '../../components/Navigation/TableWorker';
 import data from '../../components/Navigation/data';
-import {postSelectWorker} from "../../action/api"
+import { selectTimelog, selectWorkerByType} from "../../action/api"
 
 import '../../styles/home/home.css';
 
@@ -25,13 +25,28 @@ class WorkerManage extends Component {
   }
 
   curFetch = () => {
-    postSelectWorker(this.props.userinfo.business_name)
+    selectWorkerByType(this.props.userinfo.business_name, 2)
     .then(result => result.json())
     .then(result => {
-      if (result) this.setState({worker: result})
-      else this.setState({worker: []})
+      this.setState({ worker: result })
     })
-    .catch(error => console.error("postSelectWorker",error))
+
+
+    const d = new Date()
+    selectTimelog(this.props.userinfo.business_name, d.getFullYear(), d.getMonth()+1, d.getDate())
+    .then(result => result.json())
+    .then(result => {
+      // console.log("result", business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
+      // console.log(result, business_id)
+      this.setState({worker: this.state.worker.map((item, index) => {
+         const timelog = result.find((res) => res.workername == item.workername);
+         item["timelog"] = timelog;
+         return item;
+      })})
+    })
+    .catch(error => {
+      console.error("curFetchWorker",error);
+    })
   }
 
   goLogin = () => {
@@ -51,7 +66,7 @@ class WorkerManage extends Component {
           <Menu />
           <article className='sectionShadow'>
             {/* <Table data={this.state.worker} click={clickhandler}/> */}
-            <Table data={data} click={clickhandler}/>
+            <Table data={this.state.worker} click={clickhandler}/>
           </article>
         </div>
         <Footer />

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
 import { Login, Home, WorkerManage, WorkerManageContract, WorkerManageStaff, TaskManage, PayManage, PayManageExtra, PayDocument, PayDocumentDetails, Message, MessageSended, SendMail, Download, SelectBusiness } from '../pages';
+import { Library } from '../pages';
 
 import '../styles/basic/basic.css';
 import '../styles/basic/block.css';
@@ -31,6 +32,7 @@ class App extends Component {
       <Route exact path='/message/sended' component={MessageSended} />
       <Route exact path='/message/sendMail' component={SendMail} />
       <Route exact path='/download' component={Download} />
+      <Route exact path='/library' component={Library} />
     </div>
     );
   }

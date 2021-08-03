@@ -1,7 +1,7 @@
 import authenticationAction from '../action/index';
 
 const {AUTH_LOGIN, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE,AUTH_LOGIN_WAITING, AUTH_GET_STATUS, AUTH_GET_STATUS_SUCCESS,AUTH_GET_STATUS_FAILURE, AUTH_LOGOUT} = authenticationAction.authentication;
-const { AUTH_BUSINESS, AUTH_BUSINESS_SUCCESS, AUTH_BUSINESS_FAILURE, AUTH_BUSINESS_WAITING}  = authenticationAction.authentication;
+const { AUTH_BUSINESS, AUTH_BUSINESS_SUCCESS, AUTH_BUSINESS_FAILURE, AUTH_BUSINESS_WAITING, AUTH_BUSINESS_UPDATE}  = authenticationAction.authentication;
 
 
 const authentication = (state =
@@ -127,6 +127,17 @@ const authentication = (state =
                     ...state.userinfo,
                     business_info: [],
                     business_name: "",
+                  },
+                  status: {
+                    ...state.status
+                  }
+            }
+          case AUTH_BUSINESS_UPDATE:
+            return {
+                  ...state,
+                  userinfo:{
+                    ...state.userinfo,
+                    business_name: action.business_name,
                   },
                   status: {
                     ...state.status

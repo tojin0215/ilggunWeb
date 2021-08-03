@@ -13,3 +13,4 @@ export { default as MessageSended } from './message/MessageSended';
 export { default as SendMail } from './message/SendMail';
 export { default as Download } from './download/Download';
 export { default as SelectBusiness } from './home/SelectBusiness';
+export { default as Library } from './library/Library';

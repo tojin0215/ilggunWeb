@@ -35,16 +35,15 @@ const Table = props => {
       selector: "workername",
       sortable: true
     },
-
     {
       name: "퇴직처리",
       Button: true,
       cell: row =>
         (row.state == 2) ? (
             <>
-              <Button variant="danger" onClick={ () => deleteWorker(null,row.id) }>퇴사</Button>              
+              <Button variant="danger" onClick={ () => deleteWorker(null,row.workername) }>퇴사</Button>              
             </>
-          ) : null
+          ) : <><span>직원이 아닙니다.</span></>
     },
   ];
 
@@ -55,11 +54,9 @@ const Table = props => {
   // const filteredItems = data.filter(
   //   item => item.name && item.name.includes(filterText)
   // );
-  const filteredItems = data.filter(
+  const filteredItems = props.data.filter(
     item =>
-      JSON.stringify(item)
-        .toLowerCase()
-        .indexOf(filterText.toLowerCase()) !== -1
+      item.workername2.indexOf(filterText.toLowerCase()) !== -1
   );
 
   const subHeaderComponent = useMemo(() => {

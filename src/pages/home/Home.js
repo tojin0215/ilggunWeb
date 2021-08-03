@@ -11,9 +11,9 @@ import Menu from '../../components/Navigation/Menu';
 import Table from '../../components/Navigation/Table3';
 
 import { loginRequest } from '../../action/authentication';
-import { businessRequest } from '../../action/authentication';
+import { businessRequest, businessUpdate } from '../../action/authentication';
 import { setBusiness } from '../../action/userinfo';
-import { postBusinessGet, postSelectWorker, selectTimelog } from '../../action/api';
+import { postBusinessGet, postSelectWorker, selectTimelog, selectWorkerByType } from '../../action/api';
 
 import '../../styles/home/home.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -45,10 +45,16 @@ class Home extends Component {
   };
 
   curFetchWorker = (id, business_id) => {
-    postSelectWorker(business_id)
+    // postSelectWorker(business_id)
+    // .then(result => result.json())
+    // .then(result => {
+    //   console.log(result);
+    //   this.setState({ worker: result })
+    // })
+    
+    selectWorkerByType(this.props.userinfo.business_name, 2)
     .then(result => result.json())
     .then(result => {
-      console.log(result);
       this.setState({ worker: result })
     })
 
@@ -57,8 +63,8 @@ class Home extends Component {
     selectTimelog(business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
     .then(result => result.json())
     .then(result => {
-      console.log("result", business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
-      console.log(result, business_id)
+      // console.log("result", business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
+      // console.log(result, business_id)
       this.setState({worker: this.state.worker.map((item, index) => {
          const timelog = result.find((res) => res.workername == item.workername);
          item["timelog"] = timelog;
@@ -125,7 +131,7 @@ class Home extends Component {
               business_id: (result && result.length > 0) ? result[0].id : '',
             };
             console.log("this.state.worker", result)
-            console.log("this.state.worker", loginData)
+            // console.log("this.state.worker", loginData)
             // this.props.setBusiness((result) ? result[0].id: "");
             this.setState({ business: result });
 
@@ -162,7 +168,7 @@ class Home extends Component {
               <span className='color-point text-h5'>✔ </span>
               오늘의 근무자
             </h4>
-            <Table data={data} click={clickhandler} />
+            <Table data={this.state.worker} click={clickhandler} />
           </article>
         </div>
         <Footer />
@@ -187,6 +193,9 @@ const HomeDispatchToProps = (dispatch) => {
     businessRequest: (id, business_id) => {
       return dispatch(businessRequest(id, business_id));
     },
+    businessUpdate: (business_id) => {
+      return dispatch(businessUpdate(business_id));
+    }
   };
 };
 export default connect(HomeStateToProps, HomeDispatchToProps)(Home);

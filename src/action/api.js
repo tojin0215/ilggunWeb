@@ -135,6 +135,16 @@ export function selectBusiness(business_id) {
     const body = JSON.stringify({id: business_id})
     return fetch(`${SERVER_URL}/selectBusiness`, _createPostInit(body))
 }
+export function selectWorkerByType(business_id, type) {
+    // type = 1// 미계약
+    // type = 2// 계약
+    const body = JSON.stringify({business: business_id, type: type})
+    return fetch(`${SERVER_URL}/selectWorkerByType`, _createPostInit(body))
+}
+export function selectBusinessByName(business_id) {
+    const body = JSON.stringify({bname: business_id})
+    return fetch(`${SERVER_URL}/selectBusinessByName`, _createPostInit(body))
+}
 
 // ContractForm
 export function selectContractform2(user_id, business_id) {
@@ -180,3 +190,60 @@ export function delMessage(message_id) {
     const body = JSON.stringify({ind: message_id})
     return fetch(`${SERVER_URL}/delMessage`, _createPostInit(body))
 }
+
+// upload
+export function upload(business_id, file) {
+    // const body = JSON.stringify({body: JSON.stringify({bname: file_name, file: file})})
+    const form = new FormData();
+    form.append("business_id", business_id);
+    form.append("userfile", file);
+    return fetch(
+        `http://127.0.0.1:3000/upload`, {
+            method: "POST",
+            credentials: 'include',
+            body: form,
+        })
+    return fetch(
+        `${SERVER_URL}/upload`, {
+            method: "POST",
+            credentials: 'include',
+            body: form,
+        })
+}
+export function download(business_id, file_name) {
+    // const body = JSON.stringify({body: JSON.stringify({bname: file_name, file: file})})
+    return fetch(
+        `http://127.0.0.1:3000/download/${business_id}/${file_name}`,
+        {})
+    return fetch(
+        `${SERVER_URL}/download/${business_id}/${file_name}`,
+        {})
+}
+export function filelist(business_id) {
+    const body = JSON.stringify({business_id: business_id})
+    return fetch(`http://127.0.0.1:3000/log/download`, _createPostInit(body))
+    return fetch(`${SERVER_URL}/log/download`, _createPostInit(body))
+}
+
+// File
+export function getBase64(file) {
+    return new Promise(resolve => {
+      let fileInfo;
+      let baseURL = "";
+      // Make new FileReader
+      let reader = new FileReader();
+
+      // Convert the file to base64 text
+      reader.readAsDataURL(file);
+
+      // on reader load somthing...
+      reader.onload = () => {
+        // Make a fileInfo Object
+        console.log("Called", reader);
+        baseURL = reader.result;
+        console.log(baseURL);
+        resolve(baseURL);
+      };
+      console.log(fileInfo);
+    });
+  };

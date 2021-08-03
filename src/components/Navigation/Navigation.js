@@ -6,7 +6,7 @@ import { Nav, Navbar } from 'react-bootstrap';
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import 'bootstrap/dist/css/bootstrap.css';
 import { logoutRequest } from '../../action/authentication';
-import { businessRequest } from '../../action/authentication';
+import { businessRequest, businessUpdate } from '../../action/authentication';
 // import styles from './Navigation.css';
 import './Navigation.css';
 
@@ -23,7 +23,8 @@ class Navigation extends Component {
   }
 
   initPage() {
-    this.props.businessRequest(this.props.userinfo.id, null)
+    if (this.props.userinfo.business_id) this.props.businessRequest(this.props.userinfo.id, this.props.userinfo.business_id)
+    else this.props.businessRequest(this.props.userinfo.id, null)
     postBusinessGet(this.props.userinfo.id)
     .then(result => result.json())
     .then(result => {
@@ -50,6 +51,7 @@ class Navigation extends Component {
     if (eventKey === "logout") {
       this.handleLogout()
     } else {
+      this.props.businessUpdate(eventKey);
       alert(`selected ${eventKey}`)
     }
     
@@ -80,12 +82,12 @@ class Navigation extends Component {
               상세페이지 이름입니다.
             </Nav.Item>
             <NavDropdown 
-              title={"사업장:" + this.props.userinfo.business_name}
+              title={this.props.userinfo.business_name}
               id="nav-dropdown"
             >
               {this.state.business.map((business, index) => (
-                <NavDropdown.Item eventKey={business.id} title={business.name} key={index}>
-                  {business.name}
+                <NavDropdown.Item eventKey={business.bname} title={business.bname} key={index}>
+                  {business.bname}
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
@@ -127,6 +129,9 @@ const NavigationDispatchToProps = (dispatch) => {
     },
     businessRequest: (id, business_id) => {
       return dispatch(businessRequest(id, business_id));
+    },
+    businessUpdate: (business_id) => {
+      return dispatch(businessUpdate(business_id));
     },
   };
 };
