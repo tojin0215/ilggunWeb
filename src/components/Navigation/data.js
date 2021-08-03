@@ -1,97 +1,5 @@
-<<<<<<< HEAD
-=======
-// export const columns = [
-//   {
-//     name: "이름",
-//     selector: "name",
-//     sortable: true
-//   },
 
-  
-//   {
-//     name: "정규직/비정규직",
-//     selector: "permanent",
-//     grow:2,
-//     cell: row =>
-//         row.showButtons ? (
-//           <> 
-//             <button>정규직</button>
-//             <button>비정규직</button>
-//           </>
-//         ) : null
-//   },
-//   {
-//     name: "근로계약서작성여부",
-//     selector: "write",
-//     grow:2,
-//     cell: row =>
-//         row.showButtons ? (
-//           <>
-//             <button>작성</button>            
-//             <button>미작성</button>                    
-//           </>    
-//           ) : null  
-//   },
-//   {
-//     name: "근로계약서",
-//     Button: true,
-//     grow:2,
-//     cell: row =>
-//         row.showButtons ? (
-//           <>           
-//             <button>근로계약서</button>
-//           </>
-//         ) : null
-//   },
-//   ////1
-//   {
-//     name: "QR",
-//     Button: true,
-//     cell: row =>
-//         row.showButtons ? (
-//           <>           
-//             <button>QR</button>
-//           </>
-//         ) : null
-//   },
-//   {
-//     name: "입사일",
-//     selector: "date",
-//     sortable: true    
-//   }, 
-//   {
-//     name: "직책(업무)",
-//     selector: "work",
-//     sortable: true
-//   },
-//   {
-//     name: "퇴직처리",
-//     Button: true,
-//     cell: row =>
-//         row.showButtons ? (
-//           <>           
-//             <button>Delete</button>              
-//           </>
-//         ) : null
-//   },
-//   /////2
-//   {
-//     name:"출근시간",
-//     selector: "openTime",
-//     sortable:true
-//   },
-//   {
-//     name:" 퇴근시간",
-//     selector: "closeTime",
-//     sortable:true
-//   },
-//   {
-//     name:"휴가",
-//     selector: "vacation",
-//     sortable:true
-//   }
-//   /////3
-// ]
+
 
 const nameArray = [
   "도윤",
@@ -148,7 +56,7 @@ for (let i = 0; i < 20; i++) {
 }
 // export data;
 
->>>>>>> ba4a02713e33c8f8e9e2bf2262bd4464687e93f4
+
 
 // export const data = [    
 const data2 = [ 

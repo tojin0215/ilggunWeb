@@ -15,13 +15,30 @@ import '../../styles/home/home.css';
 class PayManageExtra extends Component {
   constructor(props) {
     super(props);
+    if (props.location.state) {
+      this.state = {
+        bang: props.location.state.bang,
+        worker: []
+      };
+    } else {
+      this.state = {
+        bang: "",
+        worker: []
+      };
+    }
+
+
+
     this.state = {
       value: new Date(),      
       checkboxGroup:{
         position: true,
         bonus: false,
         over: false,
-        etc: false        
+        etc: false,
+        bob: false,
+        oil: false,
+        agi: false       
       }
     }
   }
@@ -34,14 +51,25 @@ class PayManageExtra extends Component {
       position: false,
         bonus: false,
         over: false,
-        etc: false 
+        etc: false,
+        bob: false,
+        oil: false,
+        agi: false 
     }
-    obj[e.target.id] = e.target.checked
-    console.log(obj);  
+    if (e.target.id == "etc") {
+      obj[e.target.id] = e.target.checked 
+      this.setState({etc: !this.state.etc}) 
+    }else{
+      obj[e.target.id] = e.target.checked
+    }
+        
+    console.log(obj);      
       this.setState({
         checkboxGroup:obj
-      })     
+      })
+          
   }
+  
 
   render() {
     const { userinfo } = this.props;
@@ -73,33 +101,30 @@ class PayManageExtra extends Component {
 							<p>
                 <strong>과세</strong>
                 <div  className='p-3'>
-                  직책<input type="checkbox" id="position" name="checkboxGroup"
+                  직책 &nbsp; <input type="checkbox" id="position" name="checkboxGroup"
                     checked={this.state.checkboxGroup['position']} onChange={this.handleCheckbox}/>
                   <br />
-                  상여<input type="checkbox" id="bonus" name="checkboxGroup"
+                  상여 &nbsp; <input type="checkbox" id="bonus" name="checkboxGroup"
                     checked={this.state.checkboxGroup['bonus']} onChange={this.handleCheckbox}/>
                   <br />
-                  연장근무<input type="checkbox" id="over" name="checkboxGroup"
+                  연장근무 &nbsp; <input type="checkbox" id="over" name="checkboxGroup"
                     checked={this.state.checkboxGroup['over']} onChange={this.handleCheckbox}/>
                   <br />
-                  기타<input type="checkbox" id="etc" name="checkboxGroup"
-                  checked={this.state.checkboxGroup['etc']}
-                  onChange={this.handleCheckbox} 
-                  onClick={() => this.setState({etc: !this.state.etc})}
-                  />              
-                  {(this.state.etc) ? <input></input> : null}
-                </div>
-              </p>
-							<p>
+                  기타 &nbsp; <input type="checkbox" id="etc" name="checkboxGroup"
+                  checked={this.state.checkboxGroup['etc']} onChange={this.handleCheckbox}/>              
+                  &nbsp;{(this.state.etc) ? <input/> : null}
+                </div>              
 								<strong>비과세</strong> 
                 <br/>
-                비과세 종류를 선택할 수 있는 체크박스: 식대, 자가유류비, 육아수당 항목이 있습니다.
                 <div  className='p-3'>
-                  식대<input type="checkbox" />
+                  식대 &nbsp; <input type="checkbox" id="bob" name="checkboxGroup"
+                    checked={this.state.checkboxGroup['bob']} onChange={this.handleCheckbox}/>
                   <br />
-                  자가유류비<input type="checkbox" />
+                  자가유류비 &nbsp; <input type="checkbox" id="oil" name="checkboxGroup"
+                    checked={this.state.checkboxGroup['oil']} onChange={this.handleCheckbox}/>
                   <br />
-                  육아수당<input type="checkbox" />
+                  육아수당 &nbsp; <input type="checkbox" id="agi" name="checkboxGroup"
+                    checked={this.state.checkboxGroup['agi']} onChange={this.handleCheckbox}/>
                   <br />                
               </div>
 							</p>
