@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useRef  } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button'
@@ -9,7 +9,8 @@ import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 import Table from '../../components/Navigation/TableFile';
 import { getBase64 } from '../../action/api';
-import { upload, filelist, download } from '../../action/api';
+import { upload, filelist, deleteFile } from '../../action/api';
+import {SERVER_URL} from '../../const/setting';
 
 import '../../styles/home/home.css';
 
@@ -19,6 +20,8 @@ class Download extends Component {
     this.state = {
       file: [],
       base64URL: '',
+      uploadFile: null,
+      // inputRef: useRef<HTMLInputElement>(null)
     };
     this.getBase64 = getBase64
     // this.initPage();
@@ -27,11 +30,13 @@ class Download extends Component {
 
   curFetch = () => {
     filelist(this.props.userinfo.business_name)
+    // filelist("undefined")
     .then(r => r.json())
     .then(result_file => {
       console.log(result_file);
-      this.setState({file: result_file})
+      this.setState({file: result_file.file.map((item, index) => {return {name: item}})})
     })
+    .catch(error => console.error(error));
   }
 
   goLogin = () => {
@@ -39,9 +44,11 @@ class Download extends Component {
   };
 
   handleUpload = (e) => {
-    upload(this.props.userinfo.business_name, this.state.file)
+    upload(this.props.userinfo.business_name, this.state.uploadFile)
     .then(result => {
       alert("업로드 성공");
+      this.setState({uploadFile: null})
+      this.curFetch();
     })
   }
 
@@ -65,9 +72,19 @@ class Download extends Component {
     //   });
 
     this.setState({
-      file: e.target.files[0],
+      uploadFile: e.target.files[0],
     });
   };
+
+  downloadFile = (e) => {
+    window.open(`${SERVER_URL}/download/${this.props.userinfo.business_name}/${e.name}`, "_blank")
+    console.log(e);
+  }
+
+  deleteFile = (e) => {
+    deleteFile(this.props.userinfo.business_name, e.name)
+    .then(r => this.curFetch())
+  }
 
   render() {
     const { userinfo } = this.props;
@@ -79,9 +96,28 @@ class Download extends Component {
         <Navigation goLogin={this.goLogin} />
         <div className="container">
           <Menu />
+          <Table data={this.state.file} downloadFile={this.downloadFile} deleteFile={this.deleteFile}></Table>
+          {/* <div className="m-3">
+            <label className="mx-3">파일 선택:</label>
+            <input
+              ref={this.state.inputRef}
+              onChange={this.handleFileInputChange}
+              // onChange={handleDisplayFileDetails}
+              className="d-none"
+              type="file"
+            />
+            <button
+              onClick={this.handleUpload}
+              className={`btn btn-outline-${
+                this.state.file.name ? "success" : "primary"
+              }`}
+            >
+              {this.state.file.name ? this.state.file.name : "업로드"}
+            </button>
+          </div> */}
+          <label className="mx-3">파일 선택:</label>
           <input type="file" name="file" onChange={this.handleFileInputChange} />
           <Button onClick={this.handleUpload}>업로드 </Button>
-          <Table></Table>
         </div>
         <Footer />
       </div>
