@@ -9,19 +9,18 @@ import './table.css';
 import imgsearch from '../../img/search.png'
 
 const Table = props => {
-  const { data } = props;
+  const { data, downloadFile, deleteFile } = props;
   const columns = [
     {
       name: "이름",
       selector: "name",
       sortable: true
+    },
+    {
+      name: "삭제",
+      cell: row => <Button variant="danger" onClick={ () => deleteFile(row) }>삭제</Button>  
     }
   ];
-
-  const [filterText, setFilterText] = React.useState("");
-  const [resetPaginationToggle, setResetPaginationToggle] = React.useState(
-    false
-  );
   // const filteredItems = data.filter(
   //   item => item.name && item.name.includes(filterText)
   // );
@@ -31,27 +30,11 @@ const Table = props => {
   //       .toLowerCase()
   //       .indexOf(filterText.toLowerCase()) !== -1
   // );
-  const filteredItems = props.data.filter(
-    item =>
-      item.name.indexOf(filterText.toLowerCase()) !== -1
-  );
+  // const filteredItems = props.data.filter(
+  //   item =>
+  //     item.name.indexOf(filterText.toLowerCase()) !== -1
+  // );
 
-  const subHeaderComponent = useMemo(() => {
-    const handleClear = () => {
-      if (filterText) {
-        setResetPaginationToggle(!resetPaginationToggle);
-        setFilterText("");
-      }
-    };
-
-    return (
-      <FilterComponent
-        onFilter={e => setFilterText(e.target.value)}
-        onClear={handleClear}
-        filterText={filterText}
-      />
-    );
-  }, [filterText, resetPaginationToggle]);
 
   return (
     <DataTable
@@ -61,12 +44,11 @@ const Table = props => {
       pointerOnHover
       noHeader
       columns={columns}
-      data={filteredItems}
+      data={data}
       defaultSortField="name"
       striped
       pagination
-      subHeader
-      subHeaderComponent={subHeaderComponent}
+      onRowDoubleClicked={downloadFile}
     />
   );
 };

@@ -25,7 +25,8 @@ const Menu = (props) => {
           // you can use your own router's api to get pathname
           activeItemId={location.pathname}
           onSelect={({ itemId }) => {
-            history.push(itemId);
+            if (itemId==="http://13.124.141.28:9090/") window.open("http://13.124.141.28:9090/", "_blank")
+            else history.push(itemId);
           }}
           items={[
             {
@@ -39,10 +40,6 @@ const Menu = (props) => {
                 {
                   title: '근로계약서',
                   itemId: '/workerManage',
-                },
-                {
-                  title: '근로계약서상세(임시)',
-                  itemId: '/workerManage/contract',
                 },
                 {
                   title: '직원 관리',

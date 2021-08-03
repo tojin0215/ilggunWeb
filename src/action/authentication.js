@@ -30,9 +30,11 @@ export function businessRequest(id, business_id) {
 
       // API REQUEST
       return postBusinessGet(id)
-      .then(response => response.json())
+      .then(response => {
+        return response.json()
+      })
       .then((response) => {
-          if (response[0].id) {
+          if (response.length > 0 && response[0].id) {
               // SUCCEED
               if (!business_id) business_id = response[0].bname
               dispatch(businessSuccess(response, business_id));

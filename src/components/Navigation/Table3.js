@@ -9,13 +9,13 @@ const Table = props => {
   const columns = [
     {
       name: "이름",
-      selector: "workername2",
+      selector: (row, index) => row.workername2,
       sortable: true
     },  
 
     {
       name:"출근시간",
-      selector: "openTime",
+      selector: (row, index) => row.openTime,
       sortable:true,
       cell: row =>
           (row[day[new Date().getDay()]]) ? (
@@ -34,7 +34,7 @@ const Table = props => {
     },
     {
       name:" 퇴근시간",
-      selector: "closeTime",
+      selector: (row, index) => row.closeTime,
       sortable:true,
       cell: row =>
           (row[day[new Date().getDay()]]) ? (
@@ -53,7 +53,7 @@ const Table = props => {
     },
     {
       name:"휴가",
-      selector: "vacation",
+      selector: (row, index) => row.vacation,
       sortable:true
     }
   ];
@@ -95,7 +95,6 @@ const Table = props => {
 
   return (
     <DataTable      
-      defaultSortField="id"
       defaultSortAsc={false}               
       selectableRows
       highlightOnHover
@@ -103,7 +102,7 @@ const Table = props => {
       noHeader
       columns={columns}
       data={filteredItems}
-      defaultSortField="name"
+      defaultSortField="workername2"
       striped
       pagination
       subHeader

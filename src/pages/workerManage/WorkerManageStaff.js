@@ -15,7 +15,7 @@ import {Modal} from '../../components/Modal/Modal'
 import QRCode from "react-qr-code";
 import Button from 'react-bootstrap/Button'
 
-import {selectWorkerByType, selectContractform} from '../../action/api'
+import {selectWorkerByType, deleteWorker, deletedWorker} from '../../action/api'
 
 
 class WorkerManageStaff extends Component {
@@ -24,6 +24,10 @@ class WorkerManageStaff extends Component {
       this.state = {
         modalOpen: false,
         modalData: "",
+        modalRetireOpen: false,
+        modalRetireData: null,
+        modalRetireDataDate: new Date(),
+        modalRetireDataReason: "",
         worker: []
       }
       this.curFetch()
@@ -48,14 +52,25 @@ class WorkerManageStaff extends Component {
   // }
 
   curFetch = () => {
-    selectWorkerByType(this.props.userinfo.business_name, 2)
-    .then(result => result.json())
-    .then(result => {
-      console.log('|__________|');
-      console.log(result);
-      this.setState({ worker: result })
-      // this.curFetchWorker(result);
+    deletedWorker(this.props.userinfo.business_name)
+    .then(deleted_result => deleted_result.json())
+    .then(deleted_result => {
+      selectWorkerByType(this.props.userinfo.business_name, 2)
+      .then(result => result.json())
+      .then(result => {
+        
+        const new_result = result.map((item, index) => {
+          const idx = deleted_result.findIndex(function(i) {return i.user_id === item.workername})
+          if (idx === -1) item.retire_date = new Date().toLocaleDateString()
+          else item.retire_date = `${deleted_result[idx].year}/${deleted_result[idx].month}/${deleted_result[idx].date}`
+
+          return item
+        })
+        this.setState({ worker: new_result })
+        // this.curFetchWorker(result);
+      })
     })
+    
     return
   };
 
@@ -74,14 +89,42 @@ class WorkerManageStaff extends Component {
     });
   }
 
-  deleteWorker = (business_id, workername) => {
+  closeRetireModal = () => {
+    this.setState({modalRetireOpen: false})
+    deleteWorker(
+      this.props.userinfo.business_name,
+      this.state.modalRetireData.workername,
+      this.state.modalRetireDataDate.getFullYear(),
+      this.state.modalRetireDataDate.getMonth()+1,
+      this.state.modalRetireDataDate.getDate(),
+      this.state.modalRetireDataReason
+      )
+    .then(r => {
+      console.log(r)
+
+      const d = this.state.modalRetireDataDate
+      this.state.modalRetireData.state = 3;
+      this.state.modalRetireData.retire_date = `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`
+      this.setState({
+        modalRetireDataDate: new Date(),
+        modalRetireDataReason: ""
+      })
+      // const idx = this.state.worker.findIndex(function(item) {return item.workername === this.state.modalRetireData.workername})
+      // this.state.worker[idx].state = 3;
+      // this.curFetch()
+      
+    })
+  }
+
+  deleteWorker = (x, workername) => {
     const idx = this.state.worker.findIndex(function(item) {return item.workername === workername}) // findIndex = find + indexOf
+    // this.setState({modalRetireData: this.state.worker[idx]})
     // if (idx > -1) this.state.worker.splice(idx, 1)
-    this.state.worker[idx].state = 3;
+    // this.state.worker[idx].state = 3;
 
     this.setState({
-      modalOpen: false,
-      modalData: ""
+      modalRetireOpen: true,
+      modalRetireData: this.state.worker[idx]
     });
   }
 
@@ -114,6 +157,10 @@ class WorkerManageStaff extends Component {
     const { userinfo } = this.props;
 
     const clickhandler = name => console.log("delete", name);
+    let today = `${this.state.modalRetireDataDate.getFullYear()}-`
+    today = today + ((`${this.state.modalRetireDataDate.getMonth()+1}`.length === 1) ? `0${this.state.modalRetireDataDate.getMonth()+1}-` : `${this.state.modalRetireDataDate.getMonth()+1}-`);
+    today = today + ((`${this.state.modalRetireDataDate.getDate()}`.length === 1) ? `0${this.state.modalRetireDataDate.getDate()}` : `${this.state.modalRetireDataDate.getDate()}`);
+    console.log(today)
 
     return (
       <div className="wrap">
@@ -133,6 +180,17 @@ class WorkerManageStaff extends Component {
                 onClick={this.onImageCownload}
               >"QR 다운로드</Button>
           </Modal>
+          <Modal open={ this.state.modalRetireOpen } close={ () => this.setState({modalRetireOpen: false}) } ok={ this.closeRetireModal } title="Create a chat room">
+            <div>
+              퇴사일 : 
+            <input type="date" value={today} onChange={ (e) => this.setState({modalRetireDataDate: new Date(e.target.value)}) } />
+            </div>
+            <div>
+              퇴사 사유 : 
+            <input type="text" onChange={ (e) => this.setState({modalRetireDataReason: e.target.value}) } />
+            </div>
+            
+            </Modal>
         </div>
         <Footer />
       </div>

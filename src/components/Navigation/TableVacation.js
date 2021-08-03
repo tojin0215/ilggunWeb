@@ -5,6 +5,7 @@ import FilterComponent from './FilterComponent';
 
 
 const Table = props => {
+  const { data } = props;
   const columns = [
     {
       name: "이름",
@@ -22,36 +23,34 @@ const Table = props => {
   const [resetPaginationToggle, setResetPaginationToggle] = React.useState(
     false
   );
-  // const filteredItems = data.filter(
-  //   item => item.name && item.name.includes(filterText)
-  // );
-  const filteredItems = props.data.filter(
-    item =>
-      JSON.stringify(item)
-        .toLowerCase()
-        .indexOf(filterText.toLowerCase()) !== -1
+  const filteredItems = data.filter(
+    item => item.name && item.vacation
   );
+  // const filteredItems = props.data.filter(
+  //   item =>
+  //     JSON.stringify(item)
+  //       .toLowerCase()
+  //       .indexOf(filterText.toLowerCase()) !== -1
+  // );
 
-  const subHeaderComponent = useMemo(() => {
-    const handleClear = () => {
-      if (filterText) {
-        setResetPaginationToggle(!resetPaginationToggle);
-        setFilterText("");
-      }
-    };
+  const rt = (filteredItems.length > 0) ? <DataTable      
+  defaultSortAsc={false}               
+  selectableRows
+  highlightOnHover
+  pointerOnHover
+  noHeader
+  columns={columns}
+  data={filteredItems}
+  defaultSortField="name"
+  striped
+  pagination
+  paginationPerPage={4}
+/> : <span>휴가자가 없습니다</span>
 
-    return (
-      <FilterComponent
-        onFilter={e => setFilterText(e.target.value)}
-        onClear={handleClear}
-        filterText={filterText}
-      />
-    );
-  }, [filterText, resetPaginationToggle]);
+    return rt
 
   return (
     <DataTable      
-      defaultSortField="id"
       defaultSortAsc={false}               
       selectableRows
       highlightOnHover
@@ -62,8 +61,7 @@ const Table = props => {
       defaultSortField="name"
       striped
       pagination
-      subHeader
-      subHeaderComponent={subHeaderComponent}
+      paginationPerPage={4}
     />
   );
 };
