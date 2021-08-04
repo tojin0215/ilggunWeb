@@ -1,3 +1,14 @@
+input {
+  padding: 10px 15px;
+  margin: 2px 6px;
+}
+
+input[type='checkbox'] {
+  width: 25px;
+  height: 25px;
+  margin: 15px;
+}
+
 .input-underline {
   border-bottom: 2.4px solid #67c7b9;
 }

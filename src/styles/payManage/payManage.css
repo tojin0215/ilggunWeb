@@ -1,0 +1,15 @@
+.wrap-paymanage h4 {
+  margin-top: 70px;
+}
+
+.wrap-paymanage > .container > article:last-child {
+  position: relative;
+  padding: 20px 10px 90px;
+}
+
+.wrap-paymanage > .container > article:last-child > .button-solid {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+}

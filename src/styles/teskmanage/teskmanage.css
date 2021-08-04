@@ -6,9 +6,13 @@
 .todayleave > div {
   flex: 1;
   padding: 20px;
-  height: 300px;
+  height: 400px;
   overflow: scroll;
   overflow-y: scroll;
+}
+
+.react-calendar {
+  border: 0;
 }
 
 .react-calendar__month-view__weekdays__weekday {

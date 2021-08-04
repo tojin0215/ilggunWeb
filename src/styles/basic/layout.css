@@ -2,6 +2,12 @@
   background-color: #67c7b9;
 }
 
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 .wrap {
   width: calc(100% - 200px);
   height: 100vh;

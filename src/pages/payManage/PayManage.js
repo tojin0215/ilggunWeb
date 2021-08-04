@@ -14,6 +14,7 @@ import TableVacation from '../../components/Navigation/TableVacation';
 import data from '../../components/Navigation/data';
 import '../../styles/home/home.css';
 import { dividerClasses } from '@material-ui/core';
+import '../../styles/payManage/payManage.css';
 
 
 const pickerLang = {
@@ -89,15 +90,15 @@ class PayManage extends Component {
     const dateToday2 = `${year}-${month}-${day+1}`;
 
     return (
-      <div className="wrap">
+      <div className="wrap wrap-paymanage">
         <Header />
         <Navigation goLogin={this.goLogin} />
         <div className="container">
           <Menu />
           <article className='todayleave'>
-            <h4 className='w-100 text-h5'>
-              <span className='color-point text-h5'>✔ </span>
-              휴가
+            <h4 className='w-100 text-h4'>
+              {/* <span className='color-point text-h5'>✔ </span> */}
+              🏖 휴가중인 직원
             </h4>
             {/*
             <div className="edit">
@@ -126,36 +127,28 @@ class PayManage extends Component {
               />
             </div>
           </article>
-
-
-          <article className='sectionShadow flex todayleave'>
-            
-            
-            <div className='border'>
-              <div className='p-3'>
-                <p>휴가기간</p>
-                <input type="date" defaultValue={dateToday} min={dateToday} id="startVacation"/>
+          <h4 className='text-h4'>🙋‍♀️ 휴가 등록하기</h4>
+          <article className='sectionShadow flex'>
+              <div className='p-3 h-100'>
+                <p className='text-h5 text-bold'>휴가기간</p>
+                <input className='small-shadow' type="date" defaultValue={dateToday} min={dateToday} id="startVacation"/>
                  ~ 
-                <input type="date" min={dateToday2} id="startVacation"/>
+                <input className='small-shadow' type="date" min={dateToday2} id="startVacation"/>
               </div>
-              
-              <div className='p-3'>
-                <p>무/유급 휴가 선택</p>
-                유급 휴가
+              <div className='p-3 h-100 flex-wrap'>
+                <p className='text-h5 text-bold w-100'>무/유급 휴가 선택</p>
                 <input type="checkbox" id="paid" name="checkboxGroup"
-                checked={this.state.checkboxGroup['paid']} onChange={this.handleCheckbox}/>              
-
-                무급 휴가
+                checked={this.state.checkboxGroup['paid']} onChange={this.handleCheckbox}/>
+                <span className='text-h6'>유급 휴가</span>
                 <input type="checkbox" id="unpaid" name="checkboxGroup" 
                 checked={this.state.checkboxGroup['unpaid']} onChange={this.handleCheckbox}/>
+                <span className='text-h6'>무급 휴가</span>
               </div>
-
-              <div className='p-3'>
-                <p>사유 입력</p>
-                : <input placeholder="사유를 입력하세요"></input>
+              <div className='p-3 h-100'>
+                <p className='text-h5 text-bold'>사유 입력</p>
+                <input className='small-shadow' placeholder="사유를 입력하세요"></input>
               </div>
-              <button>저장하기</button>
-            </div>
+              <button className='button-solid'>저장하기</button>
           </article>
         </div>
         <Footer />
