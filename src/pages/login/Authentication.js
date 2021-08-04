@@ -98,8 +98,6 @@ class Authentication extends Component {
             {inputBoxes}
             <button className='button-solid text-h5 text-bold' onClick={this.handleLogin}>LOGIN</button>
             {/* <button onClick={this.handleLogin}>로그인</button> */}
-            <button className='button-solid text-h5'>로그인</button>
-            </a> */}
           </div>
         </div>
 
