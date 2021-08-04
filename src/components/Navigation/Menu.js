@@ -25,7 +25,8 @@ const Menu = (props) => {
           // you can use your own router's api to get pathname
           activeItemId={location.pathname}
           onSelect={({ itemId }) => {
-            history.push(itemId);
+            if (itemId==="http://13.124.141.28:9090/") window.open("http://13.124.141.28:9090/", "_blank")
+            else history.push(itemId);
           }}
           items={[
             {

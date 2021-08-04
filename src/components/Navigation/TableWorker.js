@@ -13,12 +13,12 @@ const Table = props => {
   const columns = [
     {
       name: "이름",
-      selector: "workername2",
+      selector: (row, index) => row.workername2,
       sortable: true
     },
     {
       name: "정규직/비정규직",
-      selector: "permanent",
+      selector: (row, index) => row.permanent,
       grow:2,
       cell: row =>
           (row.type == 2) ? (
@@ -32,7 +32,6 @@ const Table = props => {
     },
     {
       name: "근로계약서작성여부",
-      selector: "write",
       grow:2,
       cell: row =>
           (row.state == 2) ? (
@@ -46,17 +45,6 @@ const Table = props => {
               <Link to={{ pathname:"/workerManage/contract", state:{ worker: row } }}>미작성</Link>
                 {/* <Button>미작성</Button> */}
               </>)
-    },
-    {
-      name: "근로계약서",
-      Button: true,
-      grow:2,
-      cell: row =>
-        (row.state == 2) ? (
-            <>
-            <Link to={{ pathname:"/workerManage/contract", state:{ worker: row } }}>근로계약서</Link>
-            </>
-          ) : null
     }
   ];
 

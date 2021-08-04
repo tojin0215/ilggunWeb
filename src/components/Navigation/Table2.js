@@ -10,7 +10,7 @@ const Table = props => {
   const columns = [
     {
       name: "이름",
-      selector: "workername2",
+      selector: (row, index )=> row.workername2,
       sortable: true
     },
     {
@@ -26,13 +26,13 @@ const Table = props => {
 
     {
       name: "입사일",
-      selector: "startdate",
+      selector: (row, index) => row.startdate,
       sortable: true    
     },
 
     {
       name: "직책(업무)",
-      selector: "workername",
+      selector: (row, index) => row.workername,
       sortable: true
     },
     {
@@ -43,7 +43,7 @@ const Table = props => {
             <>
               <Button variant="danger" onClick={ () => deleteWorker(null,row.workername) }>퇴사</Button>              
             </>
-          ) : <><span>직원이 아닙니다.</span></>
+          ) : <><span>{(row.retire_date) ? row.retire_date : new Date().toLocaleDateString()}</span></>
     },
   ];
 

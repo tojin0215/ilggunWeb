@@ -11,6 +11,7 @@ import TableVacation from '../../components/Navigation/TableVacation';
 import Table3 from '../../components/Navigation/Table3';
 import data from '../../components/Navigation/data';
 import Calendar from 'react-calendar';
+import { selectTimelog, selectWorkerByType } from '../../action/api';
 
 import '../../styles/teskmanage/teskmanage.css';
 import '../../styles/home/home.css';
@@ -20,9 +21,38 @@ class TaskManage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: new Date()
+      value: new Date(),
+      worker: [],
     }
+    this.curFetchWorker()
   }
+  
+  curFetchWorker = () => {
+    // postSelectWorker(business_id)
+    // .then(result => result.json())
+    // .then(result => {
+    //   console.log(result);
+    //   this.setState({ worker: result })
+    // })
+    const d = new Date()
+    selectWorkerByType(this.props.userinfo.business_name, 2)
+    .then(result => result.json())
+    .then(selectWorkerByType_result => {
+      selectTimelog(this.props.userinfo.business_name, d.getFullYear(), d.getMonth()+1, d.getDate())
+      .then(result => result.json())
+      .then(result => {
+        this.setState({worker: selectWorkerByType_result.map((item, index) => {
+          const timelog = result.find((res) => res.workername == item.workername);
+          item["timelog"] = timelog;
+          return item;
+        })})
+      })
+      .catch(error => {
+        console.error("curFetchWorker",error);
+      })
+    })
+  }
+
   goLogin = () => {
     this.props.history.push('/');
   };
@@ -52,12 +82,12 @@ class TaskManage extends Component {
               className='sectionShadow'
             />
             <div className='sectionShadow'>
-              <TableVacation data={data} />
+              <TableVacation data={this.state.worker} />
             </div>
           </article>
           <article className='sectionShadow'>
             <h4>오늘의 근무자</h4>
-            <Table3 data={data} click={clickhandler}/>
+            <Table3 data={this.state.worker} click={clickhandler}/>
           </article>
         </div>
         <Footer />

@@ -25,55 +25,66 @@ const clickhandler = (name) => console.log('delete', name);
 class Home extends Component {
   constructor(props) {
     super(props);
-    if (props.location.state) {
-      this.state = {
-        business_id: props.location.state.business_id,
-        worker: [],
-        timelog: []
-      };
-    } else {
-      this.state = {
-        business_id: "",
-        worker: [],
-        timelog: []
-      };
-    }
+    this.state = {
+      business_id: "",
+      worker: [],
+      timelog: []
+    };
+    // if (props.location.state) {
+    //   this.state = {
+    //     business_id: props.location.state.business_id,
+    //     worker: [],
+    //     timelog: []
+    //   };
+    // } else {
+    //   this.state = {
+    //     business_id: "",
+    //     worker: [],
+    //     timelog: []
+    //   };
+    // }
+    this.curFetchWorker();
   }
 
   goLogin = () => {
     this.props.history.push('/');
   };
 
-  curFetchWorker = (id, business_id) => {
+  curFetchWorker = () => {
     // postSelectWorker(business_id)
     // .then(result => result.json())
     // .then(result => {
     //   console.log(result);
     //   this.setState({ worker: result })
     // })
-    
+    const d = new Date()
     selectWorkerByType(this.props.userinfo.business_name, 2)
     .then(result => result.json())
-    .then(result => {
-      this.setState({ worker: result })
+    .then(selectWorkerByType_result => {
+      // this.setState({ worker: result })
+
+
+      selectTimelog(this.props.userinfo.business_name, d.getFullYear(), d.getMonth()+1, d.getDate())
+      .then(result => result.json())
+      .then(result => {
+        // console.log("result", business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
+        // console.log(result, business_id)
+        this.setState({worker: selectWorkerByType_result.map((item, index) => {
+          const timelog = result.find((res) => res.workername == item.workername);
+          item["timelog"] = timelog;
+          return item;
+        })})
+
+        this.forceUpdate();
+      })
+      .catch(error => {
+        console.error("curFetchWorker",error);
+      })
     })
 
 
-    const d = new Date()
-    selectTimelog(business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
-    .then(result => result.json())
-    .then(result => {
-      // console.log("result", business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
-      // console.log(result, business_id)
-      this.setState({worker: this.state.worker.map((item, index) => {
-         const timelog = result.find((res) => res.workername == item.workername);
-         item["timelog"] = timelog;
-         return item;
-      })})
-    })
-    .catch(error => {
-      console.error("curFetchWorker",error);
-    })
+    
+    
   }
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
@@ -117,34 +128,37 @@ class Home extends Component {
         alert('다시 로그인 바랍니다');
         this.props.history.push('/');
       } else {
+        console.log("curFetchWorker",loginData.business_id);
         this.props
           .businessRequest(this.props.userinfo.id, loginData.business_id)
+          .then(v => {
+            postBusinessGet(loginData.id)
+            .then((result) => result.json())
+            .then((result) => {
+              // loginData["business_id"] = (result & result.length > 0) ? result[0].id : ''
+              loginData = {
+                isLoggedIn: true,
+                id: loginData.id,
+                pw: loginData.pw,
+                business_id: (result && result.length > 0) ? result[0].id : '',
+              };
+              console.log("this.state.worker", result)
+              // console.log("this.state.worker", loginData)
+              // this.props.setBusiness((result) ? result[0].id: "");
+              this.setState({ business: result });
+  
+              if (loginData.business_id) {
+                this.setState({ business_id: loginData.business_id });
+              } else if (this.state.business_id) {
+                loginData.business_id = this.state.business_id;
+              }
+              document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+            });
+          
+        })
+        }
 
-        postBusinessGet(loginData.id)
-          .then((result) => result.json())
-          .then((result) => {
-            // loginData["business_id"] = (result & result.length > 0) ? result[0].id : ''
-            loginData = {
-              isLoggedIn: true,
-              id: loginData.id,
-              pw: loginData.pw,
-              business_id: (result && result.length > 0) ? result[0].id : '',
-            };
-            console.log("this.state.worker", result)
-            // console.log("this.state.worker", loginData)
-            // this.props.setBusiness((result) ? result[0].id: "");
-            this.setState({ business: result });
-
-            if (loginData.business_id) {
-              this.setState({ business_id: loginData.business_id });
-            } else if (this.state.business_id) {
-              loginData.business_id = this.state.business_id;
-            }
-            document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-            this.curFetchWorker(this.props.userinfo.id, this.props.userinfo.business_name)
-          });
         
-      }
     });
   }
 

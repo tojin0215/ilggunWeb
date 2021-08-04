@@ -81,8 +81,8 @@ export function selectWorker(business_id) {
     const body = JSON.stringify({business: business_id})
     return fetch(`${SERVER_URL}/selectBusinessByWorker`, _createPostInit(body))
 }
-export function deleteWorker(business_id, worker_id) {
-    const body = JSON.stringify({workername: worker_id, business: business_id})
+export function deleteWorker(business_id, worker_id, year, month, date, reason) {
+    const body = JSON.stringify({workername: worker_id, business: business_id, year: year, month: month, date: date, reason: reason})
     return fetch(`${SERVER_URL}/deleteWorker`, _createPostInit(body))
 }
 export function selectOvertimework(business_id, year, month) {
@@ -133,6 +133,11 @@ export function AditionalAllowance(business_id, worker_id, year, month, day) {
     return fetch(`${SERVER_URL}/AditionalAllowance`, _createPostInit(body))
 }
 
+
+export function deletedWorker(business_id) {
+    const body = JSON.stringify({business_id: business_id})
+    return fetch(`${SERVER_URL}/deletedWorker`, _createPostInit(body))
+}
 
 // Business
 export function delBusiness(business_id) {
@@ -206,12 +211,6 @@ export function upload(business_id, file) {
     form.append("business_id", business_id);
     form.append("userfile", file);
     return fetch(
-        `http://127.0.0.1:3000/upload`, {
-            method: "POST",
-            credentials: 'include',
-            body: form,
-        })
-    return fetch(
         `${SERVER_URL}/upload`, {
             method: "POST",
             credentials: 'include',
@@ -221,16 +220,16 @@ export function upload(business_id, file) {
 export function download(business_id, file_name) {
     // const body = JSON.stringify({body: JSON.stringify({bname: file_name, file: file})})
     return fetch(
-        `http://127.0.0.1:3000/download/${business_id}/${file_name}`,
-        {})
-    return fetch(
         `${SERVER_URL}/download/${business_id}/${file_name}`,
         {})
 }
 export function filelist(business_id) {
     const body = JSON.stringify({business_id: business_id})
-    return fetch(`http://127.0.0.1:3000/log/download`, _createPostInit(body))
     return fetch(`${SERVER_URL}/log/download`, _createPostInit(body))
+}
+export function deleteFile(business_id, file_name) {
+    const body = JSON.stringify({business_id: business_id, file: file_name})
+    return fetch(`${SERVER_URL}/delete`, _createPostInit(body))
 }
 
 // File
