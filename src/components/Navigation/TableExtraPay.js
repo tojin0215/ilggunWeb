@@ -5,55 +5,42 @@ import FilterComponent from './FilterComponent';
 
 
 const Table = props => {
-  const { data } = props;
   const columns = [
     {
       name: "이름",
-      selector: "name",
+      selector: (rows, index) => rows.workername,
       sortable: true
     },  
     {
       name:"과세 수당",
-      selector: "withTax",
+      selector: (rows, index) => rows.taxation,
       sortable:true
     },  
     {
       name:"비과세 수당",
-      selector: "withoutTax",
+      selector: (rows, index) => rows.taxFree,
       sortable:true
     }
   ];
+//   const filteredItems = props.data.filter(
+//     item => item.name && item.vacation
+//   );
 
-  const [filterText, setFilterText] = React.useState("");
-  const [resetPaginationToggle, setResetPaginationToggle] = React.useState(
-    false
-  );
-  // const filteredItems = data.filter(
-  //   item => item.name && item.name.includes(filterText)
-  // );
-  const filteredItems = props.data.filter(
-    item =>
-      JSON.stringify(item)
-        .toLowerCase()
-        .indexOf(filterText.toLowerCase()) !== -1
-  );
+//   const addaa = (filteredItems.length > 0) ? 
+//   <DataTable      
+//   defaultSortAsc={false}               
+//   selectableRows
+//   highlightOnHover
+//   pointerOnHover
+//   noHeader
+//   columns={columns}  
+//   defaultSortField="name"
+//   striped
+//   pagination
+//   paginationPerPage={4}
+// /> : <span>추가수당 수령자가 없습니다</span>
 
-  const subHeaderComponent = useMemo(() => {
-    const handleClear = () => {
-      if (filterText) {
-        setResetPaginationToggle(!resetPaginationToggle);
-        setFilterText("");
-      }
-    };
-
-    return (
-      <FilterComponent
-        onFilter={e => setFilterText(e.target.value)}
-        onClear={handleClear}
-        filterText={filterText}
-      />
-    );
-  }, [filterText, resetPaginationToggle]);
+//     return addaa
 
   return (
     <DataTable      
@@ -63,13 +50,13 @@ const Table = props => {
       highlightOnHover
       pointerOnHover
       noHeader
-      columns={columns}
-      data={filteredItems}
+      columns={columns}      
       defaultSortField="name"
       striped
       pagination
-      subHeader
-      subHeaderComponent={subHeaderComponent}
+      // data={filteredItems}
+      // subHeader
+      // subHeaderComponent={subHeaderComponent}
     />
   );
 };

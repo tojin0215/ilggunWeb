@@ -6,10 +6,12 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
+
 import Calendar from 'react-calendar';
 import TableExtraPay from '../../components/Navigation/TableExtraPay';
-import data from '../../components/Navigation/data';
-import { AditionalAllowance} from "../../action/api"
+
+
+import { AdditionalAllowance } from "../../action/api"
 
 
 import '../../styles/home/home.css';
@@ -18,7 +20,7 @@ class PayManageExtra extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: new Date(),      
+      value: new Date(),     
 
       checkboxGroup:{
         position: true,
@@ -29,26 +31,22 @@ class PayManageExtra extends Component {
         oil: false,
         agi: false       
       },      
+      
       AA:[]
-    }
+    }    
     this.Allowance()
+    //AA:Additional Allowance
+
   }
-
-
-
-//AA:Aditional Allowance
-
   Allowance = () => {
-    const d= new Date()
-    AditionalAllowance(this.props.userinfo.business_name, d.getWorker_id, d.getFullYear(), d.getMonth()+1, d.getDate())
+    AdditionalAllowance(this.props.userinfo.business_name)
      .then((result) => result.json())
-     .then((result) => {
-       console.log('________');
-       console.log(result);
-       this.setState({ AA:result })
-     })
+     .then((result) => {           
+       this.setState({ AA :result })      
+     })     
      return
-  };
+  }
+  
 
   
 
@@ -74,8 +72,7 @@ class PayManageExtra extends Component {
     // }else{
     //   obj[e.target.id] = e.target.checked 
     // }
-    obj[e.target.id] = e.target.checked 
-        
+    obj[e.target.id] = e.target.checked         
     console.log(obj);      
       this.setState({
         checkboxGroup:obj
@@ -105,7 +102,7 @@ class PayManageExtra extends Component {
               className='sectionShadow'
             />
             <div className='sectionShadow'>
-              <TableExtraPay data={this.state.AA} />
+              <TableExtraPay data={this.state.AA} />              
               {/* this.state.id */}
             </div>
           </article>
@@ -130,7 +127,7 @@ class PayManageExtra extends Component {
                   <br />
                   기타 &nbsp; <input type="checkbox" id="etc" name="checkboxGroup"
                   checked={this.state.checkboxGroup['etc']} onChange={this.handleCheckbox}/>              
-                  &nbsp;<input/>
+                  &nbsp;
                   {/* {(this.state.etc) ? <input/> : null}    */}
                 </div>              
 								<strong>비과세</strong> 
@@ -167,7 +164,7 @@ class PayManageExtra extends Component {
 const PayManageExtraStateToProps = (state) => {
   return {
     userinfo: state.authentication.userinfo,
-    //status: state.authentication.status
+    status: state.authentication.status
   };
 };
 

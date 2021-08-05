@@ -127,10 +127,9 @@ export function otherAllowance(business_id, worker_id, year, month) {
     const body = JSON.stringify({year: year, month: month, bang: business_id, id: worker_id})
     return fetch(`${SERVER_URL}/otherAllowance`, _createPostInit(body))
 }
-
-export function AditionalAllowance(business_id, worker_id, year, month, day) {
-    const body = JSON.stringify({bang: business_id, id: worker_id, year: year, month: month, day: day})
-    return fetch(`${SERVER_URL}/AditionalAllowance`, _createPostInit(body))
+export function AdditionalAllowance(business_id) {
+    const body = JSON.stringify({bang: business_id})
+    return fetch(`${SERVER_URL}/AdditionalAllowance`, _createPostInit(body))
 }
 
 
