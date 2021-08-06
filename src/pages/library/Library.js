@@ -57,6 +57,12 @@ class Download extends Component {
     let { file } = this.state;
 
     file = e.target.files[0];
+    if (!(file.type === "image/png" || file.type === "image/jpeg" || file.type === "application/pdf")) {
+      alert("이미지나 문서만 업로드 가능합니다.")
+      return
+    }
+
+    console.log(file);
 
     // this.getBase64(file)
     //   .then((result) => {
@@ -118,6 +124,7 @@ class Download extends Component {
           <label className="mx-3">파일 선택:</label>
           <input type="file" name="file" onChange={this.handleFileInputChange} />
           <Button onClick={this.handleUpload}>업로드 </Button>
+          <span>파일 업로드는 최대 30MB까지 가능합니다.</span>
         </div>
         <Footer />
       </div>

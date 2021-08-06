@@ -46,7 +46,6 @@ class Home extends Component {
     //   };
     // }
     this.curFetchWorker();
-    this.curFetch();
   }
 
   goLogin = () => {
@@ -92,10 +91,8 @@ class Home extends Component {
         console.error("curFetchWorker",error);
       })
     })
+    this.curFetch();
 
-
-    
-    
   }
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
@@ -176,9 +173,9 @@ class Home extends Component {
   render() {
     const { userinfo } = this.props;
     const alarms = this.state.recv_message.map((item, index) => {
-      <li>{item.message}</li>
+      return <li>{item.message}</li>
     })
-    console.log(alarms)
+    console.log(this.state.recv_message)
 
     return (
       <div className="wrap">

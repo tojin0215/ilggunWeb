@@ -6,13 +6,37 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
+import { filelist } from '../../action/api';
 
 import '../../styles/home/home.css';
 
 class SendMail extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      file: [],
+      fileValue: "no"
+    }
+
+    this.curFetch()
+  }
+  curFetch = () => {
+    filelist(this.props.userinfo.business_name)
+    // filelist("undefined")
+    .then(r => r.json())
+    .then(result_file => {
+      console.log(result_file);
+      this.setState({file: result_file.file.map((item, index) => {return {name: item}})})
+    })
+    .catch(error => console.error(error));
+  }
 
     goLogin = () => {
         this.props.history.push("/");
+    }
+
+    handleFiieChange = (e) => {
+      this.setState({fileValue: e.target.value})
     }
 
     render() {
@@ -34,7 +58,7 @@ class SendMail extends Component {
             >
               메시지함/메일 보내기 페이지입니다.<br/>
               <h3> 메일 보내기 </h3>
-              <button> 삭제 </button>
+              {/* <button> 삭제 </button> */}
               <div
                 style={{
                   border: '1px solid #000',
@@ -58,24 +82,41 @@ class SendMail extends Component {
                 </div>
                 <div>
                     <span style={{ padding: '10px' }}>
+                        내용
+                    </span>
+                    <textarea style={{ padding: '10px', placeHolder: '제목을 입력하는 칸입니다' }}></textarea>
+                </div>
+                <div>
+                    <span style={{ padding: '10px' }}>
                      첨부파일
                     </span>
-                    <span style={{ border:'1px solid #000', padding: '10px' }}>
-                     첨부파일.excel
-                    </span>
-                    <button style={{ border:'1px solid #000', padding: '10px' }}>
+                    <select onChange={this.handleFiieChange} value={this.state.fileValue}>
+                      <option value={"no"}>선택안함</option>
+                      <option value={"unnamed.png"}>unnamed.png</option>
+                      {/* {this.state.file.map((item, index) => {
+                        return <option value={item}>{item}</option>
+                      })} */}
+                    </select>
+
+                    <button style={{ border:'1px solid #000', padding: '10px' }} onClick={() => this.setState({fileValue: "no"})}>
                       삭제🗑
                     </button>
-                    <button style={{ border:'1px solid #000', padding: '10px' }}>
+                    {/* <button style={{ border:'1px solid #000', padding: '10px' }}>
                         첨부💾
-                    </button>
+                    </button> */}
                 </div>
-                <span style={{ border: '1px solid #000', padding: '10px' }}>
-                  읽음
-                </span>
-                <span style={{ border: '1px solid #000', padding: '10px' }}>
+                <button style={{ border:'1px solid #000', padding: '10px' }} onClick={() => this.setState({fileValue: "no"})}>
+                전송
+                </button>
+                <button style={{ border:'1px solid #000', padding: '10px' }} onClick={() => this.setState({fileValue: "no"})}>
+                ❌
+                </button>
+                {/* <span style={{ border: '1px solid #000', padding: '10px' }}>
+                  전송
+                </span> */}
+                {/* <span style={{ border: '1px solid #000', padding: '10px' }}>
                   ❌
-                </span>
+                </span> */}
               </div>
             </article>
           </div>

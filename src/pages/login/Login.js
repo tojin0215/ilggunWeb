@@ -21,7 +21,7 @@ class Login extends Component {
     handleLogin = (id, pw) => {
         return this.props.loginRequest(id, pw).then(
             () => {
-                console.log(this.props.status)
+                // console.log(this.props.status)
                 if(this.props.status === "SUCCESS") {
                     // create session data
                     let loginData = {
