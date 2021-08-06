@@ -1,47 +1,57 @@
 import React, { useMemo } from 'react';
+import Button from 'react-bootstrap/Button';
 
 import DataTable from 'react-data-table-component';
 import FilterComponent from './FilterComponent';
 
 
 const Table = props => {
+  const { deleteMessage } = props;
+
   const columns = [
     {
       name: "No",
-      selector: "id",
+      selector: (row, index) => row.ind,
       sortable: true
     },  
 
     {
       name:"수신자",
-      selector: "to",
+      selector: (row, index) => row.t,
       sortable:true
     },
     {
       name:"제목",
-      selector: "title",
+      selector: (row, index) => row.message,
       sortable:true
     },
-    {
-      name:"날짜",
-      selector: "date",
-      sortable:true
-    },
+    // {
+    //   name:"날짜",
+    //   selector: "date",
+    //   sortable:true
+    // },
     {
       name:"읽음",
-      selector: "reac",
-      sortable:true
+      cell: row =>
+          (row.r == 1) ? (
+            <span>읽음</span>
+          ) : (
+            null)
     },
     {
       name:"삭제",
-      selector: "delete",
-      cell: row =>
-        (props.checkDelete) ? (
-          <>
-          <button onClick={ () => props.deleteMessage(row) }> ❌ </button>
-          </>
-        ) : null
-    }
+      cell: row => <Button variant="danger" onClick={ () => deleteMessage(row) }>삭제</Button>
+    },
+    // {
+    //   name:"삭제",
+    //   selector: "delete",
+    //   cell: row =>
+    //     (props.checkDelete) ? (
+    //       <>
+    //       <button onClick={ () => props.deleteMessage(row) }> ❌ </button>
+    //       </>
+    //     ) : null
+    // }
   ];
 
   const [filterText, setFilterText] = React.useState("");

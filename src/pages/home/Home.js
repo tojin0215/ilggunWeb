@@ -14,6 +14,7 @@ import { loginRequest } from '../../action/authentication';
 import { businessRequest, businessUpdate } from '../../action/authentication';
 import { setBusiness } from '../../action/userinfo';
 import { postBusinessGet, postSelectWorker, selectTimelog, selectWorkerByType } from '../../action/api';
+import {selectReceivedMessage} from '../../action/api';
 
 import '../../styles/home/home.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -28,7 +29,8 @@ class Home extends Component {
     this.state = {
       business_id: "",
       worker: [],
-      timelog: []
+      timelog: [],
+      recv_message: []
     };
     // if (props.location.state) {
     //   this.state = {
@@ -44,11 +46,20 @@ class Home extends Component {
     //   };
     // }
     this.curFetchWorker();
+    this.curFetch();
   }
 
   goLogin = () => {
     this.props.history.push('/');
   };
+
+  curFetch = () => {
+    selectReceivedMessage(this.props.userinfo.id)
+    .then(result => result.json())
+    .then(result => {
+      this.setState({recv_message: result})
+    })
+  }
 
   curFetchWorker = () => {
     // postSelectWorker(business_id)
@@ -164,6 +175,10 @@ class Home extends Component {
 
   render() {
     const { userinfo } = this.props;
+    const alarms = this.state.recv_message.map((item, index) => {
+      <li>{item.message}</li>
+    })
+    console.log(alarms)
 
     return (
       <div className="wrap">
@@ -176,6 +191,9 @@ class Home extends Component {
               <span className='color-point text-h5'>✔ </span>
                알림
             </h4>
+            <ul>
+            {alarms}
+            </ul>
           </article>
           <article className='sectionShadow'>
             <h4 className='text-h5'>
