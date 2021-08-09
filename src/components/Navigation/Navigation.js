@@ -17,19 +17,26 @@ class Navigation extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      ...props.state,
       business: []
     }
     this.initPage();
   }
 
   initPage() {
-    if (this.props.userinfo.business_id) this.props.businessRequest(this.props.userinfo.id, this.props.userinfo.business_id)
-    else this.props.businessRequest(this.props.userinfo.id, null)
-    postBusinessGet(this.props.userinfo.id)
-    .then(result => result.json())
-    .then(result => {
-        this.setState({business: result});
+    const business_id = (this.props.userinfo.business_id) ? (this.props.userinfo.business_id) : null;
+    console.log(business_id);
+    // if (this.props.userinfo.business_id) this.props.businessRequest(this.props.userinfo.id, this.props.userinfo.business_id)
+    // else this.props.businessRequest(this.props.userinfo.id, null)
+    this.props.businessRequest(this.props.userinfo.id, business_id)
+    .then(() => {
+      postBusinessGet(this.props.userinfo.id)
+      .then(result => result.json())
+      .then(result => {
+          this.setState({business: result});
+      })
     })
+    
   }
 
   handleLogout = () => {
@@ -51,7 +58,7 @@ class Navigation extends Component {
     if (eventKey === "logout") {
       this.handleLogout()
     } else {
-      this.props.businessUpdate(eventKey);
+      this.props.businessUpdate(eventKey)
       alert(`selected ${eventKey}`)
     }
     

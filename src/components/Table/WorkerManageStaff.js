@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import DataTable from 'react-data-table-component';
-import FilterComponent from './FilterComponent';
+import FilterComponent from '../Navigation/FilterComponent';
 import Button from 'react-bootstrap/Button'
 
 

@@ -8,7 +8,7 @@ import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 
-import Table from '../../components/Navigation/TableWorker';
+import Table from '../../components/Table/WorkerManage';
 import data from '../../components/Navigation/data';
 import { selectTimelog, selectWorkerByType} from "../../action/api"
 
@@ -24,20 +24,45 @@ class WorkerManage extends Component {
       this.curFetch()
   }
 
-  curFetch = () => {
-    selectWorkerByType(this.props.userinfo.business_name, 2)
+  initLoadWorkerTimelog = () => {
+    const d = new Date()
+    selectTimelog(this.props.userinfo.business_name, d.getFullYear(), d.getMonth()+1, d.getDate())
     .then(result => result.json())
     .then(result => {
-      this.setState({ worker: result })
+      // console.log("result", this.props.userinfo.business_name, d.getFullYear(), d.getMonth()+1, d.getDate())
+      // console.log(result, this.props.userinfo.business_name)
+      this.setState({worker: this.state.worker.map((item, index) => {
+         const timelog = result.find((res) => res.workername == item.workername);
+         item["timelog"] = timelog;
+         return item;
+      })})
     })
+    .catch(error => {
+      console.error("curFetchWorker",error);
+    })
+  }
+
+  initLoadWorker = () => {
+    selectWorkerByType(this.props.userinfo.business_name, 2)
+    .then(result => result.json())
+    .then(result => this.setState({ worker: result }))
+    .then(() => this.initLoadWorkerTimelog())
+  }
+
+  curFetch = () => {
+    this.initLoadWorker();
+    return
+    selectWorkerByType(this.props.userinfo.business_name, 2)
+    .then(result => result.json())
+    .then(result => this.setState({ worker: result }))
 
 
     const d = new Date()
     selectTimelog(this.props.userinfo.business_name, d.getFullYear(), d.getMonth()+1, d.getDate())
     .then(result => result.json())
     .then(result => {
-      // console.log("result", business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
-      // console.log(result, business_id)
+      // console.log("result", this.props.userinfo.business_name, d.getFullYear(), d.getMonth()+1, d.getDate())
+      // console.log(result, this.props.userinfo.business_name)
       this.setState({worker: this.state.worker.map((item, index) => {
          const timelog = result.find((res) => res.workername == item.workername);
          item["timelog"] = timelog;

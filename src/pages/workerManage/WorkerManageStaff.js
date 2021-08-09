@@ -7,7 +7,7 @@ import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 
-import Table2 from '../../components/Navigation/Table2';
+import Table2 from '../../components/Table/WorkerManageStaff';
 import data from '../../components/Navigation/data';
 
 import '../../styles/home/home.css';

@@ -51,6 +51,12 @@ export function businessRequest(id, business_id) {
   }
 
 export function businessUpdate(business_id) {
+    return (dispatch) => {
+        dispatch({
+            type: AUTH_BUSINESS_UPDATE,
+            business_name: business_id,
+        })
+    }
     return {
         type: AUTH_BUSINESS_UPDATE,
         business_name: business_id,

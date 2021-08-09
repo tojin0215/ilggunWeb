@@ -13,7 +13,7 @@ import Table from '../../components/Navigation/Table3';
 import { loginRequest } from '../../action/authentication';
 import { businessRequest, businessUpdate } from '../../action/authentication';
 import { setBusiness } from '../../action/userinfo';
-import { postBusinessGet, postSelectWorker, selectTimelog, selectWorkerByType } from '../../action/api';
+import { postBusinessGet, postSelectWorker, selectTimelog, selectWorkerByType, selectBusiness } from '../../action/api';
 import {selectReceivedMessage} from '../../action/api';
 
 import '../../styles/home/home.css';
@@ -140,7 +140,8 @@ class Home extends Component {
         this.props
           .businessRequest(this.props.userinfo.id, loginData.business_id)
           .then(v => {
-            postBusinessGet(loginData.id)
+            // selectBusiness(loginData.id)
+            selectBusiness(this.props.status.currentUser)
             .then((result) => result.json())
             .then((result) => {
               // loginData["business_id"] = (result & result.length > 0) ? result[0].id : ''
@@ -150,7 +151,6 @@ class Home extends Component {
                 pw: loginData.pw,
                 business_id: (result && result.length > 0) ? result[0].id : '',
               };
-              console.log("this.state.worker", result)
               // console.log("this.state.worker", loginData)
               // this.props.setBusiness((result) ? result[0].id: "");
               this.setState({ business: result });

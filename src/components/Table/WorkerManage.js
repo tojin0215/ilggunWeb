@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button'
 
 import DataTable from 'react-data-table-component';
-import FilterComponent from './FilterComponent';
+import FilterComponent from '../Navigation/FilterComponent';
 
 import './table.css';
 import imgsearch from '../../img/search.png'
@@ -20,15 +20,16 @@ const Table = props => {
       name: "정규직/비정규직",
       selector: (row, index) => row.permanent,
       grow:2,
-      cell: row =>
-          (row.type == 2) ? (
-            <>
-            <Link to={{ pathname:"/workerManage", state:{ worker: row } }}>정규직</Link>
-            </>
-          ) : (
-            <>
-            <Link to={{ pathname:"/workerManage", state:{ worker: row } }}>비정규직</Link>
-            </>)
+      cell: row => (row.type == 2) ? <span>정규직</span> : <span>비정규직</span>
+      // cell: row =>
+      //     (row.type == 2) ? (
+      //       <>
+      //       <Link to={{ pathname:"/workerManage", state:{ worker: row } }}>정규직</Link>
+      //       </>
+      //     ) : (
+      //       <>
+      //       <Link to={{ pathname:"/workerManage", state:{ worker: row } }}>비정규직</Link>
+      //       </>)
     },
     {
       name: "근로계약서작성여부",

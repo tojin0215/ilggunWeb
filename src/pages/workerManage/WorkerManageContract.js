@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
@@ -13,6 +15,7 @@ import '../../styles/home/home.css';
 class WorkerManageContract extends Component {
   constructor(props) {
     super(props);
+    this.renderContract = false;
     this.state = {
       type: 3,
       id: 'Qq',
@@ -86,7 +89,7 @@ class WorkerManageContract extends Component {
       .then((result) => {
         console.log('__________');
         console.log(result);
-        if (result[0].stamp == 1) {
+        if (result.length > 0 && result[0].stamp == 1) {
           this.setState({
             signOrStamp: `<img src="http://13.124.141.28:3000/{this.props.userinfo.business_name}.png" alt="도장" z-index="2" width="100" height="100"></img>`,
           });
@@ -157,6 +160,10 @@ class WorkerManageContract extends Component {
     const { userinfo } = this.props;
     console.log('userinfo : ', userinfo);
 
+    // const renderContract = this.renderContract;
+    const renderContract = this.props.location.state.worker.state == 2;
+    const renderContractNeedInput = this.props.location.state;
+
     return (
       <div className="wrap">
         <Header />
@@ -194,7 +201,7 @@ class WorkerManageContract extends Component {
               <button>다운로드</button>
               <button>프린트</button>
             </form>
-            {this.props.location.state.worker.state == 2 ? (
+            {renderContract ? (
               <div>
                 <span>표준근로계약서</span>
                 <div>
@@ -401,7 +408,7 @@ class WorkerManageContract extends Component {
                   <span class="margin_left2">(서명)</span>
                 </div>
               </div>
-            ) : this.props.location.state ? (
+            ) : renderContractNeedInput ? (
               <div>
                 <span>근로자가 확인하고 있습니다.</span>
                 <p>
