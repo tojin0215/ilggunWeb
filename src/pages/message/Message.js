@@ -51,9 +51,6 @@ class Message extends Component {
         if (result) {
           if (!item.f) item.f = result.groups.FROM
         }
-        // console.log(pattern_message.exec(item.message))
-        // console.log(pattern_message2.exec(item.message))
-        // console.log(pattern_message3.exec(item.message))
       })
 
       this.setState({recv_message: result})
@@ -70,7 +67,6 @@ class Message extends Component {
 
     render() {
         const { userinfo } = this.props;
-        console.log("userinfo : ", userinfo);
 
       return (
         <div className="wrap">

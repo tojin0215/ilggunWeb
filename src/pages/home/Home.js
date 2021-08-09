@@ -32,19 +32,6 @@ class Home extends Component {
       worker: [],
       timelog: []
     };
-    // if (props.location.state) {
-    //   this.state = {
-    //     business_id: props.location.state.business_id,
-    //     worker: [],
-    //     timelog: []
-    //   };
-    // } else {
-    //   this.state = {
-    //     business_id: "",
-    //     worker: [],
-    //     timelog: []
-    //   };
-    // }
     this.curFetchWorker();
   }
 
@@ -53,12 +40,6 @@ class Home extends Component {
   };
 
   curFetchWorker = () => {
-    // postSelectWorker(business_id)
-    // .then(result => result.json())
-    // .then(result => {
-    //   console.log(result);
-    //   this.setState({ worker: result })
-    // })
     const d = new Date()
     selectWorkerByType(this.props.userinfo.business_name, 2)
     .then(result => result.json())
@@ -69,8 +50,6 @@ class Home extends Component {
       selectTimelog(this.props.userinfo.business_name, d.getFullYear(), d.getMonth()+1, d.getDate())
       .then(result => result.json())
       .then(result => {
-        // console.log("result", business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
-        // console.log(result, business_id)
         this.setState({worker: selectWorkerByType_result.map((item, index) => {
           const timelog = result.find((res) => res.workername == item.workername);
           item["timelog"] = timelog;
@@ -157,45 +136,6 @@ class Home extends Component {
     // page refreshed & has a session in cookie,
     // check whether this cookie is valid or not
     this.initLoadUserInfo(loginData.id, loginData.pw)
-    // this.props.loginRequest(loginData.id, loginData.pw).then(() => {
-    //   // if session is not valid
-    //   // if(!this.props.status.valid) {
-    //   if (!this.props.status.isLoggedIn) {
-    //     // logout the session
-    //     this.returnToLogin();
-    //   } else {
-    //     this.props
-    //       .businessRequest(this.props.userinfo.id, loginData.business_id)
-    //       .then(v => {
-    //         postBusinessGet(loginData.id)
-    //         .then((result) => result.json())
-    //         .then((result) => {
-    //           // loginData["business_id"] = (result & result.length > 0) ? result[0].id : ''
-    //           loginData = {
-    //             isLoggedIn: true,
-    //             id: loginData.id,
-    //             pw: loginData.pw,
-    //           };
-    //           // console.log("this.state.worker", loginData)
-    //           // this.props.setBusiness((result) ? result[0].id: "");
-    //           this.setState({ business: result });
-  
-    //           if (loginData.business_id) {
-    //             console.log("this.state.worker", loginData.business_id)
-    //             this.setState({ business_id: loginData.business_id });
-    //           } else if (this.state.business_id) {
-    //             loginData.business_id = this.state.business_id;
-    //           }
-    //           document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-
-    //           this.curFetchWorker();
-    //         });
-          
-    //     })
-    //     }
-
-        
-    // });
   }
 
   render() {
