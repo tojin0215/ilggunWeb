@@ -15,6 +15,11 @@ import TableMessage from '../../components/Navigation/TableMessage';
 import data from '../../components/Navigation/data';
 import '../../styles/home/home.css';
 
+const pattern_message = /(?<FROM>.+)사업주가 (?<TO>.+)님의 계약서를 작성했습니다.\n\s?[문서함>계약서]를 확인해주세요\./
+const pattern_message2 = /(?<FROM>.+)님이 (?<WHERE>.+) 사업장에 (?<TO>.+)님을 초대합니다.\n\s?승낙하시겠습니까\?/
+const pattern_message3 = /(?<FROM>.+)근로자 (?<WHERE>.+)가 초대에 응했습니다. 근로계약서를 작성해주세요./
+
+
 class Message extends Component {
   constructor(props) {
     super(props)

@@ -9,7 +9,7 @@ import Navigation from '../../components/Navigation/Navigation';
 import { connect } from 'react-redux';
 import {loginRequest} from '../../action/authentication';
 
-import {setUserInfo} from '../../util/cookie';
+import {setUserInfo, getUserInfo} from '../../util/cookie';
 
 import '../../styles/login/login.css';
 
@@ -19,7 +19,14 @@ import imgloginvisual from '../../img/loginVisual.png';
 class Login extends Component {
     constructor(props) {
         super(props);
+        this.checkAlreadyLogin();
     }
+
+    checkAlreadyLogin = () => {
+        const userInfo = getUserInfo();
+        if (userInfo.id) this.handleLogin(userInfo.id, userInfo.pw)
+    }
+
     handleLogin = (id, pw) => {
         return this.props.loginRequest(id, pw).then(
             () => {
