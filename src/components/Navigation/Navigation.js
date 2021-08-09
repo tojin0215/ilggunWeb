@@ -11,6 +11,7 @@ import { businessRequest, businessUpdate } from '../../action/authentication';
 import './Navigation.css';
 
 import {postBusinessGet} from '../../action/api';
+import {clearUserInfo, setUserInfoBusinessId, getUserInfoBusinessId} from '../../util/cookie';
 
 
 class Navigation extends Component {
@@ -23,9 +24,14 @@ class Navigation extends Component {
   }
 
   initPage() {
-    if (this.props.userinfo.business_id) this.props.businessRequest(this.props.userinfo.id, this.props.userinfo.business_id)
-    else this.props.businessRequest(this.props.userinfo.id, null)
-    postBusinessGet(this.props.userinfo.id)
+    const user_id = this.props.userinfo.id;
+    const business_id = getUserInfoBusinessId();
+    this.props.businessRequest(user_id, business_id)
+
+    // if (this.props.userinfo.business_id) this.props.businessRequest(this.props.userinfo.id, this.props.userinfo.business_id)
+    // else this.props.businessRequest(this.props.userinfo.id, null)
+
+    postBusinessGet(user_id)
     .then(result => result.json())
     .then(result => {
         this.setState({business: result});
@@ -34,6 +40,7 @@ class Navigation extends Component {
 
   handleLogout = () => {
     this.props.logoutRequest().then(() => {
+      clearUserInfo();
       alert('로그아웃 되었습니다.');
 
       // EMPTIES THE SESSION
@@ -47,14 +54,15 @@ class Navigation extends Component {
       this.props.goLogin();
     });
   };
+
   handleSelect = (eventKey) => {
     if (eventKey === "logout") {
       this.handleLogout()
     } else {
       this.props.businessUpdate(eventKey);
+      setUserInfoBusinessId(eventKey);
       alert(`selected ${eventKey}`)
     }
-    
   }
 
   render() {

@@ -15,7 +15,7 @@ import { businessRequest, businessUpdate } from '../../action/authentication';
 import { setBusiness } from '../../action/userinfo';
 import { postBusinessGet, postSelectWorker, selectTimelog, selectWorkerByType } from '../../action/api';
 import {selectReceivedMessage} from '../../action/api';
-import {getUserInfo} from '../../util/cookie';
+import {getUserInfo, setUserInfo, getUserInfoBusinessId, setUserInfoBusinessId} from '../../util/cookie';
 
 import '../../styles/home/home.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -77,17 +77,56 @@ class Home extends Component {
           return item;
         })})
 
+        console.log("curFetchWorker",selectWorkerByType_result);
         this.forceUpdate();
       })
       .catch(error => {
         console.error("curFetchWorker",error);
       })
     })
-
-
-    
-    
   }
+
+  returnToLogin = () => {
+    const loginData = {
+      isLoggedIn: false,
+      id: '',
+    };
+
+    document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+    // and notify
+    alert('다시 로그인 바랍니다');
+    this.props.history.push('/');
+  }
+
+  initLoadBusiness = (user_id, business_id) => {
+    this.props.businessRequest(user_id, business_id)
+    .then(v => {
+      postBusinessGet(user_id)
+      .then((result) => result.json())
+      .then((result) => {
+        const new_business_id = (!business_id &&result && result.length > 0) ? result[0].bname : '';
+
+        this.setState({ business: result });
+        this.setState({ business_id: new_business_id });
+        setUserInfoBusinessId(new_business_id)
+
+        this.curFetchWorker();
+      });
+    });
+  }
+
+  initLoadUserInfo = (id, pw) => {
+    this.props.loginRequest(id, pw)
+    .then(() => {
+      if (!this.props.status.isLoggedIn) this.returnToLogin(); 
+      else {
+        const business_id = getUserInfoBusinessId()
+        setUserInfo(id, pw, null)
+        this.initLoadBusiness(id, business_id)
+      }
+    })
+  }
+
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
     // get cookie by name
@@ -112,58 +151,51 @@ class Home extends Component {
       this.props.history.push('/');
       return;
     }
-    
-    console.log("getUserInfo")
-    console.log(getUserInfo())
+
+    // document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+
     // page refreshed & has a session in cookie,
     // check whether this cookie is valid or not
-    this.props.loginRequest(loginData.id, loginData.pw).then(() => {
-      // if session is not valid
-      // if(!this.props.status.valid) {
-      if (!this.props.status.isLoggedIn) {
-        // logout the session
-        loginData = {
-          isLoggedIn: false,
-          id: '',
-        };
-
-        document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-        // and notify
-        alert('다시 로그인 바랍니다');
-        this.props.history.push('/');
-      } else {
-        console.log("curFetchWorker",loginData.business_id);
-        this.props
-          .businessRequest(this.props.userinfo.id, loginData.business_id)
-          .then(v => {
-            postBusinessGet(loginData.id)
-            .then((result) => result.json())
-            .then((result) => {
-              // loginData["business_id"] = (result & result.length > 0) ? result[0].id : ''
-              loginData = {
-                isLoggedIn: true,
-                id: loginData.id,
-                pw: loginData.pw,
-                business_id: (result && result.length > 0) ? result[0].id : '',
-              };
-              console.log("this.state.worker", result)
-              // console.log("this.state.worker", loginData)
-              // this.props.setBusiness((result) ? result[0].id: "");
-              this.setState({ business: result });
+    this.initLoadUserInfo(loginData.id, loginData.pw)
+    // this.props.loginRequest(loginData.id, loginData.pw).then(() => {
+    //   // if session is not valid
+    //   // if(!this.props.status.valid) {
+    //   if (!this.props.status.isLoggedIn) {
+    //     // logout the session
+    //     this.returnToLogin();
+    //   } else {
+    //     this.props
+    //       .businessRequest(this.props.userinfo.id, loginData.business_id)
+    //       .then(v => {
+    //         postBusinessGet(loginData.id)
+    //         .then((result) => result.json())
+    //         .then((result) => {
+    //           // loginData["business_id"] = (result & result.length > 0) ? result[0].id : ''
+    //           loginData = {
+    //             isLoggedIn: true,
+    //             id: loginData.id,
+    //             pw: loginData.pw,
+    //           };
+    //           // console.log("this.state.worker", loginData)
+    //           // this.props.setBusiness((result) ? result[0].id: "");
+    //           this.setState({ business: result });
   
-              if (loginData.business_id) {
-                this.setState({ business_id: loginData.business_id });
-              } else if (this.state.business_id) {
-                loginData.business_id = this.state.business_id;
-              }
-              document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-            });
+    //           if (loginData.business_id) {
+    //             console.log("this.state.worker", loginData.business_id)
+    //             this.setState({ business_id: loginData.business_id });
+    //           } else if (this.state.business_id) {
+    //             loginData.business_id = this.state.business_id;
+    //           }
+    //           document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+
+    //           this.curFetchWorker();
+    //         });
           
-        })
-        }
+    //     })
+    //     }
 
         
-    });
+    // });
   }
 
   render() {

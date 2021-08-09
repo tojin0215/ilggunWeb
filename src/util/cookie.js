@@ -7,6 +7,15 @@ const USERINFO_TRUE = "1"
 const USERINFO_FALSE = "0"
 
 
+function setter(key, value) {
+    if (value) localStorage.setItem(key, Buffer.from(value, "utf8").toString('base64'));
+    else localStorage.removeItem(key)
+}
+function getter(key) {
+    const value = localStorage.getItem(key)
+    return (value) ? Buffer.from(value, 'base64').toString('utf8') : null;
+}
+
 export function getUserInfo() {
     return {
         isLoggedIn: getUserInfoIsLoggedIn(),
@@ -29,13 +38,13 @@ export function getUserInfoIsLoggedIn() {
     return Boolean(Number(localStorage.getItem(USERINFO_IS_LOGGED_IN)))
 }
 export function getUserInfoId() {
-    return Buffer.from(localStorage.getItem(USERINFO_ID), 'base64').toString('utf8');
+    return getter(USERINFO_ID);
 }
 export function getUserInfoPw() {
-    return Buffer.from(localStorage.getItem(USERINFO_PW), 'base64').toString('utf8');
+    return getter(USERINFO_PW);
 }
 export function getUserInfoBusinessId() {
-    return Buffer.from(localStorage.getItem(USERINFO_BUSINESS_ID), 'base64').toString('utf8');
+    return getter(USERINFO_BUSINESS_ID);
 }
 
 export function setUserInfoIsLoggedIn(is_logged_in) {
@@ -43,12 +52,11 @@ export function setUserInfoIsLoggedIn(is_logged_in) {
     else localStorage.setItem(USERINFO_IS_LOGGED_IN, USERINFO_FALSE)
 }
 export function setUserInfoId(id) {
-    localStorage.setItem(USERINFO_ID, Buffer.from(id, "utf8").toString('base64'));
+    setter(USERINFO_ID, id)
 }
 export function setUserInfoPw(pw) {
-    localStorage.setItem(USERINFO_PW, Buffer.from(pw, "utf8").toString('base64'));
+    setter(USERINFO_PW, pw)
 }
 export function setUserInfoBusinessId(business_id) {
-    if (!business_id) business_id = ""
-    localStorage.setItem(USERINFO_BUSINESS_ID, Buffer.from(business_id, "utf8").toString('base64'));
+    setter(USERINFO_BUSINESS_ID, business_id)
 }
