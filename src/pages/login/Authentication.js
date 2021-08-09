@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 import imgPerson from '../../img/person.png';
 import imgPassword from '../../img/password.png';
 
-
 class Authentication extends Component {
-  state = {
-    mode: false,
-    id: '',
-    password: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      mode: false,
+      id: "",
+      password: ""
+    }
+  }
 
   handleChange = (e) => {
     let nextState = {};
@@ -59,10 +61,10 @@ class Authentication extends Component {
       <div>
         <div className="input-field input-underline input-id">
           <label>
-            <div className='label-icon'>
-              <img src={ imgPerson } alt='로그인 아이콘'/>
+            <div className="label-icon">
+              <img src={imgPerson} alt="로그인 아이콘" />
             </div>
-            <p className='color-point text-h5'>아이디</p>
+            <p className="color-point text-h5">아이디</p>
             <input
               name="id"
               type="text"
@@ -73,11 +75,11 @@ class Authentication extends Component {
           </label>
         </div>
         <div className="input-field input-underline input-password">
-          <label className='color-point text-h5'>
-            <div className='label-icon'>
-              <img src={ imgPassword } alt='비밀번호 아이콘'/>
+          <label className="color-point text-h5">
+            <div className="label-icon">
+              <img src={imgPassword} alt="비밀번호 아이콘" />
             </div>
-            <p className='color-point text-h5'>비밀번호</p>
+            <p className="color-point text-h5">비밀번호</p>
             <input
               name="password"
               type="password"
@@ -96,13 +98,13 @@ class Authentication extends Component {
         <div className="card-content">
           <div className="row">
             {inputBoxes}
-            <button onClick={this.handleLogin}>로그인</button>
-            {/* <a
-              className="waves-effect waves-light btn"
+            <button
+              className="button-solid text-h5 text-bold"
               onClick={this.handleLogin}
             >
-              <button className='button-solid text-h5'>로그인</button>
-            </a> */}
+              LOGIN
+            </button>
+            {/* <button onClick={this.handleLogin}>로그인</button> */}
           </div>
         </div>
 
@@ -133,9 +135,10 @@ class Authentication extends Component {
     return (
       <div className="container auth">
         <div>
-          <p className='text-bold text-h4'>편리한 근태관리 서비스</p>
+          <p className="text-bold text-h4">편리한 근태관리 서비스</p>
           <p className="text-h4">
-            <span className='text-h3 color-point text-bold'>일꾼</span>에 오신 것을 환영합니다.
+            <span className="text-h3 color-point text-bold">일꾼</span>에 오신
+            것을 환영합니다.
           </p>
         </div>
         <div className="card">

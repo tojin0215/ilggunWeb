@@ -14,6 +14,8 @@ import { loginRequest } from '../../action/authentication';
 import { businessRequest, businessUpdate } from '../../action/authentication';
 import { setBusiness } from '../../action/userinfo';
 import { postBusinessGet, postSelectWorker, selectTimelog, selectWorkerByType } from '../../action/api';
+import {selectReceivedMessage} from '../../action/api';
+import {getUserInfo} from '../../util/cookie';
 
 import '../../styles/home/home.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -110,7 +112,9 @@ class Home extends Component {
       this.props.history.push('/');
       return;
     }
-
+    
+    console.log("getUserInfo")
+    console.log(getUserInfo())
     // page refreshed & has a session in cookie,
     // check whether this cookie is valid or not
     this.props.loginRequest(loginData.id, loginData.pw).then(() => {

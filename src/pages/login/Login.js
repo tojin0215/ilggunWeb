@@ -9,6 +9,8 @@ import Navigation from '../../components/Navigation/Navigation';
 import { connect } from 'react-redux';
 import {loginRequest} from '../../action/authentication';
 
+import {setUserInfo} from '../../util/cookie';
+
 import '../../styles/login/login.css';
 
 import imgloginvisual from '../../img/loginVisual.png';
@@ -30,6 +32,7 @@ class Login extends Component {
                         pw: pw
                     };
                     document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+                    setUserInfo(id, pw, null);
                     alert(id + '님 반갑습니다.') 
                     // this.props.history.push('/selectBusiness');
                     this.props.history.push('/home');
