@@ -30,7 +30,8 @@ class Home extends Component {
     this.state = {
       business_id: "",
       worker: [],
-      timelog: []
+      timelog: [],
+      message_count: 0,
     };
     this.curFetchWorker();
   }
@@ -39,15 +40,21 @@ class Home extends Component {
     this.props.history.push('/');
   };
 
+  handleSelectNewBusiness = () => {
+    this.curFetchWorker();
+  }
+
+
   curFetchWorker = () => {
     const d = new Date()
-    selectWorkerByType(this.props.userinfo.business_name, 2)
+    const business_id = (getUserInfoBusinessId())? getUserInfoBusinessId() : this.props.userinfo.business_name;
+
+    selectWorkerByType(business_id, 2)
     .then(result => result.json())
     .then(selectWorkerByType_result => {
       // this.setState({ worker: result })
 
-
-      selectTimelog(this.props.userinfo.business_name, d.getFullYear(), d.getMonth()+1, d.getDate())
+      selectTimelog(business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
       .then(result => result.json())
       .then(result => {
         this.setState({worker: selectWorkerByType_result.map((item, index) => {
@@ -56,7 +63,6 @@ class Home extends Component {
           return item;
         })})
 
-        console.log("curFetchWorker",selectWorkerByType_result);
         this.forceUpdate();
       })
       .catch(error => {
@@ -77,6 +83,14 @@ class Home extends Component {
     this.props.history.push('/');
   }
 
+  initLoadMessageCount = () => {
+    selectReceivedMessage(this.props.userinfo.id)
+    .then(result => result.json())
+    .then(result => {
+      this.setState({message_count: result.length})
+    })
+  }
+
   initLoadBusiness = (user_id, business_id) => {
     this.props.businessRequest(user_id, business_id)
     .then(v => {
@@ -90,6 +104,7 @@ class Home extends Component {
         setUserInfoBusinessId(new_business_id)
 
         this.curFetchWorker();
+        this.initLoadMessageCount();
       });
     });
   }
@@ -144,13 +159,14 @@ class Home extends Component {
     return (
       <div className="wrap">
         <Header />
-        <Navigation goLogin={this.goLogin} />
+        <Navigation goLogin={this.goLogin}  handleSelectNewBusiness={this.handleSelectNewBusiness}/>
         <div className='container'>
           <Menu />
           <article className='sectionShadow'>
             <h4 className='text-h5'>
               <span className='color-point text-h5'>✔ </span>
                알림
+               <span>{this.state.message_count}개</span>
             </h4>
           </article>
           <article className='sectionShadow'>
