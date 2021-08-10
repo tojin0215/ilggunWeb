@@ -106,53 +106,62 @@ class PayManageExtra extends Component {
               {/* this.state.id */}
             </div>
           </article>
-
-
-          <div className='border'>
-            <div  className='p-3'>
-              <strong>지급일</strong> 
-              <input type="date"/>           
-
-							<p>
-                <strong>과세</strong>
-                <div  className='p-3'>
-                  직책 &nbsp; <input type="checkbox" id="position" name="checkboxGroup"
+          <h4 className='text-h4 mt-5'>🙋‍♀️ 추가수당 등록하기</h4>
+          <article className='sectionShadow flex flex-wrap align-items-start'>
+            <div className='col-4'>
+              <p className='p-2 text-h5 text-bold w-100'>지급일</p> 
+              <input type="date"/>
+            </div>
+            <div className='flex-wrap col-4'>
+              <p className='p-2 text-h5 text-bold w-100'>과세/비과세 선택</p>
+              <div className=''>
+                <input type='radio'></input>
+                <span className='text-h6 text-bold'>과세</span>
+                <div  className='p-1 w-100'>
+                  <input type="checkbox" id="position" name="checkboxGroup"
                     checked={this.state.checkboxGroup['position']} onChange={this.handleCheckbox}/>
+                  직책
                   <br />
-                  상여 &nbsp; <input type="checkbox" id="bonus" name="checkboxGroup"
+                  <input type="checkbox" id="bonus" name="checkboxGroup"
                     checked={this.state.checkboxGroup['bonus']} onChange={this.handleCheckbox}/>
+                  상여
                   <br />
-                  연장근무 &nbsp; <input type="checkbox" id="over" name="checkboxGroup"
+                  <input type="checkbox" id="over" name="checkboxGroup"
                     checked={this.state.checkboxGroup['over']} onChange={this.handleCheckbox}/>
+                  연장근무
                   <br />
-                  기타 &nbsp; <input type="checkbox" id="etc" name="checkboxGroup"
-                  checked={this.state.checkboxGroup['etc']} onChange={this.handleCheckbox}/>              
-                  &nbsp;
+                  <input type="checkbox" id="etc" name="checkboxGroup"
+                  checked={this.state.checkboxGroup['etc']} onChange={this.handleCheckbox}/>
+                  기타
                   {/* {(this.state.etc) ? <input/> : null}    */}
-                </div>              
-								<strong>비과세</strong> 
-                <br/>
-                <div  className='p-3'>
-                  식대 &nbsp; <input type="checkbox" id="bob" name="checkboxGroup"
-                    checked={this.state.checkboxGroup['bob']} onChange={this.handleCheckbox}/>
-                  <br />
-                  자가유류비 &nbsp; <input type="checkbox" id="oil" name="checkboxGroup"
-                    checked={this.state.checkboxGroup['oil']} onChange={this.handleCheckbox}/>
-                  <br />
-                  육아수당 &nbsp; <input type="checkbox" id="agi" name="checkboxGroup"
-                    checked={this.state.checkboxGroup['agi']} onChange={this.handleCheckbox}/>
-                  <br />                
+                </div>
               </div>
-							</p>
+              <div className='d-flex align-items-start flex-wrap pb-5 mt-2'>
+                <p>
+                  <input type='radio'></input>
+                  <span className='text-h6 text-bold'>비과세</span>
+                </p>
+                <div  className='p-1 w-100'>
+                  <input type="checkbox" id="bob" name="checkboxGroup"
+                    checked={this.state.checkboxGroup['bob']} onChange={this.handleCheckbox}/>
+                  식대
+                  <br />
+                  <input type="checkbox" id="oil" name="checkboxGroup"
+                    checked={this.state.checkboxGroup['oil']} onChange={this.handleCheckbox}/>
+                  자가유류비
+                  <br />
+                  <input type="checkbox" id="agi" name="checkboxGroup"
+                    checked={this.state.checkboxGroup['agi']} onChange={this.handleCheckbox}/>
+                  육아수당
+                </div>
+              </div>
             </div>
-
-            <div className='p-3'>
-              <h4>금액</h4>
-              <input type="number"placeholder="금액을 입력하세요." />              
-              <button>저장하기</button>
+            <div className='col-4'>
+              <h4 className='p-2 text-h5 text-bold w-100'>금액</h4>
+              <input type="number"placeholder="금액을 입력하세요." />
             </div>
-            
-          </div>
+            <button className='my-0 mx-auto button-solid mt-3'>저장하기</button>
+          </article>
 					
         </div>
         <Footer />

@@ -74,7 +74,7 @@ class Message extends Component {
           <div className="container">
             <Menu />
             <article className='sectionShadow'>
-              <h5 className='text-h5'>메시지함/받은 메시지</h5>
+              <h5 className='text-h5'>📮 받은 메시지</h5>
               <TableMessage data={this.state.recv_message} deleteMessage={this.deleteMessage} />
             </article>
           </div>

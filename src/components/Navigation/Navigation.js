@@ -94,13 +94,13 @@ class Navigation extends Component {
             <Nav.Item>
                 {/* 관리자 이름 */}
               {userinfo.id === '' ? null : (
-                <span className='navitem'>
-                  {userinfo.manager_name}님
+                <span className='navitem button-solid_white nav-name'>
+                  {userinfo.manager_name} 님
                 </span>
               )}
             </Nav.Item>
             <Nav.Item eventKey="logout">
-            <button className="btnSolid" onClick={this.handleLogout}>
+            <button className="button-logout button-solid" onClick={this.handleLogout}>
                   LOG-OUT
                 </button>
                 {/* 로그아웃 */}

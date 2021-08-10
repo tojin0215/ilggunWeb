@@ -1,0 +1,15 @@
+.workercontractwrap .worker-name {
+}
+
+.workercontractwrap .sectionShadow .container {
+  width: 60%;
+  min-width: 500px;
+}
+
+.workercontractwrap .sectionShadow p {
+  margin: 5px;
+}
+
+.workercontractwrap .sectionShadow span {
+  padding: 2px;
+}

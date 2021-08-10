@@ -12,7 +12,7 @@ const Table = props => {
     {
       name: "No",
       selector: (row, index) => row.ind,
-      sortable: true
+      sortable: true,
     },  
 
     {

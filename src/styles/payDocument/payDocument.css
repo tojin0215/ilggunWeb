@@ -5,3 +5,7 @@
 .wrap-paydocument .jf-end {
   justify-content: flex-end;
 }
+
+.month-picker > .rmp-container .rmp-popup {
+  right: 0;
+}

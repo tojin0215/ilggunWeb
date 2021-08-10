@@ -101,10 +101,10 @@ const Menu = (props) => {
                   title: '보낸 메시지함',
                   itemId: '/message/sended',
                 },
-                {
-                  title: '메일 보내기',
-                  itemId: '/message/sendMail',
-                }
+                // {
+                //   title: '메일 보내기',
+                //   itemId: '/message/sendMail',
+                // }
               ],
             },
             {

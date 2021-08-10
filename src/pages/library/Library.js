@@ -102,7 +102,10 @@ class Download extends Component {
         <Navigation goLogin={this.goLogin} />
         <div className="container">
           <Menu />
-          <Table data={this.state.file} downloadFile={this.downloadFile} deleteFile={this.deleteFile}></Table>
+          <div className='sectionShadow'>
+            <h4 className='text-h5 text-bold'>🗃 자료실 목록</h4>
+            <Table data={this.state.file} downloadFile={this.downloadFile} deleteFile={this.deleteFile}></Table>
+          </div>
           {/* <div className="m-3">
             <label className="mx-3">파일 선택:</label>
             <input
@@ -121,10 +124,15 @@ class Download extends Component {
               {this.state.file.name ? this.state.file.name : "업로드"}
             </button>
           </div> */}
-          <label className="mx-3">파일 선택:</label>
-          <input type="file" name="file" onChange={this.handleFileInputChange} />
-          <Button onClick={this.handleUpload}>업로드 </Button>
-          <span>파일 업로드는 최대 30MB까지 가능합니다.</span>
+          <div className='sectionShadow'>
+            <h4 className='text-h5 text-bold'>💾 파일 올리기</h4>
+            <label className="mx-3 text-bold text-h6">파일 선택 : </label>
+            <input type="file" name="file" onChange={this.handleFileInputChange} />
+            <div className='d-flex justify-content-center flex-wrap'>
+              <Button className='' onClick={this.handleUpload}>업로드</Button>
+              <span className='text-p w-100 d-flex justify-content-center'>파일 업로드는 최대 30MB까지 가능합니다.</span>
+            </div>
+          </div>
         </div>
         <Footer />
       </div>

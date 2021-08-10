@@ -54,7 +54,7 @@ class MessageSended extends Component {
           <div className="container">
             <Menu />
             <article className='sectionShadow'>
-              <h5 className='text-h5'> 📨보낸 메시지함 </h5>
+              <h5 className='text-h5'> 📨 보낸 메시지함 </h5>
               {/* <div className='messagedelete'>
                 삭제하기
                 <input type="checkbox" value={this.state.checkDelete} onChange={() => this.setState({checkDelete: !this.state.checkDelete})} />

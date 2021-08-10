@@ -1,5 +1,5 @@
 input {
-  padding: 10px 15px;
+  padding: 4px 10px;
   margin: 2px 6px;
 }
 
@@ -7,6 +7,11 @@ input[type='checkbox'] {
   width: 20px;
   height: 20px;
   margin: 10px;
+}
+
+input[type='password'] {
+  font-family: 'Noto Sans KR';
+  letter-spacing: 2px;
 }
 
 .input-underline {
