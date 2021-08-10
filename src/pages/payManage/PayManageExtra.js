@@ -50,8 +50,8 @@ class PayManageExtra extends Component {
       //Month select Allowance
       worker:[]
     }    
-    this.initialState;
-    this.props.initialValues;
+    // this.initialState;
+    // this.props.initialValues;
     this.insertAllowance()
     this.selectAlloWance()
     this.workerFilter()
