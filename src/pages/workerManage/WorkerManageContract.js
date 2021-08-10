@@ -413,7 +413,7 @@ class WorkerManageContract extends Component {
 
   render() {
     const { userinfo } = this.props;
-    console.log('userinfo : ', userinfo);
+    console.log('userinfo.render : ', userinfo);
 
     const isEditMode = false;
 
@@ -628,7 +628,7 @@ class WorkerManageContract extends Component {
                   <span className='ml-20'>대 표 자 : </span>
                   <span>{this.state.BusinessOwner1}</span>
                   <span>
-                    (서명){this.state.signOrStamp}
+                    {/* (서명){this.state.signOrStamp} */}
                   </span>
                 </p>
                 <p className='w-100'>
@@ -666,6 +666,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ Employer: e.target.value })
                     }
+                    value={this.state.Employer}
                   />
                   <span>
                     (이하 "사업주"라 함) 과(와)
@@ -677,6 +678,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ Employee: e.target.value })
                     }
+                    value={this.state.Employee}
                   />
                   <span>
                     (이하 "근로자"라 함) 은
@@ -693,6 +695,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ StartYear: e.target.value })
                     }
+                    value={this.state.StartYear}
                   ></input>
                   <span>년</span>
                   <input
@@ -701,6 +704,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ StartMonth: e.target.value })
                     }
+                    value={this.state.StartMonth}
                   ></input>
                   <span>월</span>
                   <input
@@ -709,6 +713,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ StartStartDayYear: e.target.value })
                     }
+                    value={this.state.StartDay}
                   ></input>
                   <span>일부터</span>
                 </p>
@@ -719,6 +724,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ EndYear: e.target.value })
                     }
+                    value={this.state.EndYear}
                   ></input>
                   <span>년</span>
                   <input
@@ -727,6 +733,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ EndMonth: e.target.value })
                     }
+                    value={this.state.EndMonth}
                   ></input>
                   <span>월</span>
                   <input
@@ -735,6 +742,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ EndDay: e.target.value })
                     }
+                    value={this.state.EndDay}
                   ></input>
                   <span>일까지</span>
                 </p>
@@ -745,6 +753,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ WorkPlace: e.target.value })
                     }
+                    value={this.state.WorkPlace}
                   ></input>
                 </p>
                 <p className='text-st w-100 text-bold text-h6'>
@@ -754,6 +763,8 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ WorkReference: e.target.value })
                     }
+                    onChange={(e) => this.setState({ WorkReference: e.target.value })}
+                    value={this.state.WorkReference}
                   ></input>
                 </p>
                 <p className='text-st w-100 text-bold text-h6'>4. 소정근로시간 :</p>
@@ -764,6 +775,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ StartTimeHour: e.target.value })
                     }
+                    value={this.state.StartTimeHour}
                   ></input>
                   <span>시</span>
                   <input
@@ -772,6 +784,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ StartTimeHMin: e.target.value })
                     }
+                    value={this.state.StartTimeHMin}
                   ></input>
                   <span>분 ~ </span>
                   <input
@@ -780,6 +793,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ EndTimeHour: e.target.value })
                     }
+                    value={this.state.EndTimeHour}
                   ></input>
                   <span>시</span>
                   <input
@@ -788,6 +802,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ EndTimeHMin: e.target.value })
                     }
+                    value={this.state.EndTimeHMin}
                   ></input>
                   <span>분까지</span>
                 </p>
@@ -799,6 +814,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ BreakTimeStartHour: e.target.value })
                     }
+                    value={this.state.BreakTimeStartHour}
                   ></input>
                   <span>시</span>
                   <input
@@ -807,6 +823,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ BreakTimeStartMin: e.target.value })
                     }
+                    value={this.state.BreakTimeStartMin}
                   ></input>
                   <span>분 ~ </span>
                   <input
@@ -815,6 +832,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ BreakTimeEndHour: e.target.value })
                     }
+                    value={this.state.BreakTimeEndHour}
                   ></input>
                   <span>시</span>
                   <input
@@ -823,6 +841,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ BreakTimeEndMin: e.target.value })
                     }
+                    value={this.state.BreakTimeEndMin}
                   ></input>
                   <span>분 )</span>
                 </p>
@@ -837,6 +856,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ WorkingDays: e.target.value })
                     }
+                    value={this.state.WorkingDays}
                   ></input>
                   <span>일 근무,</span>
                 </p>
@@ -849,6 +869,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ Holiday: e.target.value })
                     }
+                    value={this.state.Holiday}
                   ></input>
                   <span>일</span>
                   <span>)</span>
@@ -862,33 +883,35 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ Salary: e.target.value })
                     }
+                    value={this.state.Salary}
                   ></input>
                   <span>원</span>
                 </p>
                 <p className='text-st w-100'>
+                
                   <span className='ml-20'>- 상여금 : </span>
                   <input
-                    className='w-100px'
-                    type="number"
+                    type="checkbox"
+                    checked={this.state.value1 === 0}
                     onChange={(e) =>
-                      this.setState({ types1: e.target.value })
+                      this.setState({ value1: (this.state.value1 === 0)? 1: 0, value1Index: (this.state.value1 === 0)? 1: 0})
                     }
                   ></input>
-                  <span>, </span>
                   <input
                     className='w-100px'
                     type="number"
                     onChange={(e) => this.setState({ Bonus: e.target.value })}
+                    value={this.state.Bonus}
                   ></input>
                   <span>원</span>
                 </p>
                 <p className='text-st w-100'>
                   <span className='ml-20'>- 기타급여(제수당 등) : </span>
                   <input
-                    className='w-100px'
-                    type="number"
+                    type="checkbox"
+                    checked={this.state.value2 === 0}
                     onChange={(e) =>
-                      this.setState({ types2: e.target.value })
+                      this.setState({ value2: (this.state.value2 === 0)? 1: 0, value2Index: (this.state.value2 === 0)? 1: 0})
                     }
                   ></input>
                   <span>( </span>
@@ -898,6 +921,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ Bonus1: e.target.value })
                     }
+                    value={this.state.Bonus1}
                   ></input>
                   <span>원, </span>
                   <input
@@ -906,6 +930,7 @@ class WorkerManageContract extends Component {
                     onChange={(e) =>
                       this.setState({ Bonus2: e.target.value })
                     }
+                    value={this.state.Bonus2}
                   ></input>
                   <span>원</span>
                   <span> )</span>
@@ -922,6 +947,7 @@ class WorkerManageContract extends Component {
                         SalaryCalculationPeriodStart: e.target.value,
                       })
                     }
+                    value={this.state.SalaryCalculationPeriodStart}
                   ></input>
                   <span>일 ~ </span>
                   <input
@@ -932,6 +958,7 @@ class WorkerManageContract extends Component {
                         SalaryCalculationPeriodEnd: e.target.value,
                       })
                     }
+                    value={this.state.SalaryCalculationPeriodEnd}
                   ></input>
                   <span>일</span>
                 </p>
@@ -945,15 +972,26 @@ class WorkerManageContract extends Component {
                         SalaryDay: e.target.value,
                       })
                     }
+                    value={this.state.SalaryDay}
                   ></input>
                   <span>일 (휴일의 경우에는 전일 지급)</span>
                 </p>
                 <p>
                   <span className='ml-20'>- 지급방법 : </span>
+                  <span>근로자에게 직접지급 </span>
                   <input
-                    type="text"
+                    type="checkbox"
+                    checked={this.state.value3 === 0}
                     onChange={(e) =>
-                      this.setState({ types3: e.target.value })
+                      this.setState({ value3: (this.state.value3 === 0)? 1: 0, value3Index: (this.state.value3 === 0)? 1: 0})
+                    }
+                  ></input>
+                  <span>근로자 명의 예금통장에 입금</span>
+                  <input
+                    type="checkbox"
+                    checked={this.state.value3 === 1}
+                    onChange={(e) =>
+                      this.setState({ value3: (this.state.value3 === 0)? 1: 0, value3Index: (this.state.value3 === 0)? 1: 0})
                     }
                   ></input>
                 </p>
@@ -968,38 +1006,26 @@ class WorkerManageContract extends Component {
                   <span className='ml-20'>- 고용보험 : </span>
                   <input
                     type="checkbox"
-                    onChange={(e) =>
-                      this.setState({
-                        SalaryCalculationPeriodEnd: e.target.value,
-                      })
-                    }
+                    checked={this.state.checkedItems.has("고용보험")}
+                    onChange={(e) => this.checkedItemHandler("고용보험", e.checked)}
                   ></input>
                   <span className='ml-20'>- 산재보험 : </span>
                   <input
                     type="checkbox"
-                    onChange={(e) =>
-                      this.setState({
-                        SalaryCalculationPeriodEnd: e.target.value,
-                      })
-                    }
+                    checked={this.state.checkedItems.has("산재보험")}
+                    onChange={(e) => this.checkedItemHandler("산재보험", e.checked)}
                   ></input>
                   <span className='ml-20'>- 국민연금 : </span>
                   <input
                     type="checkbox"
-                    onChange={(e) =>
-                      this.setState({
-                        SalaryCalculationPeriodEnd: e.target.value,
-                      })
-                    }
+                    checked={this.state.checkedItems.has("국민연금")}
+                    onChange={(e) => this.checkedItemHandler("국민연금", e.checked)}
                   ></input>
                   <span className='ml-20'>- 건강보험 : </span>
                   <input
                     type="checkbox"
-                    onChange={(e) =>
-                      this.setState({
-                        SalaryCalculationPeriodEnd: e.target.value,
-                      })
-                    }
+                    checked={this.state.checkedItems.has("건강보험")}
+                    onChange={(e) => this.checkedItemHandler("건강보험", e.checked)}
                   ></input>
                 </p>
                 <p className='text-st w-100 text-bold text-h6'>9. 근로계약서 교부</p>
@@ -1026,6 +1052,7 @@ class WorkerManageContract extends Component {
                         ContractYear: e.target.value,
                       })
                     }
+                    value={this.state.ContractYear}
                   ></input>
                   <span>년</span>
                   <input
@@ -1036,6 +1063,7 @@ class WorkerManageContract extends Component {
                         ContractMonth: e.target.value,
                       })
                     }
+                    value={this.state.ContractMonth}
                   ></input>
                   <span>월</span>
                   <input
@@ -1046,6 +1074,7 @@ class WorkerManageContract extends Component {
                         ContractDay: e.target.value,
                       })
                     }
+                    value={this.state.ContractDay}
                   ></input>
                   <span>일</span>
                 </p>
@@ -1059,6 +1088,7 @@ class WorkerManageContract extends Component {
                         BusinessName: e.target.value,
                       })
                     }
+                    value={this.state.BusinessName}
                   />
                 </p>
                 <p className='w-100'>
@@ -1070,6 +1100,7 @@ class WorkerManageContract extends Component {
                         BusinessPhone: e.target.value,
                       })
                     }
+                    value={this.state.BusinessPhone}
                   />
                 </p>
                 <p className='w-100'>
@@ -1081,6 +1112,7 @@ class WorkerManageContract extends Component {
                         BusinessAddress: e.target.value,
                       })
                     }
+                    value={this.state.BusinessAddress}
                   />
                 </p>
                 <p className='w-100'>
@@ -1092,6 +1124,7 @@ class WorkerManageContract extends Component {
                         BusinessOwner1: e.target.value,
                       })
                     }
+                    value={this.state.BusinessOwner1}
                   />
                 </p>
                 <p className='w-100'>
@@ -1102,6 +1135,7 @@ class WorkerManageContract extends Component {
                   <input
                     type="text"
                     placeholder="사용자가 입력하는 칸입니다."
+                    disabled
                   />
                 </p>
                 <p className='w-100'>
@@ -1109,6 +1143,7 @@ class WorkerManageContract extends Component {
                   <input
                     type="text"
                     placeholder="사용자가 입력하는 칸입니다."
+                    disabled
                   />
                 </p>
                 <p className='w-100'>
@@ -1116,6 +1151,7 @@ class WorkerManageContract extends Component {
                   <input
                     type="text"
                     placeholder="사용자가 입력하는 칸입니다."
+                    disabled
                   />
                 </p>
                 <p>
