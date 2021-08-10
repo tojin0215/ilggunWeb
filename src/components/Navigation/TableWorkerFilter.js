@@ -1,48 +1,18 @@
 import React, { useMemo } from 'react';
-import Button from 'react-bootstrap/Button';
 
 import DataTable from 'react-data-table-component';
 import FilterComponent from './FilterComponent';
 
-
+import './table.css';
+import imgsearch from '../../img/search.png'
 
 const Table = props => {
-  const { deleteMessage } = props;
-
+  const { data } = props;
   const columns = [
-    {
-      name: "No",
-      selector: (row, index) => row.ind,
+    {      
+      selector: (row, index) => row.workername2,
       sortable: true
-    },  
-
-    {
-      name:"발신자",
-      selector: (row, index) => row.f,
-      sortable: true
-    },
-    {
-      name:"제목",
-      selector: (row, index) => row.message,
-      sortable:true
-    },
-    // {
-    //   name:"날짜",
-    //   selector: "date",
-    //   sortable:true
-    // },
-    {
-      name:"읽음",
-      cell: row =>
-          (row.r == 1) ? (
-            <span>읽음</span>
-          ) : (
-            null)
-    },
-    {
-      name:"삭제",
-      cell: row => (row.r === 1 ? <Button variant="danger" onClick={ () => deleteMessage(row) }>삭제</Button> : <></>)
-    },
+    }
   ];
 
   const [filterText, setFilterText] = React.useState("");
@@ -52,11 +22,15 @@ const Table = props => {
   // const filteredItems = data.filter(
   //   item => item.name && item.name.includes(filterText)
   // );
+  // const filteredItems = props.data.filter(
+  //   item =>
+  //     JSON.stringify(item)
+  //       .toLowerCase()
+  //       .indexOf(filterText.toLowerCase()) !== -1
+  // );
   const filteredItems = props.data.filter(
     item =>
-      JSON.stringify(item)
-        .toLowerCase()
-        .indexOf(filterText.toLowerCase()) !== -1
+      item.workername2.indexOf(filterText.toLowerCase()) !== -1
   );
 
   const subHeaderComponent = useMemo(() => {
@@ -77,20 +51,16 @@ const Table = props => {
   }, [filterText, resetPaginationToggle]);
 
   return (
-    <DataTable      
-      defaultSortField="id"
-      defaultSortAsc={false}               
-      selectableRows
+    <DataTable
+      defaultSortAsc={false}
       highlightOnHover
-      pointerOnHover
-      noHeader
+      pointerOnHover     
       columns={columns}
       data={filteredItems}
-      defaultSortField="name"
-      striped
-      pagination
+      striped      
       subHeader
       subHeaderComponent={subHeaderComponent}
+      
     />
   );
 };

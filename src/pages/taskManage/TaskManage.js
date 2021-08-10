@@ -82,7 +82,7 @@ class TaskManage extends Component {
               className='sectionShadow'
             />
             <div className='sectionShadow'>
-              <TableVacation data={this.state.worker} />
+              {/* <TableVacation data={this.state.worker} /> */}
             </div>
           </article>
           <article className='sectionShadow'>

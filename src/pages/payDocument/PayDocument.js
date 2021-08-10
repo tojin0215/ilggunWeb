@@ -15,6 +15,7 @@ import "react-month-picker/css/month-picker.css";
 
 import '../../styles/payDocument/payDocument.css'
 import '../../styles/home/home.css';
+import { AdditionalAllowance, selectWorkerByType } from '../../action/api';
 
 const pickerLang = {
   months: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
@@ -29,9 +30,37 @@ class PayDocument extends Component {
       yearMonth: {year: new Date().getFullYear(), month: new Date().getMonth()},
       year: "2020",
       month: "1",
-      isVisibleMonthSelector: false
+      isVisibleMonthSelector: false,
+
+      AA:[]
     }
+    this.selectAlloWance()
   }
+
+  selectAlloWance = () => {
+    AdditionalAllowance(this.props.userinfo.business_name)
+     .then((result) => result.json())
+     .then((result) => {           
+       this.setState({ AA :result })      
+     })     
+    
+    //  selectWorkerByType(this.props.userinfo.business_name, 2)
+    // .then(result => result.json())
+    // .then(result => {
+    //   this.setState({AA: this.state.AA.map((item, index) => {
+    //      const worker = result.find((res) => res.business == item.bang);
+    //      item["worker"] = worker;
+    //      return item;
+    //   })})
+    // })
+    // .catch(error => {
+    //   console.error("curFetchWorker",error);
+    // })
+    
+
+  }
+
+
   handleAMonthChange = (year, month) => {
     this.setState({yearMonth: {year, month}});
     this.setState({isVisibleMonthSelector: false});
@@ -59,10 +88,8 @@ class PayDocument extends Component {
         <div className="container">
           <Menu />
           <article className='sectionShadow'>
-            <h4 className='text-h5'>{this.state.yearMonth.year}년 {this.state.yearMonth.month}월 급여대장</h4>
+            <h4 className='text-h5 text-bold'>{this.state.yearMonth.year}년 {this.state.yearMonth.month}월 급여대장</h4>
             <div className='w-100 flex jf-end'>
-              <button> 엑셀로 다운받기 </button>
-              <button> 프린트 </button>
               {/* <input
                 placeholder='월 선택 캘린더'
                 type="date"
@@ -71,6 +98,7 @@ class PayDocument extends Component {
               >
               </input> */}
               <Picker
+                className='button-solid_white-0 py-2 ps-4 pe-0 my-0 mx-1 d-flex'
                 ref={this.pickAMonth}
                 value={this.state.yearMonth}
                 lang={pickerLang.months}
@@ -80,7 +108,7 @@ class PayDocument extends Component {
             >
             <div onClick={() => this.pickAMonth.current.show()}> {this.state.yearMonth.year}년 {this.state.yearMonth.month}월 </div></Picker>
             </div>
-            <TablePay data={data} />
+            <TablePay data={this.state.AA} />
           </article>
         </div>
         <Footer />
@@ -92,7 +120,7 @@ class PayDocument extends Component {
 const PayDocumentStateToProps = (state) => {
   return {
     userinfo: state.authentication.userinfo,
-    //status: state.authentication.status
+    status: state.authentication.status
   };
 };
 

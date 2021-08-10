@@ -32,6 +32,7 @@ class Home extends Component {
       worker: [],
       timelog: [],
       message_count: 0,
+      recv_message: []
     };
     this.curFetchWorker();
   }
@@ -155,6 +156,10 @@ class Home extends Component {
 
   render() {
     const { userinfo } = this.props;
+    const alarms = this.state.recv_message.map((item, index) => {
+      return <li>{item.message}</li>
+    })
+    console.log(this.state.recv_message)
 
     return (
       <div className="wrap">
@@ -168,6 +173,9 @@ class Home extends Component {
                알림
                <span>{this.state.message_count}개</span>
             </h4>
+            <ul>
+            {alarms}
+            </ul>
           </article>
           <article className='sectionShadow'>
             <h4 className='text-h5'>

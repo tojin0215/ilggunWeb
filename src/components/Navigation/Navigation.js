@@ -126,39 +126,37 @@ class Navigation extends Component {
                         </span>
                     </NavLink>
                 </Nav> */}
-        <Nav className="navUtill" onSelect={this.handleSelect}>
-          <Nav.Item style={{ display: 'none' }}>
-            대분류페이지 이름입니다.
-          </Nav.Item>
-          <Nav.Item style={{ display: 'none' }}>
-            상세페이지 이름입니다.
-          </Nav.Item>
-          <NavDropdown
-            title={this.props.userinfo.business_name}
-            id="nav-dropdown"
-          >
-            {this.state.business.map((business, index) => (
-              <NavDropdown.Item
-                eventKey={business.bname}
-                title={business.bname}
-                key={index}
-              >
-                {business.bname}
-              </NavDropdown.Item>
-            ))}
-          </NavDropdown>
-          <Nav.Item>
-            {/* 관리자 이름 */}
-            {userinfo.id === '' ? null : (
-              <span className="navitem">{userinfo.manager_name}님</span>
-            )}
-          </Nav.Item>
-          <Nav.Item eventKey="logout">
-            <button className="btnSolid" onClick={this.handleLogout}>
-              LOG-OUT
-            </button>
-            {/* 로그아웃 */}
-            {/* {userinfo.id === '' ? null : (
+          <Nav className='navUtill' onSelect={this.handleSelect}>
+            <Nav.Item style={{ display:'none' }}>
+              대분류페이지 이름입니다.
+            </Nav.Item>
+            <Nav.Item style={{ display:'none' }}>
+              상세페이지 이름입니다.
+            </Nav.Item>
+            <NavDropdown 
+              title={this.props.userinfo.business_name}
+              id="nav-dropdown"
+            >
+              {this.state.business.map((business, index) => (
+                <NavDropdown.Item eventKey={business.bname} title={business.bname} key={index}>
+                  {business.bname}
+                </NavDropdown.Item>
+              ))}
+            </NavDropdown>
+            <Nav.Item>
+                {/* 관리자 이름 */}
+              {userinfo.id === '' ? null : (
+                <span className='navitem button-solid_white nav-name'>
+                  {userinfo.manager_name} 님
+                </span>
+              )}
+            </Nav.Item>
+            <Nav.Item eventKey="logout">
+            <button className="button-logout button-solid" onClick={this.handleLogout}>
+                  LOG-OUT
+                </button>
+                {/* 로그아웃 */}
+              {/* {userinfo.id === '' ? null : (
                 <button className="btnSolid" onClick={this.handleLogout}>
                   LOG-OUT
                 </button>

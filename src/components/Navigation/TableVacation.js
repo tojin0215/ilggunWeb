@@ -9,13 +9,33 @@ const Table = props => {
   const columns = [
     {
       name: "이름",
-      selector: "name",
+      selector: (row, index) => row.workername,
       sortable: true
     },  
     {
-      name:"휴가 기간",
-      selector: "vacation",
+      name:"휴가 출발",
+      selector: (row, index) => row.strat_date,
       sortable:true
+    },  
+    {
+      name:"휴가 도착",
+      selector: (row, index) => row.end_date,
+      sortable:true
+    },
+    {
+      name:"휴가",
+      selector: (row, index) => row.vacation,
+      sortable:true,
+      cell: row =>
+      (row.vacation == 1) ? (
+        <>
+        <span>무급</span>
+        </>
+      ) : (
+        <>
+        <span>유급</span>
+        </>)
+
     }
   ];
 
@@ -23,9 +43,14 @@ const Table = props => {
   const [resetPaginationToggle, setResetPaginationToggle] = React.useState(
     false
   );
-  const filteredItems = data.filter(
-    item => item.name && item.vacation
+  const filteredItems = props.data.filter(
+    item =>
+      item.id.indexOf(filterText.toLowerCase()) !== -1
   );
+
+  // const filteredItems = props.data.filter(
+  //   item => item.name && item.vacation
+  // );
   // const filteredItems = props.data.filter(
   //   item =>
   //     JSON.stringify(item)
@@ -33,32 +58,30 @@ const Table = props => {
   //       .indexOf(filterText.toLowerCase()) !== -1
   // );
 
-  const rt = (filteredItems.length > 0) ? <DataTable      
-  defaultSortAsc={false}               
-  selectableRows
-  highlightOnHover
-  pointerOnHover
-  noHeader
-  columns={columns}
-  data={filteredItems}
-  defaultSortField="name"
-  striped
-  pagination
-  paginationPerPage={4}
-/> : <span>휴가자가 없습니다</span>
+//   const rt = (filteredItems.length > 0) ? <DataTable      
+//   defaultSortAsc={false}
+//   highlightOnHover
+//   pointerOnHover
+//   noHeader
+//   columns={columns}
+//   data={filteredItems}
+//   defaultSortField="workername"
+//   striped
+//   pagination
+//   paginationPerPage={4}
+// /> : <span>휴가자가 없습니다</span>
 
-    return rt
+//     return rt
 
   return (
-    <DataTable      
-      defaultSortAsc={false}               
-      selectableRows
+    <DataTable  
+      defaultSortField="workername"
+      defaultSortAsc={false}
       highlightOnHover
       pointerOnHover
       noHeader
       columns={columns}
-      data={filteredItems}
-      defaultSortField="name"
+      data={filteredItems}      
       striped
       pagination
       paginationPerPage={4}

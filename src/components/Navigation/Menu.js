@@ -41,6 +41,10 @@ const Menu = (props) => {
                   title: '근로계약서',
                   itemId: '/workerManage',
                 },
+                // {
+                //   title: '근로계약서상세(임시)',
+                //   itemId: '/workerManage/contract',
+                // },
                 {
                   title: '직원 관리',
                   itemId: '/workerManage/staff',
@@ -97,10 +101,10 @@ const Menu = (props) => {
                   title: '보낸 메시지함',
                   itemId: '/message/sended',
                 },
-                {
-                  title: '메일 보내기',
-                  itemId: '/message/sendMail',
-                }
+                // {
+                //   title: '메일 보내기',
+                //   itemId: '/message/sendMail',
+                // }
               ],
             },
             {

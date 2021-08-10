@@ -51,6 +51,9 @@ class Message extends Component {
         if (result) {
           if (!item.f) item.f = result.groups.FROM
         }
+        // console.log(pattern_message.exec(item.message))
+        // console.log(pattern_message2.exec(item.message))
+        // console.log(pattern_message3.exec(item.message))
       })
 
       this.setState({recv_message: result})
@@ -75,7 +78,7 @@ class Message extends Component {
           <div className="container">
             <Menu />
             <article className='sectionShadow'>
-              <h5 className='text-h5'>메시지함/받은 메시지</h5>
+              <h5 className='text-h5'>📮 받은 메시지</h5>
               <TableMessage data={this.state.recv_message} deleteMessage={this.deleteMessage} click={this.openModal} />
             </article>
           </div>

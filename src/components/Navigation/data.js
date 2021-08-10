@@ -1,95 +1,5 @@
-// export const columns = [
-//   {
-//     name: "이름",
-//     selector: "name",
-//     sortable: true
-//   },
 
-  
-//   {
-//     name: "정규직/비정규직",
-//     selector: "permanent",
-//     grow:2,
-//     cell: row =>
-//         row.showButtons ? (
-//           <> 
-//             <button>정규직</button>
-//             <button>비정규직</button>
-//           </>
-//         ) : null
-//   },
-//   {
-//     name: "근로계약서작성여부",
-//     selector: "write",
-//     grow:2,
-//     cell: row =>
-//         row.showButtons ? (
-//           <>
-//             <button>작성</button>            
-//             <button>미작성</button>                    
-//           </>    
-//           ) : null  
-//   },
-//   {
-//     name: "근로계약서",
-//     Button: true,
-//     grow:2,
-//     cell: row =>
-//         row.showButtons ? (
-//           <>           
-//             <button>근로계약서</button>
-//           </>
-//         ) : null
-//   },
-//   ////1
-//   {
-//     name: "QR",
-//     Button: true,
-//     cell: row =>
-//         row.showButtons ? (
-//           <>           
-//             <button>QR</button>
-//           </>
-//         ) : null
-//   },
-//   {
-//     name: "입사일",
-//     selector: "date",
-//     sortable: true    
-//   }, 
-//   {
-//     name: "직책(업무)",
-//     selector: "work",
-//     sortable: true
-//   },
-//   {
-//     name: "퇴직처리",
-//     Button: true,
-//     cell: row =>
-//         row.showButtons ? (
-//           <>           
-//             <button>Delete</button>              
-//           </>
-//         ) : null
-//   },
-//   /////2
-//   {
-//     name:"출근시간",
-//     selector: "openTime",
-//     sortable:true
-//   },
-//   {
-//     name:" 퇴근시간",
-//     selector: "closeTime",
-//     sortable:true
-//   },
-//   {
-//     name:"휴가",
-//     selector: "vacation",
-//     sortable:true
-//   }
-//   /////3
-// ]
+
 
 const nameArray = [
   "도윤",
@@ -126,6 +36,7 @@ for (let i = 0; i < 20; i++) {
     openTime: starttimeArray[Math.floor(Math.random()*starttimeArray.length)],
     closeTime:endtimeArray[Math.floor(Math.random()*endtimeArray.length)],
     vacation: "무급휴가",
+    vacationKind:"무급",
     withTax: (Math.floor(Math.random()*10)*100000).toString(),
     withoutTax: (Math.floor(Math.random()*10)*10000).toString(),
     from: name,
@@ -147,6 +58,7 @@ for (let i = 0; i < 20; i++) {
 // export data;
 
 
+
 // export const data = [    
 const data2 = [ 
   {
@@ -162,6 +74,7 @@ const data2 = [
     openTime: "07:00",
     closeTime:"17:00",
     vacation: "무급휴가",
+    vacationKind:"무급",
     withTax: "50000",
     withoutTax: "30000",
     from: "A사원",

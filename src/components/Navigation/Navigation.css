@@ -94,3 +94,13 @@
   border: none;
   color: #fff;
 }
+
+.navUtill .button-logout {
+  margin: 0 0 0 20px;
+  padding: 6px 30px;
+}
+
+.navUtill .nav-name {
+  margin: 0;
+  padding: 6px 30px;
+}
