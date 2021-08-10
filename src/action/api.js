@@ -132,6 +132,11 @@ export function AdditionalAllowance(business_id) {
     return fetch(`${SERVER_URL}/AdditionalAllowance`, _createPostInit(body))
 }
 
+export function otherAllowanceAll(business_id, year, month) {
+    const body = JSON.stringify({year: year, month: month, bang:business_id})
+    return fetch(`${SERVER_URL}/otherAllowanceAll`, _createPostInit(body))
+}
+
 
 export function deletedWorker(business_id) {
     const body = JSON.stringify({business_id: business_id})
@@ -253,3 +258,19 @@ export function getBase64(file) {
       console.log(fileInfo);
     });
   };
+
+//   vacation
+  export function selectVacation(business_id) {
+    const body = JSON.stringify({bang: business_id})
+    return fetch(`${SERVER_URL}/selectVacation`, _createPostInit(body))
+}
+
+export function insertVacation(business_id, workername, vacation, reason, start_date, end_date) {
+    const body = JSON.stringify({bang:business_id, workername:workername, vacation:vacation, reason:reason, start_date:start_date, end_date:end_date})
+    return fetch(`${SERVER_URL}/insertVacation`, _createPostInit(body))
+}
+
+export function dateVaction(business_id, start_date) {
+    const body = JSON.stringify({bang: business_id, start_date:start_date})
+    return fetch(`${SERVER_URL}/dateVaction`, _createPostInit(body))
+}

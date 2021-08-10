@@ -8,19 +8,32 @@ import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 
 import Calendar from 'react-calendar';
+import Picker from 'react-month-picker'
+
 import TableExtraPay from '../../components/Navigation/TableExtraPay';
+import TableWorkerFilter from '../../components/Navigation/TableWorkerFilter';
 
-
-import { AdditionalAllowance } from "../../action/api"
+import { otherAllowanceAll, AdditionalAllowance, selectWorkerByType } from "../../action/api"
 
 
 import '../../styles/home/home.css';
+
+const pickerLang = {
+  months: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+  from: '부터', to: '까지',
+}
+
 
 class PayManageExtra extends Component {
   constructor(props) {
     super(props);
     this.state = {
       value: new Date(),     
+
+      yearMonth: {year: new Date().getFullYear(), month: new Date().getMonth()},
+      year: "2020",
+      month: "1",
+      isVisibleMonthSelector: false,
 
       checkboxGroup:{
         position: true,
@@ -32,13 +45,20 @@ class PayManageExtra extends Component {
         agi: false       
       },      
       
-      AA:[]
+      AA:[],    
+      //Additional Allowance
+      MA:[],
+      //Month select Allowance
+      worker:[]
     }    
-    this.Allowance()
-    //AA:Additional Allowance
+    this.initialState;
+    this.props.initialValues;
+    this.insertAllowance()
+    this.selectAlloWance()
+    this.workerFilter()
 
   }
-  Allowance = () => {
+  selectAlloWance = () => {
     AdditionalAllowance(this.props.userinfo.business_name)
      .then((result) => result.json())
      .then((result) => {           
@@ -46,11 +66,38 @@ class PayManageExtra extends Component {
      })     
      return
   }
-  
+  workerFilter = () => {
+    selectWorkerByType(this.props.userinfo.business_name, 2)
+    .then(result => result.json())
+    .then(result => {
+      this.setState({ worker: result })
+    })
+    return
+  }
+
+  otherAllowanceAll = () => {
+    const d = new Date();
+    otherAllowanceAll(this.props.userinfo.business_name, d.getFullYear(), d.getMonth())
+    .then((result) => result.json)
+    .then((result) =>{
+      this.setState({ MA:result })
+    })
+    return
+  }
 
   
-
-
+  
+  handleAMonthChange = (year, month) => {
+    this.setState({yearMonth: {year, month}});
+    this.setState({isVisibleMonthSelector: false});
+  }
+  handleAMonthDissmis = (e) => {
+    this.setState({isVisibleMonthSelector: false});
+  }
+  handleClickMonthBox = (e) => {
+    this.setState({isVisibleMonthSelector: true});
+    console.debug(this.state.isVisibleMonthSelector);
+  }
 
   goLogin = () => {
     this.props.history.push('/');
@@ -65,13 +112,7 @@ class PayManageExtra extends Component {
         bob: false,
         oil: false,
         agi: false 
-    }
-    // if (e.target.id === "etc") {
-    //   obj[e.target.id] = e.target.checked 
-    //   this.setState({etc: !this.state.etc}) 
-    // }else{
-    //   obj[e.target.id] = e.target.checked 
-    // }
+    }    
     obj[e.target.id] = e.target.checked         
     console.log(obj);      
       this.setState({
@@ -79,12 +120,25 @@ class PayManageExtra extends Component {
       })
           
   }
-  
+
+
+  insertAllowance = (e) => {
+    
+  };
+
+  handleChange = event => {
+    const { taxation, value } = event.target;
+    this.setState({ [taxation]: value });
+  };
 
   render() {
     const { userinfo } = this.props;
-    console.log('userinfo : ', userinfo);
 
+    const { taxation, value } = this.state;
+    this.setState({ [taxation]: value });
+
+    this.pickAMonth = React.createRef()
+    
     return (
       <div className="wrap">
         <Header />
@@ -96,22 +150,39 @@ class PayManageExtra extends Component {
               <span className='color-point text-h5'>✔ </span>
               추가수당
             </h4>
-            <Calendar
+            {/* <Calendar
               onChange={this.onChange}
               value={this.state.value}
               className='sectionShadow'
-            />
+            /> */}
             <div className='sectionShadow'>
-              <TableExtraPay data={this.state.AA} />              
+              <Picker
+                  ref={this.pickAMonth}
+                  value={this.state.yearMonth}
+                  lang={pickerLang.months}
+                  // show={this.state.isVisibleMonthSelector}
+                  onChange={this.handleAMonthChange}
+                  onDismiss={this.handleAMonthDissmis}
+              >
+                <div onClick={() => this.pickAMonth.current.show()}> 
+                  {this.state.yearMonth.year}년 {this.state.yearMonth.month}월 
+                </div>
+              </Picker>
+            </div>
+            <div className='sectionShadow'>
+              <TableExtraPay data={this.state.AA} onChange={this.state.MA} />
+              
               {/* this.state.id */}
             </div>
           </article>
 
 
           <div className='border'>
-            <div  className='p-3'>
-              <strong>지급일</strong> 
-              <input type="date"/>           
+            <div  className='p-3'> 
+              <TableWorkerFilter data={this.state.worker}/>
+              <br/>           
+              <strong>지급월</strong> 
+              <input type="month" />           
 
 							<p>
                 <strong>과세</strong>
@@ -148,8 +219,10 @@ class PayManageExtra extends Component {
 
             <div className='p-3'>
               <h4>금액</h4>
-              <input type="number"placeholder="금액을 입력하세요." />              
-              <button>저장하기</button>
+              <input type="number"placeholder="금액을 입력하세요." 
+              name="taxation" value={taxation}
+              onChange={this.handleChange}/>              
+              <button onClick={this.insertAllowance}>저장하기</button>
             </div>
             
           </div>

@@ -11,10 +11,15 @@ import Calendar from 'react-calendar';
 // import "react-month-picker/css/month-picker.css";
 
 import TableVacation from '../../components/Navigation/TableVacation';
-import data from '../../components/Navigation/data';
+import TableWorkerFilter from '../../components/Navigation/TableWorkerFilter';
+
+
 import '../../styles/home/home.css';
 import { dividerClasses } from '@material-ui/core';
+
 import '../../styles/payManage/payManage.css';
+
+import { selectVacation, selectWorkerByType } from '../../action/api';
 
 
 const pickerLang = {
@@ -27,19 +32,48 @@ class PayManage extends Component {
     super(props);
     this.state = {
       value: new Date(),
+
       yearMonth: {year: 2019, month: 1},
       year: "2020",
       month: "1",
       isVisibleMonthSelector: false,
+      
       checkboxGroup:{
         paid:true,
         unpaid:false
-      }
+      },
+
+      VA:[],
+      worker:[]
     }
+    this.vacation()
+    this.workerFilter()
   }
   goLogin = () => {
     this.props.history.push('/');
   };
+
+
+  vacation = () => {
+    selectVacation(this.props.userinfo.business_name)
+    .then((result) => result.json())
+    .then((result) => {
+      this.setState({VA:result})
+    })
+    return
+  }
+
+  workerFilter = () => {
+    selectWorkerByType(this.props.userinfo.business_name, 2)
+    .then(result => result.json())
+    .then(result => {
+      this.setState({ worker: result })
+    })
+    return
+  }
+
+
+
   handleAMonthChange = (year, month) => {
     this.setState({yearMonth: {year, month}});
     this.setState({isVisibleMonthSelector: false});
@@ -122,13 +156,13 @@ class PayManage extends Component {
               className='sectionShadow'
             />
             <div className='sectionShadow'>
-              <TableVacation
-                data={data}
-              />
+              <TableVacation data={this.state.VA}/>
             </div>
           </article>
           <h4 className='text-h4'>🙋‍♀️ 휴가 등록하기</h4>
           <article className='sectionShadow flex'>
+              <TableWorkerFilter data={this.state.worker}/>                          
+              <br/> 
               <div className='p-3 h-100'>
                 <p className='text-h5 text-bold'>휴가기간</p>
                 <input className='small-shadow' type="date" defaultValue={dateToday} min={dateToday} id="startVacation"/>

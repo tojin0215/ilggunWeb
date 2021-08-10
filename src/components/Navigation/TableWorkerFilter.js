@@ -1,6 +1,4 @@
 import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button'
 
 import DataTable from 'react-data-table-component';
 import FilterComponent from './FilterComponent';
@@ -11,33 +9,28 @@ import imgsearch from '../../img/search.png'
 const Table = props => {
   const { data } = props;
   const columns = [
-    {
-      name: "이름",
-      selector: (row, index) => row.id,
+    {      
+      selector: (row, index) => row.workername2,
       sortable: true
-    },
-    {
-      name: "과세",
-      selector: (row, index) => row.taxation,
-      sortable: true
-    },
-    {
-      name: "비과세",
-      selector: (row, index) => row.taxFree,
-      sortable: true
-    },
-   
+    }
   ];
 
   const [filterText, setFilterText] = React.useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = React.useState(
     false
   );
+  // const filteredItems = data.filter(
+  //   item => item.name && item.name.includes(filterText)
+  // );
+  // const filteredItems = props.data.filter(
+  //   item =>
+  //     JSON.stringify(item)
+  //       .toLowerCase()
+  //       .indexOf(filterText.toLowerCase()) !== -1
+  // );
   const filteredItems = props.data.filter(
     item =>
-      JSON.stringify(item)
-        .toLowerCase()
-        .indexOf(filterText.toLowerCase()) !== -1
+      item.workername2.indexOf(filterText.toLowerCase()) !== -1
   );
 
   const subHeaderComponent = useMemo(() => {
@@ -59,18 +52,15 @@ const Table = props => {
 
   return (
     <DataTable
-      defaultSortField="id"
-      defaultSortAsc={false}      
+      defaultSortAsc={false}
       highlightOnHover
-      pointerOnHover
-      noHeader
+      pointerOnHover     
       columns={columns}
       data={filteredItems}
-      striped
-      pagination
-      paginationPerPage={4}
-      //  subHeader
-      // subHeaderComponent={subHeaderComponent}
+      striped      
+      subHeader
+      subHeaderComponent={subHeaderComponent}
+      
     />
   );
 };
