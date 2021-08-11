@@ -42,7 +42,7 @@ class PayManage extends Component {
         paid:true,
         unpaid:false
       },
-
+      
       selectedWorker: null,
 
       VA:[],
@@ -164,18 +164,21 @@ class PayManage extends Component {
           <h4 className='text-h4'>🙋‍♀️ 휴가 등록하기</h4>
           <article className='sectionShadow flex flex-wrap'>
             <div className='w-50 small-shadow pt-3 m-0'>
-              {(!this.state.selectedWorker) ? <TableWorkerFilter data={this.state.worker} handleSelectWorker={(row)=> console.log(row)}/>: null}
+              {(!this.state.selectedWorker) ? <TableWorkerFilter data={this.state.worker} handleSelectWorker={(row)=> console.log(row.workername2)}/>
+              : 
+               null}
               
             </div>
             <div className='w-50'>
               <div className='p-3 h-100'>
-
+              <input value="asdasd"/>
+              
                 <p className='text-h5 text-bold w-100'>휴가기간</p>
-                <input className='small-shadow' type="date" defaultValue={dateToday} min={dateToday} id="startVacation"/>
+                <input className='small-shadow' type="date" defaultValue={dateToday} min={dateToday} id="start_date"/>
                   ~ 
-                <input className='small-shadow' type="date" min={dateToday2} id="startVacation"/>
+                <input className='small-shadow' type="date" min={dateToday2} id="end_date"/>
               </div>
-              <div className='p-3 h-100 flex-wrap'>
+              <div className='p-3 h-100 flex-wrap'>              
                 <p className='text-h5 text-bold w-100'>무/유급 휴가 선택</p>
                 <input type="checkbox" id="paid" name="checkboxGroup"
                 checked={this.state.checkboxGroup['paid']} onChange={this.handleCheckbox}/>

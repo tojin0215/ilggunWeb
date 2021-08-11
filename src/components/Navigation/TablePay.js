@@ -13,8 +13,14 @@ const Table = props => {
      
     {
       name:"이름",
-      selector: (row, index) => row.id,
+      selector: (row, index) => row.Employee,
       sortable:true
+    },
+    {
+      name: "국민연금",
+      selector: (row, index) => row.NationalPensionPercentage,
+      sortable: true
+    
     },
 
     {
@@ -32,13 +38,7 @@ const Table = props => {
       selector: (row, index) => row.taxFree,
       sortable: true
     }, 
-    // {
-    //   name: "추가수당",
-    //   selector: (row, index) => row.bonus,
-    //   sortable: true,
-    //   cell: (row, index) => row.taxation + row.taxFree
     
-    // },
     {
       name: "연장근무비",
       selector: (row, index) => row.t_bonus,
@@ -97,8 +97,8 @@ const Table = props => {
   //       .indexOf(filterText.toLowerCase()) !== -1
   // );
   const filteredItems = props.data.filter(
-    item =>
-      item.id.indexOf(filterText.toLowerCase()) !== -1
+    item2 =>
+      item2.Employee.indexOf(filterText.toLowerCase()) !== -1
   );
 
   const subHeaderComponent = useMemo(() => {
@@ -120,7 +120,7 @@ const Table = props => {
 
   return (
     <DataTable      
-      defaultSortField="id"
+      defaultSortField="Employee"
       defaultSortAsc={false}
       highlightOnHover
       pointerOnHover

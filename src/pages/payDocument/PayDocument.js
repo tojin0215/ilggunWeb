@@ -15,7 +15,7 @@ import "react-month-picker/css/month-picker.css";
 
 import '../../styles/payDocument/payDocument.css'
 import '../../styles/home/home.css';
-import { AdditionalAllowance, selectWorkerByType } from '../../action/api';
+import { otherAllowanceAll, selectContractform, selectInsurance } from '../../action/api';
 
 const pickerLang = {
   months: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
@@ -32,30 +32,40 @@ class PayDocument extends Component {
       month: "1",
       isVisibleMonthSelector: false,
 
-      AA:[]
+      PD:[]
     }
-    this.selectAlloWance()
+    this.selectPayDocu()
   }
 
-  selectAlloWance = () => {
-    AdditionalAllowance(this.props.userinfo.business_name)
+  selectPayDocu = () => {
+    const d = new Date()
+    otherAllowanceAll(this.props.userinfo.business_name, d.getFullYear(), d.getMonth()+1)
      .then((result) => result.json())
      .then((result) => {           
-       this.setState({ AA :result })      
-     })     
-    
-    //  selectWorkerByType(this.props.userinfo.business_name, 2)
-    // .then(result => result.json())
-    // .then(result => {
-    //   this.setState({AA: this.state.AA.map((item, index) => {
-    //      const worker = result.find((res) => res.business == item.bang);
-    //      item["worker"] = worker;
-    //      return item;
-    //   })})
-    // })
-    // .catch(error => {
-    //   console.error("curFetchWorker",error);
-    // })
+      console.log(result)
+       this.setState({ PD :result })            
+     })
+     selectContractform (this.props.userinfo.business_name)
+     .then((result) => result.json())
+     .then((result) => { 
+      console.log(result)          
+       this.setState({ PD :this.state.PD.map((item, index)=>{
+        const  contractform = result.find((res) => res.bang == item.bang);
+        item["contractform"] = contractform;
+        return item;
+       }) })            
+     }) 
+     selectInsurance (this.props.userinfo.business_name)
+     .then((result) => result.json())
+     .then((result) => { 
+      console.log(result)          
+       this.setState({ item :this.state.item.map((item2, index)=>{
+        const  insurance = result.find((res) => res.bang == item2.bang);
+        item2["insurance"] = insurance;
+        return item2;
+       }) })            
+     })
+   
     
 
   }
@@ -108,7 +118,7 @@ class PayDocument extends Component {
             >
             <div onClick={() => this.pickAMonth.current.show()}> {this.state.yearMonth.year}년 {this.state.yearMonth.month}월 </div></Picker>
             </div>
-            <TablePay data={this.state.AA} />
+            <TablePay data={this.state.PD} onChange={this.handleAMonthChange} />
           </article>
         </div>
         <Footer />

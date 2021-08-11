@@ -13,16 +13,12 @@ const Table = props => {
       selector: (row, index) => row.workername,
       sortable: true
     },  
+     
     {
-      name:"휴가 출발",
-      selector: (row, index) => row.start_date,
+      name:"휴가 기간",
       sortable:true,
-      cell: row => row.start_date.split("T")[0]
-    },  
-    {
-      name:"휴가 도착",
-      selector: (row, index) => row.end_date,
-      sortable:true
+      cell: row => row.start_date.split("T")[0] + "~" + row.end_date.split("T")[0],
+      grow:2
     },
     {
       name:"휴가",

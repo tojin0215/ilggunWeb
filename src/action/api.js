@@ -133,7 +133,7 @@ export function AdditionalAllowance(business_id) {
 }
 
 export function otherAllowanceAll(business_id, year, month) {
-    const body = JSON.stringify({year: year, month: month, bang:business_id})
+    const body = JSON.stringify({ bang:business_id, year: year, month: month})
     return fetch(`${SERVER_URL}/otherAllowanceAll`, _createPostInit(body))
 }
 
@@ -289,4 +289,11 @@ export function insertVacation(business_id, workername, vacation, reason, start_
 export function dateVaction(business_id, start_date) {
     const body = JSON.stringify({bang: business_id, start_date:start_date})
     return fetch(`${SERVER_URL}/dateVaction`, _createPostInit(body))
+}
+
+
+//insurancePercentage
+export function selectInsurance(business_id) {
+    const body = JSON.stringify({bang: business_id})
+    return fetch(`${SERVER_URL}/selectInsurance`, _createPostInit(body))
 }
