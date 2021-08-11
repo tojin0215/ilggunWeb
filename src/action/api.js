@@ -172,6 +172,12 @@ export function selectContractform(user_id, business_id) {
     const body = JSON.stringify({id: user_id, bang: business_id})
     return fetch(`${SERVER_URL}/selectContractform`, _createPostInit(body))
 }
+
+export function selectContractformAll(business_id) {
+    const body = JSON.stringify({bang: business_id})
+    return fetch(`${SERVER_URL}/selectContractformAll`, _createPostInit(body))
+}
+
 export function writeContractform(contract) {
     const body = JSON.stringify(contract)
     return fetch(`http://127.0.0.1:3000/writeContractform`, _createPostInit(body))
@@ -286,8 +292,8 @@ export function insertVacation(business_id, workername, vacation, reason, start_
     return fetch(`${SERVER_URL}/insertVacation`, _createPostInit(body))
 }
 
-export function dateVaction(business_id, start_date) {
-    const body = JSON.stringify({bang: business_id, start_date:start_date})
+export function dateVaction(business_id, date) {
+    const body = JSON.stringify({bang: business_id, start_date:date})
     return fetch(`${SERVER_URL}/dateVaction`, _createPostInit(body))
 }
 
@@ -296,4 +302,9 @@ export function dateVaction(business_id, start_date) {
 export function selectInsurance(business_id) {
     const body = JSON.stringify({bang: business_id})
     return fetch(`${SERVER_URL}/insurancePercentage`, _createPostInit(body))
+}
+
+export function selectInsuranceYear(business_id, year) {
+    const body = JSON.stringify({bang: business_id, date:year})
+    return fetch(`${SERVER_URL}/insurancePercentageYear`, _createPostInit(body))
 }

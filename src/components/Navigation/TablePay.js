@@ -33,15 +33,16 @@ const Table = props => {
     },
     {
       name:" 통상시급",
-      selector: "normalPay",
+      selector: (row, index) => row.HourlyWage,
       sortable:true
     },
-    //시급 계산
+    
     // {
     //   name:" 월근무시간",
     //   selector: "worktime",
     //   sortable:true
     // },
+            
     {
       name:" 월급여공제",
       selector: "tax",
@@ -52,6 +53,7 @@ const Table = props => {
       ):(
         (row.NationalPensionPercentage + row.HealthInsurancePercentage + row.RegularCarePercentage + row.EmploymentInsurancePercentage)/1 
       )
+      
     },
     //공제액 계산
 
@@ -72,10 +74,9 @@ const Table = props => {
   // );
   const filteredItems = props.data.filter(
     item =>
-      JSON.stringify(item)
-        .toLowerCase()
-        .indexOf(filterText.toLowerCase()) !== -1
+      item.id.indexOf(filterText.toLowerCase()) !== -1
   );
+  //id ==> employee로 변경
   
 
   const subHeaderComponent = useMemo(() => {
