@@ -7,8 +7,7 @@
   flex: 1;
   padding: 20px;
   height: 430px;
-  overflow: scroll;
-  overflow-y: scroll;
+  overflow: auto;
 }
 
 .react-calendar {
