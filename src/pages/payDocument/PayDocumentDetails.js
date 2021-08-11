@@ -8,6 +8,8 @@ import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 import Calendar from 'react-calendar';
 
+import PayDocumentPDF from './PayDocumentPDF';
+
 import '../../styles/home/home.css';
 
 class PayDocumentDetails extends Component {
@@ -62,7 +64,8 @@ class PayDocumentDetails extends Component {
 							<button>전체직원</button>
             </div>
             <div>
-              급여명세서 표시하는 공간입니다.
+              {/* 급여명세서 표시하는 공간입니다. */}
+              <PayDocumentPDF forDownload={false} />
             </div>
           </div>
         </div>
