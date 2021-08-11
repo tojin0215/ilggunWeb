@@ -48,7 +48,7 @@ class PayManageExtra extends Component {
       //Additional Allowance
       MA:[],
       //Month select Allowance
-      worker:[]
+      worker:[] 
     }    
     // this.initialState;
     // this.props.initialValues;
@@ -113,11 +113,10 @@ class PayManageExtra extends Component {
         agi: false 
     }    
     obj[e.target.id] = e.target.checked         
-    console.log(obj);      
+    console.log(obj);
       this.setState({
         checkboxGroup:obj
       })
-          
   }
 
 
@@ -157,21 +156,20 @@ class PayManageExtra extends Component {
             /> */}
             <div className='sectionShadow'>
               <Picker
-                  ref={this.pickAMonth}
-                  value={this.state.yearMonth}
-                  lang={pickerLang.months}
-                  // show={this.state.isVisibleMonthSelector}
-                  onChange={this.handleAMonthChange}
-                  onDismiss={this.handleAMonthDissmis}
+                ref={this.pickAMonth}
+                value={this.state.yearMonth}
+                lang={pickerLang.months}
+                // show={this.state.isVisibleMonthSelector}
+                onChange={this.handleAMonthChange}
+                onDismiss={this.handleAMonthDissmis}
               >
-                <div onClick={() => this.pickAMonth.current.show()}> 
-                  {this.state.yearMonth.year}년 {this.state.yearMonth.month}월 
-                </div>
+              <div onClick={() => this.pickAMonth.current.show()}> 
+                {this.state.yearMonth.year}년 {this.state.yearMonth.month}월 
+              </div>
               </Picker>
             </div>
             <div className='sectionShadow'>
               <TableExtraPay data={this.state.AA} onChange={this.state.MA} />
-              
               {/* this.state.id */}
             </div>
           </article>

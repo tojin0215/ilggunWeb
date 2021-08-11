@@ -12,3 +12,10 @@
   box-shadow: 3px 3px 6.75px 2.25px rgba(87, 178, 163, 0.5);
   border: 0;
 }
+
+.small-box {
+  border-radius: 10px;
+  border: 0;
+  background-color: rgba(87, 178, 163, 0.9);
+  color: #fff;
+}
