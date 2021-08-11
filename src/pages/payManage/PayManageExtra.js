@@ -49,11 +49,16 @@ class PayManageExtra extends Component {
       //Additional Allowance
       MA:[],
       //Month select Allowance
+<<<<<<< Updated upstream
       worker:[]
     }    
     this.initialState;
     this.props.initialValues;
     this.insertAllowance()
+=======
+      worker:[] 
+    }
+>>>>>>> Stashed changes
     this.selectAlloWance()
     this.workerFilter()
 
@@ -87,17 +92,6 @@ class PayManageExtra extends Component {
 
   
   
-  handleAMonthChange = (year, month) => {
-    this.setState({yearMonth: {year, month}});
-    this.setState({isVisibleMonthSelector: false});
-  }
-  handleAMonthDissmis = (e) => {
-    this.setState({isVisibleMonthSelector: false});
-  }
-  handleClickMonthBox = (e) => {
-    this.setState({isVisibleMonthSelector: true});
-    console.debug(this.state.isVisibleMonthSelector);
-  }
 
   goLogin = () => {
     this.props.history.push('/');
@@ -120,11 +114,17 @@ class PayManageExtra extends Component {
       })
           
   }
-
-
-  insertAllowance = (e) => {
-    
-  };
+  handleAMonthChange = (year, month) => {
+    this.setState({yearMonth: {year, month}});
+    this.setState({isVisibleMonthSelector: false});
+  }
+  handleAMonthDissmis = (e) => {
+    this.setState({isVisibleMonthSelector: false});
+  }
+  handleClickMonthBox = (e) => {
+    this.setState({isVisibleMonthSelector: true});
+    console.debug(this.state.isVisibleMonthSelector);
+  }
 
   handleChange = event => {
     const { taxation, value } = event.target;
@@ -134,8 +134,6 @@ class PayManageExtra extends Component {
   render() {
     const { userinfo } = this.props;
 
-    const { taxation, value } = this.state;
-    this.setState({ [taxation]: value });
 
     this.pickAMonth = React.createRef()
     
@@ -181,6 +179,7 @@ class PayManageExtra extends Component {
             <div  className='p-3'> 
               <TableWorkerFilter data={this.state.worker}/>
               <br/>           
+<<<<<<< Updated upstream
               <strong>지급월</strong> 
               <input type="month" />           
 
@@ -188,6 +187,26 @@ class PayManageExtra extends Component {
                 <strong>과세</strong>
                 <div  className='p-3'>
                   직책 &nbsp; <input type="checkbox" id="position" name="checkboxGroup"
+=======
+              <p className='p-2 text-h5 text-bold w-100'>지급월</p>
+              <Picker
+                ref={this.pickAMonth}
+                value={this.state.yearMonth}
+                lang={pickerLang.months}
+                // show={this.state.isVisibleMonthSelector}
+                onChange={this.handleAMonthChange}
+                onDismiss={this.handleAMonthDissmis}
+              >
+            <div onClick={() => this.pickAMonth.current.show()}> {this.state.yearMonth.year}년 {this.state.yearMonth.month}월 </div></Picker>        
+            </div>
+            <div className='flex-wrap col-4'>
+              <p className='p-2 text-h5 text-bold w-100'>과세/비과세 선택</p>
+              <div className=''>
+                <input type='radio'></input>
+                <span className='text-h6 text-bold'>과세</span>
+                <div className='p-1 w-100'>
+                  <input type="checkbox" id="position" name="checkboxGroup"
+>>>>>>> Stashed changes
                     checked={this.state.checkboxGroup['position']} onChange={this.handleCheckbox}/>
                   <br />
                   상여 &nbsp; <input type="checkbox" id="bonus" name="checkboxGroup"
