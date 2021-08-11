@@ -36,14 +36,12 @@ const Table = props => {
       cell: row =>
           (row.state == 2) ? (
             <>
-            {/* <span>작성</span> */}
             <Link to={{ pathname:"/workerManage/contract", state:{ worker: row } }}>작성</Link>
-              {/* <Button>작성</Button> */}
             </>
             ) : (
               <>
               <Link to={{ pathname:"/workerManage/contract", state:{ worker: row } }}>미작성</Link>
-                {/* <Button>미작성</Button> */}
+              
               </>)
     }
   ];

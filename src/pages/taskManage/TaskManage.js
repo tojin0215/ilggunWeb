@@ -11,7 +11,7 @@ import TableVacation from '../../components/Navigation/TableVacation';
 import Table3 from '../../components/Navigation/Table3';
 import data from '../../components/Navigation/data';
 import Calendar from 'react-calendar';
-import { selectTimelog, selectWorkerByType } from '../../action/api';
+import { selectTimelog, selectWorkerByType, selectVacation, dateVaction } from '../../action/api';
 
 import '../../styles/teskmanage/teskmanage.css';
 import '../../styles/home/home.css';
@@ -23,8 +23,13 @@ class TaskManage extends Component {
     this.state = {
       value: new Date(),
       worker: [],
+      VA:[],
+      DA:[],
+      selectedDate: null,
     }
     this.curFetchWorker()
+    this.vacation()
+    this.dateVaction()
   }
   
   curFetchWorker = () => {
@@ -53,6 +58,25 @@ class TaskManage extends Component {
     })
   }
 
+  vacation = () => {
+    selectVacation(this.props.userinfo.business_name)
+    .then((result) => result.json())
+    .then((result) => {
+      this.setState({VA:result})
+    })
+    return
+  }
+
+  dateVaction =() =>{
+    const d = new Date()
+    dateVaction(this.props.userinfo.business_name, d.getDate())
+    .then((result) => result.json())
+    .then((result) => {
+      this.setState({DA:result})
+    })
+    return
+  }
+
   goLogin = () => {
     this.props.history.push('/');
   };
@@ -76,13 +100,21 @@ class TaskManage extends Component {
               <span className='color-point text-h5'>✔ </span>
               오늘의 휴가자
             </h4>
-            <Calendar
+            {/* <Calendar
               onChange={this.onChange}
               value={this.state.value}
               className='sectionShadow'
-            />
+            /> */}
+
+            {(!this.state.selectedDate) ?
+            <Calendar 
+              value={this.state.value} onChange={this.onChange} className='sectionShadow'
+              data={this.state.DA}   handleSelectWorker={(row)=> console.log(row)}
+            />: null}
+
             <div className='sectionShadow'>
-              {/* <TableVacation data={this.state.worker} /> */}
+              <TableVacation data={this.state.VA} />
+              
             </div>
           </article>
           <article className='sectionShadow'>

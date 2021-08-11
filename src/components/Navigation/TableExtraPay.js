@@ -16,6 +16,17 @@ const Table = props => {
       selector: (row, index) => row.id,
       sortable: true
     },
+    // {
+    //   name: "추가 수당",
+    //   selector: (row, index) => row.additionalAllowance,
+    //   sortable: true,
+    //   cell: row =>
+    //   (parseInt(row.taxation) + parseInt(row.taxFree) == null) ?(
+    //     0
+    //   ):(
+    //     parseInt(row.taxation) + parseInt(row.taxFree)
+    //   )
+    // },
     {
       name: "과세",
       selector: (row, index) => row.taxation,
