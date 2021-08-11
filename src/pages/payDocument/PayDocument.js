@@ -36,15 +36,16 @@ class PayDocument extends Component {
     this.selectPayDocu()
    
   } 
-  
 
   selectPayDocu = () => {
-    selectInsurance (this.props.userinfo.business_name)
-    .then((result) => result.json())
-    .then((result) => { 
-      console.log(result)   
+    const d = new Date()
+    otherAllowanceAll(this.props.userinfo.business_name, d.getFullYear(),d.getMonth()+1)
+     .then((result) => result.json())
+     .then((result) => {           
+      console.log( this.props.userinfo.business_name)
+      console.log(result)
       this.setState({ PD: result})
-    })
+     })
   }
 
   // selectPayDocu = () => {
