@@ -295,5 +295,5 @@ export function dateVaction(business_id, start_date) {
 //insurancePercentage
 export function selectInsurance(business_id) {
     const body = JSON.stringify({bang: business_id})
-    return fetch(`${SERVER_URL}/selectInsurance`, _createPostInit(body))
+    return fetch(`${SERVER_URL}/insurancePercentage`, _createPostInit(body))
 }

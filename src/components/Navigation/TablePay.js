@@ -10,77 +10,57 @@ import './table.css';
 const Table = props => {
   const { data } = props;
   const columns = [
-     
     {
       name:"이름",
       selector: (row, index) => row.Employee,
       sortable:true
     },
     {
-      name: "국민연금",
-      selector: (row, index) => row.NationalPensionPercentage,
-      sortable: true
-    
-    },
-
-    {
       name:"월급여",
       selector: (row, index) => row.Salary,
       sortable: true
     },
     {
-      name: "과세 수당",
-      selector: (row, index) => row.taxation,
-      sortable: true
+      name: "추가 수당",
+      selector: (row, index) => row.additionalAllowance,
+      sortable: true,
+      cell: row =>
+      (parseInt(row.taxation) + parseInt(row.taxFree) == null) ?(
+        0
+      ):(
+        parseInt(row.taxation) + parseInt(row.taxFree)
+      )
     },
     {
-      name: "비과세 수당",
-      selector: (row, index) => row.taxFree,
-      sortable: true
-    }, 
-    
-    {
-      name: "연장근무비",
-      selector: (row, index) => row.t_bonus,
-      sortable: true,
-      cell: row =>
-      (row.t_bonus == null) ?(
-        0
-      ):(
-        row.t_bonus
-      )
-    },   
-    {
-      name: "자가유류비",
-      selector: (row, index) => row.f_carMaintenanceFee,
-      sortable: true,
-      cell: row =>
-      (row.f_carMaintenanceFee == null) ?(
-        0
-      ):(
-        row.f_carMaintenanceFee
-      )
-    }, 
-    // {
-    //   name:" 통상시급",
-    //   selector: "normalPay",
-    //   sortable:true
-    // },
+      name:" 통상시급",
+      selector: "normalPay",
+      sortable:true
+    },
+    //시급 계산
     // {
     //   name:" 월근무시간",
     //   selector: "worktime",
     //   sortable:true
     // },
-    // {
-    //   name:" 월급여공제",
-    //   selector: "tax",
-    //   sortable:true
-    // },
-    // {
-    //   name:" 실지급액",
-    //   selector: "realPay",
-    //   sortable:true
-    // }
+    {
+      name:" 월급여공제",
+      selector: "tax",
+      sortable:true,
+      cell: row =>
+      ((row.NationalPensionPercentage + row.HealthInsurancePercentage + row.RegularCarePercentage + row.EmploymentInsurancePercentage)/1 == null) ?(
+        0
+      ):(
+        (row.NationalPensionPercentage + row.HealthInsurancePercentage + row.RegularCarePercentage + row.EmploymentInsurancePercentage)/1 
+      )
+    },
+    //공제액 계산
+
+    {
+      name:" 실지급액",
+      selector: "realPay",
+      sortable:true
+    }
+    //실지급액 계산
   ];
 
   const [filterText, setFilterText] = React.useState("");
@@ -90,16 +70,13 @@ const Table = props => {
   // const filteredItems = data.filter(
   //   item => item.name && item.name.includes(filterText)
   // );
-  // const filteredItems = props.data.filter(
-  //   item =>
-  //     JSON.stringify(item)
-  //       .toLowerCase()
-  //       .indexOf(filterText.toLowerCase()) !== -1
-  // );
   const filteredItems = props.data.filter(
-    item2 =>
-      item2.Employee.indexOf(filterText.toLowerCase()) !== -1
+    item =>
+      JSON.stringify(item)
+        .toLowerCase()
+        .indexOf(filterText.toLowerCase()) !== -1
   );
+  
 
   const subHeaderComponent = useMemo(() => {
     const handleClear = () => {
@@ -120,7 +97,7 @@ const Table = props => {
 
   return (
     <DataTable      
-      defaultSortField="Employee"
+      defaultSortField="name"
       defaultSortAsc={false}
       highlightOnHover
       pointerOnHover

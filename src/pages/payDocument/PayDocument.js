@@ -31,44 +31,59 @@ class PayDocument extends Component {
       year: "2020",
       month: "1",
       isVisibleMonthSelector: false,
-
       PD:[]
     }
     this.selectPayDocu()
-  }
+   
+  } 
+  
 
   selectPayDocu = () => {
-    const d = new Date()
-    otherAllowanceAll(this.props.userinfo.business_name, d.getFullYear(), d.getMonth()+1)
-     .then((result) => result.json())
-     .then((result) => {           
-      console.log(result)
-       this.setState({ PD :result })            
-     })
-     selectContractform (this.props.userinfo.business_name)
-     .then((result) => result.json())
-     .then((result) => { 
-      console.log(result)          
-       this.setState({ PD :this.state.PD.map((item, index)=>{
-        const  contractform = result.find((res) => res.bang == item.bang);
-        item["contractform"] = contractform;
-        return item;
-       }) })            
-     }) 
-     selectInsurance (this.props.userinfo.business_name)
-     .then((result) => result.json())
-     .then((result) => { 
-      console.log(result)          
-       this.setState({ item :this.state.item.map((item2, index)=>{
-        const  insurance = result.find((res) => res.bang == item2.bang);
-        item2["insurance"] = insurance;
-        return item2;
-       }) })            
-     })
-   
-    
-
+    selectInsurance (this.props.userinfo.business_name)
+    .then((result) => result.json())
+    .then((result) => { 
+      console.log(result)   
+      this.setState({ PD: result})
+    })
   }
+
+  // selectPayDocu = () => {
+  //   const d = new Date()
+  //   otherAllowanceAll(this.props.userinfo.business_name, d.getFullYear(),d.getMonth()+1)
+  //    .then((result) => result.json())
+  //    .then((result) => {           
+  //     console.log(result)
+  //     this.setState({ PD: result})
+  //    })
+    
+  //   selectContractform (this.props.userinfo.business_name)
+  //   .then((result) => result.json())
+  //   .then((result) => { 
+  //   console.log(result)          
+  //     this.setState({ PD : this.state.PD.map((item, index)=>{
+  //     const  contractform = result.find((res) => res.bang == item.bang);
+  //     item["contractform"] = contractform;
+  //     }) 
+  //   }) 
+  //   })
+    
+  //   selectInsurance (this.props.userinfo.business_name)
+  //   .then((result) => result.json())
+  //   .then((result) => { 
+  //     console.log(result)          
+  //     this.setState({ item :this.state.item.map((item2, index)=>{
+  //       const  insurance = result.find((res) => res.bang == item2.bang);
+  //       item2["insurance"] = insurance;
+  //       return item2;
+  //     })})         
+  //   })
+  //   .catch(error => {
+  //     console.error("fuckkkkk",error);
+  //   })
+  // }
+
+
+
 
 
   handleAMonthChange = (year, month) => {
@@ -88,7 +103,7 @@ class PayDocument extends Component {
 
   render() {
     const { userinfo } = this.props;
-    console.log('userinfo : ', userinfo);
+    // console.log('userinfo : ', userinfo);
     this.pickAMonth = React.createRef()
 
     return (
@@ -118,7 +133,7 @@ class PayDocument extends Component {
             >
             <div onClick={() => this.pickAMonth.current.show()}> {this.state.yearMonth.year}년 {this.state.yearMonth.month}월 </div></Picker>
             </div>
-            <TablePay data={this.state.PD} onChange={this.handleAMonthChange} />
+            <TablePay data={this.state.PD} />
           </article>
         </div>
         <Footer />
