@@ -1157,7 +1157,7 @@ class WorkerManageContract extends Component {
                   />
                 </p>
                 <p>
-                  {/* <input type="button">저장하기</input> */}
+                  <input type="button" onClick={() => this.handleSubmit()}>저장하기</input>
                 </p>
               </div>
             ) : (
