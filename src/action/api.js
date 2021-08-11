@@ -172,6 +172,11 @@ export function selectContractform(user_id, business_id) {
     const body = JSON.stringify({id: user_id, bang: business_id})
     return fetch(`${SERVER_URL}/selectContractform`, _createPostInit(body))
 }
+export function writeContractform(contract) {
+    const body = JSON.stringify(contract)
+    return fetch(`http://127.0.0.1:3000/writeContractform`, _createPostInit(body))
+    // return fetch(`${SERVER_URL}/writeContractform`, _createPostInit(body))
+}
 
 // Message
 export function selectReceivedMessage(to_user_id) {
@@ -186,17 +191,28 @@ export function selectSentMessage(from_user_id) {
     const body = JSON.stringify({id: from_user_id})
     return fetch(`${SERVER_URL}/selectSentMessage`, _createPostInit(body))
 }
-export function sendMessage(from_user_id, from_user_name, to_user_id, to_user_name, message, time) {
-    const body = JSON.stringify({
-        system: 1,
-        type: 1,
+export function sendMessage(from_user_id, from_user_name, to_user_id, to_user_name, message, time, system, type) {
+    const data = {
         f: from_user_id,
-        f_name: from_user_name,
         t: to_user_id,
-        t_name: to_user_name,
-        message: message,
-        time: time
-    })
+    }
+    if (from_user_name) data["f_name"] = from_user_name
+    if (to_user_name) data["t_name"] = to_user_name
+    if (system) data["system"] = system; else data["system"] = 1;
+    if (type) data["type"] = type; else data["type"] = 1;
+    if (time) data["time"] = time
+
+    const body = JSON.stringify(data)
+    // const body = JSON.stringify({
+    //     system: 1,
+    //     type: 1,
+    //     f: from_user_id,
+    //     f_name: from_user_name,
+    //     t: to_user_id,
+    //     t_name: to_user_name,
+    //     message: message,
+    //     time: time
+    // })
     return fetch(`${SERVER_URL}/sendMessage`, _createPostInit(body))
 }
 export function alterReadMessage(message_id) {

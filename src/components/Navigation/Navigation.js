@@ -3,37 +3,86 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Nav, Navbar } from 'react-bootstrap';
-import NavDropdown from 'react-bootstrap/NavDropdown'
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.css';
 import { logoutRequest } from '../../action/authentication';
-import { businessRequest, businessUpdate } from '../../action/authentication';
+import {
+  businessRequest,
+  businessUpdate,
+  loginRequest,
+} from '../../action/authentication';
 // import styles from './Navigation.css';
 import './Navigation.css';
 
-import {postBusinessGet} from '../../action/api';
-
+import { postBusinessGet } from '../../action/api';
+import {
+  clearUserInfo,
+  setUserInfoBusinessId,
+  getUserInfoBusinessId,
+  getUserInfo,
+} from '../../util/cookie';
 
 class Navigation extends Component {
   constructor(props) {
     super(props);
+    // this.setState({business: []})
     this.state = {
-      business: []
-    }
+      business: [],
+    };
+    this.initCheckLoggedIn();
     this.initPage();
   }
 
+  initCheckLoggedIn = () => {
+    //로그인 되어있으면 무시
+    if (this.props.status === 'SUCCESS') return true;
+    try {
+      //저장된 로그인이 있는지 확인
+      const userinfo = getUserInfo();
+      if (!userinfo.isLoggedIn) {
+        this.props.goLogin();
+        return true;
+      }
+
+      //저장된 로그인으로 확인
+      this.props.loginRequest(userinfo.id, userinfo.pw).then(() => {
+        if (this.props.status === 'SUCCESS') {
+          let loginData = {
+            isLoggedIn: true,
+            id: userinfo.id,
+            pw: userinfo.pw,
+          };
+          document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+
+          this.initPage();
+        } else {
+          if (typeof this.props.goLogin !== 'undefined') {
+            this.props.goLogin();
+          }
+          return true;
+        }
+      });
+    } catch (e) {}
+  };
+
   initPage() {
-    if (this.props.userinfo.business_id) this.props.businessRequest(this.props.userinfo.id, this.props.userinfo.business_id)
-    else this.props.businessRequest(this.props.userinfo.id, null)
-    postBusinessGet(this.props.userinfo.id)
-    .then(result => result.json())
-    .then(result => {
-        this.setState({business: result});
-    })
+    const user_id = this.props.userinfo.id;
+    const business_id = getUserInfoBusinessId();
+    this.props.businessRequest(user_id, business_id);
+
+    // if (this.props.userinfo.business_id) this.props.businessRequest(this.props.userinfo.id, this.props.userinfo.business_id)
+    // else this.props.businessRequest(this.props.userinfo.id, null)
+
+    postBusinessGet(user_id)
+      .then((result) => result.json())
+      .then((result) => {
+        this.setState({ business: result });
+      });
   }
 
   handleLogout = () => {
     this.props.logoutRequest().then(() => {
+      clearUserInfo();
       alert('로그아웃 되었습니다.');
 
       // EMPTIES THE SESSION
@@ -47,22 +96,25 @@ class Navigation extends Component {
       this.props.goLogin();
     });
   };
+
   handleSelect = (eventKey) => {
-    if (eventKey === "logout") {
-      this.handleLogout()
+    if (eventKey === 'logout') {
+      this.handleLogout();
     } else {
       this.props.businessUpdate(eventKey);
-      alert(`selected ${eventKey}`)
+      setUserInfoBusinessId(eventKey);
+      if (typeof this.props.handleSelectNewBusiness !== 'undefined')
+        this.props.handleSelectNewBusiness();
+      alert(`selected ${eventKey}`);
     }
-    
-  }
+  };
 
   render() {
     const { userinfo } = this.props;
     return (
       <div className="navigation">
         {/* <Nav className="mr-auto dropdownNav navitem"> */}
-          {/* <Nav>
+        {/* <Nav>
                     <NavLink exact to="/home">
                         <span className={styles.navitem}>
                             Home
@@ -109,8 +161,8 @@ class Navigation extends Component {
                   LOG-OUT
                 </button>
               )} */}
-            </Nav.Item>
-          </Nav>
+          </Nav.Item>
+        </Nav>
       </div>
     );
   }
@@ -119,6 +171,7 @@ class Navigation extends Component {
 const NavigationStateToProps = (state) => {
   return {
     userinfo: state.authentication.userinfo,
+    status: state.authentication.login.status,
   };
 };
 
@@ -132,6 +185,9 @@ const NavigationDispatchToProps = (dispatch) => {
     },
     businessUpdate: (business_id) => {
       return dispatch(businessUpdate(business_id));
+    },
+    loginRequest: (id, pw) => {
+      return dispatch(loginRequest(id, pw));
     },
   };
 };
