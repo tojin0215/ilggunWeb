@@ -526,13 +526,15 @@ class WorkerManageContract extends Component {
                 </p>
                 <p className='text-st w-100'>
                   <span className='ml-20'>- 상여금 : </span>
-                  <span for="bonusYes">{this.state.types1}</span>
+                  {console.log("- 상여금 : ")}
+                  {console.log(this.state.types1)}
+                  <span>{this.state.types1.toString()}</span>
                   <span>({this.state.Bonus}</span>
                   <span>원)</span>
                 </p>
                 <p className='text-st w-100'>
                   <span className='ml-20'>- 기타급여(제수당 등) : </span>
-                  <span for="bonus2Yes">{this.state.types2}</span>
+                  <span for="bonus2Yes">{this.state.types2.toString()}</span>
                   <span>(</span>
                   <span>{this.state.Bonus1}</span>
                   <span>원, </span>
@@ -549,22 +551,22 @@ class WorkerManageContract extends Component {
                 </p>
                 <p>
                   <span>
-                    {this.state.SalaryCalculationPeriodStart}
+                    {this.state.SalaryCalculationPeriodStart.toString()}
                   </span>
                   <span>일 ~ </span>
                   <span>
-                    {this.state.SalaryCalculationPeriodEnd}
+                    {this.state.SalaryCalculationPeriodEnd.toString()}
                   </span>
                   <span>일</span>
                 </p>
                 <p>
                   <span className='ml-20'>- 임금지급일 : 매월</span>
-                  <span>{this.state.SalaryDay}</span>
+                  <span>{this.state.SalaryDay.toString()}</span>
                   <span>일 (휴일의 경우에는 전일 지급)</span>
                 </p>
                 <p>
                   <span className='ml-20'>- 지급방법 : </span>
-                  <span for="wayOfPayment1">{this.state.types3}</span>
+                  <span for="wayOfPayment1">{this.state.types3.toString()}</span>
                 </p>
                 <p className='text-st w-100 text-bold text-h6'>
                   7. 연차유급휴가
@@ -628,7 +630,7 @@ class WorkerManageContract extends Component {
                   <span className='ml-20'>대 표 자 : </span>
                   <span>{this.state.BusinessOwner1}</span>
                   <span>
-                    {/* (서명){this.state.signOrStamp} */}
+                    (서명){/* this.state.signOrStamp */}
                   </span>
                 </p>
                 <p className='w-100'>
