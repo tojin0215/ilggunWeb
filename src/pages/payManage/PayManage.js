@@ -161,27 +161,29 @@ class PayManage extends Component {
           </article>
           <h4 className='text-h4'>🙋‍♀️ 휴가 등록하기</h4>
           <article className='sectionShadow flex flex-wrap'>
-            <div className='w-50 small-shadow pt-3'>
+            <div className='w-50 small-shadow pt-3 m-0'>
               <TableWorkerFilter data={this.state.worker}/>
             </div>
-            <div className='p-3 h-100'>
-              <p className='text-h5 text-bold'>휴가기간</p>
-              <input className='small-shadow' type="date" defaultValue={dateToday} min={dateToday} id="startVacation"/>
-                ~ 
-              <input className='small-shadow' type="date" min={dateToday2} id="startVacation"/>
-            </div>
-            <div className='p-3 h-100 flex-wrap'>
-              <p className='text-h5 text-bold w-100'>무/유급 휴가 선택</p>
-              <input type="checkbox" id="paid" name="checkboxGroup"
-              checked={this.state.checkboxGroup['paid']} onChange={this.handleCheckbox}/>
-              <span className='text-h6'>유급 휴가</span>
-              <input type="checkbox" id="unpaid" name="checkboxGroup" 
-              checked={this.state.checkboxGroup['unpaid']} onChange={this.handleCheckbox}/>
-              <span className='text-h6'>무급 휴가</span>
-            </div>
-            <div className='p-3 h-100'>
-              <p className='text-h5 text-bold'>사유 입력</p>
-              <input className='small-shadow' placeholder="사유를 입력하세요"></input>
+            <div className='w-50'>
+              <div className='p-3 h-100'>
+                <p className='text-h5 text-bold w-100'>휴가기간</p>
+                <input className='small-shadow' type="date" defaultValue={dateToday} min={dateToday} id="startVacation"/>
+                  ~ 
+                <input className='small-shadow' type="date" min={dateToday2} id="startVacation"/>
+              </div>
+              <div className='p-3 h-100 flex-wrap'>
+                <p className='text-h5 text-bold w-100'>무/유급 휴가 선택</p>
+                <input type="checkbox" id="paid" name="checkboxGroup"
+                checked={this.state.checkboxGroup['paid']} onChange={this.handleCheckbox}/>
+                <span className='text-h6'>유급 휴가</span>
+                <input type="checkbox" id="unpaid" name="checkboxGroup" 
+                checked={this.state.checkboxGroup['unpaid']} onChange={this.handleCheckbox}/>
+                <span className='text-h6'>무급 휴가</span>
+              </div>
+              <div className='p-3 h-100'>
+                <p className='text-h5 text-bold'>사유 입력</p>
+                <input className='small-shadow' placeholder="사유를 입력하세요"></input>
+              </div>
             </div>
             <button className='button-solid'>저장하기</button>
           </article>
