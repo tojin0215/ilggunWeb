@@ -80,7 +80,7 @@ const Table = props => {
     <DataTable      
       defaultSortField="id"
       defaultSortAsc={false}               
-      selectableRows
+      // selectableRows
       highlightOnHover
       pointerOnHover
       noHeader

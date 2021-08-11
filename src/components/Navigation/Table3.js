@@ -96,7 +96,7 @@ const Table = props => {
   return (
     <DataTable      
       defaultSortAsc={false}               
-      selectableRows
+      // selectableRows
       highlightOnHover
       pointerOnHover
       noHeader

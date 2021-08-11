@@ -35,6 +35,7 @@ class MessageSended extends Component {
     selectSentMessage(this.props.userinfo.id)
     .then(result => result.json())
     .then(result => {
+      console.log(result);
       this.setState({send_message: result});
     })
   }
@@ -44,8 +45,9 @@ class MessageSended extends Component {
     }
 
     render() {
-        const { userinfo } = this.props;
+        const { userinfo, send_message } = this.props;
         console.log("userinfo : ", userinfo);
+        console.log("send_message : ", send_message);
 
       return (
         <div className="wrap">

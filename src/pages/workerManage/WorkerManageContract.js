@@ -551,11 +551,11 @@ class WorkerManageContract extends Component {
                 </p>
                 <p>
                   <span>
-                    {this.state.SalaryCalculationPeriodStart.toString()}
+                    {(this.state.SalaryCalculationPeriodStart)?this.state.SalaryCalculationPeriodStart.toString():null}
                   </span>
                   <span>일 ~ </span>
                   <span>
-                    {this.state.SalaryCalculationPeriodEnd.toString()}
+                    {(this.state.SalaryCalculationPeriodEnd)?this.state.SalaryCalculationPeriodEnd.toString():null}
                   </span>
                   <span>일</span>
                 </p>
