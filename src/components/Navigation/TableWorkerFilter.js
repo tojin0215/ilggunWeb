@@ -7,7 +7,7 @@ import './table.css';
 import imgsearch from '../../img/search.png'
 
 const Table = props => {
-  const { data } = props;
+  const { data, handleSelectWorker } = props;
   const columns = [
     {      
       selector: (row, index) => row.workername2,
@@ -59,6 +59,7 @@ const Table = props => {
       data={filteredItems}
       striped      
       subHeader
+      onRowClicked={handleSelectWorker}
       subHeaderComponent={subHeaderComponent}
       
     />

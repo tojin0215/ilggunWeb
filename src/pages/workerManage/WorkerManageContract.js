@@ -426,6 +426,21 @@ class WorkerManageContract extends Component {
           <div className='small-shadow p-3 flex align-ct js-ct worker-name width-fit'>
             <span className='text-h6 text-bold'>{this.props.location.state.worker.workername2}</span>
           </div>
+          
+  {/* 완전한 계약서만 출력 */}
+  {this.state.type === 3 && !isEditMode ? (
+    <>
+      <WorkerContract forDownload={false} contract={this.state} />
+      <PDFDownloadLink
+        document={<WorkerContract forDownload={true} contract={this.state} />}
+        fileName="worker.pdf"
+      >
+        {({ blob, url, loading, error }) =>
+          loading ? "Loading document..." : "Download now!"
+        }
+      </PDFDownloadLink>
+    </>
+  ) : null}
           <article className='sectionShadow'>
             {this.props.location.state.worker.state == 2 ? (
               <div className='flex-wrap container'>
@@ -1129,7 +1144,7 @@ class WorkerManageContract extends Component {
                     value={this.state.BusinessOwner1}
                   />
                 </p>
-                <p className='w-100'>
+                {/* <p className='w-100'>
                   <span className='w-100 text-bold text-h6'>(근로자)</span>
                 </p>
                 <p className='w-100'>
@@ -1137,7 +1152,7 @@ class WorkerManageContract extends Component {
                   <input
                     type="text"
                     placeholder="사용자가 입력하는 칸입니다."
-                    disabled
+                    
                   />
                 </p>
                 <p className='w-100'>
@@ -1145,7 +1160,7 @@ class WorkerManageContract extends Component {
                   <input
                     type="text"
                     placeholder="사용자가 입력하는 칸입니다."
-                    disabled
+                    
                   />
                 </p>
                 <p className='w-100'>
@@ -1153,12 +1168,12 @@ class WorkerManageContract extends Component {
                   <input
                     type="text"
                     placeholder="사용자가 입력하는 칸입니다."
-                    disabled
+                    
                   />
-                </p>
-                <p>
+                </p> */}
+                {/* <p>
                   <input type="button" onClick={() => this.handleSubmit()}>저장하기</input>
-                </p>
+                </p> */}
               </div>
             ) : (
               <div></div>

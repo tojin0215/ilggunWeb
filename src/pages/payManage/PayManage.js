@@ -43,6 +43,8 @@ class PayManage extends Component {
         unpaid:false
       },
 
+      selectedWorker: null,
+
       VA:[],
       worker:[]
     }
@@ -162,10 +164,12 @@ class PayManage extends Component {
           <h4 className='text-h4'>🙋‍♀️ 휴가 등록하기</h4>
           <article className='sectionShadow flex flex-wrap'>
             <div className='w-50 small-shadow pt-3 m-0'>
-              <TableWorkerFilter data={this.state.worker}/>
+              {(!this.state.selectedWorker) ? <TableWorkerFilter data={this.state.worker} handleSelectWorker={(row)=> console.log(row)}/>: null}
+              
             </div>
             <div className='w-50'>
               <div className='p-3 h-100'>
+
                 <p className='text-h5 text-bold w-100'>휴가기간</p>
                 <input className='small-shadow' type="date" defaultValue={dateToday} min={dateToday} id="startVacation"/>
                   ~ 

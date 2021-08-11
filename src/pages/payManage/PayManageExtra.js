@@ -52,7 +52,7 @@ class PayManageExtra extends Component {
     }    
     // this.initialState;
     // this.props.initialValues;
-    this.insertAllowance()
+    // this.insertAllowance()
     this.selectAlloWance()
     this.workerFilter()
 
@@ -121,9 +121,7 @@ class PayManageExtra extends Component {
   }
 
 
-  insertAllowance = (e) => {
-    
-  };
+
 
   handleChange = event => {
     const { taxation, value } = event.target;
@@ -134,12 +132,15 @@ class PayManageExtra extends Component {
     const { userinfo } = this.props;
 
     const { taxation, value } = this.state;
-    this.setState({ [taxation]: value });
+    // this.setState({ [taxation]: value });
 
     this.pickAMonth = React.createRef()
+    // this.pickAMonth.current.show()
+
+    // return (<></>)
     
     return (
-      <div className="wrap">
+      <div className="wrap paymanageextra">
         <Header />
         <Navigation goLogin={this.goLogin} />
         <div className="container">

@@ -6,6 +6,7 @@ import FilterComponent from './FilterComponent';
 
 const Table = props => {
   const { data } = props;
+  console.log(data)
   const columns = [
     {
       name: "이름",
@@ -14,8 +15,9 @@ const Table = props => {
     },  
     {
       name:"휴가 출발",
-      selector: (row, index) => row.strat_date,
-      sortable:true
+      selector: (row, index) => row.start_date,
+      sortable:true,
+      cell: row => row.start_date.split("T")[0]
     },  
     {
       name:"휴가 도착",
@@ -45,7 +47,7 @@ const Table = props => {
   );
   const filteredItems = props.data.filter(
     item =>
-      item.id.indexOf(filterText.toLowerCase()) !== -1
+      item.workername.indexOf(filterText.toLowerCase()) !== -1
   );
 
   // const filteredItems = props.data.filter(

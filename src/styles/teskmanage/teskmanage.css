@@ -6,9 +6,8 @@
 .todayleave > div {
   flex: 1;
   padding: 20px;
-  height: 400px;
-  overflow: scroll;
-  overflow-y: scroll;
+  height: 440px;
+  overflow: auto;
 }
 
 .react-calendar {
@@ -18,3 +17,8 @@
 .react-calendar__month-view__weekdays__weekday {
   text-align: center;
 }
+
+.paymanageextra .month-picker > .rmp-container .rmp-popup {
+  left: 0;
+
+} 
