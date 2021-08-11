@@ -44,7 +44,6 @@ export function businessRequest(id, business_id) {
           }
       })
       .catch(response => {
-          console.error(response);
           dispatch(businessFailure());
       });
     };

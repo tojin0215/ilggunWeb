@@ -160,13 +160,15 @@ class PayManage extends Component {
             </div>
           </article>
           <h4 className='text-h4'>🙋‍♀️ 휴가 등록하기</h4>
-          <article className='sectionShadow flex'>
-              <TableWorkerFilter data={this.state.worker}/>                          
-              <br/> 
+          <article className='sectionShadow flex flex-wrap'>
+            <div className='w-50 small-shadow pt-3 m-0'>
+              <TableWorkerFilter data={this.state.worker}/>
+            </div>
+            <div className='w-50'>
               <div className='p-3 h-100'>
-                <p className='text-h5 text-bold'>휴가기간</p>
+                <p className='text-h5 text-bold w-100'>휴가기간</p>
                 <input className='small-shadow' type="date" defaultValue={dateToday} min={dateToday} id="startVacation"/>
-                 ~ 
+                  ~ 
                 <input className='small-shadow' type="date" min={dateToday2} id="startVacation"/>
               </div>
               <div className='p-3 h-100 flex-wrap'>
@@ -182,7 +184,8 @@ class PayManage extends Component {
                 <p className='text-h5 text-bold'>사유 입력</p>
                 <input className='small-shadow' placeholder="사유를 입력하세요"></input>
               </div>
-              <button className='button-solid'>저장하기</button>
+            </div>
+            <button className='button-solid'>저장하기</button>
           </article>
         </div>
         <Footer />

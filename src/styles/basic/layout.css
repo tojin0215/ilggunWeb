@@ -21,7 +21,7 @@
 .wrap > .container {
   position: relative;
   min-height: 1000px;
-  padding-top: 70px;
+  padding-top: 100px;
 }
 
 .side-navigation-panel {
@@ -71,6 +71,30 @@
   padding: 70px 0;
 }
 
+.width-fit {
+  width: fit-content;
+}
+
+.w-100px {
+  width: 100px;
+}
+
+.w-70px {
+  width: 70px;
+}
+
+.flex {
+  display: flex;
+}
+
+.align-ct {
+  align-items: center;
+}
+
 .js-sbt {
   justify-content: space-between;
+}
+
+.js-ct {
+  justify-content: center;
 }

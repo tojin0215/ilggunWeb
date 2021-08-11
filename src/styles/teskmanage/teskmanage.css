@@ -6,9 +6,8 @@
 .todayleave > div {
   flex: 1;
   padding: 20px;
-  height: 400px;
-  overflow: scroll;
-  overflow-y: scroll;
+  height: 430px;
+  overflow: auto;
 }
 
 .react-calendar {

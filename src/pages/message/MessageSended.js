@@ -35,6 +35,7 @@ class MessageSended extends Component {
     selectSentMessage(this.props.userinfo.id)
     .then(result => result.json())
     .then(result => {
+      console.log(result);
       this.setState({send_message: result});
     })
   }
@@ -44,8 +45,9 @@ class MessageSended extends Component {
     }
 
     render() {
-        const { userinfo } = this.props;
+        const { userinfo, send_message } = this.props;
         console.log("userinfo : ", userinfo);
+        console.log("send_message : ", send_message);
 
       return (
         <div className="wrap">
@@ -54,7 +56,7 @@ class MessageSended extends Component {
           <div className="container">
             <Menu />
             <article className='sectionShadow'>
-              <h5 className='text-h5'> 📨보낸 메시지함 </h5>
+              <h5 className='text-h5'> 📨 보낸 메시지함 </h5>
               {/* <div className='messagedelete'>
                 삭제하기
                 <input type="checkbox" value={this.state.checkDelete} onChange={() => this.setState({checkDelete: !this.state.checkDelete})} />

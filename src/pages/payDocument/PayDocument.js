@@ -88,10 +88,8 @@ class PayDocument extends Component {
         <div className="container">
           <Menu />
           <article className='sectionShadow'>
-            <h4 className='text-h5'>{this.state.yearMonth.year}년 {this.state.yearMonth.month}월 급여대장</h4>
+            <h4 className='text-h5 text-bold'>{this.state.yearMonth.year}년 {this.state.yearMonth.month}월 급여대장</h4>
             <div className='w-100 flex jf-end'>
-              <button> 엑셀로 다운받기 </button>
-              <button> 프린트 </button>
               {/* <input
                 placeholder='월 선택 캘린더'
                 type="date"
@@ -100,6 +98,7 @@ class PayDocument extends Component {
               >
               </input> */}
               <Picker
+                className='button-solid_white-0 py-2 ps-4 pe-0 my-0 mx-1 d-flex'
                 ref={this.pickAMonth}
                 value={this.state.yearMonth}
                 lang={pickerLang.months}

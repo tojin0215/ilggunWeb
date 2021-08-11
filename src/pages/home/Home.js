@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
@@ -15,6 +14,7 @@ import { businessRequest, businessUpdate } from '../../action/authentication';
 import { setBusiness } from '../../action/userinfo';
 import { postBusinessGet, postSelectWorker, selectTimelog, selectWorkerByType } from '../../action/api';
 import {selectReceivedMessage} from '../../action/api';
+import {getUserInfo, setUserInfo, getUserInfoBusinessId, setUserInfoBusinessId} from '../../util/cookie';
 
 import '../../styles/home/home.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -30,21 +30,9 @@ class Home extends Component {
       business_id: "",
       worker: [],
       timelog: [],
+      message_count: 0,
       recv_message: []
     };
-    // if (props.location.state) {
-    //   this.state = {
-    //     business_id: props.location.state.business_id,
-    //     worker: [],
-    //     timelog: []
-    //   };
-    // } else {
-    //   this.state = {
-    //     business_id: "",
-    //     worker: [],
-    //     timelog: []
-    //   };
-    // }
     this.curFetchWorker();
   }
 
@@ -52,33 +40,23 @@ class Home extends Component {
     this.props.history.push('/');
   };
 
-  curFetch = () => {
-    selectReceivedMessage(this.props.userinfo.id)
-    .then(result => result.json())
-    .then(result => {
-      this.setState({recv_message: result})
-    })
+  handleSelectNewBusiness = () => {
+    this.curFetchWorker();
   }
 
+
   curFetchWorker = () => {
-    // postSelectWorker(business_id)
-    // .then(result => result.json())
-    // .then(result => {
-    //   console.log(result);
-    //   this.setState({ worker: result })
-    // })
     const d = new Date()
-    selectWorkerByType(this.props.userinfo.business_name, 2)
+    const business_id = (getUserInfoBusinessId())? getUserInfoBusinessId() : this.props.userinfo.business_name;
+
+    selectWorkerByType(business_id, 2)
     .then(result => result.json())
     .then(selectWorkerByType_result => {
       // this.setState({ worker: result })
 
-
-      selectTimelog(this.props.userinfo.business_name, d.getFullYear(), d.getMonth()+1, d.getDate())
+      selectTimelog(business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
       .then(result => result.json())
       .then(result => {
-        // console.log("result", business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
-        // console.log(result, business_id)
         this.setState({worker: selectWorkerByType_result.map((item, index) => {
           const timelog = result.find((res) => res.workername == item.workername);
           item["timelog"] = timelog;
@@ -91,9 +69,58 @@ class Home extends Component {
         console.error("curFetchWorker",error);
       })
     })
-    this.curFetch();
-
   }
+
+  returnToLogin = () => {
+    const loginData = {
+      isLoggedIn: false,
+      id: '',
+    };
+
+    document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+    // and notify
+    alert('다시 로그인 바랍니다');
+    this.props.history.push('/');
+  }
+
+  initLoadMessageCount = () => {
+    selectReceivedMessage(this.props.userinfo.id)
+    .then(result => result.json())
+    .then(result => {
+      this.setState({message_count: result.length})
+    })
+  }
+
+  initLoadBusiness = (user_id, business_id) => {
+    this.props.businessRequest(user_id, business_id)
+    .then(v => {
+      postBusinessGet(user_id)
+      .then((result) => result.json())
+      .then((result) => {
+        const new_business_id = (!business_id &&result && result.length > 0) ? result[0].bname : '';
+
+        this.setState({ business: result });
+        this.setState({ business_id: new_business_id });
+        setUserInfoBusinessId(new_business_id)
+
+        this.curFetchWorker();
+        this.initLoadMessageCount();
+      });
+    });
+  }
+
+  initLoadUserInfo = (id, pw) => {
+    this.props.loginRequest(id, pw)
+    .then(() => {
+      if (!this.props.status.isLoggedIn) this.returnToLogin(); 
+      else {
+        const business_id = getUserInfoBusinessId()
+        setUserInfo(id, pw, null)
+        this.initLoadBusiness(id, business_id)
+      }
+    })
+  }
+
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
     // get cookie by name
@@ -119,55 +146,11 @@ class Home extends Component {
       return;
     }
 
+    // document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+
     // page refreshed & has a session in cookie,
     // check whether this cookie is valid or not
-    this.props.loginRequest(loginData.id, loginData.pw).then(() => {
-      // if session is not valid
-      // if(!this.props.status.valid) {
-      if (!this.props.status.isLoggedIn) {
-        // logout the session
-        loginData = {
-          isLoggedIn: false,
-          id: '',
-        };
-
-        document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-        // and notify
-        alert('다시 로그인 바랍니다');
-        this.props.history.push('/');
-      } else {
-        console.log("curFetchWorker",loginData.business_id);
-        this.props
-          .businessRequest(this.props.userinfo.id, loginData.business_id)
-          .then(v => {
-            postBusinessGet(loginData.id)
-            .then((result) => result.json())
-            .then((result) => {
-              // loginData["business_id"] = (result & result.length > 0) ? result[0].id : ''
-              loginData = {
-                isLoggedIn: true,
-                id: loginData.id,
-                pw: loginData.pw,
-                business_id: (result && result.length > 0) ? result[0].id : '',
-              };
-              console.log("this.state.worker", result)
-              // console.log("this.state.worker", loginData)
-              // this.props.setBusiness((result) ? result[0].id: "");
-              this.setState({ business: result });
-  
-              if (loginData.business_id) {
-                this.setState({ business_id: loginData.business_id });
-              } else if (this.state.business_id) {
-                loginData.business_id = this.state.business_id;
-              }
-              document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-            });
-          
-        })
-        }
-
-        
-    });
+    this.initLoadUserInfo(loginData.id, loginData.pw)
   }
 
   render() {
@@ -180,20 +163,21 @@ class Home extends Component {
     return (
       <div className="wrap">
         <Header />
-        <Navigation goLogin={this.goLogin} />
+        <Navigation goLogin={this.goLogin}  handleSelectNewBusiness={this.handleSelectNewBusiness}/>
         <div className='container'>
           <Menu />
           <article className='sectionShadow'>
-            <h4 className='text-h5'>
+            <h4 className='text-h5 text-bold'>
               <span className='color-point text-h5'>✔ </span>
                알림
+              <p className='text-h6 p-3 mt-2 small-box text-medium'>{this.state.message_count} 개의 새로운 메시지가 있습니다.</p>
             </h4>
             <ul>
             {alarms}
             </ul>
           </article>
           <article className='sectionShadow'>
-            <h4 className='text-h5'>
+            <h4 className='text-h5 text-bold'>
               <span className='color-point text-h5'>✔ </span>
               오늘의 근무자
             </h4>
