@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
@@ -168,17 +167,17 @@ class Home extends Component {
         <div className='container'>
           <Menu />
           <article className='sectionShadow'>
-            <h4 className='text-h5'>
+            <h4 className='text-h5 text-bold'>
               <span className='color-point text-h5'>✔ </span>
                알림
-               <span>{this.state.message_count}개</span>
+              <p className='text-h6 p-3 mt-2 small-box text-medium'>{this.state.message_count} 개의 새로운 메시지가 있습니다.</p>
             </h4>
             <ul>
             {alarms}
             </ul>
           </article>
           <article className='sectionShadow'>
-            <h4 className='text-h5'>
+            <h4 className='text-h5 text-bold'>
               <span className='color-point text-h5'>✔ </span>
               오늘의 근무자
             </h4>

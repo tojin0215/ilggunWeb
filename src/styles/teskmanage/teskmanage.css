@@ -6,7 +6,7 @@
 .todayleave > div {
   flex: 1;
   padding: 20px;
-  height: 400px;
+  height: 430px;
   overflow: scroll;
   overflow-y: scroll;
 }
