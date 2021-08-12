@@ -111,15 +111,13 @@ class PayDocumentDetails extends Component {
     otherAllowance(business_id, worker_id, new Date().getFullYear(), 6)
     .then(r=>r.json())
     .then(result => {
-      console.log(result);
-      const allowance = result[0];
+      const allowance = (result && result.length > 0)? result[0] : {};
 
       let taxation = 0
       if (allowance.t_bonus) taxation += Number(allowance.t_bonus)
       if (allowance.t_extension) taxation += Number(allowance.t_extension)
       if (allowance.t_position) taxation += Number(allowance.t_position)
       if (allowance.t_etc) taxation += Number(allowance.t_etc)
-      
       console.log('taxation', taxation)
 
       let taxFree = 0
@@ -128,7 +126,9 @@ class PayDocumentDetails extends Component {
       if (allowance.f_meals) taxFree += Number(allowance.f_meals)
       console.log('taxFree', taxFree)
 
-      const salary = allowance.Salary;
+      let salary = 0;
+      if (allowance.salary) salary = allowance.Salary;
+      console.log('salary', salary)
 
       this.setState({salary, taxation, taxFree})
     })
@@ -153,8 +153,6 @@ class PayDocumentDetails extends Component {
 
     const show_pay_document =
       this.state.contract !== null && this.state.insurance !== null;
-    
-    console.log(this.state.insurance)
     
     const pay_document_data = (show_pay_document)? {
       name: this.state.workername2,
