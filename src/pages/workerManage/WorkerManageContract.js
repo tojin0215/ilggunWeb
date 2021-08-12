@@ -423,27 +423,31 @@ class WorkerManageContract extends Component {
         <Navigation goLogin={this.goLogin} />
         <div className="container">
           <Menu />
-          <div className='small-shadow p-3 flex align-ct js-ct worker-name width-fit'>
-            <span className='text-h6 text-bold'>{this.props.location.state.worker.workername2}</span>
+          <div className='d-flex justify-content-between px-5'>
+            <div className='small-shadow py-3 px-5 flex align-ct js-ct worker-name width-fit'>
+              <span className='text-h6 text-bold'>{this.props.location.state.worker.workername2}</span>
+            </div>
+            <div className='button-solid width-fit d-flex align-items-center'>
+              <PDFDownloadLink
+                className='text-h6 text-bold'
+                document={<WorkerContract forDownload={true} contract={this.state} />}
+                fileName="worker.pdf"
+              >
+                {({ blob, url, loading, error }) =>
+                  loading ? "Loading document..." : "다운받기"
+                }
+              </PDFDownloadLink>
+            </div>
           </div>
-          
   {/* 완전한 계약서만 출력 */}
   {this.state.type === 3 && !isEditMode ? (
     <>
       <WorkerContract forDownload={false} contract={this.state} />
-      <PDFDownloadLink
-        document={<WorkerContract forDownload={true} contract={this.state} />}
-        fileName="worker.pdf"
-      >
-        {({ blob, url, loading, error }) => {
-          return loading ? "Loading document..." : "Download now!"
-        }}
-      </PDFDownloadLink>
     </>
   ) : null}
           <article className='sectionShadow'>
             {this.props.location.state.worker.state == 2 ? (
-              <div className='flex-wrap container'>
+              <div className='flex-wrap container w-60per'>
                 <h6 className='text-h4 text-ct w-100 text-bold'>표준근로계약서</h6>
                 <p className='text-ct w-100'>
                   <span className='text-bold'>{this.state.Employer}</span>
