@@ -105,7 +105,7 @@ class Message extends Component {
             </div>
             <div className='my-3 border'>
               <p className='text-bold pb-2'>내용</p>
-              <p>{this.state.msgBody}</p>
+              <p className='p-2'>{this.state.msgBody}</p>
             </div>
           </Modal>
           <Footer />

@@ -34,7 +34,7 @@ export class ModalMessage extends Modal {
               </div>
               <div className='my-3 border'>
                 <label for="inputBody" className='text-bold pb-2'>내용</label>
-                <textarea id="inputBody"></textarea>
+                <textarea id="inputBody" className='p-2'></textarea>
               </div>
               {this.props.children}
             </main>
