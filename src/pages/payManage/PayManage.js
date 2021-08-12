@@ -42,6 +42,8 @@ class PayManage extends Component {
         paid:true,
         unpaid:false
       },
+
+      workername2:"근로자",
       
       selectedWorker: null,
 
@@ -50,7 +52,6 @@ class PayManage extends Component {
     }
     this.vacation()
     this.workerFilter()
-    // this.insertVacation()
   }
   goLogin = () => {
     this.props.history.push('/');
@@ -75,15 +76,13 @@ class PayManage extends Component {
     return
   }
 
-  // insertVacation = () => {
-  //   insertVacation(this.props.userinfo.business_name, 
-  //     this.state.workername, this.state.vacation, 
-  //     this.state.reason, this.state.start_date, this.state.end_date)
-  //     .then(result => result.json())
-  //     .then(result => {
-  //       this.setState({})
-  //     })
-  // }
+  handleChange = (e) =>{
+    let nextState = {};
+    nextState[e.target.name] = e.target.value;
+    this.setState(nextState);
+  }
+
+  
 
 
 
@@ -105,7 +104,7 @@ class PayManage extends Component {
       unpaid:false,
     }
     obj[e.target.id] = e.target.checked
-    console.log(obj);
+    // console.log(obj);
     this.setState({
       checkboxGroup:obj
     })
@@ -183,7 +182,7 @@ class PayManage extends Component {
             <div className='w-50'>
               <div className='p-3 h-100'>
               <span className='text-h6 text-bold'>근로자</span>
-              
+              <input type="text" id='workername2' onChange={this.handleChange} />
                 <p className='text-h5 text-bold w-100'>휴가기간</p>
                 <input className='small-shadow' type="date" defaultValue={dateToday} min={dateToday} id="start_date"/>
                   ~ 
@@ -203,7 +202,7 @@ class PayManage extends Component {
                 <input className='small-shadow' placeholder="사유를 입력하세요"></input>
               </div>
             </div>
-            <button className='button-solid'>저장하기</button>
+            <button className='button-solid' type="button" onClick={this.handleOnClick} >저장하기</button>
           </article>
         </div>
         <Footer />

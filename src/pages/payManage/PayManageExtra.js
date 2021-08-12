@@ -178,8 +178,21 @@ class PayManageExtra extends Component {
             <div className='col-4'>
               <TableWorkerFilter data={this.state.worker}/>
               <br/>           
-              <p className='p-2 text-h5 text-bold w-100'>지급일</p>
-              <input type="month" />           
+              <p className='p-2 text-h5 text-bold w-100'>지급월</p>
+              <div className='sectionShadow'>
+              <Picker
+                ref={this.pickAMonth}
+                value={this.state.yearMonth}
+                lang={pickerLang.months}
+                // show={this.state.isVisibleMonthSelector}
+                onChange={this.handleAMonthChange}
+                onDismiss={this.handleAMonthDissmis}
+              >
+              <div onClick={() => this.pickAMonth.current.show()}> 
+                {this.state.yearMonth.year}년 {this.state.yearMonth.month}월 
+              </div>
+              </Picker>
+            </div>
             </div>
             <div className='flex-wrap col-4'>
               <p className='p-2 text-h5 text-bold w-100'>과세/비과세 선택</p>

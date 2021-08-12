@@ -37,49 +37,56 @@ class PayDocument extends Component {
    
   } 
  
+
+
   // selectPayDocu = () => {
   //   const d = new Date()
-  //   // otherAllowanceAll(this.props.userinfo.business_name, d.getFullYear(),d.getMonth()+1)
-  //   otherAllowanceAll(this.props.userinfo.business_name, this.state.yearMonth.year, 7)
-  //    .then((result) => result.json())
-  //    .then((result) => {
-  //     // console.log( "this.props.userinfo.business_name")
+  // selectInsuranceYear(this.props.userinfo.business_name, d.getFullYear())
+  //   .then((result) => result.json())
+  //   .then((result) => { 
   //     console.log(result)
   //     this.setState({ PD: result})
-  //    })
+  //   })
   // }
+
+  
+
 
   selectPayDocu = () => {
     const d = new Date()
     otherAllowanceAll(this.props.userinfo.business_name, d.getFullYear(), 6)
      .then((result) => result.json())
-     .then((result) => {           
-      console.log(result)
-      this.setState({ PD: result})
-     })
-    
-     selectInsuranceYear(this.props.userinfo.business_name, d.getFullYear())
+     .then((otherAllowanceAllResult) => {           
+      console.log(otherAllowanceAllResult)
+
+      selectInsuranceYear(this.props.userinfo.business_name, d.getFullYear())
     .then((result) => result.json())
-    .then((result) => { 
-    console.log(result)          
-      this.setState({ PD : this.state.PD.map((item, index)=>{
-      const  insurance = result.find((res) => res.bang == item.bang);
+    .then((selectInsuranceYearResult) => { 
+    console.log(selectInsuranceYearResult)          
+      this.setState({ PD : otherAllowanceAllResult.map((item, index)=>{
+      const  insurance = selectInsuranceYearResult.find((res) => res.bang == item.bang);
       item["insurance"] = insurance;
       return item;
       }) 
     }) 
+
+    // selectContractformAll (this.props.userinfo.business_name)
+    // .then((result) => result.json())
+    // .then((selectContractformAllResult) => { 
+    //   console.log(selectContractformAllResult)          
+    //   this.setState({ PD :otherAllowanceAllResult.map((item2, index)=>{
+    //     const  contractform = selectContractformAllResult.find((res) => res.bang == item2.bang);
+    //     item2["contractform"] = contractform;
+    //     return item2;
+    //   })})         
+    // })
     })
+
+     })
     
-    selectContractformAll (this.props.userinfo.business_name)
-    .then((result) => result.json())
-    .then((result) => { 
-      console.log(result)          
-      this.setState({ item :this.state.item.map((item2, index)=>{
-        const  contractform = result.find((res) => res.bang == item2.bang);
-        item2["contractform"] = contractform;
-        return item2;
-      })})         
-    })
+     
+    
+    
     .catch(error => {
       console.error("kkkkk",error);
     })
@@ -106,7 +113,7 @@ class PayDocument extends Component {
 
   render() {
     const { userinfo } = this.props;
-    // console.log('userinfo : ', userinfo);
+    console.log('userinfo : ', userinfo);
     this.pickAMonth = React.createRef()
 
     return (
