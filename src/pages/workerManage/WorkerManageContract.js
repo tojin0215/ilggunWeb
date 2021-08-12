@@ -424,20 +424,20 @@ class WorkerManageContract extends Component {
         <div className="container">
           <Menu />
           <div className='d-flex justify-content-between px-5'>
-            <div className='small-shadow py-3 px-5 flex align-ct js-ct worker-name width-fit m-0'>
-              <span className='text-h6 text-bold'>{this.props.location.state.worker.workername2}</span>
+            <div>
+              <div className='small-shadow py-3 px-5 flex align-ct js-ct worker-name width-fit m-0'>
+                <span className='text-h6 text-bold'>{this.props.location.state.worker.workername2}</span>
+              </div>
             </div>
-            {/* <div className='button-solid width-fit d-flex align-items-center'> */}
-              <PDFDownloadLink
-                className='button-solid width-fit d-flex align-items-center'
-                document={<WorkerContract forDownload={true} contract={this.state} />}
-                fileName="worker.pdf"
-              >
-                {({ blob, url, loading, error }) =>
-                  loading ? "Loading document..." : "다운받기"
-                }
-              </PDFDownloadLink>
-            {/* </div> */}
+            <PDFDownloadLink
+              className='button-solid width-fit d-flex align-items-center'
+              document={<WorkerContract forDownload={true} contract={this.state} />}
+              fileName="worker.pdf"
+            >
+              {({ blob, url, loading, error }) =>
+                loading ? "Loading document..." : "다운받기"
+              }
+            </PDFDownloadLink>
           </div>
   {/* 완전한 계약서만 출력 */}
   {this.state.type === 3 && !isEditMode ? (

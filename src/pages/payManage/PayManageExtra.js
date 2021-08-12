@@ -181,9 +181,10 @@ class PayManageExtra extends Component {
               <div className='mt-3'>
                 <p className='p-2 text-h5 text-bold w-100'>과세/비과세 선택</p>
                 <div className='d-flex'>
-                  <div className=''>
-                    <input type='radio'></input>
-                    <span className='text-h6 text-bold'>과세</span>
+                  <div>
+                    <label>
+                      <span className='text-h5 px-4'>과세</span>
+                    </label>
                     <div className='p-1 w-100'>
                       <input type="checkbox" id="position" name="checkboxGroup"
                         checked={this.state.checkboxGroup['position']} onChange={this.handleCheckbox}/>
@@ -203,10 +204,11 @@ class PayManageExtra extends Component {
                       {/* {(this.state.etc) ? <input/> : null}    */}
                     </div>
                   </div>
-                  <div className='d-flex align-items-start flex-wrap pb-5 mt-2'>
+                  <div className='d-flex align-items-start flex-wrap pb-5'>
                     <p>
-                      <input type='radio'></input>
-                      <span className='text-h6 text-bold'>비과세</span>
+                      <label>
+                        <span className='text-h5 px-4'>비과세</span>
+                      </label>
                     </p>
                     <div  className='p-1 w-100'>
                       <input type="checkbox" id="bob" name="checkboxGroup"
