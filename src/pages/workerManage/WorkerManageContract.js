@@ -435,9 +435,9 @@ class WorkerManageContract extends Component {
         document={<WorkerContract forDownload={true} contract={this.state} />}
         fileName="worker.pdf"
       >
-        {({ blob, url, loading, error }) =>
-          loading ? "Loading document..." : "Download now!"
-        }
+        {({ blob, url, loading, error }) => {
+          return loading ? "Loading document..." : "Download now!"
+        }}
       </PDFDownloadLink>
     </>
   ) : null}
@@ -675,6 +675,7 @@ class WorkerManageContract extends Component {
               </svg> */}
               </div>
             ) : this.props.location.state ? (
+              
               <div className='flex-wrap container'>
                 <h6 className='text-h4 text-ct w-100 text-bold'>표준근로계약서</h6>
                 <p className='text-ct w-100'>
@@ -1174,6 +1175,7 @@ class WorkerManageContract extends Component {
                 {/* <p>
                   <input type="button" onClick={() => this.handleSubmit()}>저장하기</input>
                 </p> */}
+                <input type="button" onClick={() => this.handleSubmit()} value={"저장하기"}/>
               </div>
             ) : (
               <div></div>

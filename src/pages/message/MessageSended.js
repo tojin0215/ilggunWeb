@@ -10,6 +10,7 @@ import TableMessageSended from '../../components/Navigation/TableMessageSended';
 import data from '../../components/Navigation/data';
 import {selectSentMessage} from '../../action/api';
 import {delMessage} from '../../action/api';
+import {Modal} from '../../components/Modal/Modal';
 
 import '../../styles/home/home.css';
 
@@ -64,6 +65,18 @@ class MessageSended extends Component {
               <TableMessageSended data={this.state.send_message} checkDelete={this.state.checkDelete} deleteMessage={this.deleteMessage} />
             </article>
           </div>
+          <Modal open={true} close={() =>this.closeModal}>
+            <div>
+              <span>발신자: {"발신자에요"}</span>
+            </div>
+            <div>
+              <span>수신자: {"수신자에요"}</span>
+            </div>
+            <div>
+              <span>내용</span><br />
+              <span>내용이에요</span>
+            </div>
+          </Modal>
           <Footer />
         </div>
       )

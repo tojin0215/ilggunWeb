@@ -12,9 +12,9 @@ import Table from '../../components/Navigation/Table3';
 import { loginRequest } from '../../action/authentication';
 import { businessRequest, businessUpdate } from '../../action/authentication';
 import { setBusiness } from '../../action/userinfo';
-import { postBusinessGet, postSelectWorker, selectTimelog, selectWorkerByType } from '../../action/api';
+import { postBusinessGet, postSelectWorker, selectTimelog, selectWorkerByType, selectVacation } from '../../action/api';
 import {selectReceivedMessage} from '../../action/api';
-import {getUserInfo, setUserInfo, getUserInfoBusinessId, setUserInfoBusinessId, selectVacation} from '../../util/cookie';
+import {getUserInfo, setUserInfo, getUserInfoBusinessId, setUserInfoBusinessId, } from '../../util/cookie';
 
 import '../../styles/home/home.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -68,11 +68,11 @@ class Home extends Component {
         //   return item;
         // })})
 
-        selectVacation(business_id)
-        .then(result => result.json())
-        .then(selectVacation_result => {
-          selectTimelogResult
-        })
+        // selectVacation(business_id)
+        // .then(result => result.json())
+        // .then(selectVacation_result => {
+        //   selectTimelogResult
+        // })
 
         this.forceUpdate();
       })
