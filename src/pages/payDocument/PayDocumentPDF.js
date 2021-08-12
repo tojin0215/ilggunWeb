@@ -95,87 +95,143 @@ class PayDocumentPDF extends Component {
             </View>
             <View>
               <View>
-                <Text>지급</Text>
-              </View>
-              <View>
                 <View>
-                  <Text>기본급</Text>
+                  <Text>과세</Text>
                 </View>
                 <View>
-                  <Text>기타수당(과세)</Text>
-                </View>
+                  <View>
+                    <Text>기본급</Text>
+                  </View>
+                  <View>
+                    <View>
+                      <Text>과세 추가수당</Text>
+                    </View>
+                    <View>
+                      <View>
+                        <Text>직책</Text>
+                      </View>
+                      <View>
+                        <Text>상여</Text>
+                      </View>
+                      <View>
+                        <Text>연장</Text>
+                      </View>
+                      <View>
+                        <Text>기타</Text>
+                      </View>
+                    </View>
+                  </View>{/* 과세 추가수당 */}
+                  <View>
+                    <View>
+                      <Text>비과세 추가수당</Text>
+                    </View>
+                    <View>
+                      <View>
+                        <Text>식대</Text>
+                      </View>
+                      <View>
+                        <Text>자가유류비</Text>
+                      </View>
+                      <View>
+                        <Text>육아수당</Text>
+                      </View>
+                      <View>
+                        <Text>기타</Text>
+                      </View>
+                    </View>
+                  </View>{/* 비과세 추가수당 */}
+                </View>{/* 지급 */}
                 <View>
-                  <Text>기타수당(비과세)</Text>
-                </View>
-              </View>
-              <View>
-                <View>
-                  <Text>기본급</Text>
-                </View>
-                <View>
-                  <Text>기타수당(과세)</Text>
-                </View>
-                <View>
-                  <Text>기타수당(비과세)</Text>
-                </View>
+                    <View>
+                        <Text></Text>
+                    </View>
+                    <View>
+                        <Text></Text>
+                    </View>
+                    <View>
+                        <Text></Text>
+                    </View>
+                    <View>
+                        <Text></Text>
+                    </View>
+                    <View>
+                        <Text></Text>
+                    </View>
+                    <View>
+                        <Text></Text>
+                    </View>
+                    <View>
+                        <Text></Text>
+                    </View>
+                    <View>
+                        <Text></Text>
+                    </View>
+                    <View>
+                        <Text></Text>
+                    </View>
+                </View>{/* 지급 금액 */}
               </View>
             </View>
             <View>
-              <View>
-                <Text>공제</Text>
-              </View>
-              <View>
                 <View>
-                  <Text>국민연금</Text>
-                </View>
+                    <View>
+                        <View>
+                            <Text>공제</Text>
+                        </View>
+                        <View>
+                            <View>
+                                <Text>국민연금</Text>
+                            </View>
+                            <View>
+                                <Text>건강보험료</Text>
+                            </View>
+                            <View>
+                                <Text>장기요양보험료</Text>
+                            </View>
+                            <View>
+                                <Text>고용보험료</Text>
+                            </View>
+                            <View>
+                                <Text>소득세</Text>
+                            </View>
+                            <View>
+                                <Text>주민세</Text>
+                            </View>
+                        </View>
+                    </View>
+                </View>{/* 공제 텍스트 */}
                 <View>
-                  <Text>건강보험료</Text>
-                </View>
-                <View>
-                  <Text>장기요양보험료</Text>
-                </View>
-                <View>
-                  <Text>고용보험료</Text>
-                </View>
-                <View>
-                  <Text>소득세</Text>
-                </View>
-                <View>
-                  <Text>주민세</Text>
-                </View>
-              </View>
-              <View>
-                <View>
-                  <Text>국민연금</Text>
-                </View>
-                <View>
-                  <Text>건강보험료</Text>
-                </View>
-                <View>
-                  <Text>장기요양보험료</Text>
-                </View>
-                <View>
-                  <Text>고용보험료</Text>
-                </View>
-                <View>
-                  <Text>소득세</Text>
-                </View>
-                <View>
-                  <Text>주민세</Text>
-                </View>
-              </View>
+                    <View>
+                        <Text></Text>
+                    </View>
+                    <View>
+                        <Text></Text>
+                    </View>
+                    <View>
+                        <Text></Text>
+                    </View>
+                    <View>
+                        <Text></Text>
+                    </View>
+                    <View>
+                        <Text></Text>
+                    </View>
+                    <View>
+                        <Text></Text>
+                    </View>
+                </View>{/* 공제 금액 */}
+            </View>{/* 공제 컨텐츠 */}
+            <View>
+                <View></View>
+                <View></View>
             </View>
             <View>
-              <Text>지급액계</Text>
-              <>-</>
+                <View></View>
+                <View></View>
             </View>
             <View>
-              <Text>공제액계</Text>
-              <Text>-</Text>
-            </View>
-            <View>
-              <Text>차인지급액계</Text>
-              <Text>-</Text>
+                <View></View>
+                <View></View>
             </View>
           </View>
         </Page>

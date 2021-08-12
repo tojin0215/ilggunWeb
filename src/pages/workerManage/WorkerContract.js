@@ -188,10 +188,8 @@ class WorkerContract extends Component {
                 <Text>원 </Text>
                 <Text>)</Text>
               </Text>
-              <Text>
+              <Text className='w-100'>
                 <Text className="ml-20">- 급여산정기간 :</Text>
-              </Text>
-              <Text>
                 <Text>
                   {this.state.SalaryCalculationPeriodStart
                     ? this.state.SalaryCalculationPeriodStart.toString()
@@ -205,7 +203,7 @@ class WorkerContract extends Component {
                 </Text>
                 <Text>일</Text>
               </Text>
-              <Text>
+              <Text className='w-100'>
                 <Text className="ml-20">- 임금지급일 : 매월</Text>
                 <Text>{this.state.contract.SalaryDay.toString()}</Text>
                 <Text>일 (휴일의 경우에는 전일 지급)</Text>
@@ -258,13 +256,13 @@ class WorkerContract extends Component {
                   - 이 계약에 정함이 없는 사항은 근로기준법령에 의함
                 </Text>
               </Text>
-              <Text className="text-ct w-100 text-h6">
-                <Text>{this.state.contract.ContractYear}</Text>
-                <Text>년</Text>
-                <Text>{this.state.contract.ContractMonth}</Text>
-                <Text>월</Text>
-                <Text>{this.state.contract.ContractDay}</Text>
-                <Text>일</Text>
+              <Text className="text-ct w-100 py-5">
+                <Text className='text-h5'>{this.state.contract.ContractYear}</Text>
+                <Text className='text-h5'>년</Text>
+                <Text className='text-h5'>{this.state.contract.ContractMonth}</Text>
+                <Text className='text-h5'>월</Text>
+                <Text className='text-h5'>{this.state.contract.ContractDay}</Text>
+                <Text className='text-h5'>일</Text>
               </Text>
               <Text className="w-100 text-bold text-h6">(사업주)</Text>
               <Text className="w-100">
