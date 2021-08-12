@@ -427,9 +427,9 @@ class WorkerManageContract extends Component {
             <div className='small-shadow py-3 px-5 flex align-ct js-ct worker-name width-fit m-0'>
               <span className='text-h6 text-bold'>{this.props.location.state.worker.workername2}</span>
             </div>
-            <div className='button-solid width-fit d-flex align-items-center'>
+            {/* <div className='button-solid width-fit d-flex align-items-center'> */}
               <PDFDownloadLink
-                className='text-h6 text-bold'
+                className='button-solid width-fit d-flex align-items-center'
                 document={<WorkerContract forDownload={true} contract={this.state} />}
                 fileName="worker.pdf"
               >
@@ -437,7 +437,7 @@ class WorkerManageContract extends Component {
                   loading ? "Loading document..." : "다운받기"
                 }
               </PDFDownloadLink>
-            </div>
+            {/* </div> */}
           </div>
   {/* 완전한 계약서만 출력 */}
   {this.state.type === 3 && !isEditMode ? (
