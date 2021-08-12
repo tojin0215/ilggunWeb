@@ -32,21 +32,21 @@ class WorkerManage extends Component {
     })
 
 
-    const d = new Date()
-    selectTimelog(this.props.userinfo.business_name, d.getFullYear(), d.getMonth()+1, d.getDate())
-    .then(result => result.json())
-    .then(result => {
-      // console.log("result", business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
-      // console.log(result, business_id)
-      this.setState({worker: this.state.worker.map((item, index) => {
-         const timelog = result.find((res) => res.workername == item.workername);
-         item["timelog"] = timelog;
-         return item;
-      })})
-    })
-    .catch(error => {
-      console.error("curFetchWorker",error);
-    })
+    // const d = new Date()
+    // selectTimelog(this.props.userinfo.business_name, d.getFullYear(), d.getMonth()+1, d.getDate())
+    // .then(result => result.json())
+    // .then(result => {
+    //   // console.log("result", business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
+    //   // console.log(result, business_id)
+    //   this.setState({worker: this.state.worker.map((item, index) => {
+    //      const timelog = result.find((res) => res.workername == item.workername);
+    //      item["timelog"] = timelog;
+    //      return item;
+    //   })})
+    // })
+    // .catch(error => {
+    //   console.error("curFetchWorker",error);
+    // })
   }
 
   goLogin = () => {

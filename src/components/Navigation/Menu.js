@@ -66,11 +66,11 @@ const Menu = (props) => {
               itemId: '/payManage',
               subNav: [
                 {
-                  title: '무급/유급 휴가',
+                  title: '휴가',
                   itemId: '/payManage',
                 },
                 {
-                  title: '과세/비과세 추가수당',
+                  title: '추가수당',
                   itemId: '/payManage/extra',
                 },
               ],

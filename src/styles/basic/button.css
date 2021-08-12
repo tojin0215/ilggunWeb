@@ -4,9 +4,13 @@
   border-radius: 35px;
   background-color: #67c7b9;
   color: #fff;
-  margin: 20px 0;
   font-size: 1.125rem;
   line-height: 1.5rem;
+  cursor: pointer;
+}
+
+.button-solid > a {
+  color: #fff;
 }
 
 .button-solid:hover {
@@ -14,6 +18,10 @@
   background-color: #fff;
   color: #67c7b9;
   border: 1px solid #67c7b9;
+}
+
+.button-solid:hover > a {
+  color: #67c7b9;
 }
 
 .button-solid_white {

@@ -180,8 +180,8 @@ export function selectContractformAll(business_id) {
 
 export function writeContractform(contract) {
     const body = JSON.stringify(contract)
-    return fetch(`http://127.0.0.1:3000/writeContractform`, _createPostInit(body))
-    // return fetch(`${SERVER_URL}/writeContractform`, _createPostInit(body))
+    // return fetch(`http://127.0.0.1:3000/writeContractform`, _createPostInit(body))
+    return fetch(`${SERVER_URL}/writeContractform`, _createPostInit(body))
 }
 
 // Message

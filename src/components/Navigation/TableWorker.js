@@ -23,11 +23,13 @@ const Table = props => {
       cell: row =>
           (row.type == 2) ? (
             <>
-            <Link to={{ pathname:"/workerManage", state:{ worker: row } }}>정규직</Link>
+            <span>정규직</span>
+            {/* <Link to={{ pathname:"/workerManage", state:{ worker: row } }}>정규직</Link> */}
             </>
           ) : (
             <>
-            <Link to={{ pathname:"/workerManage", state:{ worker: row } }}>비정규직</Link>
+            <span>비정규직</span>
+            {/* <Link to={{ pathname:"/workerManage", state:{ worker: row } }}>비정규직</Link> */}
             </>)
     },
     {

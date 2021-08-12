@@ -30,11 +30,11 @@ const Table = props => {
       sortable: true    
     },
 
-    {
-      name: "직책(업무)",
-      selector: (row, index) => row.workername,
-      sortable: true
-    },
+    // {
+    //   name: "직책(업무)",
+    //   selector: (row, index) => row.workername,
+    //   sortable: true
+    // },
     {
       name: "퇴직처리",
       Button: true,
