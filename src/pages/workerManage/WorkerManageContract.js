@@ -415,7 +415,7 @@ class WorkerManageContract extends Component {
     const { userinfo } = this.props;
     console.log('userinfo.render : ', userinfo);
 
-    const isEditMode = false;
+    const isEditMode = (this.state.type !== 3);
 
     return (
       <div className="wrap workercontractwrap">
@@ -445,242 +445,10 @@ class WorkerManageContract extends Component {
       <WorkerContract forDownload={false} contract={this.state} />
     </>
   ) : null}
-          <article className='sectionShadow'>
-            {this.props.location.state.worker.state == 2 ? (
-              <div className='flex-wrap container w-60per'>
-                <h6 className='text-h4 text-ct w-100 text-bold'>표준근로계약서</h6>
-                <p className='text-ct w-100'>
-                  <span className='text-bold'>{this.state.Employer}</span>
-                  <span>(이하 "사업주"라 함) 과(와)</span>
-                </p>
-                <p className='text-ct w-100'>
-                  <span className='text-bold'>{this.state.Employee}</span>
-                  <span>
-                    (이하 "근로자"라 함) 은
-                  </span>
-                </p>
-                <p className='text-ct w-100'>
-                  다음과 같이 근로계약을 체결한다.
-                </p>
-                <p className='text-st w-100 text-bold text-h6'>1. 근로계약기간 :</p>
-                <p className='text-ct w-100'>
-                  <span>{this.state.StartYear}</span>
-                  <span>년</span>
-                  <span>{this.state.StartMonth}</span>
-                  <span>월</span>
-                  <span>{this.state.StartDay}</span>
-                  <span>일부터</span>
-                </p>
-                <p className='text-ct w-100'>
-                  <span>
-                    {this.state.EndYear == null ? '-' : this.state.EndYear}
-                  </span>
-                  <span>년</span>
-                  <span>
-                    {this.state.EndMonth == null ? '-' : this.state.EndMonth}
-                  </span>
-                  <span>월</span>
-                  <span>
-                    {this.state.EndDay == null ? '-' : this.state.EndDay}
-                  </span>
-                  <span>일까지</span>
-                </p>
-                <p className='text-st w-100 text-bold text-h6'>
-                  2. 근 무 장 소 :
-                  <span className='text-medium'>{this.state.WorkPlace}</span>
-                </p>
-                <p className='text-st w-100 text-bold text-h6'>
-                  3. 업무의 내용 :
-                  <span className='text-medium'>{this.state.WorkReference}</span>
-                </p>
-                <p className='text-st w-100 text-bold text-h6'>4. 소정근로시간 :</p>
-                <p className='text-ct w-100'>
-                  <span>{this.state.StartTimeHour}</span>
-                  <span>시</span>
-                  <span>{this.state.StartTimeHMin}</span>
-                  <span>분부터 </span>
-                  <span>{this.state.EndTimeHour}</span>
-                  <span>시</span>
-                  <span>{this.state.EndTimeHMin}</span>
-                  <span>분까지</span>
-                </p>
-                <p className='text-ct w-100'>
-                  <span>( 휴게시간 : </span>
-                  <span>
-                    {this.state.BreakTimeStartHour}
-                  </span>
-                  <span>시</span>
-                  <span>
-                    {this.state.BreakTimeStartMin}
-                  </span>
-                  <span>분 ~ </span>
-                  <span>
-                    {this.state.BreakTimeEndHour}
-                  </span>
-                  <span>시</span>
-                  <span>
-                    {this.state.BreakTimeEndMin}
-                  </span>
-                  <span>분 )</span>
-                </p>
-                <p className='text-st w-100 text-bold text-h6'>
-                  5. 근무일/휴일 :
-                </p>
-                <p className='text-ct w-100'>
-                  <span>매주 {this.state.WorkingDays}</span>
-                  <span>일(또는 매일단위)근무</span>
-                </p>
-                <p className='text-ct w-100'>
-                  <span>(</span>
-                  <span>주휴일 : 매주</span>
-                  <span>{this.state.Holiday}</span>
-                  <span>일</span>
-                  <span>)</span>
-                </p>
-                <p className='text-st w-100 text-bold text-h6'>6. 임 금</p>
-                <p className='text-st w-100'>
-                  <span className='ml-20'>- 월(일, 시간)급 : </span>
-                  <span>{this.state.Salary}</span>
-                  <span>원</span>
-                </p>
-                <p className='text-st w-100'>
-                  <span className='ml-20'>- 상여금 : </span>
-                  {console.log("- 상여금 : ")}
-                  {console.log(this.state.types1)}
-                  <span>{this.state.types1.toString()}</span>
-                  <span>({this.state.Bonus}</span>
-                  <span>원)</span>
-                </p>
-                <p className='text-st w-100'>
-                  <span className='ml-20'>- 기타급여(제수당 등) : </span>
-                  <span for="bonus2Yes">{this.state.types2.toString()}</span>
-                  <span>(</span>
-                  <span>{this.state.Bonus1}</span>
-                  <span>원, </span>
-                  <span>{this.state.Bonus2}</span>
-                  <span>원, </span>
-                  <span>{this.state.Bonus3}</span>
-                  <span>원, </span>
-                  <span>{this.state.Bonus4}</span>
-                  <span>원 </span>
-                  <span>)</span>
-                </p>
-                <p>
-                  <span className='ml-20'>- 급여산정기간 :</span>
-                </p>
-                <p>
-                  <span>
-                    {(this.state.SalaryCalculationPeriodStart)?this.state.SalaryCalculationPeriodStart.toString():null}
-                  </span>
-                  <span>일 ~ </span>
-                  <span>
-                    {(this.state.SalaryCalculationPeriodEnd)?this.state.SalaryCalculationPeriodEnd.toString():null}
-                  </span>
-                  <span>일</span>
-                </p>
-                <p>
-                  <span className='ml-20'>- 임금지급일 : 매월</span>
-                  <span>{this.state.SalaryDay.toString()}</span>
-                  <span>일 (휴일의 경우에는 전일 지급)</span>
-                </p>
-                <p>
-                  <span className='ml-20'>- 지급방법 : </span>
-                  <span for="wayOfPayment1">{this.state.types3.toString()}</span>
-                </p>
-                <p className='text-st w-100 text-bold text-h6'>
-                  7. 연차유급휴가
-                </p>
-                <span className='ml-20'>
-                  {' '}
-                  - 연차유급휴가는 근로기준법에서 정하는 바에 따라 부여함.
-                </span>
-                <p className='text-st w-100 text-bold text-h6'>8. 사대보험 적용여부</p>
-                <p className='d-flex align-items-center'>
-                  <span className='ml-20'>
-                    - 고용보험 : {this.state.types4[1] == 1 ? 'O' : 'X'}
-                  </span>
-                  <span className='ml-20'>
-                    - 산재보험 : {this.state.types4[2] == 1 ? 'O' : 'X'}
-                  </span>
-                  <span className='ml-20'>
-                    - 국민연금 : {this.state.types4[3] == 1 ? 'O' : 'X'}
-                  </span>
-                  <span className='ml-20'>
-                    - 건강보험 : {this.state.types4[4] == 1 ? 'O' : 'X'}
-                  </span>
-                </p>
-                <p className='text-st w-100 text-bold text-h6'>9. 근로계약서 교부</p>
-                <p>
-                  <span className='ml-20'>
-                  {' '}
-                  - '사업주'는 근로계약을 체결함과 동시에 본 계약서를 사본하여
-                  근로자의 교부요구와 관계없이 '근로자'에게 교부함(근로기준법 제17조 이행)
-                  </span>
-                </p>
-                <p className='text-st w-100 text-bold text-h6'>10. 기타</p>
-                <p>
-                  <span className='ml-20'>
-                    {' '}
-                    - 이 계약에 정함이 없는 사항은 근로기준법령에 의함
-                  </span>
-                </p>
-                <p className='text-ct w-100 text-h6'>
-                  <span>{this.state.ContractYear}</span>
-                  <span>년</span>
-                  <span>{this.state.ContractMonth}</span>
-                  <span>월</span>
-                  <span>{this.state.ContractDay}</span>
-                  <span>일</span>
-                </p>
-                <p className='w-100 text-bold text-h6'>(사업주)</p>
-                <p className='w-100'>
-                  <span className='ml-20'>사업체명 : </span>
-                  <span>{this.state.BusinessName}</span>
-                </p>
-                <p className='w-100'>
-                  <span className='ml-20'>연락처 : </span>
-                  <span>{this.state.BusinessPhone}</span>
-                </p>
-                <p className='w-100'>
-                  <span className='ml-20'>주 소 : </span>
-                  <span>{this.state.BusinessAddress}</span>
-                </p>
-                <p className='w-100'>
-                  <span className='ml-20'>대 표 자 : </span>
-                  <span>{this.state.BusinessOwner1}</span>
-                  <span>
-                    (서명){/* this.state.signOrStamp */}
-                  </span>
-                </p>
-                <p className='w-100'>
-                  <span className='w-100 text-bold text-h6'>(근로자)</span>
-                </p>
-                <p className='w-100'>
-                  <span className='ml-20'>주 소 : </span>
-                  <span>{this.state.EmployeeAddress}</span>
-                </p>
-                <p className='w-100'>
-                  <span className='ml-20'>연 락 처 : </span>
-                  <span>{this.state.EmployeePhone}</span>
-                </p>
-                <p className='w-100'>
-                  <span className='ml-20'>성 명 : </span>
-                  <span>{this.state.EmployeeName}</span>
-                  <span>(서명)</span>
-                </p>
-                {/* <svg
-                viewBox="0 0 500 500"
-                style="position:absolute; z-index: 2; height:300px; width: 300px; "
-                xmlns="http://www.w3.org/2000/svg"
-              ><polyline
-                  points="{String(sign)}"
-                  style="fill:none;stroke:black;stroke-width:3"
-                />
-              </svg> */}
-              </div>
-            ) : this.props.location.state ? (
-              
-              <div className='flex-wrap container'>
+  
+  {isEditMode? (
+  <article className='sectionShadow'>
+    <div className='flex-wrap container'>
                 <h6 className='text-h4 text-ct w-100 text-bold'>표준근로계약서</h6>
                 <p className='text-ct w-100'>
                   <input
@@ -1181,10 +949,719 @@ class WorkerManageContract extends Component {
                 </p> */}
                 <input type="button" onClick={() => this.handleSubmit()} value={"저장하기"}/>
               </div>
+   </article>
+  ): null}
+          {/* <article className='sectionShadow'>
+            {"this.props.location.state.worker.state == 2" === "비활성화시키기" ? 
+            (
+              <div className='flex-wrap container w-60per'>
+                <h6 className='text-h4 text-ct w-100 text-bold'>표준근로계약서</h6>
+                <p className='text-ct w-100'>
+                  <span className='text-bold'>{this.state.Employer}</span>
+                  <span>(이하 "사업주"라 함) 과(와)</span>
+                </p>
+                <p className='text-ct w-100'>
+                  <span className='text-bold'>{this.state.Employee}</span>
+                  <span>
+                    (이하 "근로자"라 함) 은
+                  </span>
+                </p>
+                <p className='text-ct w-100'>
+                  다음과 같이 근로계약을 체결한다.
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>1. 근로계약기간 :</p>
+                <p className='text-ct w-100'>
+                  <span>{this.state.StartYear}</span>
+                  <span>년</span>
+                  <span>{this.state.StartMonth}</span>
+                  <span>월</span>
+                  <span>{this.state.StartDay}</span>
+                  <span>일부터</span>
+                </p>
+                <p className='text-ct w-100'>
+                  <span>
+                    {this.state.EndYear == null ? '-' : this.state.EndYear}
+                  </span>
+                  <span>년</span>
+                  <span>
+                    {this.state.EndMonth == null ? '-' : this.state.EndMonth}
+                  </span>
+                  <span>월</span>
+                  <span>
+                    {this.state.EndDay == null ? '-' : this.state.EndDay}
+                  </span>
+                  <span>일까지</span>
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>
+                  2. 근 무 장 소 :
+                  <span className='text-medium'>{this.state.WorkPlace}</span>
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>
+                  3. 업무의 내용 :
+                  <span className='text-medium'>{this.state.WorkReference}</span>
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>4. 소정근로시간 :</p>
+                <p className='text-ct w-100'>
+                  <span>{this.state.StartTimeHour}</span>
+                  <span>시</span>
+                  <span>{this.state.StartTimeHMin}</span>
+                  <span>분부터 </span>
+                  <span>{this.state.EndTimeHour}</span>
+                  <span>시</span>
+                  <span>{this.state.EndTimeHMin}</span>
+                  <span>분까지</span>
+                </p>
+                <p className='text-ct w-100'>
+                  <span>( 휴게시간 : </span>
+                  <span>
+                    {this.state.BreakTimeStartHour}
+                  </span>
+                  <span>시</span>
+                  <span>
+                    {this.state.BreakTimeStartMin}
+                  </span>
+                  <span>분 ~ </span>
+                  <span>
+                    {this.state.BreakTimeEndHour}
+                  </span>
+                  <span>시</span>
+                  <span>
+                    {this.state.BreakTimeEndMin}
+                  </span>
+                  <span>분 )</span>
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>
+                  5. 근무일/휴일 :
+                </p>
+                <p className='text-ct w-100'>
+                  <span>매주 {this.state.WorkingDays}</span>
+                  <span>일(또는 매일단위)근무</span>
+                </p>
+                <p className='text-ct w-100'>
+                  <span>(</span>
+                  <span>주휴일 : 매주</span>
+                  <span>{this.state.Holiday}</span>
+                  <span>일</span>
+                  <span>)</span>
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>6. 임 금</p>
+                <p className='text-st w-100'>
+                  <span className='ml-20'>- 월(일, 시간)급 : </span>
+                  <span>{this.state.Salary}</span>
+                  <span>원</span>
+                </p>
+                <p className='text-st w-100'>
+                  <span className='ml-20'>- 상여금 : </span>
+                  {console.log("- 상여금 : ")}
+                  {console.log(this.state.types1)}
+                  <span>{this.state.types1.toString()}</span>
+                  <span>({this.state.Bonus}</span>
+                  <span>원)</span>
+                </p>
+                <p className='text-st w-100'>
+                  <span className='ml-20'>- 기타급여(제수당 등) : </span>
+                  <span for="bonus2Yes">{this.state.types2.toString()}</span>
+                  <span>(</span>
+                  <span>{this.state.Bonus1}</span>
+                  <span>원, </span>
+                  <span>{this.state.Bonus2}</span>
+                  <span>원, </span>
+                  <span>{this.state.Bonus3}</span>
+                  <span>원, </span>
+                  <span>{this.state.Bonus4}</span>
+                  <span>원 </span>
+                  <span>)</span>
+                </p>
+                <p>
+                  <span className='ml-20'>- 급여산정기간 :</span>
+                </p>
+                <p>
+                  <span>
+                    {(this.state.SalaryCalculationPeriodStart)?this.state.SalaryCalculationPeriodStart.toString():null}
+                  </span>
+                  <span>일 ~ </span>
+                  <span>
+                    {(this.state.SalaryCalculationPeriodEnd)?this.state.SalaryCalculationPeriodEnd.toString():null}
+                  </span>
+                  <span>일</span>
+                </p>
+                <p>
+                  <span className='ml-20'>- 임금지급일 : 매월</span>
+                  <span>{this.state.SalaryDay.toString()}</span>
+                  <span>일 (휴일의 경우에는 전일 지급)</span>
+                </p>
+                <p>
+                  <span className='ml-20'>- 지급방법 : </span>
+                  <span for="wayOfPayment1">{this.state.types3.toString()}</span>
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>
+                  7. 연차유급휴가
+                </p>
+                <span className='ml-20'>
+                  {' '}
+                  - 연차유급휴가는 근로기준법에서 정하는 바에 따라 부여함.
+                </span>
+                <p className='text-st w-100 text-bold text-h6'>8. 사대보험 적용여부</p>
+                <p className='d-flex align-items-center'>
+                  <span className='ml-20'>
+                    - 고용보험 : {this.state.types4[1] == 1 ? 'O' : 'X'}
+                  </span>
+                  <span className='ml-20'>
+                    - 산재보험 : {this.state.types4[2] == 1 ? 'O' : 'X'}
+                  </span>
+                  <span className='ml-20'>
+                    - 국민연금 : {this.state.types4[3] == 1 ? 'O' : 'X'}
+                  </span>
+                  <span className='ml-20'>
+                    - 건강보험 : {this.state.types4[4] == 1 ? 'O' : 'X'}
+                  </span>
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>9. 근로계약서 교부</p>
+                <p>
+                  <span className='ml-20'>
+                  {' '}
+                  - '사업주'는 근로계약을 체결함과 동시에 본 계약서를 사본하여
+                  근로자의 교부요구와 관계없이 '근로자'에게 교부함(근로기준법 제17조 이행)
+                  </span>
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>10. 기타</p>
+                <p>
+                  <span className='ml-20'>
+                    {' '}
+                    - 이 계약에 정함이 없는 사항은 근로기준법령에 의함
+                  </span>
+                </p>
+                <p className='text-ct w-100 text-h6'>
+                  <span>{this.state.ContractYear}</span>
+                  <span>년</span>
+                  <span>{this.state.ContractMonth}</span>
+                  <span>월</span>
+                  <span>{this.state.ContractDay}</span>
+                  <span>일</span>
+                </p>
+                <p className='w-100 text-bold text-h6'>(사업주)</p>
+                <p className='w-100'>
+                  <span className='ml-20'>사업체명 : </span>
+                  <span>{this.state.BusinessName}</span>
+                </p>
+                <p className='w-100'>
+                  <span className='ml-20'>연락처 : </span>
+                  <span>{this.state.BusinessPhone}</span>
+                </p>
+                <p className='w-100'>
+                  <span className='ml-20'>주 소 : </span>
+                  <span>{this.state.BusinessAddress}</span>
+                </p>
+                <p className='w-100'>
+                  <span className='ml-20'>대 표 자 : </span>
+                  <span>{this.state.BusinessOwner1}</span>
+                  <span>
+                    (서명){ this.state.signOrStamp }
+                  </span>
+                </p>
+                <p className='w-100'>
+                  <span className='w-100 text-bold text-h6'>(근로자)</span>
+                </p>
+                <p className='w-100'>
+                  <span className='ml-20'>주 소 : </span>
+                  <span>{this.state.EmployeeAddress}</span>
+                </p>
+                <p className='w-100'>
+                  <span className='ml-20'>연 락 처 : </span>
+                  <span>{this.state.EmployeePhone}</span>
+                </p>
+                <p className='w-100'>
+                  <span className='ml-20'>성 명 : </span>
+                  <span>{this.state.EmployeeName}</span>
+                  <span>(서명)</span>
+                </p>
+                <svg
+                viewBox="0 0 500 500"
+                style="position:absolute; z-index: 2; height:300px; width: 300px; "
+                xmlns="http://www.w3.org/2000/svg"
+              ><polyline
+                  points="{String(sign)}"
+                  style="fill:none;stroke:black;stroke-width:3"
+                />
+              </svg>
+              </div>
+            ) : isEditMode ? (
+              
+              <div className='flex-wrap container'>
+                <h6 className='text-h4 text-ct w-100 text-bold'>표준근로계약서</h6>
+                <p className='text-ct w-100'>
+                  <input
+                    type="text"
+                    onChange={(e) =>
+                      this.setState({ Employer: e.target.value })
+                    }
+                    value={this.state.Employer}
+                  />
+                  <span>
+                    (이하 "사업주"라 함) 과(와)
+                  </span>
+                </p>
+                <p className='text-ct w-100'>
+                  <input
+                    type="text"
+                    onChange={(e) =>
+                      this.setState({ Employee: e.target.value })
+                    }
+                    value={this.state.Employee}
+                  />
+                  <span>
+                    (이하 "근로자"라 함) 은
+                  </span>
+                </p>
+                <p className='text-ct w-100'>
+                  다음과 같이 근로계약을 체결한다.
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>1. 근로계약기간 :</p>
+                <p className='text-ct w-100'>
+                  <input
+                    className='w-100px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ StartYear: e.target.value })
+                    }
+                    value={this.state.StartYear}
+                  ></input>
+                  <span>년</span>
+                  <input
+                    className='w-100px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ StartMonth: e.target.value })
+                    }
+                    value={this.state.StartMonth}
+                  ></input>
+                  <span>월</span>
+                  <input
+                    className='w-100px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ StartStartDayYear: e.target.value })
+                    }
+                    value={this.state.StartDay}
+                  ></input>
+                  <span>일부터</span>
+                </p>
+                <p className='text-ct w-100'>
+                  <input
+                    className='w-100px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ EndYear: e.target.value })
+                    }
+                    value={this.state.EndYear}
+                  ></input>
+                  <span>년</span>
+                  <input
+                    className='w-100px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ EndMonth: e.target.value })
+                    }
+                    value={this.state.EndMonth}
+                  ></input>
+                  <span>월</span>
+                  <input
+                    className='w-100px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ EndDay: e.target.value })
+                    }
+                    value={this.state.EndDay}
+                  ></input>
+                  <span>일까지</span>
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>
+                  2. 근무장소 : 
+                  <input
+                    type="text"
+                    onChange={(e) =>
+                      this.setState({ WorkPlace: e.target.value })
+                    }
+                    value={this.state.WorkPlace}
+                  ></input>
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>
+                  3. 업무의 내용 : 
+                  <input
+                    type="text"
+                    onChange={(e) =>
+                      this.setState({ WorkReference: e.target.value })
+                    }
+                    onChange={(e) => this.setState({ WorkReference: e.target.value })}
+                    value={this.state.WorkReference}
+                  ></input>
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>4. 소정근로시간 :</p>
+                <p className='text-ct w-100'>
+                  <input
+                    className='w-70px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ StartTimeHour: e.target.value })
+                    }
+                    value={this.state.StartTimeHour}
+                  ></input>
+                  <span>시</span>
+                  <input
+                    className='w-70px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ StartTimeHMin: e.target.value })
+                    }
+                    value={this.state.StartTimeHMin}
+                  ></input>
+                  <span>분 ~ </span>
+                  <input
+                    className='w-70px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ EndTimeHour: e.target.value })
+                    }
+                    value={this.state.EndTimeHour}
+                  ></input>
+                  <span>시</span>
+                  <input
+                    className='w-70px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ EndTimeHMin: e.target.value })
+                    }
+                    value={this.state.EndTimeHMin}
+                  ></input>
+                  <span>분까지</span>
+                </p>
+                <p className='text-ct w-100'>
+                  <span>( 휴게시간 : </span>
+                  <input
+                    className='w-70px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ BreakTimeStartHour: e.target.value })
+                    }
+                    value={this.state.BreakTimeStartHour}
+                  ></input>
+                  <span>시</span>
+                  <input
+                    className='w-70px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ BreakTimeStartMin: e.target.value })
+                    }
+                    value={this.state.BreakTimeStartMin}
+                  ></input>
+                  <span>분 ~ </span>
+                  <input
+                    className='w-70px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ BreakTimeEndHour: e.target.value })
+                    }
+                    value={this.state.BreakTimeEndHour}
+                  ></input>
+                  <span>시</span>
+                  <input
+                    className='w-70px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ BreakTimeEndMin: e.target.value })
+                    }
+                    value={this.state.BreakTimeEndMin}
+                  ></input>
+                  <span>분 )</span>
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>
+                  5. 근무일/휴일 : 
+                </p>
+                <p className='text-ct w-100'>
+                  <span>매주</span>
+                  <input
+                    className='w-70px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ WorkingDays: e.target.value })
+                    }
+                    value={this.state.WorkingDays}
+                  ></input>
+                  <span>일 근무,</span>
+                </p>
+                <p className='text-ct w-100'>
+                  <span>(</span>
+                  <span>주휴일 : 매주</span>
+                  <input
+                    className='w-70px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ Holiday: e.target.value })
+                    }
+                    value={this.state.Holiday}
+                  ></input>
+                  <span>일</span>
+                  <span>)</span>
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>6. 임금</p>
+                <p className='text-st w-100'>
+                  <span className='ml-20'>- 월급 : </span>
+                  <input
+                    className='w-100px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ Salary: e.target.value })
+                    }
+                    value={this.state.Salary}
+                  ></input>
+                  <span>원</span>
+                </p>
+                <p className='text-st w-100'>
+                
+                  <span className='ml-20'>- 상여금 : </span>
+                  <input
+                    type="checkbox"
+                    checked={this.state.value1 === 0}
+                    onChange={(e) =>
+                      this.setState({ value1: (this.state.value1 === 0)? 1: 0, value1Index: (this.state.value1 === 0)? 1: 0})
+                    }
+                  ></input>
+                  <input
+                    className='w-100px'
+                    type="number"
+                    onChange={(e) => this.setState({ Bonus: e.target.value })}
+                    value={this.state.Bonus}
+                  ></input>
+                  <span>원</span>
+                </p>
+                <p className='text-st w-100'>
+                  <span className='ml-20'>- 기타급여(제수당 등) : </span>
+                  <input
+                    type="checkbox"
+                    checked={this.state.value2 === 0}
+                    onChange={(e) =>
+                      this.setState({ value2: (this.state.value2 === 0)? 1: 0, value2Index: (this.state.value2 === 0)? 1: 0})
+                    }
+                  ></input>
+                  <span>( </span>
+                  <input
+                    className='w-100px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ Bonus1: e.target.value })
+                    }
+                    value={this.state.Bonus1}
+                  ></input>
+                  <span>원, </span>
+                  <input
+                    className='w-100px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({ Bonus2: e.target.value })
+                    }
+                    value={this.state.Bonus2}
+                  ></input>
+                  <span>원</span>
+                  <span> )</span>
+                </p>
+                <p>
+                  <span className='ml-20'>- 급여산정기간 : </span>
+                </p>
+                <p>
+                  <input
+                    className='w-70px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({
+                        SalaryCalculationPeriodStart: e.target.value,
+                      })
+                    }
+                    value={this.state.SalaryCalculationPeriodStart}
+                  ></input>
+                  <span>일 ~ </span>
+                  <input
+                    className='w-70px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({
+                        SalaryCalculationPeriodEnd: e.target.value,
+                      })
+                    }
+                    value={this.state.SalaryCalculationPeriodEnd}
+                  ></input>
+                  <span>일</span>
+                </p>
+                <p>
+                  <span className='ml-20'>- 임금지급일 : 매월</span>
+                  <input
+                    className='w-70px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({
+                        SalaryDay: e.target.value,
+                      })
+                    }
+                    value={this.state.SalaryDay}
+                  ></input>
+                  <span>일 (휴일의 경우에는 전일 지급)</span>
+                </p>
+                <p>
+                  <span className='ml-20'>- 지급방법 : </span>
+                  <span>근로자에게 직접지급 </span>
+                  <input
+                    type="checkbox"
+                    checked={this.state.value3 === 0}
+                    onChange={(e) =>
+                      this.setState({ value3: (this.state.value3 === 0)? 1: 0, value3Index: (this.state.value3 === 0)? 1: 0})
+                    }
+                  ></input>
+                  <span>근로자 명의 예금통장에 입금</span>
+                  <input
+                    type="checkbox"
+                    checked={this.state.value3 === 1}
+                    onChange={(e) =>
+                      this.setState({ value3: (this.state.value3 === 0)? 1: 0, value3Index: (this.state.value3 === 0)? 1: 0})
+                    }
+                  ></input>
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>7. 연차유급휴가</p>
+                <p>
+                  <span className='ml-20'>
+                    - 연차유급휴가는 근로기준법에서 정하는 바에 따라 부여함
+                  </span>
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>8. 사대보험 적용여부(해당란에 체크)</p>
+                <p className='d-flex align-items-center'>
+                  <span className='ml-20'>- 고용보험 : </span>
+                  <input
+                    type="checkbox"
+                    checked={this.state.checkedItems.has("고용보험")}
+                    onChange={(e) => this.checkedItemHandler("고용보험", e.checked)}
+                  ></input>
+                  <span className='ml-20'>- 산재보험 : </span>
+                  <input
+                    type="checkbox"
+                    checked={this.state.checkedItems.has("산재보험")}
+                    onChange={(e) => this.checkedItemHandler("산재보험", e.checked)}
+                  ></input>
+                  <span className='ml-20'>- 국민연금 : </span>
+                  <input
+                    type="checkbox"
+                    checked={this.state.checkedItems.has("국민연금")}
+                    onChange={(e) => this.checkedItemHandler("국민연금", e.checked)}
+                  ></input>
+                  <span className='ml-20'>- 건강보험 : </span>
+                  <input
+                    type="checkbox"
+                    checked={this.state.checkedItems.has("건강보험")}
+                    onChange={(e) => this.checkedItemHandler("건강보험", e.checked)}
+                  ></input>
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>9. 근로계약서 교부</p>
+                <p>
+                  <span className='ml-20'>
+                    {' '}
+                    - 사업주는 근로계약을 체결함과 동시에 본 계약서를 사본하여
+                    근로자의 교부요구와 관계없이 근로자에게 교부함(근로기준법 제17조 이행)
+                  </span>
+                </p>
+                <p className='text-st w-100 text-bold text-h6'>10. 기타</p>
+                <p>
+                  <span className='ml-20'>
+                    {' '}
+                    - 이 계약에 정함이 없는 사항은 근로기준법령에 의함
+                  </span>
+                </p>
+                <p className='text-ct w-100 text-h6'>
+                  <input
+                    className='w-100px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({
+                        ContractYear: e.target.value,
+                      })
+                    }
+                    value={this.state.ContractYear}
+                  ></input>
+                  <span>년</span>
+                  <input
+                    className='w-70px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({
+                        ContractMonth: e.target.value,
+                      })
+                    }
+                    value={this.state.ContractMonth}
+                  ></input>
+                  <span>월</span>
+                  <input
+                    className='w-70px'
+                    type="number"
+                    onChange={(e) =>
+                      this.setState({
+                        ContractDay: e.target.value,
+                      })
+                    }
+                    value={this.state.ContractDay}
+                  ></input>
+                  <span>일</span>
+                </p>
+                <p className='w-100 text-bold text-h6'>(사업주)</p>
+                <p className='w-100'>
+                  <span className='ml-20'>사업체명: </span>
+                  <input
+                    type="text"
+                    onChange={(e) =>
+                      this.setState({
+                        BusinessName: e.target.value,
+                      })
+                    }
+                    value={this.state.BusinessName}
+                  />
+                </p>
+                <p className='w-100'>
+                  <span className='ml-20'>전화번호 : </span>
+                  <input
+                    type="text"
+                    onChange={(e) =>
+                      this.setState({
+                        BusinessPhone: e.target.value,
+                      })
+                    }
+                    value={this.state.BusinessPhone}
+                  />
+                </p>
+                <p className='w-100'>
+                  <span className='ml-20'>주 소 : </span>
+                  <input
+                    type="text"
+                    onChange={(e) =>
+                      this.setState({
+                        BusinessAddress: e.target.value,
+                      })
+                    }
+                    value={this.state.BusinessAddress}
+                  />
+                </p>
+                <p className='w-100'>
+                  <span className='ml-20'>대표자 : </span>
+                  <input
+                    type="text"
+                    onChange={(e) =>
+                      this.setState({
+                        BusinessOwner1: e.target.value,
+                      })
+                    }
+                    value={this.state.BusinessOwner1}
+                  />
+                </p>
+                <input type="button" onClick={() => this.handleSubmit()} value={"저장하기"}/>
+              </div>
             ) : (
               <div></div>
             )}
-          </article>
+          </article> */}
         </div>
         <Footer />
       </div>
