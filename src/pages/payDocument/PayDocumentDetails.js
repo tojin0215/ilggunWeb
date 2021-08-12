@@ -82,7 +82,14 @@ class PayDocumentDetails extends Component {
   };
 
   handleSelectWorker = (worker) => {
-    const new_state = {selectedWorker: worker,contract: null, insurance: null};
+    const new_state = {
+      selectedWorker: worker,
+      contract: null,
+      insurance: null,
+      salary: 0,
+      taxation: 0,
+      taxFree: 0,
+    };
     // this.setState({ selectedWorker: worker });
 
     const worker_id = worker.workername;
@@ -93,45 +100,56 @@ class PayDocumentDetails extends Component {
       .then((result) => {
         // console.log(!result);
         if (result && result.length > 0 && result[0].id)
-          new_state.contract = result[0]
-          // this.setState({ contract: result[0] });
+          new_state.contract = result[0];
+        // this.setState({ contract: result[0] });
 
         selectInsurance(business_id)
           .then((r) => r.json())
           .then((result) => {
             if (result && result.length > 0)
-              new_state.insurance = result[result.length - 1]
-              // this.setState({ insurance: result[result.length - 1] });
-            // console.log(new_state)
-            this.setState(new_state)
+              new_state.insurance = result[result.length - 1];
+            // this.setState({ insurance: result[result.length - 1] });
+
+            otherAllowance(
+              business_id,
+              worker_id,
+              this.state.yearMonth.year,
+              this.state.yearMonth.month,
+            )
+              .then((r) => r.json())
+              .then((result) => {
+                const allowance = result && result.length > 0 ? result[0] : {};
+
+                let taxation = 0;
+                if (allowance.t_bonus) taxation += Number(allowance.t_bonus);
+                if (allowance.t_extension)
+                  taxation += Number(allowance.t_extension);
+                if (allowance.t_position)
+                  taxation += Number(allowance.t_position);
+                if (allowance.t_etc) taxation += Number(allowance.t_etc);
+                new_state.taxation = taxation
+                console.log('taxation', taxation);
+
+                let taxFree = 0;
+                if (allowance.f_carMaintenanceFee)
+                  taxFree += Number(allowance.f_carMaintenanceFee);
+                if (allowance.f_childcareAllowance)
+                  taxFree += Number(allowance.f_childcareAllowance);
+                if (allowance.f_meals) taxFree += Number(allowance.f_meals);
+                new_state.taxFree = taxFree
+                console.log('taxFree', taxFree);
+
+                let salary = 0;
+                if (allowance.salary) salary = allowance.Salary;
+                else if (new_state.contract.Salary) salary = Number(new_state.contract.Salary)
+                new_state.salary = salary
+                console.log('salary', salary);
+
+                // this.setState({ salary, taxation, taxFree });
+                this.setState(new_state);
+              });
           });
       });
-    
-    // otherAllowance(business_id, worker_id, new Date().getFullYear(), new Date().getMonth()+1)
-    otherAllowance(business_id, worker_id, new Date().getFullYear(), 6)
-    .then(r=>r.json())
-    .then(result => {
-      const allowance = (result && result.length > 0)? result[0] : {};
-
-      let taxation = 0
-      if (allowance.t_bonus) taxation += Number(allowance.t_bonus)
-      if (allowance.t_extension) taxation += Number(allowance.t_extension)
-      if (allowance.t_position) taxation += Number(allowance.t_position)
-      if (allowance.t_etc) taxation += Number(allowance.t_etc)
-      console.log('taxation', taxation)
-
-      let taxFree = 0
-      if (allowance.f_carMaintenanceFee) taxFree += Number(allowance.f_carMaintenanceFee)
-      if (allowance.f_childcareAllowance) taxFree += Number(allowance.f_childcareAllowance)
-      if (allowance.f_meals) taxFree += Number(allowance.f_meals)
-      console.log('taxFree', taxFree)
-
-      let salary = 0;
-      if (allowance.salary) salary = allowance.Salary;
-      console.log('salary', salary)
-
-      this.setState({salary, taxation, taxFree})
-    })
   };
 
   goLogin = () => {
@@ -139,7 +157,9 @@ class PayDocumentDetails extends Component {
   };
 
   handleAMonthChange = (year, month) => {
-    this.setState({ yearMonth: { year, month } });
+    if (this.state.selectedWorker) this.setState({ yearMonth: { year, month } }, () => this.handleSelectWorker(this.state.selectedWorker));
+    else this.setState({ yearMonth: { year, month } });
+
     this.setState({ isVisibleMonthSelector: false });
   };
   handleAMonthDissmis = (e) => {
@@ -148,27 +168,53 @@ class PayDocumentDetails extends Component {
 
   render() {
     const { userinfo } = this.props;
-    console.log('userinfo : ', userinfo);
     this.pickAMonth = React.createRef();
 
     const show_pay_document =
       this.state.contract !== null && this.state.insurance !== null;
-    
-    const pay_document_data = (show_pay_document)? {
-      name: this.state.workername2,
-      salary: this.state.salary,
-      taxFree: this.state.taxFree,
-      taxation: this.state.taxation,
 
-      nationalPension: Math.round((this.state.salary * this.state.insurance.NationalPensionPercentage) / 100),
-      employmentInsurance: Math.round((this.state.salary * this.state.insurance.EmploymentInsurancePercentage) / 100),
-      healthInsurance: Math.round((this.state.salary * this.state.insurance.HealthInsurancePercentage) / 100),
-      regularCare: Math.round((this.state.salary * this.state.insurance.RegularCarePercentage) / 100),
-    } : {}
+    const pay_document_data = show_pay_document
+      ? {
+          name: this.state.workername2,
+          salary: this.state.salary,
+          taxFree: this.state.taxFree,
+          taxation: this.state.taxation,
 
-    if (show_pay_document) (pay_document_data.origin = pay_document_data.salary)
-    if (show_pay_document) (pay_document_data.minus = (pay_document_data.nationalPension + pay_document_data.employmentInsurance + pay_document_data.healthInsurance + pay_document_data.regularCare))
-    if (show_pay_document) (pay_document_data.real = (pay_document_data.origin - pay_document_data.minus))
+          nationalPension: Math.round(
+            (this.state.salary *
+              this.state.insurance.NationalPensionPercentage) /
+              100,
+          ),
+          employmentInsurance: Math.round(
+            (this.state.salary *
+              this.state.insurance.EmploymentInsurancePercentage) /
+              100,
+          ),
+          healthInsurance: Math.round(
+            (this.state.salary *
+              this.state.insurance.HealthInsurancePercentage) /
+              100,
+          ),
+          regularCare: Math.round(
+            (this.state.salary * this.state.insurance.RegularCarePercentage) /
+              100,
+          ),
+        }
+      : {};
+
+    if (show_pay_document) pay_document_data.origin = pay_document_data.salary;
+    if (show_pay_document)
+      pay_document_data.minus =
+        pay_document_data.nationalPension +
+        pay_document_data.employmentInsurance +
+        pay_document_data.healthInsurance +
+        pay_document_data.regularCare;
+    if (show_pay_document)
+      pay_document_data.real =
+        pay_document_data.origin - pay_document_data.minus;
+
+    console.log(this.state);
+    console.log(pay_document_data);
 
     return (
       <div className="wrap payDocumentDetail">
@@ -178,11 +224,14 @@ class PayDocumentDetails extends Component {
           <Menu />
           <h4 className="text-h5">급여명세서</h4>
           <article className="flex todayleave sectionShadow m-5">
-            <div className='small-shadow'>
+            <div className="small-shadow">
               {this.state.selectedWorker ? (
-                <div className='d-flex align-items-center justify-content-center h-100'>
-                  <p className='text-center'>
-                    <span className='text-h5'>{this.state.selectedWorker.workername2}</span> 님 급여명세서입니다.
+                <div className="d-flex align-items-center justify-content-center h-100">
+                  <p className="text-center">
+                    <span className="text-h5">
+                      {this.state.selectedWorker.workername2}
+                    </span>{' '}
+                    님 급여명세서입니다.
                   </p>
                 </div>
               ) : (
@@ -216,23 +265,22 @@ class PayDocumentDetails extends Component {
               >
                 <div
                   onClick={() => this.pickAMonth.current.show()}
-                  className='button-solid_white-0 py-2 my-0 mx-1 w-100 text-center cursor-pointer text-h5'
+                  className="button-solid_white-0 py-2 my-0 mx-1 w-100 text-center cursor-pointer text-h5"
                 >
                   {' '}
                   {this.state.yearMonth.year}년 {this.state.yearMonth.month}월{' '}
                 </div>
               </Picker>
-                <p className='text-center py-2'>급여명세서를 보고자 하는 해당 월을 선택하세요</p>
+              <p className="text-center py-2">
+                급여명세서를 보고자 하는 해당 월을 선택하세요
+              </p>
             </div>
           </article>
           <div className="sectionShadow">
             {show_pay_document ? (
               <div>
                 {/* 급여명세서 표시하는 공간입니다. */}
-                <PayDocumentPDF
-                  forDownload={false}
-                  data={pay_document_data}
-                />
+                <PayDocumentPDF forDownload={false} data={pay_document_data} />
               </div>
             ) : null}
           </div>
