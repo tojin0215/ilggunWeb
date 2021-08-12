@@ -145,9 +145,8 @@ class PayManageExtra extends Component {
         <div className="container">
           <Menu />
           <article className='flex todayleave'>
-            <h4 className='w-100 text-h5'>
-              <span className='color-point text-h5'>✔ </span>
-              추가수당
+            <h4 className='w-100 text-h4'>
+              💰 추가수당 확인
             </h4>
             {/* <Calendar
               onChange={this.onChange}
@@ -155,6 +154,7 @@ class PayManageExtra extends Component {
               className='sectionShadow'
             /> */}
             <div className='sectionShadow'>
+              <h5 className='text-bold text-h5'>🗓 추가수당 지급 월</h5>
               <Picker
                 ref={this.pickAMonth}
                 value={this.state.yearMonth}
@@ -163,9 +163,12 @@ class PayManageExtra extends Component {
                 onChange={this.handleAMonthChange}
                 onDismiss={this.handleAMonthDissmis}
               >
-              <div onClick={() => this.pickAMonth.current.show()}> 
-                {this.state.yearMonth.year}년 {this.state.yearMonth.month}월 
+              <div 
+                className='small-shadow text-bold text-h5 text-center'
+                onClick={() => this.pickAMonth.current.show()}> 
+                {this.state.yearMonth.year}년 {this.state.yearMonth.month}월
               </div>
+              <p className='px-3'>추가수당 지급을 확인할 해당 월을 선택해주세요.</p>
               </Picker>
             </div>
             <div className='sectionShadow'>

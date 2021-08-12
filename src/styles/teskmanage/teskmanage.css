@@ -6,8 +6,7 @@
 .todayleave > div {
   flex: 1;
   padding: 20px;
-  height: 440px;
-  overflow: auto;
+  height: auto;
 }
 
 .react-calendar {
@@ -20,5 +19,4 @@
 
 .paymanageextra .month-picker > .rmp-container .rmp-popup {
   left: 0;
-
-} 
+}
