@@ -21,6 +21,7 @@ class Download extends Component {
       file: [],
       base64URL: '',
       uploadFile: null,
+      fileName: null,
       // inputRef: useRef<HTMLInputElement>(null)
     };
     this.getBase64 = getBase64
@@ -44,9 +45,14 @@ class Download extends Component {
   };
 
   handleUpload = (e) => {
+    if (!this.state.uploadFile) {
+      alert("먼저 파일을 선택하세요")
+      return
+    }
     upload(this.props.userinfo.business_name, this.state.uploadFile)
     .then(result => {
       alert("업로드 성공");
+      console.log(result);
       this.setState({uploadFile: null})
       this.curFetch();
     })
@@ -57,12 +63,16 @@ class Download extends Component {
     let { file } = this.state;
 
     file = e.target.files[0];
-    if (!(file.type === "image/png" || file.type === "image/jpeg" || file.type === "application/pdf")) {
+    if (!(file.type === "image/png" || file.type === "image/jpeg" || file.type === "application/pdf" || file.type === "text/plain" || file.type ===  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" || file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || file.type === "application/vnd.openxmlformats-officedocument.presentationml.presentation" || /.+\.hwp$/.exec(file.name))) {
       alert("이미지나 문서만 업로드 가능합니다.")
+      e.target.value = null;
       return
     }
-
-    console.log(file);
+    if (file.size >= (30 * 1024 * 1024)) {
+      alert("업로드 제한을 초과하였습니다.")
+      e.target.value = null;
+      return
+    }
 
     // this.getBase64(file)
     //   .then((result) => {
@@ -94,7 +104,6 @@ class Download extends Component {
 
   render() {
     const { userinfo } = this.props;
-    console.log('userinfo : ', userinfo);
 
     return (
       <div className="wrap">
@@ -127,7 +136,7 @@ class Download extends Component {
           <div className='sectionShadow'>
             <h4 className='text-h5 text-bold'>💾 파일 올리기</h4>
             <label className="mx-3 text-bold text-h6">파일 선택 : </label>
-            <input type="file" name="file" onChange={this.handleFileInputChange} />
+            <input type="file" name="file" onChange={this.handleFileInputChange}/>
             <div className='d-flex justify-content-center flex-wrap'>
               <Button className='' onClick={this.handleUpload}>업로드</Button>
               <span className='text-p w-100 d-flex justify-content-center'>파일 업로드는 최대 30MB까지 가능합니다.</span>
