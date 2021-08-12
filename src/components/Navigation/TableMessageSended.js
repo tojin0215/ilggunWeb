@@ -99,6 +99,7 @@ const Table = props => {
       striped
       pagination
       subHeader
+      onRowClicked={props.onRowClicked}
       subHeaderComponent={subHeaderComponent}
     />
   );
