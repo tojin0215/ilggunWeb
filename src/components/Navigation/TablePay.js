@@ -11,14 +11,24 @@ const Table = props => {
   const { data } = props;
   const columns = [
     {
-      name:"이름",
-      selector: (row, index) => row.Employee,
+      name:"id",
+      selector: (row, index) => row.id,
+      sortable:true
+    },
+    {
+      name:"근로자명",
+      // selector: (row, index) => row.contract.Employee,
       sortable:true
     },
     {
       name:"월급여",
       selector: (row, index) => row.Salary,
-      sortable: true
+      sortable: true,
+      cell: row => (row.Salary == null)?(
+        0
+        ):(
+          row.Salary
+        ) 
     },
     {
       name: "추가 수당",
@@ -33,26 +43,22 @@ const Table = props => {
     },
     {
       name:" 통상시급",
-      selector: (row, index) => row.HourlyWage,
+      selector: (row, index) => row.insurance.HourlyWage,
       sortable:true
     },
     
-    // {
-    //   name:" 월근무시간",
-    //   selector: "worktime",
-    //   sortable:true
-    // },
+    {
+      name:" 월근무시간",
+      selector: "worktime",
+      sortable:true
+    },
             
     {
       name:" 월급여공제",
       selector: "tax",
       sortable:true,
-      cell: row =>
-      ((row.NationalPensionPercentage + row.HealthInsurancePercentage + row.RegularCarePercentage + row.EmploymentInsurancePercentage)/1 == null) ?(
-        0
-      ):(
-        (row.NationalPensionPercentage + row.HealthInsurancePercentage + row.RegularCarePercentage + row.EmploymentInsurancePercentage)/1 
-      )
+      cell:  row =>
+      (row.insurance.NationalPensionPercentage + row.insurance.HealthInsurancePercentage + row.insurance.RegularCarePercentage + row.insurance.EmploymentInsurancePercentage)
       
     },
     //공제액 계산
@@ -60,7 +66,9 @@ const Table = props => {
     {
       name:" 실지급액",
       selector: "realPay",
-      sortable:true
+      sortable:true,
+      cell:row=>
+      parseInt(row.Salary) + parseInt(row.taxation) + parseInt(row.taxFree)
     }
     //실지급액 계산
   ];
@@ -76,7 +84,7 @@ const Table = props => {
     item =>
       item.id.indexOf(filterText.toLowerCase()) !== -1
   );
-  //id ==> employee로 변경
+  //id ==> Employee 변경
   
 
   const subHeaderComponent = useMemo(() => {

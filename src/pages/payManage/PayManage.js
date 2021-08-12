@@ -19,7 +19,7 @@ import { dividerClasses } from '@material-ui/core';
 
 import '../../styles/payManage/payManage.css';
 
-import { selectVacation, selectWorkerByType } from '../../action/api';
+import { insertVacation, selectVacation, selectWorkerByType } from '../../action/api';
 
 
 const pickerLang = {
@@ -42,6 +42,8 @@ class PayManage extends Component {
         paid:true,
         unpaid:false
       },
+
+      workername2:"근로자",
       
       selectedWorker: null,
 
@@ -74,6 +76,14 @@ class PayManage extends Component {
     return
   }
 
+  handleChange = (e) =>{
+    let nextState = {};
+    nextState[e.target.name] = e.target.value;
+    this.setState(nextState);
+  }
+
+  
+
 
 
   handleAMonthChange = (year, month) => {
@@ -94,7 +104,7 @@ class PayManage extends Component {
       unpaid:false,
     }
     obj[e.target.id] = e.target.checked
-    console.log(obj);
+    // console.log(obj);
     this.setState({
       checkboxGroup:obj
     })
@@ -171,8 +181,8 @@ class PayManage extends Component {
             </div>
             <div className='w-50'>
               <div className='p-3 h-100'>
-              <input value="asdasd"/>
-              
+              <span className='text-h6 text-bold'>근로자</span>
+              <input type="text" id='workername2' onChange={this.handleChange} />
                 <p className='text-h5 text-bold w-100'>휴가기간</p>
                 <input className='small-shadow' type="date" defaultValue={dateToday} min={dateToday} id="start_date"/>
                   ~ 
@@ -192,7 +202,7 @@ class PayManage extends Component {
                 <input className='small-shadow' placeholder="사유를 입력하세요"></input>
               </div>
             </div>
-            <button className='button-solid'>저장하기</button>
+            <button className='button-solid' type="button" onClick={this.handleOnClick} >저장하기</button>
           </article>
         </div>
         <Footer />

@@ -304,7 +304,7 @@ export function selectInsurance(business_id) {
     return fetch(`${SERVER_URL}/insurancePercentage`, _createPostInit(body))
 }
 
-export function selectInsuranceYear(business_id, year) {
-    const body = JSON.stringify({bang: business_id, date:year})
+export function selectInsuranceYear(business_id, date) {
+    const body = JSON.stringify({bang: business_id, date:date})
     return fetch(`${SERVER_URL}/insurancePercentageYear`, _createPostInit(body))
 }
