@@ -21,19 +21,19 @@ export class ModalMessage extends Modal {
             </header>
             <main>
               <div>
-                <label for="inputFrom">발신자</label>
+                <label for="inputFrom" className='text-bold'>발신자</label>
                 <input id="inputFrom"></input>
               </div>
               <div>
-                <label for="inputTo">수신자</label>
+                <label for="inputTo" className='text-bold'>수신자</label>
                 <input id="inputTo"></input>
               </div>
               <div>
                 <label for="inputTo">읽음</label>
                 <input type="checkbox" id="inputTo"></input>
               </div>
-              <div className='py-3'>
-                <label for="inputBody">내용</label>
+              <div className='my-3 border'>
+                <label for="inputBody" className='text-bold pb-2'>내용</label>
                 <textarea id="inputBody"></textarea>
               </div>
               {this.props.children}

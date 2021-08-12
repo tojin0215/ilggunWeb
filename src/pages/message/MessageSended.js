@@ -67,13 +67,13 @@ class MessageSended extends Component {
           </div>
           <Modal open={true} close={() =>this.closeModal}>
             <div>
-              <span>발신자: {"발신자에요"}</span>
+              <p><span className='text-bold'>발신자</span>: {"발신자에요"}</p>
             </div>
             <div>
-              <span>수신자: {"수신자에요"}</span>
+              <p><span className='text-bold'>수신자</span>: {"수신자에요"}</p>
             </div>
-            <div className='py-3'>
-              <p>내용</p>
+            <div className='my-3 border'>
+              <p className='text-bold pb-2'>내용</p>
               <p>내용이에요</p>
             </div>
           </Modal>
