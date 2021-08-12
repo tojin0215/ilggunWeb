@@ -19,7 +19,7 @@ import { dividerClasses } from '@material-ui/core';
 
 import '../../styles/payManage/payManage.css';
 
-import { selectVacation, selectWorkerByType } from '../../action/api';
+import { insertVacation, selectVacation, selectWorkerByType } from '../../action/api';
 
 
 const pickerLang = {
@@ -50,6 +50,7 @@ class PayManage extends Component {
     }
     this.vacation()
     this.workerFilter()
+    // this.insertVacation()
   }
   goLogin = () => {
     this.props.history.push('/');
@@ -73,6 +74,16 @@ class PayManage extends Component {
     })
     return
   }
+
+  // insertVacation = () => {
+  //   insertVacation(this.props.userinfo.business_name, 
+  //     this.state.workername, this.state.vacation, 
+  //     this.state.reason, this.state.start_date, this.state.end_date)
+  //     .then(result => result.json())
+  //     .then(result => {
+  //       this.setState({})
+  //     })
+  // }
 
 
 
@@ -171,7 +182,7 @@ class PayManage extends Component {
             </div>
             <div className='w-50'>
               <div className='p-3 h-100'>
-              <input value="asdasd"/>
+              <span className='text-h6 text-bold'>근로자</span>
               
                 <p className='text-h5 text-bold w-100'>휴가기간</p>
                 <input className='small-shadow' type="date" defaultValue={dateToday} min={dateToday} id="start_date"/>
