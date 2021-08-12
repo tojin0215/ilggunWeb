@@ -84,154 +84,122 @@ class PayDocumentPDF extends Component {
     return (
       <Document>
         <Page size="A4">
-          <View className="container">
-            <View>
-              <View className="">
+          <View className="d-flex w-100 border flex-wrap">
+            <View className='border d-flex w-100'>
+              <View className='border col-9 text-center p-2'>
                 <Text>내역</Text>
               </View>
-              <View>
+              <View className='border col-3 text-center p-2'>
                 <Text>금액</Text>
               </View>
-            </View>
-            <View>
-              <View>
-                <View>
-                  <Text>과세</Text>
+            </View>{/**첫째행 */}
+            <View className='border w-100 d-flex'>
+              <View className='border col-9 flex-nowrap'>
+                <View className='border col-4'>
+                  <Text>지급</Text>
                 </View>
-                <View>
-                  <View>
+                <View className='border col-8 flex-wrap'>
+                  <View className='border w-100'>
                     <Text>기본급</Text>
                   </View>
-                  <View>
-                    <View>
-                      <Text>과세 추가수당</Text>
-                    </View>
-                    <View>
-                      <View>
-                        <Text>직책</Text>
-                      </View>
-                      <View>
-                        <Text>상여</Text>
-                      </View>
-                      <View>
-                        <Text>연장</Text>
-                      </View>
-                      <View>
-                        <Text>기타</Text>
-                      </View>
-                    </View>
-                  </View>{/* 과세 추가수당 */}
-                  <View>
-                    <View>
-                      <Text>비과세 추가수당</Text>
-                    </View>
-                    <View>
-                      <View>
-                        <Text>식대</Text>
-                      </View>
-                      <View>
-                        <Text>자가유류비</Text>
-                      </View>
-                      <View>
-                        <Text>육아수당</Text>
-                      </View>
-                      <View>
-                        <Text>기타</Text>
-                      </View>
-                    </View>
-                  </View>{/* 비과세 추가수당 */}
-                </View>{/* 지급 */}
-                <View>
-                    <View>
-                        <Text></Text>
-                    </View>
-                    <View>
-                        <Text></Text>
-                    </View>
-                    <View>
-                        <Text></Text>
-                    </View>
-                    <View>
-                        <Text></Text>
-                    </View>
-                    <View>
-                        <Text></Text>
-                    </View>
-                    <View>
-                        <Text></Text>
-                    </View>
-                    <View>
-                        <Text></Text>
-                    </View>
-                    <View>
-                        <Text></Text>
-                    </View>
-                    <View>
-                        <Text></Text>
-                    </View>
-                </View>{/* 지급 금액 */}
+                  <View className='border w-100'>
+                    <Text>과세 추가수당</Text>
+                  </View>
+                  <View className='border w-100'>
+                    <Text>비과세 추가수당</Text>
+                  </View>
+                </View>
+              </View>{/**둘째행 지급 라벨 */}
+              <View className='border col-2 flex-wrap'>
+                <View className='border w-100'>
+                    <Text>{this.props.data.salary}</Text>
+                </View>
+                <View className='border w-100'>
+                    <Text>{this.props.data.taxation}</Text>
+                </View>
+                <View className='border w-100'>
+                    <Text>{this.props.data.taxFree}</Text>
+                </View>
+              </View>{/**둘째행 지급 금액 */}
+            </View>{/**둘째행 */}
+            <View className='border'>
+              <View className='border'>
+                <View className='border'>
+                  <Text>공제</Text>
+                </View>
+                <View className='border'>
+                  <View className='border'>
+                    <Text>국민연금</Text>
+                  </View>
+                  <View className='border'>
+                    <Text>건강보험료</Text>
+                  </View>
+                  <View className='border'>
+                    <Text>장기요양보험료</Text>
+                  </View>
+                  <View className='border'>
+                    <Text>고용보험료</Text>
+                  </View>
+                  {/* <View className='border'>
+                    <Text>소득세</Text>
+                  </View>
+                  <View className='border'>
+                    <Text>주민세</Text>
+                  </View> */}
+                </View>
+              </View>{/* 공제 텍스트 */}
+              <View className='border'>
+                <View className='border'>
+                  <Text>{this.props.data.nationalPension}</Text>
+                </View>
+                <View className='border'>
+                  <Text>{this.props.data.healthInsurance}</Text>
+                </View>
+                <View className='border'>
+                  <Text>{this.props.data.regularCare}</Text>
+                </View>
+                <View className='border'>
+                  <Text>{this.props.data.employmentInsurance}</Text>
+                </View>
+                {/* <View className='border'>
+                  <Text></Text>
+                </View>
+                <View className='border'>
+                  <Text></Text>
+                </View> */}
+              </View>{/* 공제 금액 */}
+            </View>{/* 셋째행 */}
+            <View className='border'>
+                <View className='border'>
+                  <Text>
+                    지급액계
+                  </Text>
+                </View>
+                <View className='border'>
+                  <Text>
+                    {this.props.data.origin}
+                  </Text>
+                </View>
+            </View>{/**넷째행 */}
+            <View className='border'>
+                <View className='border'>
+                  <Text>공제액계</Text>
+                </View>
+                <View className='border'>
+                  <Text>{this.props.data.minus}</Text>
+                </View>
+            </View>
+            <View className='border'>
+              <View className='border'>
+                <Text>
+                  차인지급액계
+                </Text>
               </View>
-            </View>
-            <View>
-                <View>
-                    <View>
-                        <View>
-                            <Text>공제</Text>
-                        </View>
-                        <View>
-                            <View>
-                                <Text>국민연금</Text>
-                            </View>
-                            <View>
-                                <Text>건강보험료</Text>
-                            </View>
-                            <View>
-                                <Text>장기요양보험료</Text>
-                            </View>
-                            <View>
-                                <Text>고용보험료</Text>
-                            </View>
-                            <View>
-                                <Text>소득세</Text>
-                            </View>
-                            <View>
-                                <Text>주민세</Text>
-                            </View>
-                        </View>
-                    </View>
-                </View>{/* 공제 텍스트 */}
-                <View>
-                    <View>
-                        <Text></Text>
-                    </View>
-                    <View>
-                        <Text></Text>
-                    </View>
-                    <View>
-                        <Text></Text>
-                    </View>
-                    <View>
-                        <Text></Text>
-                    </View>
-                    <View>
-                        <Text></Text>
-                    </View>
-                    <View>
-                        <Text></Text>
-                    </View>
-                </View>{/* 공제 금액 */}
-            </View>{/* 공제 컨텐츠 */}
-            <View>
-                <View></View>
-                <View></View>
-            </View>
-            <View>
-                <View></View>
-                <View></View>
-            </View>
-            <View>
-                <View></View>
-                <View></View>
+              <View className='border'>
+                <Text>
+                  {this.props.data.real}
+                </Text>
+              </View>
             </View>
           </View>
         </Page>
