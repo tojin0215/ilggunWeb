@@ -177,9 +177,9 @@ class PayManage extends Component {
             <div className='w-50 small-shadow pt-3 m-0'>
               {(!this.state.selectedWorker) ? <TableWorkerFilter data={this.state.worker} handleSelectWorker={this.handleSelectWorker}/>
               : 
-               (<span className='text-h5 text-bold my-3'>{this.state.selectedWorker.workername2}님의 휴가를 저장하세요.</span>
+               (<p className='text-center'>
+                 <span className='text-h5 text-bold my-3 px-2'>{this.state.selectedWorker.workername2}</span>님의 휴가를 저장하세요.</p>
                )}
-              
             </div>
             <div className='w-50'>
               <div className='p-3 h-100'>

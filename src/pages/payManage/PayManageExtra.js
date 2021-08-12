@@ -178,7 +178,10 @@ class PayManageExtra extends Component {
             <div className='col-4 w-50 small-shadow m-0'>
               {(!this.state.selectedWorker) ? <TableWorkerFilter data={this.state.worker} handleSelectWorker={this.handleSelectWorker}/>
               : 
-              (<span className='text-h5 text-bold my-3'>{this.state.selectedWorker.workername2}님의 추가 수당을 저장하세요.</span>
+              (
+              <p className='text-center'>
+                <span className='text-h5 text-bold my-3 px-2'>{this.state.selectedWorker.workername2}</span>님의 추가 수당을 저장하세요.
+              </p>
               )}
             </div>
             <div className='flex-wrap col-4 w-50 px-5'>
