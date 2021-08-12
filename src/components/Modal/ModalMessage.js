@@ -32,7 +32,7 @@ export class ModalMessage extends Modal {
                 <label for="inputTo">읽음</label>
                 <input type="checkbox" id="inputTo"></input>
               </div>
-              <div>
+              <div className='py-3'>
                 <label for="inputBody">내용</label>
                 <textarea id="inputBody"></textarea>
               </div>

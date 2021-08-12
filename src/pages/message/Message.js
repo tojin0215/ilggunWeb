@@ -103,9 +103,9 @@ class Message extends Component {
             <div>
               <span>수신자: {this.state.msgTo}</span>
             </div>
-            <div>
-              <span>내용</span><br />
-              <span>{this.state.msgBody}</span>
+            <div className='py-3'>
+              <p>내용</p>
+              <p>{this.state.msgBody}</p>
             </div>
           </Modal>
           <Footer />
