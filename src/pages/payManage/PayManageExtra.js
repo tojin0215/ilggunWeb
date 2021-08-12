@@ -175,63 +175,68 @@ class PayManageExtra extends Component {
           </article>
             <h4 className='text-h4 mt-5'>🙋‍♀️ 추가수당 등록하기</h4>
             <article className='sectionShadow flex flex-wrap align-items-start'>
-            <div className='col-4'>
+            <div className='col-4 w-50 small-shadow m-0'>
               <TableWorkerFilter data={this.state.worker}/>
-              <br/>           
-              <p className='p-2 text-h5 text-bold w-100'>지급일</p>
-              <input type="month" />           
             </div>
-            <div className='flex-wrap col-4'>
-              <p className='p-2 text-h5 text-bold w-100'>과세/비과세 선택</p>
-              <div className=''>
-                <input type='radio'></input>
-                <span className='text-h6 text-bold'>과세</span>
-                <div className='p-1 w-100'>
-                  <input type="checkbox" id="position" name="checkboxGroup"
-                    checked={this.state.checkboxGroup['position']} onChange={this.handleCheckbox}/>
-                  직책
-                  <br />
-                  <input type="checkbox" id="bonus" name="checkboxGroup"
-                    checked={this.state.checkboxGroup['bonus']} onChange={this.handleCheckbox}/>
-                  상여
-                  <br />
-                  <input type="checkbox" id="over" name="checkboxGroup"
-                    checked={this.state.checkboxGroup['over']} onChange={this.handleCheckbox}/>
-                  연장근무
-                  <br />
-                  <input type="checkbox" id="etc" name="checkboxGroup"
-                  checked={this.state.checkboxGroup['etc']} onChange={this.handleCheckbox}/>
-                  기타
-                  {/* {(this.state.etc) ? <input/> : null}    */}
+            <div className='flex-wrap col-4 w-50 px-5'>
+              <div className='w-100'>
+                <p className='p-2 text-h5 text-bold w-100'>지급월</p>
+                <input type="month" />
+              </div>
+              <div className='mt-3'>
+                <p className='p-2 text-h5 text-bold w-100'>과세/비과세 선택</p>
+                <div className='d-flex'>
+                  <div className=''>
+                    <input type='radio'></input>
+                    <span className='text-h6 text-bold'>과세</span>
+                    <div className='p-1 w-100'>
+                      <input type="checkbox" id="position" name="checkboxGroup"
+                        checked={this.state.checkboxGroup['position']} onChange={this.handleCheckbox}/>
+                      직책
+                      <br />
+                      <input type="checkbox" id="bonus" name="checkboxGroup"
+                        checked={this.state.checkboxGroup['bonus']} onChange={this.handleCheckbox}/>
+                      상여
+                      <br />
+                      <input type="checkbox" id="over" name="checkboxGroup"
+                        checked={this.state.checkboxGroup['over']} onChange={this.handleCheckbox}/>
+                      연장근무
+                      <br />
+                      <input type="checkbox" id="etc" name="checkboxGroup"
+                      checked={this.state.checkboxGroup['etc']} onChange={this.handleCheckbox}/>
+                      기타
+                      {/* {(this.state.etc) ? <input/> : null}    */}
+                    </div>
+                  </div>
+                  <div className='d-flex align-items-start flex-wrap pb-5 mt-2'>
+                    <p>
+                      <input type='radio'></input>
+                      <span className='text-h6 text-bold'>비과세</span>
+                    </p>
+                    <div  className='p-1 w-100'>
+                      <input type="checkbox" id="bob" name="checkboxGroup"
+                        checked={this.state.checkboxGroup['bob']} onChange={this.handleCheckbox}/>
+                      식대
+                      <br />
+                      <input type="checkbox" id="oil" name="checkboxGroup"
+                        checked={this.state.checkboxGroup['oil']} onChange={this.handleCheckbox}/>
+                      자가유류비
+                      <br />
+                      <input type="checkbox" id="agi" name="checkboxGroup"
+                        checked={this.state.checkboxGroup['agi']} onChange={this.handleCheckbox}/>
+                      육아수당
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className='d-flex align-items-start flex-wrap pb-5 mt-2'>
-                <p>
-                  <input type='radio'></input>
-                  <span className='text-h6 text-bold'>비과세</span>
-                </p>
-                <div  className='p-1 w-100'>
-                  <input type="checkbox" id="bob" name="checkboxGroup"
-                    checked={this.state.checkboxGroup['bob']} onChange={this.handleCheckbox}/>
-                  식대
-                  <br />
-                  <input type="checkbox" id="oil" name="checkboxGroup"
-                    checked={this.state.checkboxGroup['oil']} onChange={this.handleCheckbox}/>
-                  자가유류비
-                  <br />
-                  <input type="checkbox" id="agi" name="checkboxGroup"
-                    checked={this.state.checkboxGroup['agi']} onChange={this.handleCheckbox}/>
-                  육아수당
-                </div>
+              <div className='w-100'>
+                <h4 className='p-2 text-h5 text-bold w-100'>금액</h4>
+                <input type="number"placeholder="금액을 입력하세요." 
+                name="taxation" value={taxation}
+                onChange={this.handleChange}/>
               </div>
             </div>
-            <div className='col-4'>
-              <h4 className='p-2 text-h5 text-bold w-100'>금액</h4>
-              <input type="number"placeholder="금액을 입력하세요." 
-              name="taxation" value={taxation}
-              onChange={this.handleChange}/>              
-              <button className='my-0 mx-auto button-solid mt-3' onClick={this.insertAllowance}>저장하기</button>
-            </div>
+            <button className='my-0 mx-auto button-solid mt-3' onClick={this.insertAllowance}>저장하기</button>
           </article>
         </div>
         <Footer />
