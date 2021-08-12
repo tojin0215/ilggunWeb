@@ -82,24 +82,18 @@ class Message extends Component {
               <TableMessage data={this.state.recv_message} deleteMessage={this.deleteMessage} click={this.openModal} />
             </article>
           </div>
-          {/* <Modal open={true} close={this.closeModal} msg={}>
+          <Modal open={true} close={this.closeModal}>
             <div>
-              <label for="inputFrom">발신자</label>
-              <input id="inputFrom"></input>
+              <span>발신자: {"발신자에요"}</span>
             </div>
             <div>
-              <label for="inputTo">수신자</label>
-              <input id="inputTo"></input>
+              <span>수신자: {"수신자에요"}</span>
             </div>
             <div>
-              <label for="inputTo">읽음</label>
-              <input type="checkbox" id="inputTo"></input>
+              <span>내용</span><br />
+              <span>내용이에요</span>
             </div>
-            <div>
-              <label for="inputBody">내용</label>
-              <textarea id="inputBody"></textarea>
-            </div>
-          </Modal> */}
+          </Modal>
           <Footer />
         </div>
       )
