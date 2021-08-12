@@ -83,6 +83,10 @@
   width: 70px;
 }
 
+.w-60per {
+  width: 60%;
+}
+
 .flex {
   display: flex;
 }
