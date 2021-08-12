@@ -54,32 +54,34 @@ class PayDocument extends Component {
 
   selectPayDocu = () => {
     const d = new Date()
-    otherAllowanceAll(this.props.userinfo.business_name, d.getFullYear(), 6)
+    selectContractformAll (this.props.userinfo.business_name)
      .then((result) => result.json())
-     .then((otherAllowanceAllResult) => {           
-      console.log(otherAllowanceAllResult)
+     .then((selectContractformAllResult) => {           
+      console.log(selectContractformAllResult)
 
       selectInsuranceYear(this.props.userinfo.business_name, d.getFullYear())
     .then((result) => result.json())
     .then((selectInsuranceYearResult) => { 
     console.log(selectInsuranceYearResult)          
-      this.setState({ PD : otherAllowanceAllResult.map((item, index)=>{
+      { selectContractformAllResult.map((item, index)=>{
       const  insurance = selectInsuranceYearResult.find((res) => res.bang == item.bang);
       item["insurance"] = insurance;
-      return item;
+      
       }) 
-    }) 
+    } 
 
-    // selectContractformAll (this.props.userinfo.business_name)
-    // .then((result) => result.json())
-    // .then((selectContractformAllResult) => { 
-    //   console.log(selectContractformAllResult)          
-    //   this.setState({ PD :otherAllowanceAllResult.map((item2, index)=>{
-    //     const  contractform = selectContractformAllResult.find((res) => res.bang == item2.bang);
-    //     item2["contractform"] = contractform;
-    //     return item2;
-    //   })})         
-    // })
+    otherAllowanceAll(this.props.userinfo.business_name, d.getFullYear(), 6)    
+    .then((result) => result.json())
+    .then((otherAllowanceAllResult) => { 
+      console.log(otherAllowanceAllResult)          
+      this.setState({ PD :selectContractformAllResult.map((item2, index)=>{
+        const  otherAllowance = otherAllowanceAllResult.find((res) => res.bang == item2.bang);
+        item2["otherAllowance"] = otherAllowance;
+        console.log(item2)
+        return item2;
+          
+      })})         
+    })
     })
 
      })

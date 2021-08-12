@@ -10,15 +10,12 @@ import './table.css';
 const Table = props => {
   const { data } = props;
   const columns = [
-    {
-      name:"id",
-      selector: (row, index) => row.id,
-      sortable:true
-    },
+    
     {
       name:"근로자명",
-      // selector: (row, index) => row.contract.Employee,
+      selector: (row, index) => row.Employee,
       sortable:true
+      //contractform
     },
     {
       name:"월급여",
@@ -29,28 +26,34 @@ const Table = props => {
         ):(
           row.Salary
         ) 
+        //contractform
     },
     {
       name: "추가 수당",
       selector: (row, index) => row.additionalAllowance,
       sortable: true,
       cell: row =>
-      (parseInt(row.taxation) + parseInt(row.taxFree) == null) ?(
+      (parseInt(row.otherAllowance.taxation) + parseInt(row.otherAllowance.taxFree) == null) ?(
         0
       ):(
-        parseInt(row.taxation) + parseInt(row.taxFree)
+        parseInt(row.otherAllowance.taxation) + parseInt(row.otherAllowance.taxFree)
       )
+      //otherAllowance.
     },
     {
       name:" 통상시급",
       selector: (row, index) => row.insurance.HourlyWage,
       sortable:true
+      //insurance
     },
     
     {
       name:" 월근무시간",
       selector: "worktime",
-      sortable:true
+      sortable:true,
+      cell: row =>
+      parseInt(row.EndTimeHour)- parseInt(row.StartTimeHour) + "시간"
+      //contractform.
     },
             
     {
@@ -59,7 +62,7 @@ const Table = props => {
       sortable:true,
       cell:  row =>
       (row.insurance.NationalPensionPercentage + row.insurance.HealthInsurancePercentage + row.insurance.RegularCarePercentage + row.insurance.EmploymentInsurancePercentage)
-      
+      //insurance
     },
     //공제액 계산
 
@@ -68,7 +71,8 @@ const Table = props => {
       selector: "realPay",
       sortable:true,
       cell:row=>
-      parseInt(row.Salary) + parseInt(row.taxation) + parseInt(row.taxFree)
+      parseInt(row.Salary) + parseInt(row.otherAllowance.taxation) + parseInt(row.otherAllowance.taxFree)
+      //otherAllowance. + contractform + insurance
     }
     //실지급액 계산
   ];
@@ -82,7 +86,7 @@ const Table = props => {
   // );
   const filteredItems = props.data.filter(
     item =>
-      item.id.indexOf(filterText.toLowerCase()) !== -1
+      item.Employee.indexOf(filterText.toLowerCase()) !== -1
   );
   //id ==> Employee 변경
   
