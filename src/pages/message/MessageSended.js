@@ -20,7 +20,12 @@ class MessageSended extends Component {
     this.state = {
       checkDelete: false,
       recv_message: [],
-      send_message: []
+      send_message: [],
+
+      isModalOpen: false,
+      msgFrom: "발신자",
+      msgTo: "수신자",
+      msgBody: "메시지 내용",
     }
     this.curFetch()
   }
@@ -45,6 +50,20 @@ class MessageSended extends Component {
         this.props.history.push("/");
     }
 
+    onRowClicked = (row) => {
+      console.log(row);
+      this.setState({
+        msgFrom: row.f,
+        msgTo: row.t,
+        msgBody: row.message,
+        isModalOpen: true,
+      })
+    }
+
+    closeModal = () => {
+      this.setState({isModalOpen: false})
+    }
+
     render() {
         const { userinfo, send_message } = this.props;
         console.log("userinfo : ", userinfo);
@@ -62,19 +81,19 @@ class MessageSended extends Component {
                 삭제하기
                 <input type="checkbox" value={this.state.checkDelete} onChange={() => this.setState({checkDelete: !this.state.checkDelete})} />
               </div> */}
-              <TableMessageSended data={this.state.send_message} checkDelete={this.state.checkDelete} deleteMessage={this.deleteMessage} />
+              <TableMessageSended data={this.state.send_message} checkDelete={this.state.checkDelete} deleteMessage={this.deleteMessage} onRowClicked={this.onRowClicked} />
             </article>
           </div>
-          <Modal open={true} close={() =>this.closeModal}>
+          <Modal open={this.state.isModalOpen} close={this.closeModal}>
             <div>
-              <p><span className='text-bold'>발신자</span>: {"발신자에요"}</p>
+              <p><span className='text-bold'>발신자</span>: {this.state.msgFrom}</p>
             </div>
             <div>
-              <p><span className='text-bold'>수신자</span>: {"수신자에요"}</p>
+              <p><span className='text-bold'>수신자</span>: {this.state.msgTo}</p>
             </div>
             <div className='my-3 border'>
               <p className='text-bold pb-2'>내용</p>
-              <p>내용이에요</p>
+              <p>{this.state.msgBody}</p>
             </div>
           </Modal>
           <Footer />
