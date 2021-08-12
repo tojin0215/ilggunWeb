@@ -46,13 +46,8 @@ class PayManageExtra extends Component {
       
       AA:[],    
       //Additional Allowance
-      MA:[],
-      //Month select Allowance
       worker:[] 
-    }    
-    // this.initialState;
-    // this.props.initialValues;
-    // this.insertAllowance()
+    }
     this.selectAlloWance()
     this.workerFilter()
 
@@ -70,16 +65,6 @@ class PayManageExtra extends Component {
     .then(result => result.json())
     .then(result => {
       this.setState({ worker: result })
-    })
-    return
-  }
-
-  otherAllowanceAll = () => {
-    const d = new Date();
-    otherAllowanceAll(this.props.userinfo.business_name, d.getFullYear(), d.getMonth())
-    .then((result) => result.json)
-    .then((result) =>{
-      this.setState({ MA:result })
     })
     return
   }
@@ -113,7 +98,7 @@ class PayManageExtra extends Component {
         agi: false 
     }    
     obj[e.target.id] = e.target.checked         
-    console.log(obj);
+    // console.log(obj);
       this.setState({
         checkboxGroup:obj
       })
@@ -126,6 +111,13 @@ class PayManageExtra extends Component {
     const { taxation, value } = event.target;
     this.setState({ [taxation]: value });
   };
+
+  handleOnClick = () =>{
+    alert("추가 수당 저장 완료.");
+  }
+
+
+
 
   render() {
     const { userinfo } = this.props;
@@ -172,7 +164,7 @@ class PayManageExtra extends Component {
               </Picker>
             </div>
             <div className='sectionShadow'>
-              <TableExtraPay data={this.state.AA} onChange={this.state.MA} />
+              <TableExtraPay data={this.state.AA}  />
               {/* this.state.id */}
             </div>
           </article>
@@ -239,7 +231,7 @@ class PayManageExtra extends Component {
                 onChange={this.handleChange}/>
               </div>
             </div>
-            <button className='my-0 mx-auto button-solid mt-3' onClick={this.insertAllowance}>저장하기</button>
+            <button className='my-0 mx-auto button-solid mt-3' onClick={this.handleOnClick}>저장하기</button>
           </article>
         </div>
         <Footer />
