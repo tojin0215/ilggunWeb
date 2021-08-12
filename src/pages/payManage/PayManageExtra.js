@@ -156,7 +156,7 @@ class PayManageExtra extends Component {
                 onDismiss={this.handleAMonthDissmis}
               >
               <div 
-                className='small-shadow text-bold text-h5 text-center'
+                className='small-shadow text-bold text-h5 text-center cursor-pointer'
                 onClick={() => this.pickAMonth.current.show()}> 
                 {this.state.yearMonth.year}년 {this.state.yearMonth.month}월
               </div>

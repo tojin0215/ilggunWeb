@@ -9,3 +9,8 @@
 .month-picker > .rmp-container .rmp-popup {
   right: 0;
 }
+
+.payDocumentDetail .month-picker > .rmp-container .rmp-popup {
+  right: 39px;
+  top: 50px;
+}

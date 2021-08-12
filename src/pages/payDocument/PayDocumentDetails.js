@@ -171,38 +171,40 @@ class PayDocumentDetails extends Component {
     if (show_pay_document) (pay_document_data.real = (pay_document_data.origin - pay_document_data.minus))
 
     return (
-      <div className="wrap">
+      <div className="wrap payDocumentDetail">
         <Header />
         <Navigation goLogin={this.goLogin} />
         <div className="container">
           <Menu />
-          <h4 className="text-h5">급여서류/급여명세서</h4>
-          <article className="flex todayleave sectionShadow">
-            {this.state.selectedWorker ? (
-              <div>
-                <span>{this.state.selectedWorker.workername2}</span>
-              </div>
-            ) : (
-              <div>
-                {/* <h4>직원 선택</h4>
-              <input ></input>
-              <button >검색</button> */}
-                <TableWorkerFilter
-                  data={this.state.workers}
-                  handleSelectWorker={this.handleSelectWorker}
-                />
-              </div>
-            )}
-            {/* <div>
-              <TableWorkerFilter data={this.state.workers} handleSelectWorker={r => this.setState({selectedWorker: r})}/>
-            </div> */}
-            {/* <Calendar
-              onChange={this.onChange}
-              value={this.state.value}
-            /> */}
+          <h4 className="text-h5">급여명세서</h4>
+          <article className="flex todayleave sectionShadow m-5">
+            <div className='small-shadow'>
+              {this.state.selectedWorker ? (
+                <div>
+                  <span>{this.state.selectedWorker.workername2}</span>
+                </div>
+              ) : (
+                <div>
+                  {/* <h4>직원 선택</h4>
+                <input ></input>
+                <button >검색</button> */}
+                  <TableWorkerFilter
+                    data={this.state.workers}
+                    handleSelectWorker={this.handleSelectWorker}
+                  />
+                </div>
+              )}
+              {/* <div>
+                <TableWorkerFilter data={this.state.workers} handleSelectWorker={r => this.setState({selectedWorker: r})}/>
+              </div> */}
+              {/* <Calendar
+                onChange={this.onChange}
+                value={this.state.value}
+              /> */}
+            </div>
             <div>
               <Picker
-                className="button-solid_white-0 py-2 ps-4 pe-0 my-0 mx-1 d-flex"
+                className="py-2 ps-4 pe-0 my-0 mx-1 d-flex"
                 ref={this.pickAMonth}
                 value={this.state.yearMonth}
                 lang={pickerLang.months}
@@ -210,31 +212,18 @@ class PayDocumentDetails extends Component {
                 onChange={this.handleAMonthChange}
                 onDismiss={this.handleAMonthDissmis}
               >
-                <div onClick={() => this.pickAMonth.current.show()}>
+                <div
+                  onClick={() => this.pickAMonth.current.show()}
+                  className='button-solid_white-0 py-2 my-0 mx-1 w-100 text-center cursor-pointer text-h5'
+                >
                   {' '}
                   {this.state.yearMonth.year}년 {this.state.yearMonth.month}월{' '}
                 </div>
               </Picker>
+                <p className='text-center py-2'>급여명세서를 보고자 하는 해당 월을 선택하세요</p>
             </div>
           </article>
           <div className="sectionShadow">
-            급여명세서가 표시되는 공간입니다. 이름,근무형태,급여신청기간이
-            표시되며, 다운로드, 프린트, 전체직원 버튼이 있습니다. 전체직원을
-            클릭하면 전체직원의 엑셀이 다운로드 합니다.
-            <div>
-              <span>
-                이름:<strong>A사원</strong>
-              </span>
-              <span>
-                근무형태:<strong>정규직</strong>
-              </span>
-              <span>
-                급여신청기간:<strong>매월 0일~0일</strong>
-              </span>
-              <button>다운로드</button>
-              <button>프린트</button>
-              <button>전체직원</button>
-            </div>
             {show_pay_document ? (
               <div>
                 {/* 급여명세서 표시하는 공간입니다. */}
