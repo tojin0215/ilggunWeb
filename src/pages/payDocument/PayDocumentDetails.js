@@ -180,8 +180,10 @@ class PayDocumentDetails extends Component {
           <article className="flex todayleave sectionShadow m-5">
             <div className='small-shadow'>
               {this.state.selectedWorker ? (
-                <div>
-                  <span>{this.state.selectedWorker.workername2}</span>
+                <div className='d-flex align-items-center justify-content-center h-100'>
+                  <p className='text-center'>
+                    <span className='text-h5'>{this.state.selectedWorker.workername2}</span> 님 급여명세서입니다.
+                  </p>
                 </div>
               ) : (
                 <div>

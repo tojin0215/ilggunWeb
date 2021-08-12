@@ -96,9 +96,9 @@ class TaskManage extends Component {
         <div className="container">
           <Menu />
           <article className='todayleave'>
-            <h4 className='text-h5 w-100'>
-              <span className='color-point text-h5'>✔ </span>
-              오늘의 휴가자
+            <h4 className='text-h4 w-100 px-5'>
+              {/* <span className='color-point text-h5'>✔ </span> */}
+              🏖 오늘의 휴가자
             </h4>
             {/* <Calendar
               onChange={this.onChange}
@@ -118,7 +118,7 @@ class TaskManage extends Component {
             </div>
           </article>
           <article className='sectionShadow'>
-            <h4>오늘의 근무자</h4>
+            <h4 className='text-h4 px-4'>🗿 오늘의 근무자</h4>
             <Table3 data={this.state.worker} click={clickhandler}/>
           </article>
         </div>

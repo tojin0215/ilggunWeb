@@ -181,8 +181,10 @@ class PayManage extends Component {
             </div>
             <div className='w-50'>
               <div className='p-3 h-100'>
-              <span className='text-h6 text-bold'>근로자</span>
-              <input type="text" id='workername2' onChange={this.handleChange} />
+                <span className='text-h5 text-bold my-3'>근로자</span>
+                <input type="text" id='workername2' onChange={this.handleChange} />
+              </div>
+              <div className='p-3 h-100'>
                 <p className='text-h5 text-bold w-100'>휴가기간</p>
                 <input className='small-shadow' type="date" defaultValue={dateToday} min={dateToday} id="start_date"/>
                   ~ 
