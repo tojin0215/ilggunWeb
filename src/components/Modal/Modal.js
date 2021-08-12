@@ -13,14 +13,14 @@ export class Modal extends Component {
                     <section>
                         <header>
                             { header }
-                            <Button variant="secondary" className="close" onClick={close}> &times; </Button>
+                            {/* <Button variant="secondary" className="close" onClick={close}> &times; </Button> */}
                         </header>
                         <main>
                             {this.props.children}
                         </main>
                         <footer>
                             {ok ? <Button variant="primary" className="ok" onClick={ok}> 확인 </Button> : null}
-                            <Button variant="secondary" className="close" onClick={close}> 닫기 </Button>
+                            <Button variant="secondary" className="close d-flex mx-auto" onClick={close}> 닫기 </Button>
                         </footer>
                     </section>
                 ) : null }

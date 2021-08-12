@@ -72,9 +72,9 @@ class MessageSended extends Component {
             <div>
               <span>수신자: {"수신자에요"}</span>
             </div>
-            <div>
-              <span>내용</span><br />
-              <span>내용이에요</span>
+            <div className='py-3'>
+              <p>내용</p>
+              <p>내용이에요</p>
             </div>
           </Modal>
           <Footer />

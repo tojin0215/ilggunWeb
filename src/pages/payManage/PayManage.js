@@ -182,6 +182,7 @@ class PayManage extends Component {
             <div className='w-50'>
               <div className='p-3 h-100'>
                 <span className='text-h5 text-bold my-3'>근로자</span>
+                {/* <input type="text" id='workername2' onChange={this.handleChange} /> */}
               </div>
               <div className='p-3 h-100'>
                 <p className='text-h5 text-bold w-100'>휴가기간</p>
@@ -189,12 +190,12 @@ class PayManage extends Component {
                   ~ 
                 <input className='small-shadow' type="date" min={dateToday2} id="end_date"/>
               </div>
-              <div className='p-3 h-100 flex-wrap'>              
+              <div className='p-3 h-100 flex-wrap'>
                 <p className='text-h5 text-bold w-100'>무/유급 휴가 선택</p>
                 <input type="checkbox" id="paid" name="checkboxGroup"
                 checked={this.state.checkboxGroup['paid']} onChange={this.handleCheckbox}/>
                 <span className='text-h6'>유급 휴가</span>
-                <input type="checkbox" id="unpaid" name="checkboxGroup" 
+                <input type="checkbox" id="unpaid" name="checkboxGroup"
                 checked={this.state.checkboxGroup['unpaid']} onChange={this.handleCheckbox}/>
                 <span className='text-h6'>무급 휴가</span>
               </div>
