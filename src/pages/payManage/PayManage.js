@@ -43,8 +43,6 @@ class PayManage extends Component {
         unpaid:false
       },
 
-      workername2:"근로자",
-      
       selectedWorker: null,
 
       VA:[],
@@ -77,7 +75,10 @@ class PayManage extends Component {
   }
 
  
-
+  handleSelectWorker =(workername2) =>{
+    const selectWokrerState = {selectedWorker: workername2};
+    this.setState(selectWokrerState)
+  }
   
 
 
@@ -174,15 +175,16 @@ class PayManage extends Component {
           <h4 className='text-h4'>🙋‍♀️ 휴가 등록하기</h4>
           <article className='sectionShadow flex flex-wrap'>
             <div className='w-50 small-shadow pt-3 m-0'>
-              {(!this.state.selectedWorker) ? <TableWorkerFilter data={this.state.worker} handleSelectWorker={(row)=> console.log(row.workername2)}/>
+              {(!this.state.selectedWorker) ? <TableWorkerFilter data={this.state.worker} handleSelectWorker={this.handleSelectWorker}/>
               : 
-               null}
+               (<span className='text-h5 text-bold my-3'>{this.state.selectedWorker.workername2}님의 휴가를 저장하세요.</span>
+               )}
               
             </div>
             <div className='w-50'>
               <div className='p-3 h-100'>
-                <span className='text-h5 text-bold my-3'>근로자</span>
-                {/* <input type="text" id='workername2' onChange={this.handleChange} /> */}
+                
+                
               </div>
               <div className='p-3 h-100'>
                 <p className='text-h5 text-bold w-100'>휴가기간</p>
