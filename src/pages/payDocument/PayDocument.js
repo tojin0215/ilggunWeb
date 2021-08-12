@@ -125,8 +125,8 @@ class PayDocument extends Component {
         <div className="container">
           <Menu />
           <article className='sectionShadow'>
-            <h4 className='text-h5 text-bold'>{this.state.yearMonth.year}년 {this.state.yearMonth.month}월 급여대장</h4>
-            <div className='w-100 flex jf-end'>
+            <div className='w-100 flex justify-content-between align-items-center'>
+              <h4 className='text-h5 text-bold'>{this.state.yearMonth.year}년 {this.state.yearMonth.month}월 급여대장</h4>
               {/* <input
                 placeholder='월 선택 캘린더'
                 type="date"

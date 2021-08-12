@@ -26,7 +26,11 @@ class Message extends Component {
     this.state = {
       recv_message: [],
       send_message: [],
-      msg: {}
+      msg: {},
+      isModalOpen: false,
+      msgFrom: "발신자",
+      msgTo: "수신자",
+      msgBody: "메시지 내용",
     }
     this.curFetch()
   }
@@ -64,8 +68,18 @@ class Message extends Component {
         this.props.history.push("/");
     }
 
-    openModal = () => {
+    openModal = (row) => {
+      console.log(row);
+      this.setState({
+        msgFrom: row.f,
+        msgTo: row.t,
+        msgBody: row.message,
+        isModalOpen: true,
+      })
+    }
 
+    closeModal = () => {
+      this.setState({isModalOpen: false})
     }
 
     render() {
@@ -82,16 +96,16 @@ class Message extends Component {
               <TableMessage data={this.state.recv_message} deleteMessage={this.deleteMessage} click={this.openModal} />
             </article>
           </div>
-          <Modal open={true} close={this.closeModal}>
+          <Modal open={this.state.isModalOpen} close={this.closeModal}>
             <div>
-              <span>발신자: {"발신자에요"}</span>
+              <p><span className='text-bold'>발신자</span>: {this.state.msgFrom}</p>
             </div>
             <div>
-              <span>수신자: {"수신자에요"}</span>
+              <p><span className='text-bold'>수신자</span>: {this.state.msgTo}</p>
             </div>
-            <div>
-              <span>내용</span><br />
-              <span>내용이에요</span>
+            <div className='my-3 border'>
+              <p className='text-bold pb-2'>내용</p>
+              <p className='p-2'>{this.state.msgBody}</p>
             </div>
           </Modal>
           <Footer />
