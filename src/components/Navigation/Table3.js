@@ -54,7 +54,8 @@ const Table = props => {
     {
       name:"휴가",
       selector: (row, index) => row.vacation,
-      sortable:true
+      sortable:true,
+      cell: row => (row.vacation)? (<span>{console.log(row.vacation)}{row.vacation.start_date_str.split('T')[0].replace("2021-", "")}~{row.vacation.end_date_str.split('T')[0].replace("2021-", "")}</span>):(<>-</>)
     }
   ];
 

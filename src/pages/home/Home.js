@@ -62,19 +62,46 @@ class Home extends Component {
           item["timelog"] = timelog;
           return item;
         })
+        // console.log(selectTimelogResult)
         // this.setState({worker: selectWorkerByType_result.map((item, index) => {
         //   const timelog = result.find((res) => res.workername == item.workername);
         //   item["timelog"] = timelog;
         //   return item;
-        // })})
+        // })}) 
 
-        // selectVacation(business_id)
-        // .then(result => result.json())
-        // .then(selectVacation_result => {
-        //   selectTimelogResult
-        // })
+        selectVacation(business_id)
+        .then(result => result.json())
+        .then(selectVacation_result => {
 
-        this.forceUpdate();
+          selectVacation_result = selectVacation_result.map((item, index) => {return {
+            business_id: ""+item.bang,
+            start_date: new Date(item.start_date),
+            end_date: new Date(item.end_date),
+            reason: ""+item.reason,
+            vacation_type: 0+item.vacation,
+            worker_name: ""+item.workername,
+            start_date_str: ""+item.start_date,
+            end_date_str: ""+item.end_date,
+            worker_id: null,
+          }})
+
+          const d = new Date();
+          selectVacation_result = selectVacation_result.filter(item => item.end_date < d)
+          console.log(selectVacation_result)
+
+          const workerResult = selectTimelogResult.map((item, index) => {
+            const filtered = selectVacation_result.filter(vac_item =>
+              vac_item.worker_name === item.workername2)
+            if (filtered.length > 0) item["vacation"] = filtered[0];
+            else item["vacation"] = null;
+
+            return item
+          })
+
+          console.log(workerResult)
+          this.setState({worker: workerResult})
+        })
+        // this.forceUpdate();
       })
       .catch(error => {
         console.error("curFetchWorker",error);
@@ -169,7 +196,6 @@ class Home extends Component {
     const alarms = this.state.recv_message.map((item, index) => {
       return <li>{item.message}</li>
     })
-    console.log(this.state.recv_message)
 
     return (
       <div className="wrap">
