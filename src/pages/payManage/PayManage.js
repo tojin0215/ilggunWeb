@@ -162,11 +162,11 @@ class PayManage extends Component {
               </Picker>
             </div>
             */}
-            <Calendar
+            {/* <Calendar
               onChange={this.onChange}
               value={this.state.value}
               className='sectionShadow'
-            />
+            /> */}
             <div className='sectionShadow'>
               <TableVacation data={this.state.VA}/>
             </div>
