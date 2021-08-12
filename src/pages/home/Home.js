@@ -52,7 +52,6 @@ class Home extends Component {
     selectWorkerByType(business_id, 2)
     .then(result => result.json())
     .then(selectWorkerByType_result => {
-      // this.setState({ worker: result })
 
       selectTimelog(business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
       .then(result => result.json())
@@ -62,12 +61,6 @@ class Home extends Component {
           item["timelog"] = timelog;
           return item;
         })
-        // console.log(selectTimelogResult)
-        // this.setState({worker: selectWorkerByType_result.map((item, index) => {
-        //   const timelog = result.find((res) => res.workername == item.workername);
-        //   item["timelog"] = timelog;
-        //   return item;
-        // })}) 
 
         selectVacation(business_id)
         .then(result => result.json())
@@ -86,7 +79,7 @@ class Home extends Component {
           }})
 
           const d = new Date();
-          selectVacation_result = selectVacation_result.filter(item => item.end_date < d)
+          selectVacation_result = selectVacation_result.filter(item => item.end_date > d)
           console.log(selectVacation_result)
 
           const workerResult = selectTimelogResult.map((item, index) => {
@@ -107,6 +100,7 @@ class Home extends Component {
         console.error("curFetchWorker",error);
       })
     })
+    console.log(this.props)
   }
 
   returnToLogin = () => {

@@ -19,6 +19,9 @@ import imgloginvisual from '../../img/loginVisual.png';
 class Login extends Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount = () => {
         this.checkAlreadyLogin();
     }
 

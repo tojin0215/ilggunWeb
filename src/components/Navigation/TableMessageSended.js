@@ -38,10 +38,10 @@ const Table = props => {
           ) : (
             null)
     },
-    {
-      name:"삭제",
-      cell: row => <Button variant="danger" onClick={ () => deleteMessage(row) }>삭제</Button>
-    },
+    // {
+    //   name:"삭제",
+    //   cell: row => <Button variant="danger" onClick={ () => deleteMessage(row) }>삭제</Button>
+    // },
     // {
     //   name:"삭제",
     //   selector: "delete",
