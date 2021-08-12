@@ -76,11 +76,7 @@ class PayManage extends Component {
     return
   }
 
-  handleChange = (e) =>{
-    let nextState = {};
-    nextState[e.target.name] = e.target.value;
-    this.setState(nextState);
-  }
+ 
 
   
 
@@ -108,6 +104,10 @@ class PayManage extends Component {
     this.setState({
       checkboxGroup:obj
     })
+  }
+
+  handleOnClick = () =>{
+    alert("휴가 저장 완료.");
   }
 
 
@@ -182,7 +182,6 @@ class PayManage extends Component {
             <div className='w-50'>
               <div className='p-3 h-100'>
                 <span className='text-h5 text-bold my-3'>근로자</span>
-                <input type="text" id='workername2' onChange={this.handleChange} />
               </div>
               <div className='p-3 h-100'>
                 <p className='text-h5 text-bold w-100'>휴가기간</p>
