@@ -204,7 +204,7 @@ class PayDocumentDetails extends Component {
             </div>
             <div>
               <Picker
-                className="button-solid_white-0 py-2 ps-4 pe-0 my-0 mx-1 d-flex"
+                className="py-2 ps-4 pe-0 my-0 mx-1 d-flex"
                 ref={this.pickAMonth}
                 value={this.state.yearMonth}
                 lang={pickerLang.months}
@@ -219,8 +219,8 @@ class PayDocumentDetails extends Component {
                   {' '}
                   {this.state.yearMonth.year}년 {this.state.yearMonth.month}월{' '}
                 </div>
-                <p className='text-center py-2'>급여명세서를 보고자 하는 해당 월을 선택하세요</p>
               </Picker>
+                <p className='text-center py-2'>급여명세서를 보고자 하는 해당 월을 선택하세요</p>
             </div>
           </article>
           <div className="sectionShadow">

@@ -38,11 +38,21 @@ const Table = props => {
       cell: row =>
           (row.state == 2) ? (
             <>
-            <Link to={{ pathname:"/workerManage/contract", state:{ worker: row } }}>작성</Link>
+            <Link
+              to={{ pathname:"/workerManage/contract", state:{ worker: row } }}
+              className='button-solid_white m-1 px-5 py-2'
+            >
+              작성
+            </Link>
             </>
             ) : (
               <>
-              <Link to={{ pathname:"/workerManage/contract", state:{ worker: row } }}>미작성</Link>
+              <Link
+                to={{ pathname:"/workerManage/contract", state:{ worker: row } }}
+                className='button-solid m-1 px-5 py-2'
+              >
+                미작성
+              </Link>
               
               </>)
     }

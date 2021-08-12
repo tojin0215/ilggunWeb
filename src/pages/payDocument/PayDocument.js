@@ -133,15 +133,21 @@ class PayDocument extends Component {
               >
               </input> */}
               <Picker
-                className='button-solid_white-0 py-2 ps-4 pe-0 my-0 mx-1 d-flex'
+                className='py-2 ps-4 pe-0 my-0 mx-1 d-flex'
                 ref={this.pickAMonth}
                 value={this.state.yearMonth}
                 lang={pickerLang.months}
                 // show={this.state.isVisibleMonthSelector}
                 onChange={this.handleAMonthChange}
                 onDismiss={this.handleAMonthDissmis}
-            >
-            <div onClick={() => this.pickAMonth.current.show()}> {this.state.yearMonth.year}년 {this.state.yearMonth.month}월 </div></Picker>
+              >
+                <div
+                  onClick={() => this.pickAMonth.current.show()}
+                  className='button-solid_white-0 py-2 px-5 my-0 mx-1 w-100 text-center cursor-pointer text-h5'
+                >
+                  {this.state.yearMonth.year}년 {this.state.yearMonth.month}월
+                </div>
+              </Picker>
             </div>
             <TablePay data={this.state.PD} />
           </article>

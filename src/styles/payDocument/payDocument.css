@@ -11,5 +11,6 @@
 }
 
 .payDocumentDetail .month-picker > .rmp-container .rmp-popup {
-  left: 0;
+  right: 39px;
+  top: 50px;
 }

@@ -424,7 +424,7 @@ class WorkerManageContract extends Component {
         <div className="container">
           <Menu />
           <div className='d-flex justify-content-between px-5'>
-            <div className='small-shadow py-3 px-5 flex align-ct js-ct worker-name width-fit'>
+            <div className='small-shadow py-3 px-5 flex align-ct js-ct worker-name width-fit m-0'>
               <span className='text-h6 text-bold'>{this.props.location.state.worker.workername2}</span>
             </div>
             <div className='button-solid width-fit d-flex align-items-center'>
