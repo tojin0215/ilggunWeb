@@ -116,6 +116,11 @@ class PayManageExtra extends Component {
     alert("추가 수당 저장 완료.");
   }
 
+  handleSelectWorker =(workername2) =>{
+    const selectWokrerState = {selectedWorker: workername2};
+    this.setState(selectWokrerState)
+  }
+  
 
 
 
@@ -171,7 +176,10 @@ class PayManageExtra extends Component {
             <h4 className='text-h4 mt-5'>🙋‍♀️ 추가수당 등록하기</h4>
             <article className='sectionShadow flex flex-wrap align-items-start'>
             <div className='col-4 w-50 small-shadow m-0'>
-              <TableWorkerFilter data={this.state.worker}/>
+              {(!this.state.selectedWorker) ? <TableWorkerFilter data={this.state.worker} handleSelectWorker={this.handleSelectWorker}/>
+              : 
+              (<span className='text-h5 text-bold my-3'>{this.state.selectedWorker.workername2}님의 추가 수당을 저장하세요.</span>
+              )}
             </div>
             <div className='flex-wrap col-4 w-50 px-5'>
               <div className='w-100'>
