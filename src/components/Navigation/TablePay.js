@@ -10,60 +10,65 @@ import './table.css';
 const Table = props => {
   const { data } = props;
   const columns = [
-    
     {
-      name:"근로자명",
+      name: "근로자명",
       selector: (row, index) => row.name,
-      sortable:true
+      sortable: true
       //contractform
     },
     {
-      name:"월급여",
+      name: "근로자명",
+      selector: (row, index) => row.name,
+      sortable: true
+      //contractform
+    },
+    {
+      name: "월급여",
       selector: (row, index) => row.salary,
       sortable: true,
-      cell: row => (row.salary == null)?(
+      cell: row => (row.salary == null) ? (
         0
-        ):(
-          row.salary
-        ) 
-        //contractform
+      ) : (
+        row.salary
+      )
+      //contractform
     },
     {
       name: "추가 수당",
       selector: (row, index) => row.additionalAllowance,
       sortable: true,
-      
+
       //otherAllowance.
     },
-    {
-      name:" 통상시급",
-      selector: (row, index) => row.insurance.HourlyWage,
-      sortable:true
-      //insurance
-    },
-    
-    {
-      name:" 월근무시간",
-      selector: (row, index) => row.insurance.workTime,
-      sortable:true      
-      //contractform.
-    },
-            
-    {
-      name:" 월급여공제",
-      selector: (row, index) => row.insurance.origin,
-      sortable:true     
-      //insurance
-    },
-    //공제액 계산
 
     {
-      name:" 실지급액",
-      selector: (row, index) => row.insurance.realPay,
-      sortable:true      
+      name: "통상시급",
+      selector: (row, index) => row.hourlyWage,
+      sortable: true
+      //insurance
+    },
+
+    {
+      name: " 월근무시간",
+      selector: (row, index) => row.workTime,
+      sortable: true
+      //contractform.
+    },
+
+    {
+      name: " 월급여공제",
+      selector: (row, index) => row.insurance,
+      sortable: true
+      //insurance
+    },
+
+    {
+      name: " 실지급액",
+      selector: (row, index) => row.realPay,
+      sortable: true
       //otherAllowance. + contractform + insurance
     }
-    //실지급액 계산
+
   ];
 
   const [filterText, setFilterText] = React.useState("");
@@ -97,7 +102,7 @@ const Table = props => {
   }, [filterText, resetPaginationToggle]);
 
   return (
-    <DataTable      
+    <DataTable
       defaultSortField="name"
       defaultSortAsc={false}
       highlightOnHover

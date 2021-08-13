@@ -50,26 +50,30 @@ class PayDocument extends Component {
         month: new Date().getMonth(),
       },
       year: '2021',
-      month: '6',
+      month: '7',
       isVisibleMonthSelector: false,
+
+      name: "",
+      salary: "",
+      item: null,
+      insurance: null,
+      otherAllowance: null,
+      salary: 0,
+      workTime: 0,
+      origin: 0,
+      realPay: 0,
+
       PD: [],
       //PayDocument(constractForm+insurancePercentage+otherAllance)
     };
     this.selectPayDocu();
   }
 
-  // selectPayDocu = () => {
-  //   const d = new Date()
-  // selectInsuranceYear(this.props.userinfo.business_name, d.getFullYear())
-  //   .then((result) => result.json())
-  //   .then((result) => {
-  //     console.log(result)
-  //     this.setState({ PD: result})
-  //   })
-  // }
+
 
   selectPayDocu = () => {
-    const d = new Date();
+
+
     selectContractformAll(this.props.userinfo.business_name)
       .then((result) => result.json())
       .then((selectContractformAllResult) => {
@@ -82,7 +86,7 @@ class PayDocument extends Component {
 
             selectContractformAllResult.map((item, index) => {
               const insurance = selectInsuranceYearResult.find(
-                (res) => res.bang == item.bang,
+                (selectContractformAllResult) => selectContractformAllResult.bang == item.bang,
               );
               item['insurance'] = insurance;
             });
@@ -96,15 +100,14 @@ class PayDocument extends Component {
               .then((otherAllowanceAllResult) => {
                 // console.log(otherAllowanceAllResult);
                 this.setState({
-                  PD: selectContractformAllResult.map((item2, index) => {
+                  PD: selectContractformAllResult.map((item, index) => {
                     const otherAllowance = otherAllowanceAllResult.find(
-                      (res) => res.bang == item2.bang,
+                      (selectContractformAllResult) => selectContractformAllResult.id == item.id,
                     );
-                    item2['otherAllowance'] = otherAllowance;
-                    console.log("item2");
-                    console.log(item2);
-                    return item2;
-
+                    item['otherAllowance'] = otherAllowance;
+                    console.log("item");
+                    console.log(item);
+                    return item;
                   }),
                 });
               });
@@ -117,7 +120,7 @@ class PayDocument extends Component {
   };
 
   handleAMonthChange = (year, month) => {
-    this.setState({ yearMonth: { year, month } });
+    this.setState({ yearMonth: { year, month } }, () => this.selectPayDocu());
     this.setState({ isVisibleMonthSelector: false });
   };
   handleAMonthDissmis = (e) => {
@@ -136,17 +139,14 @@ class PayDocument extends Component {
     // console.log('userinfo : ', userinfo);
     this.pickAMonth = React.createRef();
 
-    console.log("PD");
-    console.log(this.state.PD);
+    const view_pay_document = this.state.PD !== null && this.state.PD == null;
 
-    const view_pay_document =
-      this.state.PD !== null && this.state.insurance != null && this.state.otherAllowance != null;
-
-    const pay_document_data = view_pay_document
+    const PDdata = view_pay_document
+      //PDdata :PayDocument's data
       ?
       {
-        name: this.state.Employee,
-        salary: this.state.Salary,
+        name: this.item.Employee,
+        salary: this.item.Salary,
         workTime: Math.round(
           this.state.EndTime - this.state.StartTime
         ),
@@ -160,23 +160,23 @@ class PayDocument extends Component {
         nationalPension: Math.round(
           (this.state.Salary *
             this.state.insurance.NationalPensionPercentage) /
-          100,
+          100
         ),
         employmentInsurance: Math.round(
           (this.state.Salary *
             this.state.insurance.EmploymentInsurancePercentage) /
-          100,
+          100
         ),
         healthInsurance: Math.round(
           (this.state.Salary *
             this.state.insurance.HealthInsurancePercentage) /
-          100,
+          100
         ),
         regularCare: Math.round(
           (this.state.Salary * this.state.insurance.RegularCarePercentage) /
-          100,
+          100
         ),
-        origin: Math.round(
+        insurance: Math.round(
           this.state.nationalPension + this.state.employmentInsurance + this.state.healthInsurance + this.state.regularCare
         ),
         realPay: Math.round(
@@ -186,8 +186,8 @@ class PayDocument extends Component {
       }
       : {};
 
-    console.log("____________________");
-    console.log(pay_document_data);
+    console.log("PDdata");
+    console.log(PDdata);
 
     return (
       <div className="wrap wrap-paydocument">
@@ -213,7 +213,7 @@ class PayDocument extends Component {
                 ref={this.pickAMonth}
                 value={this.state.yearMonth}
                 lang={pickerLang.months}
-                // show={this.state.isVisibleMonthSelector}
+                show={this.state.isVisibleMonthSelector}
                 onChange={this.handleAMonthChange}
                 onDismiss={this.handleAMonthDissmis}
               >
@@ -225,10 +225,12 @@ class PayDocument extends Component {
                 </div>
               </Picker>
             </div>
-
+            <div>
+            </div>
+            {/* <TablePay data={this.state.PD} /> */}
             {view_pay_document ? (
-              <TablePay data={pay_document_data} />
-            ) : null
+              <TablePay data={PDdata} />
+            ) : this.state.yearMonth.year + "년 " + this.state.yearMonth.month + "월 " + "달 급여대장은 없습니다."
             }
 
           </article>
