@@ -49,10 +49,11 @@ class PayDocument extends Component {
         year: new Date().getFullYear(),
         month: new Date().getMonth(),
       },
-      year: '2020',
-      month: '1',
+      year: '2021',
+      month: '6',
       isVisibleMonthSelector: false,
       PD: [],
+      //PayDocument(constractForm+insurancePercentage+otherAllance)
     };
     this.selectPayDocu();
   }
@@ -89,19 +90,21 @@ class PayDocument extends Component {
             otherAllowanceAll(
               this.props.userinfo.business_name,
               this.state.yearMonth.year,
-              this.state.yearMonth.month,
+              this.state.yearMonth.month
             )
               .then((result) => result.json())
               .then((otherAllowanceAllResult) => {
-                console.log(otherAllowanceAllResult);
+                // console.log(otherAllowanceAllResult);
                 this.setState({
                   PD: selectContractformAllResult.map((item2, index) => {
                     const otherAllowance = otherAllowanceAllResult.find(
                       (res) => res.bang == item2.bang,
                     );
                     item2['otherAllowance'] = otherAllowance;
+                    console.log("item2");
                     console.log(item2);
                     return item2;
+
                   }),
                 });
               });
@@ -130,8 +133,61 @@ class PayDocument extends Component {
 
   render() {
     const { userinfo } = this.props;
-    console.log('userinfo : ', userinfo);
+    // console.log('userinfo : ', userinfo);
     this.pickAMonth = React.createRef();
+
+    console.log("PD");
+    console.log(this.state.PD);
+
+    const view_pay_document =
+      this.state.PD !== null && this.state.insurance != null && this.state.otherAllowance != null;
+
+    const pay_document_data = view_pay_document
+      ?
+      {
+        name: this.state.Employee,
+        salary: this.state.Salary,
+        workTime: Math.round(
+          this.state.EndTime - this.state.StartTime
+        ),
+        additionalAllowance: Math.round(
+          (this.state.otherAllowance.t_bonus + this.state.otherAllowance.t_extension + this.state.otherAllowance.t_position + this.state.otherAllowance.t_etc)
+          +
+          (this.state.otherAllowance.f_carMaintenanceFee + this.state.otherAllowance.f_childcareAllowance + this.state.otherAllowance.f_meals)
+        ),
+        hourlyWage: this.state.insurance.HourlyWage,
+
+        nationalPension: Math.round(
+          (this.state.Salary *
+            this.state.insurance.NationalPensionPercentage) /
+          100,
+        ),
+        employmentInsurance: Math.round(
+          (this.state.Salary *
+            this.state.insurance.EmploymentInsurancePercentage) /
+          100,
+        ),
+        healthInsurance: Math.round(
+          (this.state.Salary *
+            this.state.insurance.HealthInsurancePercentage) /
+          100,
+        ),
+        regularCare: Math.round(
+          (this.state.Salary * this.state.insurance.RegularCarePercentage) /
+          100,
+        ),
+        origin: Math.round(
+          this.state.nationalPension + this.state.employmentInsurance + this.state.healthInsurance + this.state.regularCare
+        ),
+        realPay: Math.round(
+          (this.stae.salary + this.stae.additionalAllowance) - this.stae.origin
+        )
+
+      }
+      : {};
+
+    console.log("____________________");
+    console.log(pay_document_data);
 
     return (
       <div className="wrap wrap-paydocument">
@@ -169,7 +225,12 @@ class PayDocument extends Component {
                 </div>
               </Picker>
             </div>
-            <TablePay data={this.state.PD} />
+
+            {view_pay_document ? (
+              <TablePay data={pay_document_data} />
+            ) : null
+            }
+
           </article>
         </div>
         <Footer />

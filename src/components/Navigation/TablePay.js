@@ -13,18 +13,18 @@ const Table = props => {
     
     {
       name:"근로자명",
-      selector: (row, index) => row.Employee,
+      selector: (row, index) => row.name,
       sortable:true
       //contractform
     },
     {
       name:"월급여",
-      selector: (row, index) => row.Salary,
+      selector: (row, index) => row.salary,
       sortable: true,
-      cell: row => (row.Salary == null)?(
+      cell: row => (row.salary == null)?(
         0
         ):(
-          row.Salary
+          row.salary
         ) 
         //contractform
     },
@@ -32,12 +32,7 @@ const Table = props => {
       name: "추가 수당",
       selector: (row, index) => row.additionalAllowance,
       sortable: true,
-      cell: row =>
-      (parseInt(row.otherAllowance.taxation) + parseInt(row.otherAllowance.taxFree) == null) ?(
-        0
-      ):(
-        parseInt(row.otherAllowance.taxation) + parseInt(row.otherAllowance.taxFree)
-      )
+      
       //otherAllowance.
     },
     {
@@ -49,29 +44,23 @@ const Table = props => {
     
     {
       name:" 월근무시간",
-      selector: "worktime",
-      sortable:true,
-      cell: row =>
-      parseInt(row.EndTimeHour)- parseInt(row.StartTimeHour) + "시간"
+      selector: (row, index) => row.insurance.workTime,
+      sortable:true      
       //contractform.
     },
             
     {
       name:" 월급여공제",
-      selector: "tax",
-      sortable:true,
-      cell:  row =>
-      (row.insurance.NationalPensionPercentage + row.insurance.HealthInsurancePercentage + row.insurance.RegularCarePercentage + row.insurance.EmploymentInsurancePercentage)
+      selector: (row, index) => row.insurance.origin,
+      sortable:true     
       //insurance
     },
     //공제액 계산
 
     {
       name:" 실지급액",
-      selector: "realPay",
-      sortable:true,
-      cell:row=>
-      parseInt(row.Salary) + parseInt(row.otherAllowance.taxation) + parseInt(row.otherAllowance.taxFree)
+      selector: (row, index) => row.insurance.realPay,
+      sortable:true      
       //otherAllowance. + contractform + insurance
     }
     //실지급액 계산
@@ -86,10 +75,9 @@ const Table = props => {
   // );
   const filteredItems = props.data.filter(
     item =>
-      item.Employee.indexOf(filterText.toLowerCase()) !== -1
+      item.name.indexOf(filterText.toLowerCase()) !== -1
   );
-  //id ==> Employee 변경
-  
+  // name = Employee
 
   const subHeaderComponent = useMemo(() => {
     const handleClear = () => {
