@@ -139,14 +139,14 @@ class PayDocument extends Component {
     // console.log('userinfo : ', userinfo);
     this.pickAMonth = React.createRef();
 
-    const view_pay_document = this.state.PD !== null && this.state.PD == null;
+    const view_pay_document = this.state.PD !== null;
 
     const PDdata = view_pay_document
       //PDdata :PayDocument's data
       ?
       {
-        name: this.item.Employee,
-        salary: this.item.Salary,
+        name: this.state.Employee,
+        salary: this.state.Salary,
         workTime: Math.round(
           this.state.EndTime - this.state.StartTime
         ),
