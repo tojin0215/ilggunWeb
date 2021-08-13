@@ -140,7 +140,7 @@ class TaskManage extends Component {
               className='sectionShadow'
             /> */}
 
-            {(!this.state.selectedDate) ?
+            {(!this.state.selectedDate && false) ?
             <Calendar 
               value={this.state.value} onChange={this.onChange} className='sectionShadow'
               data={this.state.DA}   handleSelectWorker={(row)=> console.log(row)}

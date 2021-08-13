@@ -108,7 +108,13 @@ class PayManage extends Component {
   }
 
   handleOnClick = () =>{
+    const reason = this.state.reason;
+    
     alert("휴가 저장 완료.");
+  }
+
+  handleReason = (e) => {
+    this.setState({reason: e.target.value});
   }
 
 
@@ -203,7 +209,7 @@ class PayManage extends Component {
               </div>
               <div className='p-3 h-100'>
                 <p className='text-h5 text-bold'>사유 입력</p>
-                <input className='small-shadow' placeholder="사유를 입력하세요"></input>
+                <input className='small-shadow' placeholder="사유를 입력하세요" onChange={this.handleReason}></input>
               </div>
             </div>
             <button className='button-solid' type="button" onClick={this.handleOnClick} >저장하기</button>
