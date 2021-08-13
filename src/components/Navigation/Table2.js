@@ -91,6 +91,7 @@ const Table = props => {
       pagination
       subHeader
       subHeaderComponent={subHeaderComponent}
+      noDataComponent="데이터가 없습니다"
     />
   );
 };

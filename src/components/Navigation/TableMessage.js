@@ -92,6 +92,7 @@ const Table = props => {
       subHeader
       onRowClicked={props.click}
       subHeaderComponent={subHeaderComponent}
+      noDataComponent="데이터가 없습니다"
     />
   );
 };

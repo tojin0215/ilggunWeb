@@ -30,6 +30,7 @@ class Download extends Component {
   }
 
   curFetch = () => {
+    if (!this.props.userinfo.business_name) return
     filelist(this.props.userinfo.business_name)
     // filelist("undefined")
     .then(r => r.json())

@@ -49,6 +49,7 @@ const Table = props => {
       striped
       pagination
       onRowDoubleClicked={downloadFile}
+      noDataComponent="데이터가 없습니다"
     />
   );
 };

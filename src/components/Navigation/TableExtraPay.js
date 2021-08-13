@@ -82,6 +82,7 @@ const Table = props => {
       paginationPerPage={4}
       //  subHeader
       // subHeaderComponent={subHeaderComponent}
+      noDataComponent="데이터가 없습니다"
     />
   );
 };
