@@ -119,6 +119,7 @@ class Home extends Component {
     selectReceivedMessage(this.props.userinfo.id)
     .then(result => result.json())
     .then(result => {
+      result = result.filter(item => item.r === 0)
       this.setState({message_count: result.length})
     })
   }

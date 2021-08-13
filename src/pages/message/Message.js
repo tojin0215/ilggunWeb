@@ -7,7 +7,7 @@ import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 
-import {selectReceivedMessage} from '../../action/api';
+import {selectReceivedMessage, alterReadMessage} from '../../action/api';
 import {delMessage} from '../../action/api';
 import {Modal} from '../../components/Modal/Modal';
 
@@ -76,6 +76,9 @@ class Message extends Component {
         msgBody: row.message,
         isModalOpen: true,
       })
+
+      alterReadMessage(row.ind)
+      .then(result => console.log(result))
     }
 
     closeModal = () => {
