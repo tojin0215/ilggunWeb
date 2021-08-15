@@ -178,7 +178,7 @@ class WorkerManageStaff extends Component {
                 // type="button"
                 value="QR 다운로드"
                 onClick={this.onImageCownload}
-              >"QR 다운로드</Button>
+              >QR 다운로드</Button>
           </Modal>
           <Modal open={ this.state.modalRetireOpen } close={ () => this.setState({modalRetireOpen: false}) } ok={ this.closeRetireModal } title="Create a chat room">
             <div>

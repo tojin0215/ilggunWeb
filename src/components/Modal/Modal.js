@@ -13,6 +13,7 @@ export class Modal extends Component {
                     <section>
                         <header>
                             { header }
+                            <p>QR Code</p>
                             {/* <Button variant="secondary" className="close" onClick={close}> &times; </Button> */}
                         </header>
                         <main>
