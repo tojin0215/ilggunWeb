@@ -102,7 +102,8 @@ class PayDocument extends Component {
                     const otherAllowance = otherAllowanceAllResult.find(
                       (selectContractformAllResult) => selectContractformAllResult.id == item.id,
                     );
-                    item['otherAllowance'] = otherAllowance;
+                    if (otherAllowance) item['otherAllowance'] = otherAllowance;
+                    else  item['otherAllowance'] = {t_bonus: 0, t_extension: 0, t_position: 0, t_etc: 0, f_carMaintenanceFee: 0, f_childcareAllowance: 0, f_meals: 0};
                     console.log("item");
                     console.log(item);
                     return item;
