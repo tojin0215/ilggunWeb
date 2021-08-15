@@ -54,13 +54,11 @@ class PayDocument extends Component {
       isVisibleMonthSelector: false,
 
       name: "",
-      salary: "",
-      item: null,
-      insurance: null,
-      otherAllowance: null,
       salary: 0,
+      additionalAllowance: 0,
+      hourlyWage: 0,
       workTime: 0,
-      origin: 0,
+      deduction: 0,
       realPay: 0,
 
       PD: [],
@@ -139,55 +137,56 @@ class PayDocument extends Component {
     // console.log('userinfo : ', userinfo);
     this.pickAMonth = React.createRef();
 
-    const view_pay_document = this.state.PD !== null;
+    const view_pay_document = this.state.insurance !== null && this.state.otherAllowance !== null;
 
-    const PDdata = view_pay_document
-      //PDdata :PayDocument's data
-      ?
-      {
-        name: this.state.Employee,
-        salary: this.state.Salary,
-        workTime: Math.round(
-          this.state.EndTime - this.state.StartTime
-        ),
-        additionalAllowance: Math.round(
-          (this.state.otherAllowance.t_bonus + this.state.otherAllowance.t_extension + this.state.otherAllowance.t_position + this.state.otherAllowance.t_etc)
-          +
-          (this.state.otherAllowance.f_carMaintenanceFee + this.state.otherAllowance.f_childcareAllowance + this.state.otherAllowance.f_meals)
-        ),
-        hourlyWage: this.state.insurance.HourlyWage,
+    // const PDdata = view_pay_document
+    //   //PDdata :PayDocument's data
+    //   ?
+    //   {
+    //     name: this.state.Employee,
+    //     salary: this.state.Salary,
+    //     workTime: Math.round(
+    //       this.state.EndTime - this.state.StartTime
+    //     ),
+    //     additionalAllowance: Math.round(
+    //       (this.state.t_bonus + this.state.t_extension + this.state.t_position + this.state.t_etc)
+    //       +
+    //       (this.state.f_carMaintenanceFee + this.state.f_childcareAllowance + this.state.f_meals)
+    //     ),
+    //     hourlyWage: this.state.HourlyWage,
 
-        nationalPension: Math.round(
-          (this.state.Salary *
-            this.state.insurance.NationalPensionPercentage) /
-          100
-        ),
-        employmentInsurance: Math.round(
-          (this.state.Salary *
-            this.state.insurance.EmploymentInsurancePercentage) /
-          100
-        ),
-        healthInsurance: Math.round(
-          (this.state.Salary *
-            this.state.insurance.HealthInsurancePercentage) /
-          100
-        ),
-        regularCare: Math.round(
-          (this.state.Salary * this.state.insurance.RegularCarePercentage) /
-          100
-        ),
-        insurance: Math.round(
-          this.state.nationalPension + this.state.employmentInsurance + this.state.healthInsurance + this.state.regularCare
-        ),
-        realPay: Math.round(
-          (this.stae.salary + this.stae.additionalAllowance) - this.stae.origin
-        )
+    //     nationalPension: Math.round(
+    //       (this.state.Salary *
+    //         this.state.NationalPensionPercentage) /
+    //       100
+    //     ),
+    //     employmentInsurance: Math.round(
+    //       (this.state.Salary *
+    //         this.state.EmploymentInsurancePercentage) /
+    //       100
+    //     ),
+    //     healthInsurance: Math.round(
+    //       (this.state.Salary *
+    //         this.state.HealthInsurancePercentage) /
+    //       100
+    //     ),
+    //     regularCare: Math.round(
+    //       (this.state.Salary * this.state.RegularCarePercentage) /
+    //       100
+    //     ),
+    //     deduction: Math.round(
+    //       this.state.nationalPension + this.state.employmentInsurance + this.state.healthInsurance + this.state.regularCare
+    //     ),
+    //     realPay: Math.round(
+    //       (this.state.Salary + PDdata.additionalAllowance) - PDdata.deduction
+    //     )
 
-      }
-      : {};
+    //   }
+    //   : {};
 
-    console.log("PDdata");
-    console.log(PDdata);
+
+    // console.log("PDdata");
+    // console.log(PDdata);
 
     return (
       <div className="wrap wrap-paydocument">
@@ -227,11 +226,11 @@ class PayDocument extends Component {
             </div>
             <div>
             </div>
-            {/* <TablePay data={this.state.PD} /> */}
-            {view_pay_document ? (
+            <TablePay data={this.state.PD} />
+            {/* {view_pay_document ? (
               <TablePay data={PDdata} />
             ) : this.state.yearMonth.year + "년 " + this.state.yearMonth.month + "월 " + "달 급여대장은 없습니다."
-            }
+            } */}
 
           </article>
         </div>
