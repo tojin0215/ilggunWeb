@@ -176,7 +176,7 @@ class WorkerManageStaff extends Component {
             <QRCode id="QRCode" value={ this.state.modalData } />
             <Button
                 // type="button"
-                value="QR 다운로드"
+                value="QR Code"
                 onClick={this.onImageCownload}
               >QR 다운로드</Button>
           </Modal>
