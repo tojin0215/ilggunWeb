@@ -8,6 +8,7 @@ import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 import Calendar from 'react-calendar';
 import Picker from 'react-month-picker';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 
 import TableWorkerFilter from '../../components/Navigation/TableWorkerFilter';
 
@@ -74,7 +75,8 @@ class PayDocumentDetails extends Component {
     selectWorkerByType(business_id, 2)
       .then((result) => result.json())
       .then((result) => {
-        this.setState({ workers: result });
+        const r = result.filter(item => !(item.state === "0" || item.state === "1"));
+        this.setState({ workers: r });
       })
       .catch((error) => {
         console.error('curFetchWorker', error);
@@ -140,8 +142,11 @@ class PayDocumentDetails extends Component {
                 console.log('taxFree', taxFree);
 
                 let salary = 0;
-                if (allowance.salary) salary = allowance.Salary;
-                else if (new_state.contract.Salary) salary = Number(new_state.contract.Salary)
+                try {
+                  if (allowance.salary) salary = allowance.Salary;
+                  else if (new_state.contract.Salary) salary = Number(new_state.contract.Salary)
+                } catch (e) {console.error(e)}
+                
                 new_state.salary = salary
                 console.log('salary', salary);
 
@@ -277,6 +282,18 @@ class PayDocumentDetails extends Component {
             </div>
           </article>
           <div className="sectionShadow">
+            {show_pay_document ? (
+              <PDFDownloadLink
+              className='button-solid width-fit d-flex align-items-center'
+              document={<PayDocumentPDF forDownload={true} data={pay_document_data} />}
+              fileName="pay_detail.pdf"
+            >
+              {({ blob, url, loading, error }) =>
+                loading ? "Loading document..." : "다운받기"
+              }
+            </PDFDownloadLink>
+              ): null
+            }
             {show_pay_document ? (
               <div>
                 {/* 급여명세서 표시하는 공간입니다. */}

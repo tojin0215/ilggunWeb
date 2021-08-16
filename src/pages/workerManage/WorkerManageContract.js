@@ -16,6 +16,7 @@ import '../../styles/workerManage/workerManageContract.css';
 class WorkerManageContract extends Component {
   constructor(props) {
     super(props);
+    const this_business = this.props.userinfo.business_info.filter(item => this.props.userinfo.business_name === item.bname)[0]
     this.state = {
       bangcode: props.userinfo.business_name,
       bang: props.userinfo.business_name,
@@ -47,10 +48,11 @@ class WorkerManageContract extends Component {
       BreakTimeEndHour: "",
       BreakTimeEndMin: "",
       Salary: "",
-      Bonus: "",
-      Bonus2: "",
-      Bonus3: "",
-      Bonus4: "",
+      Bonus: "0",
+      Bonus1: "0",
+      Bonus2: "0",
+      Bonus3: "0",
+      Bonus4: "0",
       SalaryDay: "",
       WorkPlace: "",
       Holiday: "",
@@ -81,10 +83,11 @@ class WorkerManageContract extends Component {
       BreakTimeEndHour: "",
       BreakTimeEndMin: "",
       Salary: "",
-      Bonus: "",
-      Bonus2: "",
-      Bonus3: "",
-      Bonus4: "",
+      Bonus: "0",
+      Bonus1: "0",
+      Bonus2: "0",
+      Bonus3: "0",
+      Bonus4: "0",
       SalaryDay: "",
       WorkPlace: "",
       Holiday: "",
@@ -93,10 +96,11 @@ class WorkerManageContract extends Component {
       ContractYear: "",
       ContractMonth: "",
       ContractDay: "",
-      BusinessName: "",
-      BusinessAddress: "",
-      BusinessPhone: "",
-      BusinessOwner1: "",
+      // BusinessName: this.props.userinfo.business_name,
+      BusinessName: this_business.bname,
+      BusinessAddress: this_business.baddress,
+      BusinessPhone: this_business.bphone,
+      BusinessOwner1: this.props.userinfo.manager_name,
       EmployeeAddress: "",
       EmployeePhone: "",
       EmployeeName: "",
@@ -106,6 +110,7 @@ class WorkerManageContract extends Component {
       tableTitle: ['월', '화', '수', '목', '금', '토', '일'],
       checkedItems: new Set(),
     };
+
     // this.props.location.worker.name
     console.debug('WorkerManageContract');
     console.debug(props);
@@ -385,8 +390,17 @@ class WorkerManageContract extends Component {
     if (data.checkedItems.has("산재보험")) value4.push(2)
     if (data.checkedItems.has("국민연금")) value4.push(3)
     if (data.checkedItems.has("건강보험")) value4.push(4)
-    data['value4'] = (data.value4.length > 0)? data.value4 : value4;
+    // data['value4'] = (data.value4.length > 0)? data.value4 : value4;
+    data['value4'] = value4;
     delete data['checkedItems']
+
+    data.types1 = [{"label":"없음   ","value":0},{"label":"있음","value":1}]
+    data.types2 = [{"label":"없음   ","value":0},{"label":"있음","value":1}]
+    data.types3 = [{"label":"근로자에게 직접지급   ","value":0},{"label":"근로자 명의 예금통장에 입금","value":1}]
+
+    data.BusinessName = this.props.userinfo.business_name
+
+    console.log(data.value4)
 
     writeContractform(data)
     .then(res => {
@@ -429,7 +443,9 @@ class WorkerManageContract extends Component {
                 <span className='text-h6 text-bold'>{this.props.location.state.worker.workername2}</span>
               </div>
             </div>
-            <PDFDownloadLink
+            {
+              this.state.type === 3 ? (
+                <PDFDownloadLink
               className='button-solid width-fit d-flex align-items-center'
               document={<WorkerContract forDownload={true} contract={this.state} />}
               fileName="worker.pdf"
@@ -438,6 +454,9 @@ class WorkerManageContract extends Component {
                 loading ? "Loading document..." : "다운받기"
               }
             </PDFDownloadLink>
+              ): null
+            }
+            
           </div>
   {/* 완전한 계약서만 출력 */}
   {this.state.type === 3 && !isEditMode ? (
@@ -501,7 +520,7 @@ class WorkerManageContract extends Component {
                     className='w-100px'
                     type="number"
                     onChange={(e) =>
-                      this.setState({ StartStartDayYear: e.target.value })
+                      this.setState({ StartDay: e.target.value })
                     }
                     value={this.state.StartDay}
                   ></input>

@@ -17,6 +17,7 @@ Font.register({
 // Create styles
 const styles = StyleSheet.create({
   page: {
+    fontFamily: 'Nanum Gothic',
     //   flexDirection: 'row',
     //   backgroundColor: '#E4E4E4'
   },
@@ -55,7 +56,7 @@ class WorkerContract extends Component {
     this.setState({ numPages: numPages });
   };
 
-  renderPDF = () => {
+  render = () => {
     return (
       <Document>
         <Page size="A4" style={styles.page}>
@@ -435,7 +436,7 @@ class WorkerContract extends Component {
   //     );
   //   };
 
-  render() {
+  renderTemp() {
     return this.renderPDF();
     return (
       <div>
