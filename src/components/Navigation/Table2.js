@@ -41,7 +41,7 @@ const Table = props => {
       cell: row =>
         (row.state == 2) ? (
             <>
-              <Button variant="danger" onClick={ () => deleteWorker(null,row.workername) }>퇴사</Button>              
+              <Button variant="danger" onClick={ () => deleteWorker(null, row.workername) }>퇴사</Button>              
             </>
           ) : <><span>{(row.retire_date) ? row.retire_date : new Date().toLocaleDateString()}</span></>
     },

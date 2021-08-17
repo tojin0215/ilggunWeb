@@ -44,6 +44,17 @@
   padding: 16px;
   border-bottom: 1px solid #dee2e6;
   border-top: 1px solid #dee2e6;
+  display:flex;
+  flex-direction: column;
+}
+.modal > section > main > svg {
+  margin: 10px auto ;
+}
+.modal > section > main > button {
+  width: fit-content;
+  margin : 10px auto;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 .modal > section > footer {
   padding: 12px 16px;
