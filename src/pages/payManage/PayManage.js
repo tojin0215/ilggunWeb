@@ -7,8 +7,8 @@ import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 import Calendar from 'react-calendar';
-// import Picker from 'react-month-picker'
-// import "react-month-picker/css/month-picker.css";
+import Picker from 'react-month-picker'
+import "react-month-picker/css/month-picker.css";
 
 import TableVacation from '../../components/Navigation/TableVacation';
 import TableWorkerFilter from '../../components/Navigation/TableWorkerFilter';
@@ -33,23 +33,26 @@ class PayManage extends Component {
     this.state = {
       value: new Date(),
 
-      yearMonth: {year: 2019, month: 1},
+      yearMonth: { year: 2019, month: 1, date: 31 },
       year: "2020",
       month: "1",
+      date: "31",
       isVisibleMonthSelector: false,
-      
-      checkboxGroup:{
-        paid:true,
-        unpaid:false
+
+      checkboxGroup: {
+        paid: true,
+        unpaid: false
       },
 
       selectedWorker: null,
 
-      VA:[],
-      worker:[]
+      vacation: [],
+      worker: [],
+      dateVacation: []
     }
     this.vacation()
     this.workerFilter()
+    // this.dateVacation()
   }
   goLogin = () => {
     this.props.history.push('/');
@@ -58,63 +61,81 @@ class PayManage extends Component {
 
   vacation = () => {
     selectVacation(this.props.userinfo.business_name)
-    .then((result) => result.json())
-    .then((result) => {
-      this.setState({VA:result})
-    })
+      .then((result) => result.json())
+      .then((result) => {
+        this.setState({ vacation: result })
+      })
     return
   }
+
+  dateVacation = () => {
+    this.dateVacation(this.props.userinfo.business_name, this.yearMonth.year, this.yearMonth.month, this.yearMonth.date)
+      .then((result) => result.json())
+      .then((result) => {
+        this.setState({ dateVacation: result })
+        console.log(this.state)
+        console.log(result)
+      })
+    return
+  }
+
+
+
 
   workerFilter = () => {
     selectWorkerByType(this.props.userinfo.business_name, 2)
-    .then(result => result.json())
-    .then(result => {
-      this.setState({ worker: result })
-    })
+      .then(result => result.json())
+      .then(result => {
+        this.setState({ worker: result })
+      })
     return
   }
 
- 
-  handleSelectWorker =(workername2) =>{
-    const selectWokrerState = {selectedWorker: workername2};
+
+  handleSelectWorker = (workername2) => {
+    const selectWokrerState = { selectedWorker: workername2 };
     this.setState(selectWokrerState)
   }
-  
+  handleSelectDate = (year, month, date) => {
+    const selectDateState = { selectedDate: year, month, date };
+    this.setState(selectDateState)
+  }
 
 
 
-  handleAMonthChange = (year, month) => {
-    this.setState({yearMonth: {year, month}});
-    this.setState({isVisibleMonthSelector: false});
+  handleAMonthChange = (year, month, date) => {
+    this.setState({ yearMonth: { year, month, date } }, () => this.dateVacation());
+    this.setState({ isVisibleMonthSelector: false });
   }
   handleAMonthDissmis = (e) => {
-    this.setState({isVisibleMonthSelector: false});
+    this.setState({ isVisibleMonthSelector: false });
   }
   handleClickMonthBox = (e) => {
-    this.setState({isVisibleMonthSelector: true});
+    this.setState({ isVisibleMonthSelector: true });
     console.debug(this.state.isVisibleMonthSelector);
   }
 
   handleCheckbox = (e) => {
     let obj = {
-      paid:false,
-      unpaid:false,
+      paid: false,
+      unpaid: false,
     }
     obj[e.target.id] = e.target.checked
     // console.log(obj);
     this.setState({
-      checkboxGroup:obj
+      checkboxGroup: obj
     })
   }
 
-  handleOnClick = () =>{
+  handleOnClick = () => {
     const reason = this.state.reason;
-    
+
     alert("휴가 저장 완료.");
   }
 
   handleReason = (e) => {
-    this.setState({reason: e.target.value});
+    this.setState({ reason: e.target.value });
+    this.setState({ checkboxGroup: e.target.checked });
   }
 
 
@@ -124,9 +145,9 @@ class PayManage extends Component {
     const { userinfo } = this.props;
     console.log('userinfo : ', userinfo);
     const makeText = m => {
-      if (m && m.year && m.month) return (pickerLang.months[m.month-1] + '. ' + m.year)
+      if (m && m.year && m.month) return (pickerLang.months[m.month - 1] + '. ' + m.year)
       return '?'
-      }
+    }
     this.pickAMonth = React.createRef()
 
     const a = new Date();
@@ -140,7 +161,7 @@ class PayManage extends Component {
       day = "0" + day;
     }
     const dateToday = `${year}-${month}-${day}`;
-    const dateToday2 = `${year}-${month}-${day+1}`;
+    const dateToday2 = `${year}-${month}-${day + 1}`;
 
     return (
       <div className="wrap wrap-paymanage">
@@ -153,8 +174,7 @@ class PayManage extends Component {
               {/* <span className='color-point text-h5'>✔ </span> */}
               🏖 휴가중인 직원
             </h4>
-            {/*
-            <div className="edit">
+            {/* <div className="edit">
               <Picker
                 ref={this.pickAMonth}
                 show={this.state.isVisibleMonthSelector}
@@ -165,46 +185,55 @@ class PayManage extends Component {
                 onChange={this.handleAMonthChange}
                 onDismiss={this.handleAMonthDissmis}
               >
-                <MonthBox value={makeText({year: 2019, month: 1})} onClick={this.handleClickMonthBox} />
+                <MonthBox value={makeText({ year: 2019, month: 1 })} onClick={this.handleClickMonthBox} />
+                
               </Picker>
-            </div>
-            */}
-            {/* <Calendar
-              onChange={this.onChange}
-              value={this.state.value}
-              className='sectionShadow'
-            /> */}
+            </div> */}
+
+            {/* {(!this.state.handleSelectDate) ?
+              <Calendar
+                onChange={this.onChange}
+                value={this.state.value}
+                className='sectionShadow'
+                handleSelectDate={this.handleSelectDate}
+              />
+              :
+              (<p>휴가기간선택</p>)} */}
             <div className='sectionShadow'>
-              <TableVacation data={this.state.VA}/>
+              <TableVacation data={this.state.vacation} handleSelectDate={this.handleSelectDate} />
             </div>
+
+
           </article>
+
+
           <h4 className='text-h4'>🙋‍♀️ 휴가 등록하기</h4>
           <article className='sectionShadow flex flex-wrap'>
             <div className='w-50 small-shadow pt-3 m-0'>
-              {(!this.state.selectedWorker) ? <TableWorkerFilter data={this.state.worker} handleSelectWorker={this.handleSelectWorker}/>
-              : 
-               (<p className='text-center'>
-                 <span className='text-h5 text-bold my-3 px-2'>{this.state.selectedWorker.workername2}</span>님의 휴가를 저장하세요.</p>
-               )}
+              {(!this.state.selectedWorker) ? <TableWorkerFilter data={this.state.worker} handleSelectWorker={this.handleSelectWorker} />
+                :
+                (<p className='text-center'>
+                  <span className='text-h5 text-bold my-3 px-2'>{this.state.selectedWorker.workername2}</span>님의 휴가를 저장하세요.</p>
+                )}
             </div>
             <div className='w-50'>
               <div className='p-3 h-100'>
-                
-                
+
+
               </div>
               <div className='p-3 h-100'>
                 <p className='text-h5 text-bold w-100'>휴가기간</p>
-                <input className='small-shadow' type="date" defaultValue={dateToday} min={dateToday} id="start_date"/>
-                  ~ 
-                <input className='small-shadow' type="date" min={dateToday2} id="end_date"/>
+                <input className='small-shadow' type="date" defaultValue={dateToday} min={dateToday} id="start_date" />
+                ~
+                <input className='small-shadow' type="date" min={dateToday2} id="end_date" />
               </div>
               <div className='p-3 h-100 flex-wrap'>
                 <p className='text-h5 text-bold w-100'>무/유급 휴가 선택</p>
                 <input type="checkbox" id="paid" name="checkboxGroup"
-                checked={this.state.checkboxGroup['paid']} onChange={this.handleCheckbox}/>
+                  checked={this.state.checkboxGroup['paid']} onChange={this.handleCheckbox} />
                 <span className='text-h6'>유급 휴가</span>
                 <input type="checkbox" id="unpaid" name="checkboxGroup"
-                checked={this.state.checkboxGroup['unpaid']} onChange={this.handleCheckbox}/>
+                  checked={this.state.checkboxGroup['unpaid']} onChange={this.handleCheckbox} />
                 <span className='text-h6'>무급 휴가</span>
               </div>
               <div className='p-3 h-100'>

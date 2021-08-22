@@ -53,13 +53,18 @@ class PayDocument extends Component {
       month: '7',
       isVisibleMonthSelector: false,
 
+      item: null,
+      insurance: null,
+      otherAllowance: null,
       name: "",
-      salary: 0,
-      additionalAllowance: 0,
-      hourlyWage: 0,
-      workTime: 0,
-      deduction: 0,
-      realPay: 0,
+      salary: null,
+      hourlyWage: null,
+      workTime: null,
+      additionalAllowance: null,
+      nationalPension: null,
+      employmentInsurance: null,
+      healthInsurance: null,
+      regularCare: null,
 
       PD: [],
       //PayDocument(constractForm+insurancePercentage+otherAllance)
@@ -75,7 +80,7 @@ class PayDocument extends Component {
     selectContractformAll(this.props.userinfo.business_name)
       .then((result) => result.json())
       .then((selectContractformAllResult) => {
-        // console.log(selectContractformAllResult);
+        // console.log(selectContractformAllResult);        
 
         selectInsuranceYear(this.props.userinfo.business_name, this.state.yearMonth.year)
           .then((result) => result.json())
@@ -87,6 +92,8 @@ class PayDocument extends Component {
                 (selectContractformAllResult) => selectContractformAllResult.bang == item.bang,
               );
               item['insurance'] = insurance;
+              if (insurance) item['insurance'] = insurance;
+              else item['insurance'] = { HourlyWage: 0, NationalPensionPercentage: 0, EmploymentInsurancePercentage: 0, HealthInsurancePercentage: 0, RegularCarePercentage: 0 };
             });
 
             otherAllowanceAll(
@@ -103,10 +110,11 @@ class PayDocument extends Component {
                       (selectContractformAllResult) => selectContractformAllResult.id == item.id,
                     );
                     if (otherAllowance) item['otherAllowance'] = otherAllowance;
-                    else  item['otherAllowance'] = {t_bonus: 0, t_extension: 0, t_position: 0, t_etc: 0, f_carMaintenanceFee: 0, f_childcareAllowance: 0, f_meals: 0};
-                    console.log("item");
-                    console.log(item);
+                    else item['otherAllowance'] = { t_bonus: 0, t_extension: 0, t_position: 0, t_etc: 0, f_carMaintenanceFee: 0, f_childcareAllowance: 0, f_meals: 0 };
+                    // console.log("item");
+                    // console.log(item);
                     return item;
+
                   }),
                 });
               });
@@ -138,56 +146,64 @@ class PayDocument extends Component {
     // console.log('userinfo : ', userinfo);
     this.pickAMonth = React.createRef();
 
-    const view_pay_document = this.state.insurance !== null && this.state.otherAllowance !== null;
+    const view_pay_document =
+      // this.state.PD !== null &&
+      this.state.insurance !== null && this.state.otherAllowance !== null;
 
-    // const PDdata = view_pay_document
-    //   //PDdata :PayDocument's data
-    //   ?
-    //   {
-    //     name: this.state.Employee,
-    //     salary: this.state.Salary,
-    //     workTime: Math.round(
-    //       this.state.EndTime - this.state.StartTime
-    //     ),
-    //     additionalAllowance: Math.round(
-    //       (this.state.t_bonus + this.state.t_extension + this.state.t_position + this.state.t_etc)
-    //       +
-    //       (this.state.f_carMaintenanceFee + this.state.f_childcareAllowance + this.state.f_meals)
-    //     ),
-    //     hourlyWage: this.state.HourlyWage,
+    const PDdata = view_pay_document
+      //PDdata :PayDocument's data
+      //item. insurance. otherAllowance.
+      ?
+      {
+        name: this.state.Employee,
+        salary: this.state.Salary,
+        hourlyWage: this.state.insurance.HourlyWage,
+        workTime: Math.round(
+          this.state.EndTimeHour - this.state.StartTimeHour
+        ),
+        additionalAllowance: Math.round(
+          (parseInt(this.state.otherAllowance.t_bonus) + parseInt(this.state.otherAllowance.t_extension) + parseInt(this.state.otherAllowance.t_position) + parseInt(this.state.otherAllowance.t_etc))
+          +
+          (parseInt(this.state.otherAllowance.f_carMaintenanceFee) + parseInt(this.state.otherAllowance.f_childcareAllowance) + parseInt(this.state.otherAllowance.f_meals))
+        ),
+        nationalPension: Math.round(
+          (this.state.Salary *
+            this.state.insurance.NationalPensionPercentage) /
+          100,
+        ),
+        employmentInsurance: Math.round(
+          (this.state.Salary *
+            this.state.insurance.EmploymentInsurancePercentage) /
+          100,
+        ),
+        healthInsurance: Math.round(
+          (this.state.Salary *
+            this.state.insurance.HealthInsurancePercentage) /
+          100,
+        ),
+        regularCare: Math.round(
+          (this.state.Salary * this.state.insurance.RegularCarePercentage) /
+          100,
+        )
 
-    //     nationalPension: Math.round(
-    //       (this.state.Salary *
-    //         this.state.NationalPensionPercentage) /
-    //       100
-    //     ),
-    //     employmentInsurance: Math.round(
-    //       (this.state.Salary *
-    //         this.state.EmploymentInsurancePercentage) /
-    //       100
-    //     ),
-    //     healthInsurance: Math.round(
-    //       (this.state.Salary *
-    //         this.state.HealthInsurancePercentage) /
-    //       100
-    //     ),
-    //     regularCare: Math.round(
-    //       (this.state.Salary * this.state.RegularCarePercentage) /
-    //       100
-    //     ),
-    //     deduction: Math.round(
-    //       this.state.nationalPension + this.state.employmentInsurance + this.state.healthInsurance + this.state.regularCare
-    //     ),
-    //     realPay: Math.round(
-    //       (this.state.Salary + PDdata.additionalAllowance) - PDdata.deduction
-    //     )
+      }
+      : {};
 
-    //   }
-    //   : {};
+    if (view_pay_document) PDdata.origin = PDdata.salary;
+    if (view_pay_document)
+      PDdata.deduction =
+        PDdata.nationalPension +
+        PDdata.employmentInsurance +
+        PDdata.healthInsurance +
+        PDdata.regularCare;
+    if (view_pay_document)
+      PDdata.realPay =
+        (parseInt(PDdata.origin) + parseInt(PDdata.additionalAllowance)) - parseInt(PDdata.deduction);
 
-
-    // console.log("PDdata");
-    // console.log(PDdata);
+    console.log("PDdata" + "," + this.state.yearMonth.year + "," + this.state.yearMonth.month);
+    console.log(this.state);
+    console.log(PDdata)
+    console.log(view_pay_document);
 
     return (
       <div className="wrap wrap-paydocument">
@@ -227,11 +243,11 @@ class PayDocument extends Component {
             </div>
             <div>
             </div>
-            <TablePay data={this.state.PD} />
-            {/* {view_pay_document ? (
+            {/* <TablePay data={this.state.PDdata} /> */}
+            {view_pay_document ? (
               <TablePay data={PDdata} />
             ) : this.state.yearMonth.year + "년 " + this.state.yearMonth.month + "월 " + "달 급여대장은 없습니다."
-            } */}
+            }
 
           </article>
         </div>
