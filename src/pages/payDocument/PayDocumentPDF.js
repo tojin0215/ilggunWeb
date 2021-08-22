@@ -21,9 +21,10 @@ const styles = StyleSheet.create({
     // "flex-direction": "row"
   },
   page: {
-    backgroundColor: '#E4E4E4',
-    display: 'flex',
-    flexDirection: 'column',
+    fontFamily: 'Nanum Gothic',
+    // backgroundColor: '#E4E4E4',
+    // display: 'flex',
+    // flexDirection: 'column',
   },
   header: {
     backgroundColor: '#EFEFEF',
@@ -83,7 +84,7 @@ class PayDocumentPDF extends Component {
   render() {
     return (
       <Document>
-        <Page size="A4">
+        <Page size="A4"  style={styles.page}>
           <View className="d-flex w-100 flex-wrap px-5">
             <View className='border border-col d-flex w-100'>
               <View className='border border-col col-9 text-center p-3'>
