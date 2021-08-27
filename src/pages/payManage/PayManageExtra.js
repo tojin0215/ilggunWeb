@@ -13,7 +13,7 @@ import Picker from 'react-month-picker'
 import TableExtraPay from '../../components/Navigation/TableExtraPay';
 import TableWorkerFilter from '../../components/Navigation/TableWorkerFilter';
 
-import { otherAllowanceAll, AdditionalAllowance, selectWorkerByType } from "../../action/api"
+import { otherAllowanceAll, selectWorkerByType, selectContractformAll, insertAllowance } from "../../action/api"
 
 
 import '../../styles/home/home.css';
@@ -46,20 +46,40 @@ class PayManageExtra extends Component {
 
       AA: [],
       //Additional Allowance
-      worker: []
+      worker: [],
+      addAllowance: []
     }
     this.selectAlloWance()
     this.workerFilter()
 
   }
   selectAlloWance = () => {
-    AdditionalAllowance(this.props.userinfo.business_name)
+
+    selectContractformAll(this.props.userinfo.business_name)
       .then((result) => result.json())
-      .then((result) => {
-        this.setState({ AA: result })
+      .then((selectContractformAllResult) => {
+
+        otherAllowanceAll(this.props.userinfo.business_name, this.state.yearMonth.year,
+          this.state.yearMonth.month)
+          .then((result) => result.json())
+          .then((otherAllowanceAllResult) => {
+            this.setState({
+              AA: selectContractformAllResult.map((item, index) => {
+                const otherAllowance = otherAllowanceAllResult.find(
+                  (selectContractformAllResult) => selectContractformAllResult.id == item.id
+                );
+                if (otherAllowance) item['otherAllowance'] = otherAllowance;
+                else item['otherAllowance'] = { t_bonus: 0, t_extension: 0, t_position: 0, t_etc: 0, f_carMaintenanceFee: 0, f_childcareAllowance: 0, f_meals: 0 };
+                console.log("item");
+                console.log(item);
+                return item;
+              })
+            })
+          })
       })
-    return
   }
+
+
   workerFilter = () => {
     selectWorkerByType(this.props.userinfo.business_name, 2)
       .then(result => result.json())
@@ -70,9 +90,8 @@ class PayManageExtra extends Component {
   }
 
 
-
   handleAMonthChange = (year, month) => {
-    this.setState({ yearMonth: { year, month } });
+    this.setState({ yearMonth: { year, month } }, () => this.selectAlloWance());
     this.setState({ isVisibleMonthSelector: false });
   }
   handleAMonthDissmis = (e) => {
@@ -87,6 +106,18 @@ class PayManageExtra extends Component {
     this.props.history.push('/');
   };
 
+
+  handleOnClick = (e) => {
+
+    insertAllowance(this.props.userinfo.business_name, "Qq", this.state.month, this.state.month,
+      this.state.allowance)
+      .then((result) => result.json())
+      .then((result) => {
+        alert("추가 수당 저장 완료.");
+        this.setState({ addAllowance: result })
+      })
+    this.selectAlloWance()
+  }
   handleCheckbox = (e) => {
     let obj = {
       position: false,
@@ -103,18 +134,17 @@ class PayManageExtra extends Component {
       checkboxGroup: obj
     })
   }
-
-
-
-
-  handleChange = event => {
-    const { taxation, value } = event.target;
-    this.setState({ [taxation]: value });
-  };
-
-  handleOnClick = () => {
-    alert("추가 수당 저장 완료.");
+  handleInsert = (e) => {
+    this.setState({
+      allowance: e.target.value
+    })
   }
+  handleInsertMonth = (e) => {
+    this.setState({
+      month: e.target.value
+    })
+  }
+
 
   handleSelectWorker = (workername2) => {
     const selectWokrerState = { selectedWorker: workername2 };
@@ -122,18 +152,12 @@ class PayManageExtra extends Component {
   }
 
 
-
-
   render() {
     const { userinfo } = this.props;
 
-    const { taxation, value } = this.state;
-    // this.setState({ [taxation]: value });
-
     this.pickAMonth = React.createRef()
     // this.pickAMonth.current.show()
-
-    // return (<></>)
+    this.pickAMonth2 = React.createRef()
 
     return (
       <div className="wrap paymanageextra">
@@ -146,11 +170,20 @@ class PayManageExtra extends Component {
               💰 추가수당 지급 확인
             </h4>
 
-            {/* <Calendar
-              onChange={this.onChange}
-              value={this.state.value}
-              className='sectionShadow'
-            /> */}
+            <Picker
+              ref={this.pickAMonth}
+              value={this.state.yearMonth}
+              lang={pickerLang.months}
+              // show={this.state.isVisibleMonthSelector}
+              onChange={this.handleAMonthChange}
+              onDismiss={this.handleAMonthDissmis}
+            >
+              <div
+                className='small-shadow text-bold text-h5 text-center cursor-pointer'
+                onClick={() => this.pickAMonth.current.show()}>
+                {this.state.yearMonth.year}년 {this.state.yearMonth.month}월
+              </div>
+            </Picker>
 
             <div className='sectionShadow'>
               <TableExtraPay data={this.state.AA} />
@@ -171,23 +204,8 @@ class PayManageExtra extends Component {
             <div className='flex-wrap col-4 w-50 px-5'>
               <div className='w-100'>
                 <h5 className='text-bold text-h5'>🗓 추가수당 지급 월</h5>
-                <Picker
-                  ref={this.pickAMonth}
-                  value={this.state.yearMonth}
-                  lang={pickerLang.months}
-                  // show={this.state.isVisibleMonthSelector}
-                  onChange={this.handleAMonthChange}
-                  onDismiss={this.handleAMonthDissmis}
-                >
-                  <div
-                    className='small-shadow text-bold text-h5 text-center cursor-pointer'
-                    onClick={() => this.pickAMonth.current.show()}>
-                    {this.state.yearMonth.year}년 {this.state.yearMonth.month}월
-                  </div>
-                  <p className='px-3'>추가수당 지급을 확인할 해당 월을 선택해주세요.</p>
-                </Picker>
-
-
+                <input className='small-shadow' type="month" id="month" value={this.state.month} onChange={this.handleInsertMonth} />
+                <p className='px-3'>추가수당 지급을 확인할 해당 월을 선택해주세요.</p>
               </div>
               <div className='mt-3'>
                 <p className='p-2 text-h5 text-bold w-100'>과세/비과세 선택</p>
@@ -240,8 +258,8 @@ class PayManageExtra extends Component {
               <div className='w-100'>
                 <h4 className='p-2 text-h5 text-bold w-100'>금액</h4>
                 <input type="number" placeholder="금액을 입력하세요."
-                  name="taxation" value={taxation}
-                  onChange={this.handleChange} />
+                  name="taxation" id="allowance" value={this.state.allowance} onChange={this.handleInsert}
+                />
               </div>
             </div>
             <button className='my-0 mx-auto button-solid mt-3' onClick={this.handleOnClick}>저장하기</button>

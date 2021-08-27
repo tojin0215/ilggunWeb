@@ -10,68 +10,45 @@ import imgsearch from '../../img/search.png'
 
 const Table = props => {
   const { data } = props;
+  console.log(data)
   const columns = [
     {
       name: "이름",
-      selector: (row, index) => row.id,
+      selector: (row, index) => row.Employee,
       sortable: true
     },
-    // {
-    //   name: "추가 수당",
-    //   selector: (row, index) => row.additionalAllowance,
-    //   sortable: true,
-    //   cell: row =>
-    //   (parseInt(row.taxation) + parseInt(row.taxFree) == null) ?(
-    //     0
-    //   ):(
-    //     parseInt(row.taxation) + parseInt(row.taxFree)
-    //   )
-    // },
     {
       name: "과세",
-      selector: (row, index) => row.taxation,
-      sortable: true
+      selector: (row, index) => row.realTaxation,
+      sortable: true,
+      cell: row =>
+        (parseInt(row.otherAllowance.t_bonus) + parseInt(row.otherAllowance.t_extension) + parseInt(row.otherAllowance.t_position) + parseInt(row.otherAllowance.t_etc))
     },
     {
       name: "비과세",
-      selector: (row, index) => row.taxFree,
-      sortable: true
+      selector: (row, index) => row.realTaxFree,
+      sortable: true,
+      cell: row =>
+        (parseInt(row.otherAllowance.f_carMaintenanceFee) + parseInt(row.otherAllowance.f_childcareAllowance) + parseInt(row.otherAllowance.f_meals))
     },
-   
-  ];
 
+  ];
   const [filterText, setFilterText] = React.useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = React.useState(
     false
   );
   const filteredItems = props.data.filter(
     item =>
-      JSON.stringify(item)
-        .toLowerCase()
-        .indexOf(filterText.toLowerCase()) !== -1
+      item.Employee.indexOf(filterText.toLowerCase()) !== -1
   );
 
-  const subHeaderComponent = useMemo(() => {
-    const handleClear = () => {
-      if (filterText) {
-        setResetPaginationToggle(!resetPaginationToggle);
-        setFilterText("");
-      }
-    };
 
-    return (
-      <FilterComponent
-        onFilter={e => setFilterText(e.target.value)}
-        onClear={handleClear}
-        filterText={filterText}
-      />
-    );
-  }, [filterText, resetPaginationToggle]);
+
 
   return (
     <DataTable
-      defaultSortField="id"
-      defaultSortAsc={false}      
+      defaultSortField="Employee"
+      defaultSortAsc={false}
       highlightOnHover
       pointerOnHover
       noHeader
@@ -80,8 +57,6 @@ const Table = props => {
       striped
       pagination
       paginationPerPage={4}
-      //  subHeader
-      // subHeaderComponent={subHeaderComponent}
       noDataComponent="데이터가 없습니다"
     />
   );

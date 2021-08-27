@@ -11,7 +11,7 @@ import TableVacation from '../../components/Navigation/TableVacation';
 import Table3 from '../../components/Navigation/Table3';
 import data from '../../components/Navigation/data';
 import Calendar from 'react-calendar';
-import { selectTimelog, selectWorkerByType, selectVacation, dateVaction } from '../../action/api';
+import { selectTimelog, selectWorkerByType, selectVacation, dateVacation } from '../../action/api';
 import { getUserInfoBusinessId, } from '../../util/cookie';
 
 import '../../styles/teskmanage/teskmanage.css';
@@ -24,90 +24,92 @@ class TaskManage extends Component {
     this.state = {
       value: new Date(),
       worker: [],
-      VA:[],
-      DA:[],
+      VA: [],
+      DA: [],
       selectedDate: null,
     }
     this.curFetchWorker()
     this.vacation()
     this.dateVaction()
   }
-  
+
   curFetchWorker = () => {
     const d = new Date()
-    const business_id = (getUserInfoBusinessId())? getUserInfoBusinessId() : this.props.userinfo.business_name;
+    const business_id = (getUserInfoBusinessId()) ? getUserInfoBusinessId() : this.props.userinfo.business_name;
 
     selectWorkerByType(business_id, 2)
-    .then(result => result.json())
-    .then(selectWorkerByType_result => {
-      // this.setState({ worker: result })
-
-      selectTimelog(business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
       .then(result => result.json())
-      .then(result => {
-        const selectTimelogResult = selectWorkerByType_result.map((item, index) => {
-          const timelog = result.find((res) => res.workername == item.workername);
-          item["timelog"] = timelog;
-          return item;
-        })
+      .then(selectWorkerByType_result => {
+        // this.setState({ worker: result })
 
-        selectVacation(business_id)
-        .then(result => result.json())
-        .then(selectVacation_result => {
+        selectTimelog(business_id, d.getFullYear(), d.getMonth() + 1, d.getDate())
+          .then(result => result.json())
+          .then(result => {
+            const selectTimelogResult = selectWorkerByType_result.map((item, index) => {
+              const timelog = result.find((res) => res.workername == item.workername);
+              item["timelog"] = timelog;
+              return item;
+            })
 
-          selectVacation_result = selectVacation_result.map((item, index) => {return {
-            business_id: ""+item.bang,
-            start_date: new Date(item.start_date),
-            end_date: new Date(item.end_date),
-            reason: ""+item.reason,
-            vacation_type: 0+item.vacation,
-            worker_name: ""+item.workername,
-            start_date_str: ""+item.start_date,
-            end_date_str: ""+item.end_date,
-            worker_id: null,
-          }})
+            selectVacation(business_id)
+              .then(result => result.json())
+              .then(selectVacation_result => {
 
-          const d = new Date();
-          selectVacation_result = selectVacation_result.filter(item => item.end_date > d)
-          console.log(selectVacation_result)
+                selectVacation_result = selectVacation_result.map((item, index) => {
+                  return {
+                    business_id: "" + item.bang,
+                    start_date: new Date(item.start_date),
+                    end_date: new Date(item.end_date),
+                    reason: "" + item.reason,
+                    vacation_type: 0 + item.vacation,
+                    worker_name: "" + item.workername,
+                    start_date_str: "" + item.start_date,
+                    end_date_str: "" + item.end_date,
+                    worker_id: null,
+                  }
+                })
 
-          const workerResult = selectTimelogResult.map((item, index) => {
-            const filtered = selectVacation_result.filter(vac_item =>
-              vac_item.worker_name === item.workername2)
-            if (filtered.length > 0) item["vacation"] = filtered[0];
-            else item["vacation"] = null;
+                const d = new Date();
+                selectVacation_result = selectVacation_result.filter(item => item.end_date > d)
+                console.log(selectVacation_result)
 
-            return item
+                const workerResult = selectTimelogResult.map((item, index) => {
+                  const filtered = selectVacation_result.filter(vac_item =>
+                    vac_item.worker_name === item.workername2)
+                  if (filtered.length > 0) item["vacation"] = filtered[0];
+                  else item["vacation"] = null;
+
+                  return item
+                })
+
+                console.log(workerResult)
+                this.setState({ worker: workerResult })
+              })
+            // this.forceUpdate();
           })
-
-          console.log(workerResult)
-          this.setState({worker: workerResult})
-        })
-        // this.forceUpdate();
+          .catch(error => {
+            console.error("curFetchWorker", error);
+          })
       })
-      .catch(error => {
-        console.error("curFetchWorker",error);
-      })
-    })
     console.log(this.props)
   }
 
   vacation = () => {
     selectVacation(this.props.userinfo.business_name)
-    .then((result) => result.json())
-    .then((result) => {
-      this.setState({VA:result})
-    })
+      .then((result) => result.json())
+      .then((result) => {
+        this.setState({ VA: result })
+      })
     return
   }
 
-  dateVaction =() =>{
+  dateVaction = () => {
     const d = new Date()
-    dateVaction(this.props.userinfo.business_name, d.getDate())
-    .then((result) => result.json())
-    .then((result) => {
-      this.setState({DA:result})
-    })
+    dateVacation(this.props.userinfo.business_name, d.getDate())
+      .then((result) => result.json())
+      .then((result) => {
+        this.setState({ DA: result })
+      })
     return
   }
 
@@ -115,7 +117,7 @@ class TaskManage extends Component {
     this.props.history.push('/');
   };
   onChange = (e) => {
-    this.setState({value: e});
+    this.setState({ value: e });
     console.log(e);
   }
 
@@ -141,19 +143,19 @@ class TaskManage extends Component {
             /> */}
 
             {(!this.state.selectedDate && false) ?
-            <Calendar 
-              value={this.state.value} onChange={this.onChange} className='sectionShadow'
-              data={this.state.DA}   handleSelectWorker={(row)=> console.log(row)}
-            />: null}
+              <Calendar
+                value={this.state.value} onChange={this.onChange} className='sectionShadow'
+                data={this.state.DA} handleSelectWorker={(row) => console.log(row)}
+              /> : null}
 
             <div className='sectionShadow'>
               <TableVacation data={this.state.VA} />
-              
+
             </div>
           </article>
           <article className='sectionShadow'>
             <h4 className='text-h4 px-4'>🗿 오늘의 근무자</h4>
-            <Table3 data={this.state.worker} click={clickhandler}/>
+            <Table3 data={this.state.worker} click={clickhandler} />
           </article>
         </div>
         <Footer />
