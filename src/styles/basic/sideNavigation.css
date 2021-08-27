@@ -25,11 +25,12 @@
   color: #fff;
 }
 
-/* 메뉴 마우스 오버 색상 */
+/* 메뉴 선택시 색상 */
 .side-navigation-panel
   .side-navigation-panel-select
   .side-navigation-panel-select-wrap
   .side-navigation-panel-select-option-selected {
+  background-color: rgba(58, 102, 100, var(--tw-bg-opacity));
 }
 
 /* 선택된 메뉴 */
@@ -37,4 +38,23 @@
   .side-navigation-panel-select
   .side-navigation-panel-select-wrap
   .side-navigation-panel-select-option:hover {
+  background-color: rgba(58, 102, 100, var(--tw-bg-opacity));
+}
+
+/* 서브메뉴 호버 */
+.side-navigation-panel
+  .side-navigation-panel-select
+  .side-navigation-panel-select-inner
+  .side-navigation-panel-select-inner-wrap
+  .side-navigation-panel-select-inner-option:hover {
+  background-color: rgba(58, 102, 100, var(--tw-bg-opacity));
+}
+
+/* 선택된 메뉴 */
+.side-navigation-panel
+  .side-navigation-panel-select
+  .side-navigation-panel-select-inner
+  .side-navigation-panel-select-inner-wrap
+  .side-navigation-panel-select-inner-option-selected {
+  background-color: rgba(58, 102, 100, var(--tw-bg-opacity));
 }

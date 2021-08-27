@@ -11,7 +11,7 @@ import {
   businessUpdate,
   loginRequest,
 } from '../../action/authentication';
-// import styles from './Navigation.css';
+import  { PC } from '../MediaQuery';
 import './Navigation.css';
 
 import { postBusinessGet } from '../../action/api';
@@ -112,58 +112,60 @@ class Navigation extends Component {
   render() {
     const { userinfo } = this.props;
     return (
-      <div className="navigation">
-        {/* <Nav className="mr-auto dropdownNav navitem"> */}
-        {/* <Nav>
-                    <NavLink exact to="/home">
-                        <span className={styles.navitem}>
-                            Home
-                        </span>
-                    </NavLink>
-                    <NavLink exact to="/WorkerManage">
-                        <span className={styles.navitem}>
-                            근무자관리
-                        </span>
-                    </NavLink>
-                </Nav> */}
-          <Nav className='navUtill' onSelect={this.handleSelect}>
-            <Nav.Item style={{ display:'none' }}>
-              대분류페이지 이름입니다.
-            </Nav.Item>
-            <Nav.Item style={{ display:'none' }}>
-              상세페이지 이름입니다.
-            </Nav.Item>
-            <NavDropdown 
-              title={this.props.userinfo.business_name}
-              id="nav-dropdown"
-            >
-              {this.state.business.map((business, index) => (
-                <NavDropdown.Item eventKey={business.bname} title={business.bname} key={index}>
-                  {business.bname}
-                </NavDropdown.Item>
-              ))}
-            </NavDropdown>
-            <Nav.Item>
-                {/* 관리자 이름 */}
-              {userinfo.id === '' ? null : (
-                <span className='navitem button-solid_white nav-name'>
-                  {userinfo.manager_name} 님
-                </span>
-              )}
-            </Nav.Item>
-            <Nav.Item eventKey="logout">
-            <button className="button-logout button-solid" onClick={this.handleLogout}>
-                  LOG-OUT
-                </button>
-                {/* 로그아웃 */}
-              {/* {userinfo.id === '' ? null : (
-                <button className="btnSolid" onClick={this.handleLogout}>
-                  LOG-OUT
-                </button>
-              )} */}
+      <PC>
+        <div className="navigation">
+      {/* <Nav className="mr-auto dropdownNav navitem"> */}
+      {/* <Nav>
+                  <NavLink exact to="/home">
+                      <span className={styles.navitem}>
+                          Home
+                      </span>
+                  </NavLink>
+                  <NavLink exact to="/WorkerManage">
+                      <span className={styles.navitem}>
+                          근무자관리
+                      </span>
+                  </NavLink>
+              </Nav> */}
+        <Nav className='navUtill' onSelect={this.handleSelect}>
+          <Nav.Item style={{ display:'none' }}>
+            대분류페이지 이름입니다.
+          </Nav.Item>
+          <Nav.Item style={{ display:'none' }}>
+            상세페이지 이름입니다.
+          </Nav.Item>
+          <NavDropdown 
+            title={this.props.userinfo.business_name}
+            id="nav-dropdown"
+          >
+            {this.state.business.map((business, index) => (
+              <NavDropdown.Item eventKey={business.bname} title={business.bname} key={index}>
+                {business.bname}
+              </NavDropdown.Item>
+            ))}
+          </NavDropdown>
+          <Nav.Item>
+              {/* 관리자 이름 */}
+            {userinfo.id === '' ? null : (
+              <span className='navitem button-solid_white nav-name'>
+                {userinfo.manager_name} 님
+              </span>
+            )}
+          </Nav.Item>
+          <Nav.Item eventKey="logout">
+          <button className="button-logout button-solid" onClick={this.handleLogout}>
+                LOG-OUT
+              </button>
+              {/* 로그아웃 */}
+            {/* {userinfo.id === '' ? null : (
+              <button className="btnSolid" onClick={this.handleLogout}>
+                LOG-OUT
+              </button>
+            )} */}
           </Nav.Item>
         </Nav>
-      </div>
+        </div>
+      </PC>
     );
   }
 }

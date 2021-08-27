@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import $ from 'jquery';
+// import $ from 'jquery';
 
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';

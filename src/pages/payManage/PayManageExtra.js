@@ -192,7 +192,7 @@ class PayManageExtra extends Component {
           </article>
           <h4 className='text-h4 mt-5'>🙋‍♀️ 추가수당 등록하기</h4>
           <article className='sectionShadow flex flex-wrap align-items-start'>
-            <div className='col-4 w-50 small-shadow m-0'>
+            <div className='col-4 w-50 small-shadow m-0 align-self-center'>
               {(!this.state.selectedWorker) ? <TableWorkerFilter data={this.state.worker} handleSelectWorker={this.handleSelectWorker} />
                 :
                 (
