@@ -6,34 +6,34 @@ import FilterComponent from './FilterComponent';
 
 const Table = props => {
   const { data } = props;
-  console.log(data)
+  // console.log(data)
   const columns = [
     {
       name: "이름",
       selector: (row, index) => row.workername,
       sortable: true
-    },  
-     
+    },
+
     {
-      name:"휴가 기간",
-      sortable:true,
+      name: "휴가 기간",
+      sortable: true,
       cell: row => row.start_date.split("T")[0] + "~" + row.end_date.split("T")[0],
-      grow:2
+      grow: 2
     },
     {
-      name:"휴가",
+      name: "휴가",
       selector: (row, index) => row.vacation,
-      sortable:true,
+      sortable: true,
       cell: row =>
-      (row.vacation == 1) ? (
-        <>
-        <span>무급</span>
-        </>
-      ) : (
-        <>
-        <span>유급</span>
-        </>)
-
+        (row.vacation == 1) ? (
+          <>
+            <span>무급</span>
+          </>
+        ) : (
+          <>
+            <span>유급</span>
+          </>)
+      //무급=1, 유급=else
     }
   ];
 
@@ -56,30 +56,30 @@ const Table = props => {
   //       .indexOf(filterText.toLowerCase()) !== -1
   // );
 
-//   const rt = (filteredItems.length > 0) ? <DataTable      
-//   defaultSortAsc={false}
-//   highlightOnHover
-//   pointerOnHover
-//   noHeader
-//   columns={columns}
-//   data={filteredItems}
-//   defaultSortField="workername"
-//   striped
-//   pagination
-//   paginationPerPage={4}
-// /> : <span>휴가자가 없습니다</span>
+  //   const rt = (filteredItems.length > 0) ? <DataTable      
+  //   defaultSortAsc={false}
+  //   highlightOnHover
+  //   pointerOnHover
+  //   noHeader
+  //   columns={columns}
+  //   data={filteredItems}
+  //   defaultSortField="workername"
+  //   striped
+  //   pagination
+  //   paginationPerPage={4}
+  // /> : <span>휴가자가 없습니다</span>
 
-//     return rt
+  //     return rt
 
   return (
-    <DataTable  
+    <DataTable
       defaultSortField="workername"
       defaultSortAsc={false}
       highlightOnHover
       pointerOnHover
       noHeader
       columns={columns}
-      data={filteredItems}      
+      data={filteredItems}
       striped
       pagination
       paginationPerPage={4}

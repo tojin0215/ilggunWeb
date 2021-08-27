@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import $ from 'jquery';
 
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -19,7 +20,7 @@ import { dividerClasses } from '@material-ui/core';
 
 import '../../styles/payManage/payManage.css';
 
-import { insertVacation, selectVacation, selectWorkerByType } from '../../action/api';
+import { insertVacation, selectVacation, selectWorkerByType, dateVacation } from '../../action/api';
 
 
 const pickerLang = {
@@ -31,7 +32,7 @@ class PayManage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: new Date(),
+      Calendar: new Date(),
 
       yearMonth: { year: 2019, month: 1, date: 31 },
       year: "2020",
@@ -46,13 +47,19 @@ class PayManage extends Component {
 
       selectedWorker: null,
 
+      workername: false,
+      reason: false,
+      start_date: false,
+      end_date: false,
+
       vacation: [],
       worker: [],
-      dateVacation: []
+      // dateVacation: [],
+      addVacation: []
     }
     this.vacation()
     this.workerFilter()
-    // this.dateVacation()
+    this.updateVacation()
   }
   goLogin = () => {
     this.props.history.push('/');
@@ -68,8 +75,8 @@ class PayManage extends Component {
     return
   }
 
-  dateVacation = () => {
-    this.dateVacation(this.props.userinfo.business_name, this.yearMonth.year, this.yearMonth.month, this.yearMonth.date)
+  updateVacation = () => {
+    dateVacation(this.props.userinfo.business_name, `${this.state.yearMonth.year}-${this.state.yearMonth.month}-${this.state.yearMonth.date}`)
       .then((result) => result.json())
       .then((result) => {
         this.setState({ dateVacation: result })
@@ -104,7 +111,7 @@ class PayManage extends Component {
 
 
   handleAMonthChange = (year, month, date) => {
-    this.setState({ yearMonth: { year, month, date } }, () => this.dateVacation());
+    this.setState({ yearMonth: { year, month, date } }, () => this.updateVacation());
     this.setState({ isVisibleMonthSelector: false });
   }
   handleAMonthDissmis = (e) => {
@@ -115,35 +122,56 @@ class PayManage extends Component {
     console.debug(this.state.isVisibleMonthSelector);
   }
 
+
+
+  handleOnClick = (e) => {
+
+    insertVacation(this.props.userinfo.business_name, this.state.selectedWorker.workername2,
+      this.state.checkboxGroup.unpaid && 1,//true:유급(else), false:무급(1)
+      this.state.reason, this.state.start_date, this.state.end_date)
+      .then((result) => result.json())
+      .then((result) => {
+        alert("휴가 저장 완료.");
+        this.setState({ addVacation: result })
+        this.vacation();
+      })
+      .then(() => { this.props.history.push('/payManage') })
+
+
+  }
+
   handleCheckbox = (e) => {
     let obj = {
       paid: false,
       unpaid: false,
     }
     obj[e.target.id] = e.target.checked
-    // console.log(obj);
     this.setState({
       checkboxGroup: obj
     })
+    console.log(obj)
   }
-
-  handleOnClick = () => {
-    const reason = this.state.reason;
-
-    alert("휴가 저장 완료.");
+  handleInsert = (e) => {
+    this.setState({
+      start_date: e.target.value
+    })
   }
-
-  handleReason = (e) => {
-    this.setState({ reason: e.target.value });
-    this.setState({ checkboxGroup: e.target.checked });
+  handleInsert1 = (e) => {
+    this.setState({
+      end_date: e.target.value
+    })
   }
-
+  handleInsert2 = (e) => {
+    this.setState({
+      reason: e.target.value
+    })
+  }
 
 
 
   render() {
     const { userinfo } = this.props;
-    console.log('userinfo : ', userinfo);
+    // console.log('userinfo : ', userinfo);
     const makeText = m => {
       if (m && m.year && m.month) return (pickerLang.months[m.month - 1] + '. ' + m.year)
       return '?'
@@ -190,15 +218,15 @@ class PayManage extends Component {
               </Picker>
             </div> */}
 
-            {/* {(!this.state.handleSelectDate) ?
+            {(!this.state.handleSelectDate) ?
               <Calendar
                 onChange={this.onChange}
-                value={this.state.value}
+                value={this.state.Calendar}
                 className='sectionShadow'
                 handleSelectDate={this.handleSelectDate}
               />
               :
-              (<p>휴가기간선택</p>)} */}
+              (<p>휴가기간선택</p>)}
             <div className='sectionShadow'>
               <TableVacation data={this.state.vacation} handleSelectDate={this.handleSelectDate} />
             </div>
@@ -223,9 +251,9 @@ class PayManage extends Component {
               </div>
               <div className='p-3 h-100'>
                 <p className='text-h5 text-bold w-100'>휴가기간</p>
-                <input className='small-shadow' type="date" defaultValue={dateToday} min={dateToday} id="start_date" />
+                <input className='small-shadow' type="date" defaultValue={dateToday} min={dateToday} id="start_date" value={this.state.start_date} onChange={this.handleInsert} />
                 ~
-                <input className='small-shadow' type="date" min={dateToday2} id="end_date" />
+                <input className='small-shadow' type="date" min={dateToday2} id="end_date" value={this.state.end_date} onChange={this.handleInsert1} />
               </div>
               <div className='p-3 h-100 flex-wrap'>
                 <p className='text-h5 text-bold w-100'>무/유급 휴가 선택</p>
@@ -238,7 +266,7 @@ class PayManage extends Component {
               </div>
               <div className='p-3 h-100'>
                 <p className='text-h5 text-bold'>사유 입력</p>
-                <input className='small-shadow' placeholder="사유를 입력하세요" onChange={this.handleReason}></input>
+                <input className='small-shadow' placeholder="사유를 입력하세요" id="reason" onChange={this.handleInsert2} />
               </div>
             </div>
             <button className='button-solid' type="button" onClick={this.handleOnClick} >저장하기</button>
