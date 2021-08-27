@@ -17,3 +17,24 @@
   font-weight: 700;
   font-size: 1.16rem;
 }
+
+/* 사이드 내비게이션 폰트 색상 */
+.side-navigation-panel *,
+.side-navigation-panel:after,
+.side-navigation-panel:before {
+  color: #fff;
+}
+
+/* 메뉴 마우스 오버 색상 */
+.side-navigation-panel
+  .side-navigation-panel-select
+  .side-navigation-panel-select-wrap
+  .side-navigation-panel-select-option-selected {
+}
+
+/* 선택된 메뉴 */
+.side-navigation-panel
+  .side-navigation-panel-select
+  .side-navigation-panel-select-wrap
+  .side-navigation-panel-select-option:hover {
+}

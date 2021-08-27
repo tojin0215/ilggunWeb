@@ -7,7 +7,6 @@ import { BrowserRouter } from 'react-router-dom';
 import reducer from './reducer/index';
 import configureStore from './store/index';
 
-
 const store = configureStore(reducer,{});
 
 const render = () => {
