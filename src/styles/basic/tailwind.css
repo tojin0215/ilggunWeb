@@ -1,0 +1,96 @@
+/* .fixed {
+  position: fixed;
+}
+
+.inset-0 {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.left-0 {
+  left: 0;
+}
+
+.inset-y-0 {
+  top: 0;
+  bottom: 0;
+}
+
+.w-64 {
+  width: 16rem;
+}
+
+.z-20 {
+  z-index: 20;
+}
+
+.z-30 {
+  z-index: 30;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+.transition-opacity {
+  transition-property: opacity;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.block {
+  display: block;
+}
+
+.bg-white {
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+}
+
+.bg-black {
+  background-color: rgba(0, 0, 0, var(--bg-opacity));
+}
+
+.border-r-2 {
+  border-right-width: 2px;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.ease-out {
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.transition {
+  transition-property: background-color, border-color, color, fill, stroke,
+    opacity, box-shadow, transform;
+}
+
+.translate-x-0 {
+  --transform-translate-x: 0;
+}
+
+.transform {
+  --transform-translate-x: 0;
+  --transform-translate-y: 0;
+  --transform-rotate: 0;
+  --transform-skew-x: 0;
+  --transform-skew-y: 0;
+  --transform-scale-x: 1;
+  --transform-scale-y: 1;
+  transform: translateX(var(--transform-translate-x))
+    translateY(var(--transform-translate-y)) rotate(var(--transform-rotate))
+    skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y))
+    scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
+}
+
+div {
+  display: block;
+} */

@@ -2,8 +2,10 @@
 /* 검색창 */
 .container .krDAgv {
   justify-content: flex-start;
+  flex-wrap: nowrap;
   box-shadow: 6px 10px 12.75px 2.25px rgba(87, 178, 163, 0.4);
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   height: 50px;
   /* position: absolute;
   top: 120px;
@@ -13,9 +15,9 @@
 }
 /* 검색 인풋 */
 .container .jsTYsS {
-  width: 310px;
+  width: 100%;
+  max-width: 310px;
   border: 0;
-  margin-right: 8px;
   height: 40px;
   font-size: 1.2rem;
 }

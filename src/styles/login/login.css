@@ -9,7 +9,7 @@
   display: none;
 }
 
-.auth {
+.container .auth {
   width: 450px;
   margin: 0;
 }

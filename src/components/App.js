@@ -12,6 +12,8 @@ import '../styles/basic/input.css';
 import '../styles/basic/layout.css';
 import '../styles/basic/sideNavigation.css';
 import '../styles/basic/text.css';
+import '../styles/basic/tailwind.css';
+import '../styles/basic/mainbunble.css';
 
 class App extends Component {
   render() {

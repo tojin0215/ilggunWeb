@@ -7,6 +7,12 @@ html * {
   letter-spacing: -0.1rem;
 }
 
+@media (max-width: 767px) {
+  html {
+    font-size: 16px;
+  }
+}
+
 .text-extrabold {
   font-weight: 800;
 }

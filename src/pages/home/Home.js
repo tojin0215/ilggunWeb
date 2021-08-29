@@ -16,6 +16,8 @@ import { postBusinessGet, postSelectWorker, selectTimelog, selectWorkerByType, s
 import {selectReceivedMessage} from '../../action/api';
 import {getUserInfo, setUserInfo, getUserInfoBusinessId, setUserInfoBusinessId, } from '../../util/cookie';
 
+import { FaBell } from "react-icons/fa";
+
 import '../../styles/home/home.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-calendar/dist/Calendar.css';
@@ -196,8 +198,8 @@ class Home extends Component {
       <div className="wrap">
         <Header />
         <Navigation goLogin={this.goLogin}  handleSelectNewBusiness={this.handleSelectNewBusiness}/>
+        <Menu />
         <div className='container'>
-          <Menu />
           <article className='sectionShadow'>
             <h4 className='text-h5 text-bold'>
               <span className='color-point text-h5'>✔ </span>

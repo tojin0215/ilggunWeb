@@ -11,6 +11,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "@types/react": "^17.0.19",
+    "awesome-react-icons": "^1.4.8",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
     "eslint": "^7.30.0",
@@ -22,6 +23,7 @@
     "react-calendar": "^3.4.0",
     "react-data-table-component": "^7.0.0-rc2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.2.0",
     "react-minimal-side-navigation": "^1.9.2",
     "react-modal": "^3.14.3",
     "react-month-picker": "^2.2.1",
@@ -68,6 +70,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.1.8",
     "eslint-config-prettier": "^8.3.0",
     "ts-node": "^10.2.1"
   }
