@@ -25,6 +25,8 @@ import 'react-calendar/dist/Calendar.css';
 import data from '../../components/Navigation/data';
 const clickhandler = (name) => console.log('delete', name);
 
+const day = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -89,6 +91,14 @@ class Home extends Component {
               vac_item.worker_name === item.workername2)
             if (filtered.length > 0) item["vacation"] = filtered[0];
             else item["vacation"] = null;
+
+            item['goToWork'] = (item[day[new Date().getDay()]])
+            ? ( item[day[new Date().getDay()]].slice(0, 2) + ":" + item[day[new Date().getDay()]].slice(2, 4) )
+            : ( "출근안함" )
+
+            item['goToHome'] = (item[day[new Date().getDay()]])
+            ? ( item[day[new Date().getDay()]].slice(4, 6) + ":" + item[day[new Date().getDay()]].slice(6, 8) )
+            : ( "출근안함")
 
             return item
           })
