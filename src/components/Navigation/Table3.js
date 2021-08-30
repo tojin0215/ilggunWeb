@@ -15,41 +15,13 @@ const Table = props => {
 
     {
       name:"출근시간",
-      selector: (row, index) => row.openTime,
+      selector: (row, index) => row.goToWork,
       sortable:true,
-      cell: row =>
-          (row[day[new Date().getDay()]]) ? (
-            <>
-            <span>{row[day[new Date().getDay()]].slice(0, 2)}:{row[day[new Date().getDay()]].slice(2, 4)}</span>
-            {/* <span>작성</span> */}
-            {/* <Link to={{ pathname:"/workerManage/contract", state:{ worker: row } }}>작성</Link> */}
-              {/* <Button>작성</Button> */}
-            </>
-            ) : (
-              <>
-              <span>{"출근안함"}</span>
-              {/* <Link to={{ pathname:"/workerManage/contract", state:{ worker: row } }}>미작성</Link> */}
-                {/* <Button>미작성</Button> */}
-              </>)
     },
     {
       name:" 퇴근시간",
-      selector: (row, index) => row.closeTime,
+      selector: (row, index) => row.goToHome,
       sortable:true,
-      cell: row =>
-          (row[day[new Date().getDay()]]) ? (
-            <>
-            <span>{row[day[new Date().getDay()]].slice(4, 6)}:{row[day[new Date().getDay()]].slice(6, 8)}</span>
-            {/* <span>작성</span> */}
-            {/* <Link to={{ pathname:"/workerManage/contract", state:{ worker: row } }}>작성</Link> */}
-              {/* <Button>작성</Button> */}
-            </>
-            ) : (
-              <>
-              <span>{"출근안함"}</span>
-              {/* <Link to={{ pathname:"/workerManage/contract", state:{ worker: row } }}>미작성</Link> */}
-                {/* <Button>미작성</Button> */}
-              </>)
     },
     {
       name:"휴가",
@@ -103,6 +75,7 @@ const Table = props => {
       noHeader
       columns={columns}
       data={filteredItems}
+      // sortFunction={(rows, field, sortDirection) => {console.log(field)}}
       defaultSortField="workername2"
       striped
       pagination

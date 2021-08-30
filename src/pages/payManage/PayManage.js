@@ -31,6 +31,7 @@ const pickerLang = {
 class PayManage extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       Calendar: new Date(),
 
@@ -49,8 +50,8 @@ class PayManage extends Component {
 
       workername: false,
       reason: false,
-      start_date: false,
-      end_date: false,
+      start_date: `${this.getToday().year}-${this.getToday().month}-${this.getToday().date}`,
+      end_date: `${this.getToday().year}-${this.getToday().month}-${this.getToday().date + 1}`,
 
       vacation: [],
       worker: [],
@@ -70,6 +71,17 @@ class PayManage extends Component {
     selectVacation(this.props.userinfo.business_name)
       .then((result) => result.json())
       .then((result) => {
+        result.map((item, index) => {
+          const start_date = new Date(item.start_date)
+          start_date.setDate(start_date.getDate() + 1);
+          
+          item.start_date = `${start_date.getFullYear()}-${start_date.getMonth()}-${start_date.getDate()}`
+          const end_date = new Date(item.end_date)
+          end_date.setDate(end_date.getDate() + 1);
+          
+          item.end_date = `${end_date.getFullYear()}-${end_date.getMonth()}-${end_date.getDate()}`
+        });
+        
         this.setState({ vacation: result })
       })
     return
@@ -135,7 +147,7 @@ class PayManage extends Component {
         this.setState({ addVacation: result })
         this.vacation();
       })
-      .then(() => { this.props.history.push('/payManage') })
+      // .then(() => { this.props.history.push('/payManage') })
 
 
   }
@@ -167,6 +179,20 @@ class PayManage extends Component {
     })
   }
 
+  getToday = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    let date = today.getDate();
+    if (String(month).length === 1) month = "0" + month;
+    if (String(date).length === 1) date = "0" + date;
+
+    return {
+      year: year,
+      month: month,
+      date: date,
+    }
+  }
 
 
   render() {
@@ -178,18 +204,9 @@ class PayManage extends Component {
     }
     this.pickAMonth = React.createRef()
 
-    const a = new Date();
-    const year = a.getFullYear();
-    let month = a.getMonth() + 1;
-    if (String(month).length === 1) {
-      month = "0" + month;
-    }
-    let day = a.getDate();
-    if (String(day).length === 1) {
-      day = "0" + day;
-    }
-    const dateToday = `${year}-${month}-${day}`;
-    const dateToday2 = `${year}-${month}-${day + 1}`;
+    const today = this.getToday();
+    const dateToday = `${today.year}-${today.month}-${today.date}`;
+    const dateToday2 = `${today.year}-${today.month}-${today.date + 1}`;
 
     return (
       <div className="wrap wrap-paymanage">
@@ -251,7 +268,7 @@ class PayManage extends Component {
               </div>
               <div className='p-3 h-100'>
                 <p className='text-h5 text-bold w-100'>휴가기간</p>
-                <input className='small-shadow' type="date" defaultValue={dateToday} min={dateToday} id="start_date" value={this.state.start_date} onChange={this.handleInsert} />
+                <input className='small-shadow' type="date" min={dateToday} id="start_date" value={this.state.start_date} onChange={this.handleInsert} />
                 ~
                 <input className='small-shadow' type="date" min={dateToday2} id="end_date" value={this.state.end_date} onChange={this.handleInsert1} />
               </div>
