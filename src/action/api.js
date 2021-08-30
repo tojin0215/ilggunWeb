@@ -138,9 +138,7 @@ export function otherAllowanceAll(business_id, year, month) {
     const body = JSON.stringify({ bang: business_id, year: year, month: month })
     return fetch(`${SERVER_URL}/otherAllowanceAll`, _createPostInit(body))
 }
-// , t_extension, t_position, t_etc, f_carMaintenanceFee, f_childcareAllowance, f_meals
-// , t_extension: t_extension, t_position: t_position, t_etc: t_etc,
-//         f_carMaintenanceFee: f_carMaintenanceFee, f_childcareAllowance: f_childcareAllowance, f_meals: f_meals
+
 export function insertAllowance(business_id, id, year, month, t_bonus, t_extension, t_position, t_etc, f_carMaintenanceFee, f_childcareAllowance, f_meals) {
     const body = JSON.stringify({
         bang: business_id, id: id, year: year, month: month,

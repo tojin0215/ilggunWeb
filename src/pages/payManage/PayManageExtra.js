@@ -110,17 +110,20 @@ class PayManageExtra extends Component {
     this.props.history.push('/');
   };
 
-
+  // this.state.yearMonth.year2,
+  // this.state.yearMonth.month2
   handleOnClick = (e) => {
 
-    insertAllowance(this.props.userinfo.business_name, "Qq", this.state.month, this.state.month,
-      this.state.allowance)
+    insertAllowance(this.props.userinfo.business_name, this.state.selectedWorker.workername,
+      "2021", "08",
+      this.state.t_bonus, this.state.t_extension, this.state.t_position, this.state.t_etc,
+      this.state.f_carMaintenanceFee, this.state.f_childcareAllowance, this.state.f_meals)
       .then((result) => result.json())
       .then((result) => {
         alert("추가 수당 저장 완료.");
         this.setState({ addAllowance: result })
+        this.selectAlloWance()
       })
-    this.selectAlloWance()
   }
   handleCheckbox = (e) => {
     let obj = {
@@ -138,11 +141,42 @@ class PayManageExtra extends Component {
       checkboxGroup: obj
     })
   }
-  handleInsert = (e) => {
+  handleAllowance = (e) => {
     this.setState({
-      allowance: e.target.value
+      t_position: e.target.value
     })
   }
+  handleAllowance1 = (e) => {
+    this.setState({
+      t_bonus: e.target.value
+    })
+  }
+  handleAllowance2 = (e) => {
+    this.setState({
+      t_extension: e.target.value
+    })
+  }
+  handleAllowance3 = (e) => {
+    this.setState({
+      t_etc: e.target.value
+    })
+  }
+  handleAllowance4 = (e) => {
+    this.setState({
+      f_carMaintenanceFee: e.target.value
+    })
+  }
+  handleAllowance5 = (e) => {
+    this.setState({
+      f_childcareAllowance: e.target.value
+    })
+  }
+  handleAllowance6 = (e) => {
+    this.setState({
+      f_meals: e.target.value
+    })
+  }
+
   handleInsertMonth = (e) => {
     this.setState({
       month: e.target.value
@@ -263,16 +297,71 @@ class PayManageExtra extends Component {
               </div>
               <div className='w-100'>
                 <h4 className='p-2 text-h5 text-bold w-100'>금액</h4>
-                <input type="number" placeholder="금액을 입력하세요."
-                  name="taxation" id="allowance" value={this.state.allowance} onChange={this.handleInsert}
-                />
+                {(!this.state.checkboxGroup['position'] == true) ? null
+                  :
+                  (
+                    <input type="number" placeholder="금액을 입력하세요."
+                      id="t_position" value={this.state.t_position}
+                      onChange={this.handleAllowance}
+                    />
+                  )}
+                {(!this.state.checkboxGroup['bonus'] == true) ? null
+                  :
+                  (
+                    <input type="number" placeholder="금액을 입력하세요."
+                      id="t_bonus" value={this.state.t_bonus}
+                      onChange={this.handleAllowance1}
+                    />
+                  )}
+                {(!this.state.checkboxGroup['over'] == true) ? null
+                  :
+                  (
+                    <input type="number" placeholder="금액을 입력하세요."
+                      id="t_extension" value={this.state.t_extension}
+                      onChange={this.handleAllowance2}
+                    />
+                  )}
+                {(!this.state.checkboxGroup['etc'] == true) ? null
+                  :
+                  (
+                    <input type="number" placeholder="금액을 입력하세요."
+                      id="t_etc" value={this.state.t_etc}
+                      onChange={this.handleAllowance3}
+                    />
+                  )}
+                {(!this.state.checkboxGroup['bob'] == true) ? null
+                  :
+                  (
+                    <input type="number" placeholder="금액을 입력하세요."
+                      id="f_meals" value={this.state.f_meals}
+                      onChange={this.handleAllowance6}
+                    />
+                  )}
+                {(!this.state.checkboxGroup['oil'] == true) ? null
+                  :
+                  (
+                    <input type="number" placeholder="금액을 입력하세요."
+                      id="f_carMaintenanceFee" value={this.state.f_carMaintenanceFee}
+                      onChange={this.handleAllowance4}
+                    />
+                  )}
+                {(!this.state.checkboxGroup['agi'] == true) ? null
+                  :
+                  (
+                    <input type="number" placeholder="금액을 입력하세요."
+                      id="f_childcareAllowance" value={this.state.f_childcareAllowance}
+                      onChange={this.handleAllowance5}
+                    />
+                  )}
+
+
               </div>
             </div>
-            <button className='my-0 mx-auto button-solid mt-3 py-3 px-5 font-bold' onClick={this.handleOnClick}>저장하기</button>
+            <button className='my-0 mx-auto button-solid mt-3 py-3 px-5 font-bold' type="button" onClick={this.handleOnClick}>저장하기</button>
           </article>
         </div>
         <Footer />
-      </div>
+      </div >
     );
   }
 }
