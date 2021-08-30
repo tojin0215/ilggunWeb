@@ -59,14 +59,16 @@ class Login extends Component {
         return (
             <div className='wrap wrap_login'>
                 <Header />
-                <Navigation />
+                {/* <Navigation /> */}
                 <div className='container'>
-                  <Authentication
-                  mode={ true }
-                  onLogin={ this.handleLogin } />
-                  <div className='card-visual'>
-                      <img src={ imgloginvisual } alt='로그인 배경 이미지' />
-                  </div>
+                    <div className='sectionShadow container flex justify-around max-w-5xl items-center h-fit'>
+                        <Authentication
+                        mode={ true }
+                        onLogin={ this.handleLogin } />
+                        <div className='card-visual'>
+                            <img src={ imgloginvisual } alt='로그인 배경 이미지' />
+                        </div>
+                    </div>
                 </div>
                 <Footer />
             </div>

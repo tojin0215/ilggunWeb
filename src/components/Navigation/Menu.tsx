@@ -28,7 +28,7 @@ export const Menu = () => {
           isSidebarOpen ? "block" : "hidden"
         }`}
       />
-      <div className='z-30 fixed'>
+      <div className='z-30 fixed top-0'>
         <button
           className="btn-menu"
           onClick={(): void => setIsSidebarOpen(true)}

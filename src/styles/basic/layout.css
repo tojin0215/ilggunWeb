@@ -25,6 +25,10 @@
   .wrap > .container {
     padding-left: 255px;
   }
+  .wrap_login > .container {
+    padding-left: 0;
+    padding-top: 100px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -116,4 +120,8 @@
 
 .js-ct {
   justify-content: center;
+}
+
+.h-fit {
+  height: fit-content;
 }
