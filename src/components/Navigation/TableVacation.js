@@ -17,7 +17,7 @@ const Table = props => {
     {
       name: "휴가 기간",
       sortable: true,
-      cell: row => row.start_date.split("T")[0] + "~" + row.end_date.split("T")[0],
+      cell: row => (<> {row.start_date.split("T")[0]} ~<br/>{row.end_date.split("T")[0]}</>),
       grow: 2
     },
     {
@@ -25,7 +25,7 @@ const Table = props => {
       selector: (row, index) => row.vacation,
       sortable: true,
       cell: row =>
-        (row.vacation == 1) ? (
+        (row.vacation === 1) ? (
           <>
             <span>무급</span>
           </>
