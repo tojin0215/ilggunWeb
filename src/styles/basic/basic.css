@@ -1,3 +1,13 @@
+button,
+input,
+optgroup,
+select,
+textarea {
+  border: 1px solid #aaa;
+  padding: 6px !important;
+  border-radius: 12px;
+}
+
 a {
   text-decoration: none;
   color: #000;

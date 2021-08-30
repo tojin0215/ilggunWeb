@@ -187,6 +187,7 @@ class PayManageExtra extends Component {
                 onClick={() => this.pickAMonth.current.show()}>
                 {this.state.yearMonth.year}년 {this.state.yearMonth.month}월
               </div>
+              <p className='text-center'>확인하고 싶은 해당 월을 선택하세요</p>
             </Picker>
 
             <div className='sectionShadow'>
@@ -266,7 +267,7 @@ class PayManageExtra extends Component {
                 />
               </div>
             </div>
-            <button className='my-0 mx-auto button-solid mt-3' onClick={this.handleOnClick}>저장하기</button>
+            <button className='my-0 mx-auto button-solid mt-3 py-3 px-5 font-bold' onClick={this.handleOnClick}>저장하기</button>
           </article>
         </div>
         <Footer />
