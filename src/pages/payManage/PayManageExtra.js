@@ -150,8 +150,9 @@ class PayManageExtra extends Component {
   }
 
 
-  handleSelectWorker = (workername2) => {
-    const selectWokrerState = { selectedWorker: workername2 };
+  handleSelectWorker = (worker) => {
+    console.log(worker);
+    const selectWokrerState = { selectedWorker: worker };
     this.setState(selectWokrerState)
   }
 
