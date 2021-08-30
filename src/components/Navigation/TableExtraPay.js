@@ -47,7 +47,7 @@ const Table = props => {
 
   return (
     <DataTable
-      defaultSortField="Employee"
+      defaultSortField="idx"
       defaultSortAsc={false}
       highlightOnHover
       pointerOnHover
