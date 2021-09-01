@@ -115,13 +115,17 @@ class PayManageExtra extends Component {
   handleOnClick = (e) => {
 
     insertAllowance(this.props.userinfo.business_name, this.state.selectedWorker.workername,
-      "2021", "08",
+      this.state.yearMonth.year, this.state.yearMonth.month,
       this.state.t_bonus, this.state.t_extension, this.state.t_position, this.state.t_etc,
       this.state.f_carMaintenanceFee, this.state.f_childcareAllowance, this.state.f_meals)
+      // ? null : 0
       .then((result) => result.json())
       .then((result) => {
+        console.log(this.state.t_bonus)
+        console.log(result)
         alert("추가 수당 저장 완료.");
         this.setState({ addAllowance: result })
+
         this.selectAlloWance()
       })
   }
@@ -177,11 +181,6 @@ class PayManageExtra extends Component {
     })
   }
 
-  handleInsertMonth = (e) => {
-    this.setState({
-      month: e.target.value
-    })
-  }
 
 
   handleSelectWorker = (worker) => {
@@ -244,8 +243,24 @@ class PayManageExtra extends Component {
             <div className='flex-wrap col-4 w-50 px-5'>
               <div className='w-100'>
                 <h5 className='text-bold text-h5'>🗓 추가수당 지급 월</h5>
-                <input className='small-shadow' type="month" id="month" value={this.state.month} onChange={this.handleInsertMonth} />
-                <p className='px-3'>추가수당 지급을 확인할 해당 월을 선택해주세요.</p>
+
+                <Picker
+                  ref={this.pickAMonth2}
+                  value={this.state.yearMonth}
+                  lang={pickerLang.months}
+                  // show={this.state.isVisibleMonthSelector}
+                  onChange={this.handleAMonthChange}
+                  onDismiss={this.handleAMonthDissmis}
+                >
+                  <div
+                    className='small-shadow text-bold text-h5 text-center cursor-pointer'
+                    onClick={() => this.pickAMonth2.current.show()}>
+                    {this.state.yearMonth.year}년 {this.state.yearMonth.month}월
+                  </div>
+                  <p className='px-3'>추가수당 지급을 확인할 해당 월을 선택해주세요.</p>
+                </Picker>
+
+
               </div>
               <div className='mt-3'>
                 <p className='p-2 text-h5 text-bold w-100'>과세/비과세 선택</p>
@@ -300,8 +315,8 @@ class PayManageExtra extends Component {
                 {(!this.state.checkboxGroup['position'] == true) ? null
                   :
                   (
-                    <input type="number" placeholder="금액을 입력하세요."
-                      id="t_position" value={this.state.t_position}
+                    < input type="number" placeholder="금액을 입력하세요."
+                      id="t_position" value={this.state.checkboxGroup['position'] == false ? 0 : this.state.t_position}
                       onChange={this.handleAllowance}
                     />
                   )}
@@ -309,7 +324,7 @@ class PayManageExtra extends Component {
                   :
                   (
                     <input type="number" placeholder="금액을 입력하세요."
-                      id="t_bonus" value={this.state.t_bonus}
+                      id="t_bonus" value={this.state.checkboxGroup['bonus'] == false ? 0 : this.state.t_bonus}
                       onChange={this.handleAllowance1}
                     />
                   )}
@@ -317,7 +332,7 @@ class PayManageExtra extends Component {
                   :
                   (
                     <input type="number" placeholder="금액을 입력하세요."
-                      id="t_extension" value={this.state.t_extension}
+                      id="t_extension" value={this.state.checkboxGroup['over'] == false ? 0 : this.state.t_extension}
                       onChange={this.handleAllowance2}
                     />
                   )}
@@ -325,7 +340,7 @@ class PayManageExtra extends Component {
                   :
                   (
                     <input type="number" placeholder="금액을 입력하세요."
-                      id="t_etc" value={this.state.t_etc}
+                      id="t_etc" value={this.state.checkboxGroup['etc'] == false ? 0 : this.state.t_etc}
                       onChange={this.handleAllowance3}
                     />
                   )}
@@ -333,7 +348,7 @@ class PayManageExtra extends Component {
                   :
                   (
                     <input type="number" placeholder="금액을 입력하세요."
-                      id="f_meals" value={this.state.f_meals}
+                      id="f_meals" value={this.state.checkboxGroup['bob'] == false ? 0 : this.state.f_meals}
                       onChange={this.handleAllowance6}
                     />
                   )}
@@ -341,7 +356,7 @@ class PayManageExtra extends Component {
                   :
                   (
                     <input type="number" placeholder="금액을 입력하세요."
-                      id="f_carMaintenanceFee" value={this.state.f_carMaintenanceFee}
+                      id="f_carMaintenanceFee" value={this.state.checkboxGroup['oil'] == false ? 0 : this.state.f_carMaintenanceFee}
                       onChange={this.handleAllowance4}
                     />
                   )}
@@ -349,7 +364,7 @@ class PayManageExtra extends Component {
                   :
                   (
                     <input type="number" placeholder="금액을 입력하세요."
-                      id="f_childcareAllowance" value={this.state.f_childcareAllowance}
+                      id="f_childcareAllowance" value={this.state.checkboxGroup['agi'] == false ? 0 : this.state.f_childcareAllowance}
                       onChange={this.handleAllowance5}
                     />
                   )}
