@@ -74,14 +74,14 @@ class PayManage extends Component {
         result.map((item, index) => {
           const start_date = new Date(item.start_date)
           start_date.setDate(start_date.getDate() + 1);
-          
-          item.start_date = `${start_date.getFullYear()}-${start_date.getMonth()}-${start_date.getDate()}`
+
+          item.start_date = `${start_date.getFullYear()}-${start_date.getMonth() + 1}-${start_date.getDate() - 1}`
           const end_date = new Date(item.end_date)
-          end_date.setDate(end_date.getDate() + 1);
-          
-          item.end_date = `${end_date.getFullYear()}-${end_date.getMonth()}-${end_date.getDate()}`
+          end_date.setDate(end_date.getDate());
+
+          item.end_date = `${end_date.getFullYear()}-${end_date.getMonth() + 1}-${end_date.getDate()}`
         });
-        
+
         this.setState({ vacation: result })
       })
     return
@@ -147,7 +147,7 @@ class PayManage extends Component {
         this.setState({ addVacation: result })
         this.vacation();
       })
-      // .then(() => { this.props.history.push('/payManage') })
+    // .then(() => { this.props.history.push('/payManage') })
 
 
   }
