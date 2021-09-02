@@ -60,7 +60,7 @@ class PayManage extends Component {
     }
     this.vacation()
     this.workerFilter()
-    this.updateVacation()
+    // this.updateVacation()
   }
   goLogin = () => {
     this.props.history.push('/');
@@ -87,16 +87,16 @@ class PayManage extends Component {
     return
   }
 
-  updateVacation = () => {
-    dateVacation(this.props.userinfo.business_name, `${this.state.yearMonth.year}-${this.state.yearMonth.month}-${this.state.yearMonth.date}`)
-      .then((result) => result.json())
-      .then((result) => {
-        this.setState({ dateVacation: result })
-        console.log(this.state)
-        console.log(result)
-      })
-    return
-  }
+  // updateVacation = () => {
+  //   dateVacation(this.props.userinfo.business_name, `${this.state.yearMonth.year}-${this.state.yearMonth.month}-${this.state.yearMonth.date}`)
+  //     .then((result) => result.json())
+  //     .then((result) => {
+  //       this.setState({ dateVacation: result })
+  //       console.log(this.state)
+  //       console.log(result)
+  //     })
+  //   return
+  // }
 
 
 
