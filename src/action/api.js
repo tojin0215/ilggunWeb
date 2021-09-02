@@ -304,7 +304,7 @@ export function insertVacation(business_id, workername, vacation, reason, start_
 }
 
 export function dateVacation(business_id, date) {
-    const body = JSON.stringify({ bang: business_id, start_date: date })
+    const body = JSON.stringify({ bang: business_id, end_date: date })
     return fetch(`${SERVER_URL}/dateVaction`, _createPostInit(body))
 }
 
