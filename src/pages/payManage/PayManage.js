@@ -47,6 +47,7 @@ class PayManage extends Component {
       },
 
       selectedWorker: null,
+      dateValue: null,
 
       workername: false,
       reason: false,
@@ -55,22 +56,44 @@ class PayManage extends Component {
 
       vacation: [],
       worker: [],
-      // dateVacation: [],
       addVacation: []
     }
-    this.vacation()
+    this.updateVacation()
     this.workerFilter()
-    // this.updateVacation()
+
   }
   goLogin = () => {
     this.props.history.push('/');
   };
 
 
-  vacation = () => {
-    selectVacation(this.props.userinfo.business_name)
+  // vacation = () => {
+  //   selectVacation(this.props.userinfo.business_name)
+  //     .then((result) => result.json())
+  //     .then((result) => {
+  //       result.map((item, index) => {
+  //         const start_date = new Date(item.start_date)
+  //         start_date.setDate(start_date.getDate() + 1);
+
+  //         item.start_date = `${start_date.getFullYear()}-${start_date.getMonth() + 1}-${start_date.getDate() - 1}`
+  //         const end_date = new Date(item.end_date)
+  //         end_date.setDate(end_date.getDate());
+
+  //         item.end_date = `${end_date.getFullYear()}-${end_date.getMonth() + 1}-${end_date.getDate()}`
+  //       });
+
+  //       this.setState({ vacation: result })
+  //     })
+  //   return
+  // }
+
+  updateVacation = () => {
+    console.log(this.state.dateValue)
+    const a = new Date()
+    dateVacation(this.props.userinfo.business_name, `${a.getFullYear()}-${a.getMonth() + 1}-${a.getDate()}`)
       .then((result) => result.json())
       .then((result) => {
+
         result.map((item, index) => {
           const start_date = new Date(item.start_date)
           start_date.setDate(start_date.getDate() + 1);
@@ -86,17 +109,11 @@ class PayManage extends Component {
       })
     return
   }
-
-  // updateVacation = () => {
-  //   dateVacation(this.props.userinfo.business_name, `${this.state.yearMonth.year}-${this.state.yearMonth.month}-${this.state.yearMonth.date}`)
-  //     .then((result) => result.json())
-  //     .then((result) => {
-  //       this.setState({ dateVacation: result })
-  //       console.log(this.state)
-  //       console.log(result)
-  //     })
-  //   return
-  // }
+  handleDate = (date) => {
+    const day = { dateValue: date }
+    this.setState({ day })
+    console.log(day)
+  }
 
 
 
@@ -109,30 +126,14 @@ class PayManage extends Component {
       })
     return
   }
-
-
   handleSelectWorker = (workername2) => {
     const selectWokrerState = { selectedWorker: workername2 };
     this.setState(selectWokrerState)
   }
-  handleSelectDate = (year, month, date) => {
-    const selectDateState = { selectedDate: year, month, date };
-    this.setState(selectDateState)
-  }
 
 
 
-  handleAMonthChange = (year, month, date) => {
-    this.setState({ yearMonth: { year, month, date } }, () => this.updateVacation());
-    this.setState({ isVisibleMonthSelector: false });
-  }
-  handleAMonthDissmis = (e) => {
-    this.setState({ isVisibleMonthSelector: false });
-  }
-  handleClickMonthBox = (e) => {
-    this.setState({ isVisibleMonthSelector: true });
-    console.debug(this.state.isVisibleMonthSelector);
-  }
+
 
 
 
@@ -145,7 +146,7 @@ class PayManage extends Component {
       .then((result) => {
         alert("휴가 저장 완료.");
         this.setState({ addVacation: result })
-        this.vacation();
+        this.updateVacation();
       })
     // .then(() => { this.props.history.push('/payManage') })
 
@@ -209,7 +210,7 @@ class PayManage extends Component {
     const dateToday2 = `${today.year}-${today.month}-${today.date + 1}`;
 
     return (
-      <div className="wrap wrap-paymanage">
+      <div className="wrap wrap-paymanage" >
         <Header />
         <Navigation goLogin={this.goLogin} />
         <div className="container">
@@ -219,33 +220,17 @@ class PayManage extends Component {
               {/* <span className='color-point text-h5'>✔ </span> */}
               🏖 휴가중인 직원
             </h4>
-            {/* <div className="edit">
-              <Picker
-                ref={this.pickAMonth}
-                show={this.state.isVisibleMonthSelector}
-                years={[2019, 2020, 2021, 2022]}
-                age={0}
-                value={this.state.yearMonth}
-                lang={pickerLang.months}
-                onChange={this.handleAMonthChange}
-                onDismiss={this.handleAMonthDissmis}
-              >
-                <MonthBox value={makeText({ year: 2019, month: 1 })} onClick={this.handleClickMonthBox} />
-                
-              </Picker>
-            </div> */}
 
-            {(!this.state.handleSelectDate) ?
-              <Calendar
-                onChange={this.onChange}
-                value={this.state.Calendar}
-                className='sectionShadow'
-                handleSelectDate={this.handleSelectDate}
-              />
-              :
-              (<p>휴가기간선택</p>)}
+
+            <Calendar
+              onChange={this.handleDate}
+              id="date"
+              value={this.state.dateValue}
+              className='sectionShadow'
+            />
+
             <div className='sectionShadow'>
-              <TableVacation data={this.state.vacation} handleSelectDate={this.handleSelectDate} />
+              <TableVacation data={this.state.vacation} />
             </div>
 
 
