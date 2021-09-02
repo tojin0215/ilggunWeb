@@ -30,7 +30,7 @@ class TaskManage extends Component {
     }
     this.curFetchWorker()
     this.vacation()
-    this.dateVaction()
+    this.dateVacation()
   }
 
   curFetchWorker = () => {
@@ -103,7 +103,7 @@ class TaskManage extends Component {
     return
   }
 
-  dateVaction = () => {
+  dateVacation = () => {
     const d = new Date()
     dateVacation(this.props.userinfo.business_name, d.getDate())
       .then((result) => result.json())
@@ -136,11 +136,11 @@ class TaskManage extends Component {
               {/* <span className='color-point text-h5'>✔ </span> */}
               🏖 오늘의 휴가자
             </h4>
-            {/* <Calendar
+            <Calendar
               onChange={this.onChange}
               value={this.state.value}
               className='sectionShadow'
-            /> */}
+            />
 
             {(!this.state.selectedDate && false) ?
               <Calendar

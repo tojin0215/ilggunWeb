@@ -15,9 +15,15 @@ const Table = props => {
     },
 
     {
-      name: "휴가 기간",
+      name: "휴가 출발",
       sortable: true,
-      cell: row => (<> {row.start_date.split("T")[0]} ~<br/>{row.end_date.split("T")[0]}</>),
+      cell: row => (<> {row.start_date.split("T")[0]}</>),
+      grow: 2
+    },
+    {
+      name: "휴가 복귀",
+      sortable: true,
+      cell: row => (<>{row.end_date.split("T")[0]}</>),
       grow: 2
     },
     {

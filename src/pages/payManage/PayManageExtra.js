@@ -29,7 +29,7 @@ class PayManageExtra extends Component {
     this.state = {
       value: new Date(),
 
-      yearMonth: { year: new Date().getFullYear(), month: new Date().getMonth() },
+      yearMonth: { year: new Date().getFullYear(), month: new Date().getMonth() + 1 },
       year: "2020",
       month: "1",
       isVisibleMonthSelector: false,

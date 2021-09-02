@@ -47,7 +47,7 @@ class PayDocument extends Component {
       value: new Date(),
       yearMonth: {
         year: new Date().getFullYear(),
-        month: new Date().getMonth(),
+        month: new Date().getMonth() + 1,
       },
       year: '2021',
       month: '7',
