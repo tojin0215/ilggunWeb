@@ -35,7 +35,7 @@ class PayManage extends Component {
     this.state = {
       Calendar: new Date(),
 
-      yearMonth: { year: 2019, month: 1, date: 31 },
+      yearMonth: { year: new Date().getFullYear(), month: new Date().getMonth() + 1, date: new Date().getDate() },
       year: "2020",
       month: "1",
       date: "31",
@@ -86,11 +86,11 @@ class PayManage extends Component {
   //     })
   //   return
   // }
-
   updateVacation = () => {
-    console.log(this.state.dateValue)
-    const a = new Date()
-    dateVacation(this.props.userinfo.business_name, `${a.getFullYear()}-${a.getMonth() + 1}-${a.getDate()}`)
+    console.log(this.state.yearMonth)
+    const a = this.state.yearMonth
+    dateVacation(this.props.userinfo.business_name, a)
+      //`${a.year}-${a.month}-${a.date}`
       .then((result) => result.json())
       .then((result) => {
 
@@ -109,10 +109,9 @@ class PayManage extends Component {
       })
     return
   }
-  handleDate = (date) => {
-    const day = { dateValue: date }
-    this.setState({ day })
-    console.log(day)
+  handleDate = (currentDate) => {
+    this.setState({ yearMonth: currentDate }, () => this.updateVacation())
+    console.log(currentDate)
   }
 
 
@@ -197,6 +196,7 @@ class PayManage extends Component {
 
 
   render() {
+    console.log(this.state.yearMonth.currentDate)
     const { userinfo } = this.props;
     // console.log('userinfo : ', userinfo);
     const makeText = m => {
@@ -221,11 +221,10 @@ class PayManage extends Component {
               🏖 휴가중인 직원
             </h4>
 
-
             <Calendar
               onChange={this.handleDate}
-              id="date"
-              value={this.state.dateValue}
+              id="currentDate"
+              // value={this.state.yearMonth.date}
               className='sectionShadow'
             />
 
