@@ -33,13 +33,10 @@ class PayManage extends Component {
     super(props);
 
     this.state = {
-      Calendar: new Date(),
-
       yearMonth: { year: new Date().getFullYear(), month: new Date().getMonth() + 1, date: new Date().getDate() },
       year: "2020",
       month: "1",
       date: "31",
-      isVisibleMonthSelector: false,
 
       checkboxGroup: {
         paid: true,
@@ -224,7 +221,7 @@ class PayManage extends Component {
             <Calendar
               onChange={this.handleDate}
               id="currentDate"
-              // value={this.state.yearMonth.date}
+              // value={this.state.yearMonth.currentDate}
               className='sectionShadow'
             />
 

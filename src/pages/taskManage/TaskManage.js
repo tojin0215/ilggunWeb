@@ -23,14 +23,20 @@ class TaskManage extends Component {
     super(props);
     this.state = {
       value: new Date(),
+
+      yearMonth: { year: new Date().getFullYear(), month: new Date().getMonth() + 1, date: new Date().getDate() },
+      year: "2020",
+      month: "1",
+      date: "31",
+
       worker: [],
       VA: [],
       DA: [],
       selectedDate: null,
     }
     this.curFetchWorker()
-    this.vacation()
-    this.dateVacation()
+    // this.vacation()
+    this.updateVacation()
   }
 
   curFetchWorker = () => {
@@ -94,33 +100,49 @@ class TaskManage extends Component {
     console.log(this.props)
   }
 
-  vacation = () => {
-    selectVacation(this.props.userinfo.business_name)
-      .then((result) => result.json())
-      .then((result) => {
-        this.setState({ VA: result })
-      })
-    return
-  }
+  // vacation = () => {
+  //   selectVacation(this.props.userinfo.business_name)
+  //     .then((result) => result.json())
+  //     .then((result) => {
+  //       this.setState({ VA: result })
+  //     })
+  //   return
+  // }
 
-  dateVacation = () => {
-    const d = new Date()
-    dateVacation(this.props.userinfo.business_name, d.getDate())
+  updateVacation = () => {
+    console.log(this.state.yearMonth)
+    const a = this.state.yearMonth
+    dateVacation(this.props.userinfo.business_name, a)
+      //`${a.year}-${a.month}-${a.date}`
       .then((result) => result.json())
       .then((result) => {
+
+        result.map((item, index) => {
+          const start_date = new Date(item.start_date)
+          start_date.setDate(start_date.getDate() + 1);
+
+          item.start_date = `${start_date.getFullYear()}-${start_date.getMonth() + 1}-${start_date.getDate() - 1}`
+          const end_date = new Date(item.end_date)
+          end_date.setDate(end_date.getDate());
+
+          item.end_date = `${end_date.getFullYear()}-${end_date.getMonth() + 1}-${end_date.getDate()}`
+        });
+
         this.setState({ DA: result })
       })
     return
   }
-
   goLogin = () => {
     this.props.history.push('/');
   };
-  onChange = (e) => {
-    this.setState({ value: e });
-    console.log(e);
+  // onChange = (e) => {
+  //   this.setState({ value: e });
+  //   console.log(e);
+  // }
+  handleDate = (currentDate) => {
+    this.setState({ yearMonth: currentDate }, () => this.updateVacation())
+    console.log(currentDate)
   }
-
   render() {
     const { userinfo } = this.props;
     const clickhandler = name => console.log("delete", name);
@@ -136,7 +158,7 @@ class TaskManage extends Component {
               {/* <span className='color-point text-h5'>✔ </span> */}
               🏖 오늘의 휴가자
             </h4>
-            <Calendar
+            {/* <Calendar
               onChange={this.onChange}
               value={this.state.value}
               className='sectionShadow'
@@ -146,10 +168,15 @@ class TaskManage extends Component {
               <Calendar
                 value={this.state.value} onChange={this.onChange} className='sectionShadow'
                 data={this.state.DA} handleSelectWorker={(row) => console.log(row)}
-              /> : null}
-
+              /> : null} */}
+            <Calendar
+              onChange={this.handleDate}
+              id="currentDate"
+              // value={this.state.yearMonth.currentDate}
+              className='sectionShadow'
+            />
             <div className='sectionShadow'>
-              <TableVacation data={this.state.VA} />
+              <TableVacation data={this.state.DA} />
 
             </div>
           </article>
