@@ -34,7 +34,7 @@ class PayManage extends Component {
     super(props);
 
     this.state = {
-      yearMonth: { year: new Date().getFullYear(), month: new Date().getMonth() + 1, date: new Date().getDate() },
+      yearMonth: new Date(),
       year: "2020",
       month: "1",
       date: "31",
