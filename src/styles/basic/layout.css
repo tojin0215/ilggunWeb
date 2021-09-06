@@ -94,6 +94,10 @@
   width: fit-content;
 }
 
+.w-inherit {
+  width: inherit;
+}
+
 .w-100px {
   width: 100px;
 }

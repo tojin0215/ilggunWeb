@@ -28,7 +28,7 @@ export const Menu = () => {
           isSidebarOpen ? "block" : "hidden"
         }`}
       />
-      <div className='z-30 fixed top-0'>
+      <div className='z-30 fixed top-0 md:hidden'>
         <button
           className="btn-menu"
           onClick={(): void => setIsSidebarOpen(true)}
@@ -41,7 +41,7 @@ export const Menu = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 ease-out transform translate-x-0 bg-white border-r-2 lg:translate-x-0 lg:inset-0 pt-12 bg-base ${
+        className={`fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 ease-out transform translate-x-0 bg-white border-r-2 md:translate-x-0 md:inset-0 pt-12 bg-base ${
           isSidebarOpen ? "ease-out translate-x-0" : "ease-in -translate-x-full"
         }
         `
@@ -77,7 +77,9 @@ export const Menu = () => {
           activeItemId={location.pathname}
           onSelect={({ itemId }) => {
             history.push(itemId);
+            setIsSidebarOpen(false);
           }}
+          
           // onSelect={({ itemId }) => {
           //   if (itemId==="http://13.124.141.28:9090/") window.open("http://13.124.141.28:9090/", "_blank")
           //   else history.push(itemId);
@@ -187,6 +189,7 @@ export const Menu = () => {
               elemBefore: () => <FaFileAlt />
             },
           ]}
+          
         />
       </div>
     </>

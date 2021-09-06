@@ -15,6 +15,7 @@ import 'react-month-picker/css/month-picker.css';
 
 import '../../styles/payDocument/payDocument.css';
 import '../../styles/home/home.css';
+import  { PC, Mobile } from '../../components/MediaQuery';
 import {
   otherAllowanceAll,
   selectContractformAll,
@@ -146,6 +147,7 @@ class PayDocument extends Component {
         <Navigation goLogin={this.goLogin} />
         <div className="container">
           <Menu />
+          <PC>
           <article className="sectionShadow">
             <div className="w-100 flex justify-content-between align-items-center">
               <h4 className="text-h5 text-bold">
@@ -185,6 +187,51 @@ class PayDocument extends Component {
             }
 
           </article>
+          </PC>
+          <Mobile>
+            <article className="sectionShadow">
+              <div className="w-100 flex align-items-center flex-col">
+                <h4 className="text-h5 text-bold w-100 text-center">
+                  {this.state.yearMonth.year}년 {this.state.yearMonth.month}월
+                  급여대장
+                </h4>
+                {/* <input
+                  placeholder='월 선택 캘린더'
+                  type="date"
+                  value={this.state.value}
+                  onChange={(v) => this.setState({value: v.target.value})}
+                >
+                </input> */}
+                <p className='pt-3'>
+                  해당 월을 선택하세요.
+                </p>
+                <Picker
+                  className="py-2 ps-4 pe-0 my-0 mx-1 d-flex"
+                  ref={this.pickAMonth}
+                  value={this.state.yearMonth}
+                  lang={pickerLang.months}
+                  show={this.state.isVisibleMonthSelector}
+                  onChange={this.handleAMonthChange}
+                  onDismiss={this.handleAMonthDissmis}
+                >
+                  <div
+                    onClick={() => this.pickAMonth.current.show()}
+                    className="button-solid_white-0 py-2 px-5 my-0 mx-1 w-100 text-center cursor-pointer text-h5"
+                  >
+                    {this.state.yearMonth.year}년 {this.state.yearMonth.month}월
+                  </div>
+                </Picker>
+              </div>
+              <div>
+              </div>
+              {/* <TablePay data={this.state.PDdata} /> */}
+              {view_pay_document ? (
+                <TablePay data={this.state.PD} />
+              ) : this.state.yearMonth.year + "년 " + this.state.yearMonth.month + "월 " + "달 급여대장은 없습니다."
+              }
+
+            </article>
+          </Mobile>
         </div>
         <Footer />
       </div>

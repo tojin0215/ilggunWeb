@@ -13,6 +13,7 @@ import { upload, filelist, deleteFile } from '../../action/api';
 import {SERVER_URL} from '../../const/setting';
 
 import '../../styles/home/home.css';
+import  { PC, Mobile } from '../../components/MediaQuery';
 
 class Download extends Component {
   constructor(props) {
@@ -136,10 +137,15 @@ class Download extends Component {
           </div> */}
           <div className='sectionShadow'>
             <h4 className='text-h5 text-bold'>💾 파일 올리기</h4>
-            <label className="mx-3 text-bold text-h6">파일 선택 : </label>
-            <input type="file" name="file" onChange={this.handleFileInputChange}/>
-            <div className='d-flex justify-content-center flex-wrap'>
-              <Button className='' onClick={this.handleUpload}>업로드</Button>
+            <PC>
+              <label className="mx-3 text-bold text-h6">파일 선택 : </label>
+              <input type="file" name="file" onChange={this.handleFileInputChange}/>
+            </PC>
+            <Mobile>
+              <input className='inherit mt-4' type="file" name="file" onChange={this.handleFileInputChange}/>
+            </Mobile>
+            <div className='d-flex justify-content-center flex-wrap pt-2'>
+              <Button className='px-5 mt-3' onClick={this.handleUpload}>업로드</Button>
               <span className='text-p w-100 d-flex justify-content-center'>파일 업로드는 최대 30MB까지 가능합니다.</span>
             </div>
           </div>

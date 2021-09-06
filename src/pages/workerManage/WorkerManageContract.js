@@ -12,6 +12,7 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 
 import '../../styles/home/home.css';
 import '../../styles/workerManage/workerManageContract.css';
+import  { PC, Mobile } from '../../components/MediaQuery';
 
 class WorkerManageContract extends Component {
   constructor(props) {
@@ -439,9 +440,16 @@ class WorkerManageContract extends Component {
           <Menu />
           <div className='d-flex justify-content-between px-5'>
             <div>
-              <div className='small-shadow py-3 px-5 flex align-ct js-ct worker-name width-fit m-0'>
-                <span className='text-h6 text-bold'>{this.props.location.state.worker.workername2}</span>
-              </div>
+              <PC>
+                <div className='small-shadow py-3 px-5 flex align-ct js-ct worker-name width-fit m-0'>
+                  <span className='text-h6 text-bold'>{this.props.location.state.worker.workername2}</span>
+                </div>
+              </PC>
+              <Mobile>
+                <div className='small-shadow flex align-ct js-ct worker-name width-fit m-0'>
+                  <span className='text-h6 text-bold'>{this.props.location.state.worker.workername2}</span>
+                </div>
+              </Mobile>
             </div>
             {
               this.state.type === 3 ? (
@@ -466,7 +474,7 @@ class WorkerManageContract extends Component {
   ) : null}
   
   {isEditMode? (
-  <article className='sectionShadow'>
+  <article className='sectionShadow overflow-auto'>
     <div className='flex-wrap container'>
                 <h6 className='text-h4 text-ct w-100 text-bold'>표준근로계약서</h6>
                 <p className='text-ct w-100'>
@@ -685,7 +693,7 @@ class WorkerManageContract extends Component {
                 </p>
                 <p className='text-st w-100 text-bold text-h6'>6. 임금</p>
                 <p className='text-st w-100'>
-                  <span className='ml-20'>- 월급 : </span>
+                  <span className=''>- 월급 : </span>
                   <input
                     className='w-100px'
                     type="number"
@@ -698,7 +706,7 @@ class WorkerManageContract extends Component {
                 </p>
                 <p className='text-st w-100'>
                 
-                  <span className='ml-20'>- 상여금 : </span>
+                  <span className=''>- 상여금 : </span>
                   <input
                     type="checkbox"
                     checked={this.state.value1 === 0}
@@ -715,7 +723,7 @@ class WorkerManageContract extends Component {
                   <span>원</span>
                 </p>
                 <p className='text-st w-100'>
-                  <span className='ml-20'>- 기타급여(제수당 등) : </span>
+                  <span className=''>- 기타급여(제수당 등) : </span>
                   <input
                     type="checkbox"
                     checked={this.state.value2 === 0}
@@ -745,7 +753,7 @@ class WorkerManageContract extends Component {
                   <span> )</span>
                 </p>
                 <p>
-                  <span className='ml-20'>- 급여산정기간 : </span>
+                  <span className=''>- 급여산정기간 : </span>
                 </p>
                 <p>
                   <input
@@ -772,7 +780,7 @@ class WorkerManageContract extends Component {
                   <span>일</span>
                 </p>
                 <p>
-                  <span className='ml-20'>- 임금지급일 : 매월</span>
+                  <span className=''>- 임금지급일 : 매월</span>
                   <input
                     className='w-70px'
                     type="number"
@@ -786,7 +794,7 @@ class WorkerManageContract extends Component {
                   <span>일 (휴일의 경우에는 전일 지급)</span>
                 </p>
                 <p>
-                  <span className='ml-20'>- 지급방법 : </span>
+                  <span className=''>- 지급방법 : </span>
                   <span>근로자에게 직접지급 </span>
                   <input
                     type="checkbox"
@@ -806,31 +814,31 @@ class WorkerManageContract extends Component {
                 </p>
                 <p className='text-st w-100 text-bold text-h6'>7. 연차유급휴가</p>
                 <p>
-                  <span className='ml-20'>
+                  <span className=''>
                     - 연차유급휴가는 근로기준법에서 정하는 바에 따라 부여함
                   </span>
                 </p>
                 <p className='text-st w-100 text-bold text-h6'>8. 사대보험 적용여부(해당란에 체크)</p>
                 <p className='d-flex align-items-center'>
-                  <span className='ml-20'>- 고용보험 : </span>
+                  <span className=''>- 고용보험 : </span>
                   <input
                     type="checkbox"
                     checked={this.state.checkedItems.has("고용보험")}
                     onChange={(e) => this.checkedItemHandler("고용보험", e.checked)}
                   ></input>
-                  <span className='ml-20'>- 산재보험 : </span>
+                  <span className=''>- 산재보험 : </span>
                   <input
                     type="checkbox"
                     checked={this.state.checkedItems.has("산재보험")}
                     onChange={(e) => this.checkedItemHandler("산재보험", e.checked)}
                   ></input>
-                  <span className='ml-20'>- 국민연금 : </span>
+                  <span className=''>- 국민연금 : </span>
                   <input
                     type="checkbox"
                     checked={this.state.checkedItems.has("국민연금")}
                     onChange={(e) => this.checkedItemHandler("국민연금", e.checked)}
                   ></input>
-                  <span className='ml-20'>- 건강보험 : </span>
+                  <span className=''>- 건강보험 : </span>
                   <input
                     type="checkbox"
                     checked={this.state.checkedItems.has("건강보험")}
@@ -839,7 +847,7 @@ class WorkerManageContract extends Component {
                 </p>
                 <p className='text-st w-100 text-bold text-h6'>9. 근로계약서 교부</p>
                 <p>
-                  <span className='ml-20'>
+                  <span className=''>
                     {' '}
                     - 사업주는 근로계약을 체결함과 동시에 본 계약서를 사본하여
                     근로자의 교부요구와 관계없이 근로자에게 교부함(근로기준법 제17조 이행)
@@ -847,7 +855,7 @@ class WorkerManageContract extends Component {
                 </p>
                 <p className='text-st w-100 text-bold text-h6'>10. 기타</p>
                 <p>
-                  <span className='ml-20'>
+                  <span className=''>
                     {' '}
                     - 이 계약에 정함이 없는 사항은 근로기준법령에 의함
                   </span>
@@ -889,7 +897,7 @@ class WorkerManageContract extends Component {
                 </p>
                 <p className='w-100 text-bold text-h6'>(사업주)</p>
                 <p className='w-100'>
-                  <span className='ml-20'>사업체명: </span>
+                  <span className=''>사업체명: </span>
                   <input
                     type="text"
                     onChange={(e) =>
@@ -901,7 +909,7 @@ class WorkerManageContract extends Component {
                   />
                 </p>
                 <p className='w-100'>
-                  <span className='ml-20'>전화번호 : </span>
+                  <span className=''>전화번호 : </span>
                   <input
                     type="text"
                     onChange={(e) =>
@@ -913,7 +921,7 @@ class WorkerManageContract extends Component {
                   />
                 </p>
                 <p className='w-100'>
-                  <span className='ml-20'>주 소 : </span>
+                  <span className=''>주 소 : </span>
                   <input
                     type="text"
                     onChange={(e) =>
@@ -925,7 +933,7 @@ class WorkerManageContract extends Component {
                   />
                 </p>
                 <p className='w-100'>
-                  <span className='ml-20'>대표자 : </span>
+                  <span className=''>대표자 : </span>
                   <input
                     type="text"
                     onChange={(e) =>

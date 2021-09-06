@@ -9,6 +9,16 @@
   height: auto;
 }
 
+.todayleave-col {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.todayleave-col > div {
+  padding: 20px;
+  height: auto;
+}
+
 .react-calendar {
   border: 0;
 }

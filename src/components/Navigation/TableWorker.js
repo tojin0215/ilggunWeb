@@ -6,7 +6,8 @@ import DataTable from 'react-data-table-component';
 import FilterComponent from './FilterComponent';
 
 import './table.css';
-import imgsearch from '../../img/search.png'
+import imgsearch from '../../img/search.png';
+import  { PC, Mobile } from '../MediaQuery';
 
 const Table = props => {
   const { data } = props;
@@ -38,22 +39,41 @@ const Table = props => {
       cell: row =>
           (row.state == 2) ? (
             <>
-            <Link
-              to={{ pathname:"/workerManage/contract", state:{ worker: row } }}
-              className='button-solid_white m-1 px-5 py-2'
-            >
-              작성
-            </Link>
+              <PC>
+                <Link
+                  to={{ pathname:"/workerManage/contract", state:{ worker: row } }}
+                  className='button-solid_white m-1 px-5 py-2'
+                >
+                  작성
+                </Link>
+              </PC>
+              <Mobile>
+                <Link
+                  to={{ pathname:"/workerManage/contract", state:{ worker: row } }}
+                  className='button-solid_white m-1 px-3 py-1'
+                >
+                  작성
+                </Link>
+              </Mobile>
             </>
             ) : (
               <>
-              <Link
-                to={{ pathname:"/workerManage/contract", state:{ worker: row } }}
-                className='button-solid m-1 px-5 py-2'
-              >
-                미작성
-              </Link>
-              
+                <PC>
+                  <Link
+                    to={{ pathname:"/workerManage/contract", state:{ worker: row } }}
+                    className='button-solid m-1 px-5 py-2'
+                  >
+                    미작성
+                  </Link>
+                </PC>
+                <Mobile>
+                  <Link
+                    to={{ pathname:"/workerManage/contract", state:{ worker: row } }}
+                    className='button-solid m-1 px-3 py-1'
+                  >
+                    미작성
+                  </Link>
+                </Mobile>
               </>)
     }
   ];
