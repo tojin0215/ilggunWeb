@@ -77,7 +77,9 @@ export const Menu = () => {
           activeItemId={location.pathname}
           onSelect={({ itemId }) => {
             history.push(itemId);
+            setIsSidebarOpen(false);
           }}
+          
           // onSelect={({ itemId }) => {
           //   if (itemId==="http://13.124.141.28:9090/") window.open("http://13.124.141.28:9090/", "_blank")
           //   else history.push(itemId);
@@ -187,6 +189,7 @@ export const Menu = () => {
               elemBefore: () => <FaFileAlt />
             },
           ]}
+          
         />
       </div>
     </>
