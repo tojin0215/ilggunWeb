@@ -89,10 +89,10 @@ class PayDocumentPDF extends Component {
         <Page size="A4"  style={styles.page}>
           <View className="d-flex w-100 flex-wrap">
             <View className='border border-col d-flex w-100'>
-              <View className='border border-col col-9 text-center p-3'>
+              <View className='border border-col col-9 text-center p-2'>
                 <Text className='text-bold'>내역</Text>
               </View>
-              <View className='border border-col col-3 text-center p-3'>
+              <View className='border border-col col-3 text-center p-2'>
                 <Text className='text-bold'>금액</Text>
               </View>
             </View>{/**첫째행 */}
@@ -173,32 +173,32 @@ class PayDocumentPDF extends Component {
               </View>{/* 공제 금액 */}
             </View>{/* 셋째행 */}
             <View className='border border-col w-100 d-flex'>
-                <View className='border border-col col-9 text-center p-3'>
+                <View className='border border-col col-9 text-center p-2'>
                   <Text>
                     지급액계
                   </Text>
                 </View>
-                <View className='border border-col col-3 text-center p-3'>
+                <View className='border border-col col-3 text-center p-2'>
                   <Text>
                     {this.props.data.origin}
                   </Text>
                 </View>
             </View>{/**넷째행 */}
             <View className='border border-col w-100 d-flex'>
-                <View className='border border-col col-9 text-center p-3'>
+                <View className='border border-col col-9 text-center p-2'>
                   <Text>공제액계</Text>
                 </View>
-                <View className='border border-col col-3 text-center p-3'>
+                <View className='border border-col col-3 text-center p-2'>
                   <Text>{this.props.data.minus}</Text>
                 </View>
             </View>
             <View className='border border-col w-100 d-flex'>
-              <View className='border border-col col-9 text-center p-3'>
+              <View className='border border-col col-9 text-center p-2'>
                 <Text>
                   차인지급액계
                 </Text>
               </View>
-              <View className='border border-col col-3 text-center p-3'>
+              <View className='border border-col col-3 text-center p-2'>
                 <Text>
                   {this.props.data.real}
                 </Text>
