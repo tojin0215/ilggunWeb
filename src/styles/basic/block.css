@@ -3,6 +3,7 @@
   padding: 40px 30px;
   margin: 30px 15px 0 15px;
   box-shadow: 6px 6px 6.75px 6.25px rgba(87, 178, 163, 0.4);
+  width: -webkit-fill-available;
 }
 
 .small-shadow {

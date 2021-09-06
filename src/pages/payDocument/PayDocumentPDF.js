@@ -9,6 +9,8 @@ import {
   Font,
 } from '@react-pdf/renderer';
 
+import  { PC, Mobile } from '../../components/MediaQuery';
+
 Font.register({
   family: 'Nanum Gothic',
   src: 'https://fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.ttf',
@@ -85,7 +87,7 @@ class PayDocumentPDF extends Component {
     return (
       <Document>
         <Page size="A4"  style={styles.page}>
-          <View className="d-flex w-100 flex-wrap px-5">
+          <View className="d-flex w-100 flex-wrap">
             <View className='border border-col d-flex w-100'>
               <View className='border border-col col-9 text-center p-3'>
                 <Text className='text-bold'>내역</Text>

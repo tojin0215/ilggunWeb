@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Font,
 } from '@react-pdf/renderer';
+import  { PC, Mobile } from '../../components/MediaQuery';
 
 Font.register({
   family: 'Nanum Gothic',
@@ -163,18 +164,18 @@ class WorkerContract extends Component {
               </Text>
               <Text className="text-st w-100 text-bold text-h6">6. 임 금</Text>
               <Text className="text-st w-100">
-                <Text className="ml-20">- 월(일, 시간)급 : </Text>
+                <Text className="">- 월(일, 시간)급 : </Text>
                 <Text>{this.state.contract.Salary}</Text>
                 <Text>원</Text>
               </Text>
               <Text className="text-st w-100">
-                <Text className="ml-20">- 상여금 : </Text>
+                <Text className="">- 상여금 : </Text>
                 <Text>{this.state.contract.types1.toString()}</Text>
                 <Text>({this.state.contract.Bonus}</Text>
                 <Text>원)</Text>
               </Text>
               <Text className="text-st w-100">
-                <Text className="ml-20">- 기타급여(제수당 등) : </Text>
+                <Text className="">- 기타급여(제수당 등) : </Text>
                 <Text for="bonus2Yes">
                   {this.state.contract.types2.toString()}
                 </Text>
@@ -190,7 +191,7 @@ class WorkerContract extends Component {
                 <Text>)</Text>
               </Text>
               <Text className='w-100'>
-                <Text className="ml-20">- 급여산정기간 :</Text>
+                <Text className="">- 급여산정기간 :</Text>
                 <Text>
                   {this.state.SalaryCalculationPeriodStart
                     ? this.state.SalaryCalculationPeriodStart.toString()
@@ -205,12 +206,12 @@ class WorkerContract extends Component {
                 <Text>일</Text>
               </Text>
               <Text className='w-100'>
-                <Text className="ml-20">- 임금지급일 : 매월</Text>
+                <Text className="">- 임금지급일 : 매월</Text>
                 <Text>{this.state.contract.SalaryDay.toString()}</Text>
                 <Text>일 (휴일의 경우에는 전일 지급)</Text>
               </Text>
               <Text>
-                <Text className="ml-20">- 지급방법 : </Text>
+                <Text className="">- 지급방법 : </Text>
                 <Text for="wayOfPayment1">
                   {this.state.contract.types3.toString()}
                 </Text>
@@ -218,32 +219,50 @@ class WorkerContract extends Component {
               <Text className="text-st w-100 text-bold text-h6">
                 7. 연차유급휴가
               </Text>
-              <Text className="ml-20">
+              <Text className="">
                 {' '}
                 - 연차유급휴가는 근로기준법에서 정하는 바에 따라 부여함.
               </Text>
               <Text className="text-st w-100 text-bold text-h6">
                 8. 사대보험 적용여부
               </Text>
-              <Text className="d-flex align-items-center">
-                <Text className="ml-20">
-                  - 고용보험 : {this.state.contract.types4[1] == 1 ? 'O' : 'X'}
+              <PC>
+                <Text className="d-flex align-items-center">
+                  <Text className="">
+                    - 고용보험 : {this.state.contract.types4[1] == 1 ? 'O' : 'X'}
+                  </Text>
+                  <Text className="">
+                    - 산재보험 : {this.state.contract.types4[2] == 1 ? 'O' : 'X'}
+                  </Text>
+                  <Text className="">
+                    - 국민연금 : {this.state.contract.types4[3] == 1 ? 'O' : 'X'}
+                  </Text>
+                  <Text className="">
+                    - 건강보험 : {this.state.contract.types4[4] == 1 ? 'O' : 'X'}
+                  </Text>
                 </Text>
-                <Text className="ml-20">
-                  - 산재보험 : {this.state.contract.types4[2] == 1 ? 'O' : 'X'}
+              </PC>
+              <Mobile>
+                <Text className="d-flex align-items-center flex-col">
+                  <Text className="">
+                    - 고용보험 : {this.state.contract.types4[1] == 1 ? 'O' : 'X'}
+                  </Text>
+                  <Text className="">
+                    - 산재보험 : {this.state.contract.types4[2] == 1 ? 'O' : 'X'}
+                  </Text>
+                  <Text className="">
+                    - 국민연금 : {this.state.contract.types4[3] == 1 ? 'O' : 'X'}
+                  </Text>
+                  <Text className="">
+                    - 건강보험 : {this.state.contract.types4[4] == 1 ? 'O' : 'X'}
+                  </Text>
                 </Text>
-                <Text className="ml-20">
-                  - 국민연금 : {this.state.contract.types4[3] == 1 ? 'O' : 'X'}
-                </Text>
-                <Text className="ml-20">
-                  - 건강보험 : {this.state.contract.types4[4] == 1 ? 'O' : 'X'}
-                </Text>
-              </Text>
+              </Mobile>
               <Text className="text-st w-100 text-bold text-h6">
                 9. 근로계약서 교부
               </Text>
               <Text>
-                <Text className="ml-20">
+                <Text className="">
                   {' '}
                   - '사업주'는 근로계약을 체결함과 동시에 본 계약서를 사본하여
                   근로자의 교부요구와 관계없이 '근로자'에게 교부함(근로기준법
@@ -252,7 +271,7 @@ class WorkerContract extends Component {
               </Text>
               <Text className="text-st w-100 text-bold text-h6">10. 기타</Text>
               <Text>
-                <Text className="ml-20">
+                <Text className="">
                   {' '}
                   - 이 계약에 정함이 없는 사항은 근로기준법령에 의함
                 </Text>
@@ -267,19 +286,19 @@ class WorkerContract extends Component {
               </Text>
               <Text className="w-100 text-bold text-h6">(사업주)</Text>
               <Text className="w-100">
-                <Text className="ml-20">사업체명 : </Text>
+                <Text className="">사업체명 : </Text>
                 <Text>{this.state.contract.BusinessName}</Text>
               </Text>
               <Text className="w-100">
-                <Text className="ml-20">연락처 : </Text>
+                <Text className="">연락처 : </Text>
                 <Text>{this.state.contract.BusinessPhone}</Text>
               </Text>
               <Text className="w-100">
-                <Text className="ml-20">주 소 : </Text>
+                <Text className="">주 소 : </Text>
                 <Text>{this.state.contract.BusinessAddress}</Text>
               </Text>
               <Text className="w-100">
-                <Text className="ml-20">대 표 자 : </Text>
+                <Text className="">대 표 자 : </Text>
                 <Text>{this.state.contract.BusinessOwner1}</Text>
                 <Text>(서명){/* this.state.signOrStamp */}</Text>
               </Text>
@@ -287,15 +306,15 @@ class WorkerContract extends Component {
                 <Text className="w-100 text-bold text-h6">(근로자)</Text>
               </Text>
               <Text className="w-100">
-                <Text className="ml-20">주 소 : </Text>
+                <Text className="">주 소 : </Text>
                 <Text>{this.state.contract.EmployeeAddress}</Text>
               </Text>
               <Text className="w-100">
-                <Text className="ml-20">연 락 처 : </Text>
+                <Text className="">연 락 처 : </Text>
                 <Text>{this.state.contract.EmployeePhone}</Text>
               </Text>
               <Text className="w-100">
-                <Text className="ml-20">성 명 : </Text>
+                <Text className="">성 명 : </Text>
                 <Text>{this.state.contract.EmployeeName}</Text>
                 <Text>(서명)</Text>
               </Text>

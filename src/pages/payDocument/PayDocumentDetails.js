@@ -23,6 +23,7 @@ import {
 } from '../../action/api';
 
 import '../../styles/home/home.css';
+import  { PC, Mobile } from '../../components/MediaQuery';
 
 const pickerLang = {
   months: [
@@ -227,64 +228,122 @@ class PayDocumentDetails extends Component {
         <Navigation goLogin={this.goLogin} />
         <div className="container">
           <Menu />
+            <PC>
           <h4 className="text-h5">급여명세서</h4>
-          <article className="flex todayleave sectionShadow m-5">
-            <div className="small-shadow">
-              {this.state.selectedWorker ? (
-                <div className="d-flex align-items-center justify-content-center h-100">
-                  <p className="text-center">
-                    <span className="text-h5">
-                      {this.state.selectedWorker.workername2}
-                    </span>{' '}
-                    님 급여명세서입니다.
-                  </p>
-                </div>
-              ) : (
-                <div>
-                  {/* <h4>직원 선택</h4>
-                <input ></input>
-                <button >검색</button> */}
-                  <TableWorkerFilter
-                    data={this.state.workers}
-                    handleSelectWorker={this.handleSelectWorker}
-                  />
-                </div>
-              )}
-              {/* <div>
-                <TableWorkerFilter data={this.state.workers} handleSelectWorker={r => this.setState({selectedWorker: r})}/>
-              </div> */}
-              {/* <Calendar
-                onChange={this.onChange}
-                value={this.state.value}
-              /> */}
-            </div>
-            <div>
-              <Picker
-                className="py-2 ps-4 pe-0 my-0 mx-1 d-flex"
-                ref={this.pickAMonth}
-                value={this.state.yearMonth}
-                lang={pickerLang.months}
-                show={this.state.isVisibleMonthSelector}
-                onChange={this.handleAMonthChange}
-                onDismiss={this.handleAMonthDissmis}
-              >
-                <div
-                  onClick={() => this.pickAMonth.current.show()}
-                  className="button-solid_white-0 py-2 my-0 mx-1 w-100 text-center cursor-pointer text-h5"
+              <article className="flex todayleave sectionShadow m-5 px-2">
+              <div className="small-shadow">
+                {this.state.selectedWorker ? (
+                  <div className="d-flex align-items-center justify-content-center h-100">
+                    <p className="text-center">
+                      <span className="text-h5">
+                        {this.state.selectedWorker.workername2}
+                      </span>{' '}
+                      님 급여명세서입니다.
+                    </p>
+                  </div>
+                ) : (
+                  <div>
+                    {/* <h4>직원 선택</h4>
+                  <input ></input>
+                  <button >검색</button> */}
+                    <TableWorkerFilter
+                      data={this.state.workers}
+                      handleSelectWorker={this.handleSelectWorker}
+                    />
+                  </div>
+                )}
+                {/* <div>
+                  <TableWorkerFilter data={this.state.workers} handleSelectWorker={r => this.setState({selectedWorker: r})}/>
+                </div> */}
+                {/* <Calendar
+                  onChange={this.onChange}
+                  value={this.state.value}
+                /> */}
+              </div>
+              <div>
+                <p className="text-center py-2">
+                  급여명세서를 보고자 하는 해당 월을 선택하세요
+                </p>
+                <Picker
+                  className="py-2 ps-4 pe-0 my-0 mx-1 d-flex"
+                  ref={this.pickAMonth}
+                  value={this.state.yearMonth}
+                  lang={pickerLang.months}
+                  show={this.state.isVisibleMonthSelector}
+                  onChange={this.handleAMonthChange}
+                  onDismiss={this.handleAMonthDissmis}
                 >
-                  {' '}
-                  {this.state.yearMonth.year}년 {this.state.yearMonth.month}월{' '}
-                </div>
-              </Picker>
-              <p className="text-center py-2">
-                급여명세서를 보고자 하는 해당 월을 선택하세요
-              </p>
-            </div>
+                  <div
+                    onClick={() => this.pickAMonth.current.show()}
+                    className="button-solid_white-0 py-2 my-0 mx-1 w-100 text-center cursor-pointer text-h5"
+                  >
+                    {' '}
+                    {this.state.yearMonth.year}년 {this.state.yearMonth.month}월{' '}
+                  </div>
+                </Picker>
+              </div>
           </article>
+            </PC>
+            <Mobile>
+          <h4 className="text-h5 text-center">급여명세서</h4>
+              <article className="flex todayleave-col sectionShadow px-2 flex-auto">
+              <div className="small-shadow w-100 flex-col">
+                {this.state.selectedWorker ? (
+                  <div className="d-flex align-items-center justify-content-center h-100">
+                    <p className="text-center">
+                      <span className="text-h5">
+                        {this.state.selectedWorker.workername2}
+                      </span>{' '}
+                      님 급여명세서입니다.
+                    </p>
+                  </div>
+                ) : (
+                  <div>
+                    {/* <h4>직원 선택</h4>
+                  <input ></input>
+                  <button >검색</button> */}
+                    <TableWorkerFilter
+                      data={this.state.workers}
+                      handleSelectWorker={this.handleSelectWorker}
+                    />
+                  </div>
+                )}
+                {/* <div>
+                  <TableWorkerFilter data={this.state.workers} handleSelectWorker={r => this.setState({selectedWorker: r})}/>
+                </div> */}
+                {/* <Calendar
+                  onChange={this.onChange}
+                  value={this.state.value}
+                /> */}
+              </div>
+              <div>
+                <p className="text-center py-2">
+                  급여명세서를 보고자 하는 해당 월을 선택하세요
+                </p>
+                <Picker
+                  className="py-2 ps-4 pe-0 my-0 mx-1 d-flex"
+                  ref={this.pickAMonth}
+                  value={this.state.yearMonth}
+                  lang={pickerLang.months}
+                  show={this.state.isVisibleMonthSelector}
+                  onChange={this.handleAMonthChange}
+                  onDismiss={this.handleAMonthDissmis}
+                >
+                  <div
+                    onClick={() => this.pickAMonth.current.show()}
+                    className="button-solid_white-0 py-2 my-0 mx-1 w-100 text-center cursor-pointer text-h5"
+                  >
+                    {' '}
+                    {this.state.yearMonth.year}년 {this.state.yearMonth.month}월{' '}
+                  </div>
+                </Picker>
+              </div>
+          </article>
+            </Mobile>
           <div className="sectionShadow">
             {show_pay_document ? (
               <PDFDownloadLink
-              className='button-solid width-fit d-flex align-items-center'
+              className='button-solid width-fit d-flex align-items-center mb-3'
               document={<PayDocumentPDF forDownload={true} data={pay_document_data} />}
               fileName="pay_detail.pdf"
             >

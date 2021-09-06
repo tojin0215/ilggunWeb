@@ -16,6 +16,7 @@ import { getUserInfoBusinessId, } from '../../util/cookie';
 
 import '../../styles/teskmanage/teskmanage.css';
 import '../../styles/home/home.css';
+import  { PC, Mobile } from '../../components/MediaQuery';
 
 
 class TaskManage extends Component {
@@ -153,33 +154,65 @@ class TaskManage extends Component {
         <Navigation goLogin={this.goLogin} />
         <div className="container">
           <Menu />
-          <article className='todayleave'>
-            <h4 className='text-h4 w-100 px-5'>
-              {/* <span className='color-point text-h5'>✔ </span> */}
-              🏖 오늘의 휴가자
-            </h4>
-            {/* <Calendar
-              onChange={this.onChange}
-              value={this.state.value}
-              className='sectionShadow'
-            />
+          <PC>
+            <article className='todayleave'>
+              <h4 className='text-h4 w-100 px-5'>
+                {/* <span className='color-point text-h5'>✔ </span> */}
+                🏖 오늘의 휴가자
+              </h4>
+              {/* <Calendar
+                onChange={this.onChange}
+                value={this.state.value}
+                className='sectionShadow'
+              />
 
-            {(!this.state.selectedDate && false) ?
+              {(!this.state.selectedDate && false) ?
+                <Calendar
+                  value={this.state.value} onChange={this.onChange} className='sectionShadow'
+                  data={this.state.DA} handleSelectWorker={(row) => console.log(row)}
+                /> : null} */}
               <Calendar
-                value={this.state.value} onChange={this.onChange} className='sectionShadow'
-                data={this.state.DA} handleSelectWorker={(row) => console.log(row)}
-              /> : null} */}
-            <Calendar
-              onChange={this.handleDate}
-              id="currentDate"
-              // value={this.state.yearMonth.currentDate}
-              className='sectionShadow'
-            />
-            <div className='sectionShadow'>
-              <TableVacation data={this.state.DA} />
+                onChange={this.handleDate}
+                id="currentDate"
+                // value={this.state.yearMonth.currentDate}
+                className='sectionShadow'
+              />
+              <div className='sectionShadow'>
+                <TableVacation data={this.state.DA} />
 
-            </div>
-          </article>
+              </div>
+            </article>
+          </PC>
+          <Mobile>
+            <article className='todayleave'>
+              <h4 className='text-h4 w-100 px-5'>
+                {/* <span className='color-point text-h5'>✔ </span> */}
+                🏖 오늘의 휴가자
+              </h4>
+              {/* <Calendar
+                onChange={this.onChange}
+                value={this.state.value}
+                className='sectionShadow'
+              />
+
+              {(!this.state.selectedDate && false) ?
+                <Calendar
+                  value={this.state.value} onChange={this.onChange} className='sectionShadow'
+                  data={this.state.DA} handleSelectWorker={(row) => console.log(row)}
+                /> : null} */}
+              <Calendar
+                onChange={this.handleDate}
+                id="currentDate"
+                // value={this.state.yearMonth.currentDate}
+                className='sectionShadow'
+              />
+            </article>
+            <article className='todayleave'>
+              <div className='sectionShadow'>
+                <TableVacation data={this.state.DA} />
+              </div>
+            </article>
+          </Mobile>
           <article className='sectionShadow'>
             <h4 className='text-h4 px-4'>🗿 오늘의 근무자</h4>
             <Table3 data={this.state.worker} click={clickhandler} />
