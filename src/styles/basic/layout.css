@@ -21,7 +21,7 @@
   padding-top: 100px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .wrap > .container {
     padding-left: 255px;
   }

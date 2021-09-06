@@ -14,6 +14,7 @@ import {setUserInfo, getUserInfo} from '../../util/cookie';
 import '../../styles/login/login.css';
 
 import imgloginvisual from '../../img/loginVisual.png';
+import  { PC, Mobile } from '../../components/MediaQuery';
 
 
 class Login extends Component {
@@ -61,14 +62,23 @@ class Login extends Component {
                 <Header />
                 {/* <Navigation /> */}
                 <div className='container'>
-                    <div className='sectionShadow container flex justify-around max-w-5xl items-center h-fit'>
-                        <Authentication
-                        mode={ true }
-                        onLogin={ this.handleLogin } />
-                        <div className='card-visual'>
-                            <img src={ imgloginvisual } alt='로그인 배경 이미지' />
+                    <PC>
+                        <div className='sectionShadow container flex justify-around max-w-5xl items-center h-fit m-5'>
+                            <Authentication
+                            mode={ true }
+                            onLogin={ this.handleLogin } />
+                            <div className='card-visual'>
+                                <img src={ imgloginvisual } alt='로그인 배경 이미지' />
+                            </div>
                         </div>
-                    </div>
+                    </PC>
+                    <Mobile>
+                        <div className='sectionShadow container flex justify-around max-w-5xl items-center h-fit m-5'>
+                            <Authentication
+                            mode={ true }
+                            onLogin={ this.handleLogin } />
+                        </div>
+                    </Mobile>
                 </div>
                 <Footer />
             </div>

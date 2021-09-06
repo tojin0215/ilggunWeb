@@ -10,6 +10,12 @@
   padding-top: 8rem;
 }
 
+@media (min-width: 769px) {
+  .navigation {
+    margin-left: 0;
+  }
+}
+
 .navigation {
   height: 60px;
   background-color: rgba(255, 255, 255, 1);
