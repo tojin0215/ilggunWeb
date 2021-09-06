@@ -78,6 +78,7 @@ class Login extends Component {
                             mode={ true }
                             onLogin={ this.handleLogin } />
                         </div>
+                    <p className='text-base text-center'>해당 홈페이지는 PC 해상도에 최적화되어 있으며,<br/> 모바일 전용 앱이 제작되어 있습니다.</p>
                     </Mobile>
                 </div>
                 <Footer />
