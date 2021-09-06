@@ -1,16 +1,14 @@
 import React, {useState} from 'react';
 import  { PC, Mobile } from '../MediaQuery';
 
-import {Nav, Navbar} from 'react-bootstrap';
 import { useHistory, useLocation } from "react-router-dom";
 import {Navigation} from 'react-minimal-side-navigation';
 
 import imgLogo from '../../img/logo.png';
-import { BsList } from "react-icons/bs";
 import "react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css";
 
 import Icon from 'awesome-react-icons';
-import { FaHome, FaBriefcase, FaUsers, FaFileAlt, FaMailBulk, FaMarker, FaNetworkWired, FaTable, FaPiggyBank, FaCoffee, FaDonate, FaFileInvoiceDollar, FaListAlt, FaWindowRestore, FaArchive, FaCommentDots, FaEnvelope, FaRegEnvelope, FaPaperPlane } from "react-icons/fa";
+import { FaHome, FaBriefcase, FaUsers, FaFileAlt, FaMarker, FaNetworkWired, FaTable, FaPiggyBank, FaCoffee, FaDonate, FaFileInvoiceDollar, FaListAlt, FaWindowRestore, FaArchive, FaCommentDots, FaEnvelope, FaPaperPlane } from "react-icons/fa";
 
 
 
