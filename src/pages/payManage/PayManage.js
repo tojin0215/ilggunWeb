@@ -320,7 +320,7 @@ class PayManage extends Component {
                   <input className='small-shadow' placeholder="사유를 입력하세요" id="reason" onChange={this.handleInsert2} />
                 </div>
               </div>
-              <button className='button-solid py-3 px-5 font-bold' type="button" onClick={this.handleOnClick} >저장하기</button>
+              <button className='button-solid py-3 px-4 font-bold' type="button" onClick={this.handleOnClick} >저장하기</button>
             </article>
           </Mobile>
         </div>
