@@ -21,7 +21,7 @@
   padding-top: 100px;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
   .wrap > .container {
     padding-left: 255px;
   }
@@ -92,6 +92,10 @@
 
 .width-fit {
   width: fit-content;
+}
+
+.w-inherit {
+  width: inherit;
 }
 
 .w-100px {

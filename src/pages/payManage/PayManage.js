@@ -232,7 +232,7 @@ class PayManage extends Component {
           </PC>
           <Mobile>
             <article className='todayleave'>
-              <h4 className='w-100 text-h4'>
+              <h4 className='w-100 text-h4 text-center'>
                 {/* <span className='color-point text-h5'>✔ </span> */}
                 🏖 휴가중인 직원
               </h4>
@@ -249,8 +249,8 @@ class PayManage extends Component {
               </div>
             </article>
           </Mobile>
-          <h4 className='text-h4'>🙋‍♀️ 휴가 등록하기</h4>
           <PC>
+            <h4 className='text-h4'>🙋‍♀️ 휴가 등록하기</h4>
             <article className='sectionShadow flex flex-wrap'>
               <div className='w-50 small-shadow pt-3 m-0'>
                 {(!this.state.selectedWorker) ? <TableWorkerFilter data={this.state.worker} handleSelectWorker={this.handleSelectWorker} />
@@ -286,6 +286,7 @@ class PayManage extends Component {
             </article>
           </PC>
           <Mobile>
+            <h4 className='text-h4 text-center'>🙋‍♀️ 휴가 등록하기</h4>
             <article className='sectionShadow flex flex-wrap'>
               <div className='w-100 small-shadow pt-3 m-0'>
                 {(!this.state.selectedWorker) ? <TableWorkerFilter data={this.state.worker} handleSelectWorker={this.handleSelectWorker} />
