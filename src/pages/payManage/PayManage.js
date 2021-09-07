@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import $ from 'jquery';
 
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -21,7 +20,7 @@ import { dividerClasses } from '@material-ui/core';
 import '../../styles/payManage/payManage.css';
 import { PC, Mobile } from '../../components/MediaQuery';
 
-import { insertVacation, selectVacation, selectWorkerByType, dateVacation } from '../../action/api';
+import { insertVacation, selectWorkerByType, dateVacation } from '../../action/api';
 
 
 const pickerLang = {
@@ -38,15 +37,11 @@ class PayManage extends Component {
       year: "2020",
       month: "1",
       date: "31",
-
       checkboxGroup: {
         paid: true,
         unpaid: false
       },
-
       selectedWorker: null,
-      dateValue: null,
-
       workername: false,
       reason: false,
       start_date: `${this.getToday().year}-${this.getToday().month}-${this.getToday().date}`,
@@ -69,7 +64,6 @@ class PayManage extends Component {
     console.log(this.state.yearMonth)
     const a = this.state.yearMonth
     dateVacation(this.props.userinfo.business_name, a)
-      //`${a.year}-${a.month}-${a.date}`
       .then((result) => result.json())
       .then((result) => {
 
@@ -216,7 +210,6 @@ class PayManage extends Component {
               <Calendar
                 onChange={this.handleDate}
                 id="currentDate"
-                // value={this.state.yearMonth.currentDate}
                 className='sectionShadow'
               />
             </article>

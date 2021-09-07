@@ -118,7 +118,6 @@ class PayManageExtra extends Component {
       this.state.checkboxGroup['position'] == false ? 0 : this.state.t_position, this.state.checkboxGroup['etc'] == false ? 0 : this.state.t_etc,
       this.state.checkboxGroup['oil'] == false ? 0 : this.state.f_carMaintenanceFee, this.state.checkboxGroup['agi'] == false ? 0 : this.state.f_childcareAllowance,
       this.state.checkboxGroup['bob'] == false ? 0 : this.state.f_meals)
-      // ? null : 0
       .then((result) => result.json())
       .then((result) => {
         console.log(result)
@@ -387,7 +386,6 @@ class PayManageExtra extends Component {
                     ref={this.pickAMonth2}
                     value={this.state.yearMonth}
                     lang={pickerLang.months}
-                    // show={this.state.isVisibleMonthSelector}
                     onChange={this.handleAMonthChange}
                     onDismiss={this.handleAMonthDissmis}
                   >
@@ -422,7 +420,6 @@ class PayManageExtra extends Component {
                         <input type="checkbox" id="etc" name="checkboxGroup"
                           checked={this.state.checkboxGroup['etc']} onChange={this.handleCheckbox} />
                         기타
-                        {/* {(this.state.etc) ? <input/> : null}    */}
                       </div>
                     </div>
                     <div className='pb-5'>
