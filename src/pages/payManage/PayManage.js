@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import $ from 'jquery';
 
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -19,9 +18,9 @@ import '../../styles/home/home.css';
 import { dividerClasses } from '@material-ui/core';
 
 import '../../styles/payManage/payManage.css';
-import  { PC, Mobile } from '../../components/MediaQuery';
+import { PC, Mobile } from '../../components/MediaQuery';
 
-import { insertVacation, selectVacation, selectWorkerByType, dateVacation } from '../../action/api';
+import { insertVacation, selectWorkerByType, dateVacation } from '../../action/api';
 
 
 const pickerLang = {
@@ -38,15 +37,11 @@ class PayManage extends Component {
       year: "2020",
       month: "1",
       date: "31",
-
       checkboxGroup: {
         paid: true,
         unpaid: false
       },
-
       selectedWorker: null,
-      dateValue: null,
-
       workername: false,
       reason: false,
       start_date: `${this.getToday().year}-${this.getToday().month}-${this.getToday().date}`,
@@ -65,30 +60,10 @@ class PayManage extends Component {
   };
 
 
-  // vacation = () => {
-  //   selectVacation(this.props.userinfo.business_name)
-  //     .then((result) => result.json())
-  //     .then((result) => {
-  //       result.map((item, index) => {
-  //         const start_date = new Date(item.start_date)
-  //         start_date.setDate(start_date.getDate() + 1);
-
-  //         item.start_date = `${start_date.getFullYear()}-${start_date.getMonth() + 1}-${start_date.getDate() - 1}`
-  //         const end_date = new Date(item.end_date)
-  //         end_date.setDate(end_date.getDate());
-
-  //         item.end_date = `${end_date.getFullYear()}-${end_date.getMonth() + 1}-${end_date.getDate()}`
-  //       });
-
-  //       this.setState({ vacation: result })
-  //     })
-  //   return
-  // }
   updateVacation = () => {
     console.log(this.state.yearMonth)
     const a = this.state.yearMonth
     dateVacation(this.props.userinfo.business_name, a)
-      //`${a.year}-${a.month}-${a.date}`
       .then((result) => result.json())
       .then((result) => {
 
@@ -145,7 +120,7 @@ class PayManage extends Component {
         this.setState({ addVacation: result })
         this.updateVacation();
       })
-    // .then(() => { this.props.history.push('/payManage') })
+
 
 
   }
@@ -196,7 +171,6 @@ class PayManage extends Component {
   render() {
     console.log(this.state.yearMonth.currentDate)
     const { userinfo } = this.props;
-    // console.log('userinfo : ', userinfo);
     const makeText = m => {
       if (m && m.year && m.month) return (pickerLang.months[m.month - 1] + '. ' + m.year)
       return '?'
@@ -216,13 +190,11 @@ class PayManage extends Component {
           <PC>
             <article className='todayleave'>
               <h4 className='w-100 text-h4'>
-                {/* <span className='color-point text-h5'>✔ </span> */}
                 🏖 휴가중인 직원
               </h4>
               <Calendar
                 onChange={this.handleDate}
                 id="currentDate"
-                // value={this.state.yearMonth.currentDate}
                 className='sectionShadow'
               />
               <div className='sectionShadow'>
@@ -233,13 +205,11 @@ class PayManage extends Component {
           <Mobile>
             <article className='todayleave'>
               <h4 className='w-100 text-h4 text-center'>
-                {/* <span className='color-point text-h5'>✔ </span> */}
                 🏖 휴가중인 직원
               </h4>
               <Calendar
                 onChange={this.handleDate}
                 id="currentDate"
-                // value={this.state.yearMonth.currentDate}
                 className='sectionShadow'
               />
             </article>
@@ -332,8 +302,7 @@ class PayManage extends Component {
 
 const PayManageStateToProps = (state) => {
   return {
-    userinfo: state.authentication.userinfo,
-    //status: state.authentication.status
+    userinfo: state.authentication.userinfo
   };
 };
 
