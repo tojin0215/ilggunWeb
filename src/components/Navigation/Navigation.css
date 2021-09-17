@@ -10,9 +10,17 @@
   padding-top: 8rem;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
   .navigation {
     margin-left: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .navigation {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 56px;
   }
 }
 
@@ -37,14 +45,6 @@
   -ms-transition: height 500ms cubic-bezier(0.19, 1, 0.22, 1);
   -o-transition: height 500ms cubic-bezier(0.19, 1, 0.22, 1);
   transition: height 500ms cubic-bezier(0.19, 1, 0.22, 1); /* easeOutExpo */
-}
-
-@media (max-width: 767px) {
-  .navigation {
-    width: 100%;
-    margin-left: 0;
-    padding-left: 56px;
-  }
 }
 
 .navigation > .navbar {

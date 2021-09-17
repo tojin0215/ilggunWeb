@@ -10,8 +10,6 @@ import "react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css";
 import Icon from 'awesome-react-icons';
 import { FaHome, FaBriefcase, FaUsers, FaFileAlt, FaMarker, FaNetworkWired, FaTable, FaPiggyBank, FaCoffee, FaDonate, FaFileInvoiceDollar, FaListAlt, FaWindowRestore, FaArchive, FaCommentDots, FaEnvelope, FaPaperPlane } from "react-icons/fa";
 
-
-
 export const Menu = () => {
   const history = useHistory();
   const location = useLocation();
