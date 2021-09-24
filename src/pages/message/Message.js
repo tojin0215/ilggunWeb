@@ -71,8 +71,8 @@ class Message extends Component {
     openModal = (row) => {
       console.log(row);
       this.setState({
-        msgFrom: row.f,
-        msgTo: row.t,
+        msgFrom: row.f_name,
+        msgTo: row.t_name,
         msgBody: row.message,
         isModalOpen: true,
       })

@@ -17,7 +17,7 @@ const Table = props => {
 
     {
       name:"수신자",
-      selector: (row, index) => row.t,
+      selector: (row, index) => row.t_name,
       sortable:true
     },
     {

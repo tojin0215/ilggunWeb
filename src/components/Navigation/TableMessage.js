@@ -18,7 +18,7 @@ const Table = props => {
 
     {
       name:"발신자",
-      selector: (row, index) => row.f,
+      selector: (row, index) => row.f_name,
       sortable: true
     },
     {
