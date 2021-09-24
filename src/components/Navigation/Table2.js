@@ -19,7 +19,7 @@ const Table = props => {
     cell: row =>
         (row.state == 2) ? (
           <>
-          <Button onClick={ () => openModal(row.workername2) }> QR </Button>
+          <Button onClick={ () => openModal(row.workername) }> QR </Button>
           </>
         ) : null
     },
