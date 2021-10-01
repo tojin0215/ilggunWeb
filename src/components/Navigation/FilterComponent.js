@@ -32,13 +32,14 @@ const ClearButton = styled.button`
 const FilterComponent = ({ filterText, onFilter, onClear }) => (
   <>
     <Input
+      className="filterCom"
       id="search"
       type="text"
       placeholder="사원 이름 검색..."
       value={filterText}
       onChange={onFilter}
     />
-    <ClearButton onClick={onClear}>X</ClearButton>
+    <ClearButton onClick={onClear} className="clearButt">X</ClearButton>
   </>
 );
 

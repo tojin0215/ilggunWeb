@@ -1,6 +1,6 @@
 /* 고객관리 - 근로계약서 */
 /* 검색창 */
-.container .krDAgv {
+.container .filterCom {
   justify-content: flex-start;
   flex-wrap: nowrap;
   box-shadow: 6px 10px 12.75px 2.25px rgba(87, 178, 163, 0.4);
@@ -14,7 +14,7 @@
   margin-bottom: 30px;
 }
 /* 검색 인풋 */
-.container .jsTYsS {
+.container .filterCom {
   width: 100%;
   max-width: 310px;
   border: 0;
@@ -22,7 +22,7 @@
   font-size: 1.2rem;
 }
 /* 검색버튼 */
-.container .hwsrfo {
+.container .clearButt {
   border: 0;
   background: #67c7b9 url(../../img/search.png) no-repeat center center/60% auto;
   text-indent: -9999px;
