@@ -10,25 +10,30 @@
   /* position: absolute;
   top: 120px;
   left: 40px; */
+  border: 0;
   border-radius: 16px;
   margin-bottom: 30px;
+  text-indent: 12px;
 }
-/* 검색 인풋 */
+/* 검색 인풋
 .container .filterCom {
   width: 100%;
   max-width: 310px;
-  border: 0;
   height: 40px;
   font-size: 1.2rem;
-}
+} */
 /* 검색버튼 */
 .container .clearButt {
   border: 0;
-  background: #67c7b9 url(../../img/search.png) no-repeat center center/60% auto;
+  background: #67c7b9 url(../../img/close_white.png) no-repeat center center/60%
+    auto;
   text-indent: -9999px;
   border-radius: 14px;
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
+  position: absolute;
+  top: 11px;
+  right: 22px;
 }
 /* 첫번째열 */
 .container .edTgaw {

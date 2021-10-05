@@ -4,7 +4,7 @@ import DataTable from 'react-data-table-component';
 import FilterComponent from './FilterComponent';
 
 import './table.css';
-import imgsearch from '../../img/search.png'
+import imgsearch from '../../img/close_white.png'
 
 const Table = props => {
   const { data, handleSelectWorker } = props;
@@ -62,7 +62,6 @@ const Table = props => {
       onRowClicked={handleSelectWorker}
       subHeaderComponent={subHeaderComponent}
       noDataComponent="데이터가 없습니다"
-
     />
   );
 };

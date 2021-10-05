@@ -6,7 +6,7 @@ import DataTable from 'react-data-table-component';
 import FilterComponent from './FilterComponent';
 
 import './table.css';
-import imgsearch from '../../img/search.png';
+import imgsearch from '../../img/close_white.png';
 import { PC, Mobile } from '../MediaQuery';
 
 const Table = props => {

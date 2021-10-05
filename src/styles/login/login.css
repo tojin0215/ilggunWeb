@@ -34,3 +34,28 @@
   width: 100%;
   height: auto;
 }
+
+@media (max-width: 767px) {
+  div > .wrap_login > .container {
+    padding-top: 0;
+    margin-left: 7px;
+  }
+  .wrap_login > .container > .container {
+    width: 95%;
+  }
+  .wrap_login .container .auth > div > p {
+    white-space: nowrap;
+  }
+  .wrap_login .input-field > label {
+    flex-direction: column;
+  }
+  .wrap_login .input-field > label > p {
+    padding: 5px;
+  }
+  .wrap_login .label-icon {
+    top: 20px;
+  }
+  .wrap_login .loginCard > .card-content {
+    padding: 20px 0;
+  }
+}
