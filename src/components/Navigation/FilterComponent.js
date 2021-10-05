@@ -33,12 +33,13 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
   <>
     <Input
       id="search"
+      className="test"
       type="text"
       placeholder="사원 이름 검색..."
       value={filterText}
       onChange={onFilter}
     />
-    <ClearButton onClick={onClear}>X</ClearButton>
+    <ClearButton onClick={onClear} className='test2'>X</ClearButton>
   </>
 );
 

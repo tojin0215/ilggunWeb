@@ -106,6 +106,7 @@ const Table = props => {
 
     return (
       <FilterComponent
+        className="test"
         onFilter={e => setFilterText(e.target.value)}
         onClear={handleClear}
         filterText={filterText}
