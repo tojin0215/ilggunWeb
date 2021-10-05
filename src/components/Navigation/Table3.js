@@ -11,23 +11,23 @@ const Table = props => {
       name: "이름",
       selector: (row, index) => row.workername2,
       sortable: true
-    },  
+    },
 
     {
-      name:"출근시간",
+      name: "출근시간",
       selector: (row, index) => row.goToWork,
-      sortable:true,
+      sortable: true,
     },
     {
-      name:" 퇴근시간",
+      name: " 퇴근시간",
       selector: (row, index) => row.goToHome,
-      sortable:true,
+      sortable: true,
     },
     {
-      name:"휴가",
+      name: "휴가",
       selector: (row, index) => row.vacation,
-      sortable:true,
-      cell: row => (row.vacation)? (<span>{console.log(row.vacation)}{row.vacation.start_date_str.split('T')[0].replace("2021-", "")}~{row.vacation.end_date_str.split('T')[0].replace("2021-", "")}</span>):(<>-</>)
+      sortable: true,
+      cell: row => (row.vacation) ? (<span>{console.log(row.vacation)}{row.vacation.start_date_str.split('T')[0].replace("2021-", "")}~{row.vacation.end_date_str.split('T')[0].replace("2021-", "")}</span>) : (<>-</>)
     }
   ];
 
@@ -46,7 +46,7 @@ const Table = props => {
   // );
   const filteredItems = props.data.filter(
     item =>
-      item.workername2.indexOf(filterText.toLowerCase()) !== -1
+      item.workername2.indexOf(filterText) !== -1
   );
 
   const subHeaderComponent = useMemo(() => {
@@ -67,8 +67,8 @@ const Table = props => {
   }, [filterText, resetPaginationToggle]);
 
   return (
-    <DataTable      
-      defaultSortAsc={false}               
+    <DataTable
+      defaultSortAsc={false}
       // selectableRows
       highlightOnHover
       pointerOnHover

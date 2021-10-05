@@ -9,7 +9,7 @@ import imgsearch from '../../img/search.png'
 const Table = props => {
   const { data, handleSelectWorker } = props;
   const columns = [
-    {      
+    {
       selector: (row, index) => row.workername2,
       sortable: true
     }
@@ -30,7 +30,7 @@ const Table = props => {
   // );
   const filteredItems = props.data.filter(
     item =>
-      item.workername2.indexOf(filterText.toLowerCase()) !== -1
+      item.workername2.indexOf(filterText) !== -1
   );
 
   const subHeaderComponent = useMemo(() => {
@@ -54,15 +54,15 @@ const Table = props => {
     <DataTable
       defaultSortAsc={false}
       highlightOnHover
-      pointerOnHover     
+      pointerOnHover
       columns={columns}
       data={filteredItems}
-      striped      
+      striped
       subHeader
       onRowClicked={handleSelectWorker}
       subHeaderComponent={subHeaderComponent}
       noDataComponent="데이터가 없습니다"
-      
+
     />
   );
 };

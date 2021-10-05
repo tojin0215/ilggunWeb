@@ -7,7 +7,7 @@ import FilterComponent from './FilterComponent';
 
 import './table.css';
 import imgsearch from '../../img/search.png';
-import  { PC, Mobile } from '../MediaQuery';
+import { PC, Mobile } from '../MediaQuery';
 
 const Table = props => {
   const { data } = props;
@@ -20,61 +20,61 @@ const Table = props => {
     {
       name: "정규직/비정규직",
       selector: (row, index) => row.permanent,
-      grow:2,
+      grow: 2,
       cell: row =>
-          (row.type == 2) ? (
-            <>
+        (row.type == 2) ? (
+          <>
             <span>정규직</span>
             {/* <Link to={{ pathname:"/workerManage", state:{ worker: row } }}>정규직</Link> */}
-            </>
-          ) : (
-            <>
+          </>
+        ) : (
+          <>
             <span>비정규직</span>
             {/* <Link to={{ pathname:"/workerManage", state:{ worker: row } }}>비정규직</Link> */}
-            </>)
+          </>)
     },
     {
       name: "근로계약서작성여부",
-      grow:2,
+      grow: 2,
       cell: row =>
-          (row.state == 2) ? (
-            <>
-              <PC>
-                <Link
-                  to={{ pathname:"/workerManage/contract", state:{ worker: row } }}
-                  className='button-solid_white m-1 px-5 py-2'
-                >
-                  작성
-                </Link>
-              </PC>
-              <Mobile>
-                <Link
-                  to={{ pathname:"/workerManage/contract", state:{ worker: row } }}
-                  className='button-solid_white m-1 px-3 py-1'
-                >
-                  작성
-                </Link>
-              </Mobile>
-            </>
-            ) : (
-              <>
-                <PC>
-                  <Link
-                    to={{ pathname:"/workerManage/contract", state:{ worker: row } }}
-                    className='button-solid m-1 px-5 py-2'
-                  >
-                    미작성
-                  </Link>
-                </PC>
-                <Mobile>
-                  <Link
-                    to={{ pathname:"/workerManage/contract", state:{ worker: row } }}
-                    className='button-solid m-1 px-3 py-1'
-                  >
-                    미작성
-                  </Link>
-                </Mobile>
-              </>)
+        (row.state == 2) ? (
+          <>
+            <PC>
+              <Link
+                to={{ pathname: "/workerManage/contract", state: { worker: row } }}
+                className='button-solid_white m-1 px-5 py-2'
+              >
+                작성
+              </Link>
+            </PC>
+            <Mobile>
+              <Link
+                to={{ pathname: "/workerManage/contract", state: { worker: row } }}
+                className='button-solid_white m-1 px-3 py-1'
+              >
+                작성
+              </Link>
+            </Mobile>
+          </>
+        ) : (
+          <>
+            <PC>
+              <Link
+                to={{ pathname: "/workerManage/contract", state: { worker: row } }}
+                className='button-solid m-1 px-5 py-2'
+              >
+                미작성
+              </Link>
+            </PC>
+            <Mobile>
+              <Link
+                to={{ pathname: "/workerManage/contract", state: { worker: row } }}
+                className='button-solid m-1 px-3 py-1'
+              >
+                미작성
+              </Link>
+            </Mobile>
+          </>)
     }
   ];
 
@@ -93,7 +93,7 @@ const Table = props => {
   // );
   const filteredItems = props.data.filter(
     item =>
-      item.workername2.indexOf(filterText.toLowerCase()) !== -1
+      item.workername2.indexOf(filterText) !== -1
   );
 
   const subHeaderComponent = useMemo(() => {

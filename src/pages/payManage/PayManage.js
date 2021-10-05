@@ -45,11 +45,12 @@ class PayManage extends Component {
       workername: false,
       reason: false,
       start_date: `${this.getToday().year}-${this.getToday().month}-${this.getToday().date}`,
-      end_date: `${this.getToday().year}-${this.getToday().month}-${this.getToday().date + 1}`,
+      end_date: false,
 
       vacation: [],
       worker: [],
       addVacation: []
+
     }
     this.updateVacation()
     this.workerFilter()
@@ -111,15 +112,28 @@ class PayManage extends Component {
 
   handleOnClick = (e) => {
 
-    insertVacation(this.props.userinfo.business_name, this.state.selectedWorker.workername2,
-      this.state.checkboxGroup.unpaid && 1,//true:유급(else), false:무급(1)
-      this.state.reason, this.state.start_date, this.state.end_date)
-      .then((result) => result.json())
-      .then((result) => {
-        alert("휴가 저장 완료.");
-        this.setState({ addVacation: result })
-        this.updateVacation();
-      })
+
+    if (this.state.selectedWorker === null) {
+      alert("근로자를 선택해주세요.")
+    }
+    if (this.state.end_date === false) {
+      alert("휴가 복귀일을 지정해주세요.")
+    }
+    if (this.state.reason === false || this.state.reason === " ") {
+      alert("휴가 사유를 기입해주세요.")
+    }
+    else {
+      insertVacation(this.props.userinfo.business_name, this.state.selectedWorker.workername2,
+        this.state.checkboxGroup.unpaid && 1,//true:유급(else), false:무급(1)
+        this.state.reason, this.state.start_date, this.state.end_date)
+        .then((result) => result.json())
+        .then((result) => {
+          alert("휴가 저장 완료.");
+          this.setState({ addVacation: result })
+          this.updateVacation();
+        })
+    }
+
 
 
 
@@ -169,7 +183,10 @@ class PayManage extends Component {
 
 
   render() {
-    console.log(this.state.yearMonth.currentDate)
+    console.log(this.state.selectedWorker)
+    console.log(this.state.end_date)
+    console.log(this.state.reason)
+
     const { userinfo } = this.props;
     const makeText = m => {
       if (m && m.year && m.month) return (pickerLang.months[m.month - 1] + '. ' + m.year)
@@ -179,7 +196,6 @@ class PayManage extends Component {
 
     const today = this.getToday();
     const dateToday = `${today.year}-${today.month}-${today.date}`;
-    const dateToday2 = `${today.year}-${today.month}-${today.date + 1}`;
 
     return (
       <div className="wrap wrap-paymanage" >
@@ -236,7 +252,7 @@ class PayManage extends Component {
                   <p className='text-h5 text-bold w-100'>휴가기간</p>
                   <input className='small-shadow' type="date" min={dateToday} id="start_date" value={this.state.start_date} onChange={this.handleInsert} />
                   ~
-                  <input className='small-shadow' type="date" min={dateToday2} id="end_date" value={this.state.end_date} onChange={this.handleInsert1} />
+                  <input className='small-shadow' type="date" min={dateToday} id="end_date" value={this.state.end_date} onChange={this.handleInsert1} />
                 </div>
                 <div className='p-3 h-100 flex-wrap'>
                   <p className='text-h5 text-bold w-100'>무/유급 휴가 선택</p>
@@ -274,7 +290,7 @@ class PayManage extends Component {
                   <p className='text-h5 text-bold w-100'>휴가기간</p>
                   <input className='small-shadow' type="date" min={dateToday} id="start_date" value={this.state.start_date} onChange={this.handleInsert} />
                   ~
-                  <input className='small-shadow' type="date" min={dateToday2} id="end_date" value={this.state.end_date} onChange={this.handleInsert1} />
+                  <input className='small-shadow' type="date" min={dateToday} id="end_date" value={this.state.end_date} onChange={this.handleInsert1} />
                 </div>
                 <div className='p-3 h-100 flex-wrap'>
                   <p className='text-h5 text-bold w-100'>무/유급 휴가 선택</p>

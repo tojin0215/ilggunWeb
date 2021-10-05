@@ -34,6 +34,15 @@ class PayManageExtra extends Component {
       month: "1",
       isVisibleMonthSelector: false,
 
+      selectedWorker: null,
+      t_bonus: false,
+      t_extension: false,
+      t_position: false,
+      t_etc: false,
+      f_carMaintenanceFee: false,
+      f_childcareAllowance: false,
+      f_meals: false,
+
       checkboxGroup: {
         position: true,
         bonus: false,
@@ -111,21 +120,31 @@ class PayManageExtra extends Component {
   };
 
   handleOnClick = (e) => {
+    if (this.state.selectedWorker === null) {
+      alert("근로자를 선택해주세요.")
+    }
+    if (this.state.t_bonus === false || this.state.t_extension === false || this.state.t_position === false
+      || this.state.t_etc === false || this.state.f_carMaintenanceFee === false || this.state.f_childcareAllowance === false || this.state.f_meals === false) {
+      alert("금액을 입력해주세요.")
+    }
 
-    insertAllowance(this.props.userinfo.business_name, this.state.selectedWorker.workername,
-      this.state.yearMonth.year, this.state.yearMonth.month,
-      this.state.checkboxGroup['bonus'] == false ? 0 : this.state.t_bonus, this.state.checkboxGroup['over'] == false ? 0 : this.state.t_extension,
-      this.state.checkboxGroup['position'] == false ? 0 : this.state.t_position, this.state.checkboxGroup['etc'] == false ? 0 : this.state.t_etc,
-      this.state.checkboxGroup['oil'] == false ? 0 : this.state.f_carMaintenanceFee, this.state.checkboxGroup['agi'] == false ? 0 : this.state.f_childcareAllowance,
-      this.state.checkboxGroup['bob'] == false ? 0 : this.state.f_meals)
-      .then((result) => result.json())
-      .then((result) => {
-        console.log(result)
-        alert("추가 수당 저장 완료.");
-        this.setState({ addAllowance: result })
+    else {
+      insertAllowance(this.props.userinfo.business_name, this.state.selectedWorker.workername,
+        this.state.yearMonth.year, this.state.yearMonth.month,
+        this.state.checkboxGroup['bonus'] == false ? 0 : this.state.t_bonus, this.state.checkboxGroup['over'] == false ? 0 : this.state.t_extension,
+        this.state.checkboxGroup['position'] == false ? 0 : this.state.t_position, this.state.checkboxGroup['etc'] == false ? 0 : this.state.t_etc,
+        this.state.checkboxGroup['oil'] == false ? 0 : this.state.f_carMaintenanceFee, this.state.checkboxGroup['agi'] == false ? 0 : this.state.f_childcareAllowance,
+        this.state.checkboxGroup['bob'] == false ? 0 : this.state.f_meals)
+        .then((result) => result.json())
+        .then((result) => {
+          console.log(result)
+          alert("추가 수당 저장 완료.");
+          this.setState({ addAllowance: result })
+          this.selectAlloWance()
+        })
+    }
 
-        this.selectAlloWance()
-      })
+
   }
   handleCheckbox = (e) => {
     let obj = {

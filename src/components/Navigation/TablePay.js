@@ -94,7 +94,7 @@ const Table = props => {
 
   const filteredItems = props.data.filter(
     item =>
-      item.Employee.indexOf(filterText.toLowerCase()) !== -1
+      item.Employee.indexOf(filterText) !== -1
   );
 
 
