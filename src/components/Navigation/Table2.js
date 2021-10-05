@@ -10,16 +10,16 @@ const Table = props => {
   const columns = [
     {
       name: "이름",
-      selector: (row, index )=> row.workername2,
+      selector: (row, index) => row.workername2,
       sortable: true
     },
     {
-    name: "QR",
-    Button: true,
-    cell: row =>
+      name: "QR",
+      Button: true,
+      cell: row =>
         (row.state == 2) ? (
           <>
-          <Button onClick={ () => openModal(row.workername) }> QR </Button>
+            <Button onClick={() => openModal(row.workername)}> QR </Button>
           </>
         ) : null
     },
@@ -27,7 +27,7 @@ const Table = props => {
     {
       name: "입사일",
       selector: (row, index) => row.startdate,
-      sortable: true    
+      sortable: true
     },
 
     // {
@@ -40,10 +40,10 @@ const Table = props => {
       Button: true,
       cell: row =>
         (row.state == 2) ? (
-            <>
-              <Button variant="danger" onClick={ () => deleteWorker(null, row.workername) }>퇴사</Button>              
-            </>
-          ) : <><span>{(row.retire_date) ? row.retire_date : new Date().toLocaleDateString()}</span></>
+          <>
+            <Button variant="danger" onClick={() => deleteWorker(null, row.workername)}>퇴사</Button>
+          </>
+        ) : <><span>{(row.retire_date) ? row.retire_date : new Date().toLocaleDateString()}</span></>
     },
   ];
 
@@ -56,7 +56,7 @@ const Table = props => {
   // );
   const filteredItems = props.data.filter(
     item =>
-      item.workername2.indexOf(filterText.toLowerCase()) !== -1
+      item.workername2.indexOf(filterText) !== -1
   );
 
   const subHeaderComponent = useMemo(() => {
@@ -79,7 +79,7 @@ const Table = props => {
   return (
     <DataTable
       defaultSortField="id"
-      defaultSortAsc={false}               
+      defaultSortAsc={false}
       // selectableRows
       highlightOnHover
       pointerOnHover

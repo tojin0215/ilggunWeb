@@ -49,7 +49,7 @@ const Table = props => {
   );
   const filteredItems = props.data.filter(
     item =>
-      item.workername.indexOf(filterText.toLowerCase()) !== -1
+      item.workername.indexOf(filterText) !== -1
   );
 
   // const filteredItems = props.data.filter(
