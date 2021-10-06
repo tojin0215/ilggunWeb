@@ -49,7 +49,7 @@
 
 @media (max-width: 767px) {
   .footer {
-    padding: 0;
+    padding: 20px 0;
   }
   .footerIn {
     padding-left: 0;

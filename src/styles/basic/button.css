@@ -54,3 +54,9 @@ button {
 .cursor-pointer {
   cursor: pointer;
 }
+
+@media (max-width: 767px) {
+  .button-solid {
+    padding: 10px 20px;
+  }
+}

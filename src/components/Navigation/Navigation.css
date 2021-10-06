@@ -10,20 +10,6 @@
   padding-top: 8rem;
 }
 
-@media (min-width: 768px) {
-  .navigation {
-    margin-left: 0;
-  }
-}
-
-@media (max-width: 767px) {
-  .navigation {
-    width: 100%;
-    margin-left: 0;
-    padding-left: 56px;
-  }
-}
-
 .navigation {
   height: 60px;
   background-color: rgba(255, 255, 255, 1);
@@ -117,4 +103,21 @@
   padding: 1rem 2rem;
   border: none;
   color: #fff;
+}
+
+/* @media (min-width: 768px) {
+  .navigation {
+    margin-left: 0;
+  }
+} */
+
+@media (max-width: 767px) {
+  .navigation {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 56px;
+  }
+  .btn-menu {
+    padding: 2px !important;
+  }
 }
