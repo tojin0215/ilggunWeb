@@ -119,7 +119,7 @@ class PayManage extends Component {
     if (this.state.end_date === false) {
       alert("휴가 복귀일을 지정해주세요.")
     }
-    if (this.state.reason === false || this.state.reason === " ") {
+    if (this.state.reason === false || this.state.reason.trim() === "") {
       alert("휴가 사유를 기입해주세요.")
     }
     else {

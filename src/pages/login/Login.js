@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Authentication from '../login/Authentication';
@@ -7,14 +7,14 @@ import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 
 import { connect } from 'react-redux';
-import {loginRequest} from '../../action/authentication';
+import { loginRequest } from '../../action/authentication';
 
-import {setUserInfo, getUserInfo} from '../../util/cookie';
+import { setUserInfo, getUserInfo } from '../../util/cookie';
 
 import '../../styles/login/login.css';
 
 import imgloginvisual from '../../img/loginVisual.png';
-import  { PC, Mobile } from '../../components/MediaQuery';
+import { PC, Mobile } from '../../components/MediaQuery';
 
 
 class Login extends Component {
@@ -35,7 +35,7 @@ class Login extends Component {
         return this.props.loginRequest(id, pw).then(
             () => {
                 // console.log(this.props.status)
-                if(this.props.status === "SUCCESS") {
+                if (this.props.status === "SUCCESS") {
                     // create session data
                     let loginData = {
                         isLoggedIn: true,
@@ -44,7 +44,6 @@ class Login extends Component {
                     };
                     document.cookie = 'key=' + btoa(JSON.stringify(loginData));
                     setUserInfo(id, pw, null);
-                    alert(id + '님 반갑습니다.') 
                     // this.props.history.push('/selectBusiness');
                     this.props.history.push('/home');
                     return true;
@@ -65,20 +64,20 @@ class Login extends Component {
                     <PC>
                         <div className='sectionShadow container flex justify-around max-w-5xl items-center h-fit m-5'>
                             <Authentication
-                            mode={ true }
-                            onLogin={ this.handleLogin } />
+                                mode={true}
+                                onLogin={this.handleLogin} />
                             <div className='card-visual'>
-                                <img src={ imgloginvisual } alt='로그인 배경 이미지' />
+                                <img src={imgloginvisual} alt='로그인 배경 이미지' />
                             </div>
                         </div>
                     </PC>
                     <Mobile>
                         <div className='sectionShadow container flex justify-around max-w-5xl items-center h-fit m-5'>
                             <Authentication
-                            mode={ true }
-                            onLogin={ this.handleLogin } />
+                                mode={true}
+                                onLogin={this.handleLogin} />
                         </div>
-                    <p className='text-base text-center'>해당 홈페이지는 PC 해상도에 최적화되어 있으며,<br/> 모바일 전용 앱이 제작되어 있습니다.</p>
+                        <p className='text-base text-center'>해당 홈페이지는 PC 해상도에 최적화되어 있으며,<br /> 모바일 전용 앱이 제작되어 있습니다.</p>
                     </Mobile>
                 </div>
                 <Footer />
@@ -87,7 +86,7 @@ class Login extends Component {
     }
 };
 
- 
+
 const mapStateToProps = (state) => {
     return {
         status: state.authentication.login.status
@@ -97,7 +96,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         loginRequest: (id, pw) => {
-            return dispatch(loginRequest(id,pw));
+            return dispatch(loginRequest(id, pw));
         }
     };
 };
