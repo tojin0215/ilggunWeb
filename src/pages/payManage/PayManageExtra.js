@@ -123,8 +123,15 @@ class PayManageExtra extends Component {
     if (this.state.selectedWorker === null) {
       alert("근로자를 선택해주세요.")
     }
-    if (this.state.t_bonus === false || this.state.t_extension === false || this.state.t_position === false
-      || this.state.t_etc === false || this.state.f_carMaintenanceFee === false || this.state.f_childcareAllowance === false || this.state.f_meals === false) {
+
+    if (this.state.checkboxGroup['position'] == true && this.state.t_position === false
+      || this.state.checkboxGroup['bonus'] == true && this.state.t_bonus === false
+      || this.state.checkboxGroup['over'] == true && this.state.t_extension === false
+      || this.state.checkboxGroup['etc'] == true && this.state.t_etc === false
+      || this.state.checkboxGroup['bob'] == true && this.state.f_meals === false
+      || this.state.checkboxGroup['oil'] == true && this.state.f_carMaintenanceFee === false
+      || this.state.checkboxGroup['agi'] == true && this.state.f_childcareAllowance === false
+    ) {
       alert("금액을 입력해주세요.")
     }
 
