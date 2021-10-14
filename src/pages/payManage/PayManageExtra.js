@@ -124,7 +124,7 @@ class PayManageExtra extends Component {
       alert("근로자를 선택해주세요.")
     }
 
-    if (this.state.checkboxGroup['position'] == true && this.state.t_position === false
+    if (this.state.checkboxGroup['position'] == true && this.state.t_position.trim() === ""
       || this.state.checkboxGroup['bonus'] == true && this.state.t_bonus === false
       || this.state.checkboxGroup['over'] == true && this.state.t_extension === false
       || this.state.checkboxGroup['etc'] == true && this.state.t_etc === false
