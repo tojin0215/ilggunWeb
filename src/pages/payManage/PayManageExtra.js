@@ -35,13 +35,14 @@ class PayManageExtra extends Component {
       isVisibleMonthSelector: false,
 
       selectedWorker: null,
-      t_bonus: false,
-      t_extension: false,
-      t_position: false,
-      t_etc: false,
-      f_carMaintenanceFee: false,
-      f_childcareAllowance: false,
-      f_meals: false,
+
+      t_position: " ",
+      t_bonus: " ",
+      t_extension: " ",
+      t_etc: " ",
+      f_carMaintenanceFee: " ",
+      f_childcareAllowance: " ",
+      f_meals: " ",
 
       checkboxGroup: {
         position: true,
@@ -124,13 +125,13 @@ class PayManageExtra extends Component {
       alert("근로자를 선택해주세요.")
     }
 
-    if (this.state.checkboxGroup['position'] == true && this.state.t_position === false
-      || this.state.checkboxGroup['bonus'] == true && this.state.t_bonus === false
-      || this.state.checkboxGroup['over'] == true && this.state.t_extension === false
-      || this.state.checkboxGroup['etc'] == true && this.state.t_etc === false
-      || this.state.checkboxGroup['bob'] == true && this.state.f_meals === false
-      || this.state.checkboxGroup['oil'] == true && this.state.f_carMaintenanceFee === false
-      || this.state.checkboxGroup['agi'] == true && this.state.f_childcareAllowance === false
+    if (this.state.checkboxGroup['position'] == true && this.state.t_position.trim() === ""
+      || this.state.checkboxGroup['bonus'] == true && this.state.t_bonus.trim() === ""
+      || this.state.checkboxGroup['over'] == true && this.state.t_extension.trim() === ""
+      || this.state.checkboxGroup['etc'] == true && this.state.t_etc.trim() === ""
+      || this.state.checkboxGroup['bob'] == true && this.state.f_meals.trim() === ""
+      || this.state.checkboxGroup['oil'] == true && this.state.f_carMaintenanceFee.trim() === ""
+      || this.state.checkboxGroup['agi'] == true && this.state.f_childcareAllowance.trim() === ""
     ) {
       alert("금액을 입력해주세요.")
     }
