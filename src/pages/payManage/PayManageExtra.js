@@ -132,6 +132,7 @@ class PayManageExtra extends Component {
       || this.state.checkboxGroup['bob'] == true && this.state.f_meals.trim() === ""
       || this.state.checkboxGroup['oil'] == true && this.state.f_carMaintenanceFee.trim() === ""
       || this.state.checkboxGroup['agi'] == true && this.state.f_childcareAllowance.trim() === ""
+
     ) {
       alert("금액을 입력해주세요.")
     }
