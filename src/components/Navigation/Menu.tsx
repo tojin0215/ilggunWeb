@@ -8,7 +8,7 @@ import imgLogo from '../../img/logo.png';
 import "react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css";
 
 import Icon from 'awesome-react-icons';
-import { FaHome, FaBriefcase, FaUsers, FaFileAlt, FaMarker, FaNetworkWired, FaTable, FaPiggyBank, FaCoffee, FaDonate, FaFileInvoiceDollar, FaListAlt, FaWindowRestore, FaArchive, FaCommentDots, FaEnvelope, FaPaperPlane } from "react-icons/fa";
+import { FaHome, FaBriefcase, FaUsers, FaFileAlt, FaMarker, FaNetworkWired, FaTable, FaPiggyBank, FaCoffee, FaDonate, FaFileInvoiceDollar, FaListAlt, FaWindowRestore, FaArchive, FaCommentDots, FaEnvelope, FaPaperPlane, FaBuilding } from "react-icons/fa";
 
 export const Menu = () => {
   const history = useHistory();
@@ -73,6 +73,7 @@ export const Menu = () => {
           activeItemId={location.pathname}
           onSelect={({ itemId }) => {
             if (itemId==="http://13.124.141.28:9090/") window.open("http://13.124.141.28:9090/", "_blank")
+            if (itemId==="https://www.bizinfo.go.kr/see/seea/selectSEEA100.do") window.open("https://www.bizinfo.go.kr/see/seea/selectSEEA100.do", "_blank")
             else history.push(itemId);
             setIsSidebarOpen(false);
           }}
@@ -181,12 +182,21 @@ export const Menu = () => {
               elemBefore: () => <FaArchive />
             },
             {
-              title: '견적내기 사이트 링크',
+              title: '지원사업 조회(링크)',
+              itemId: 'https://www.bizinfo.go.kr/see/seea/selectSEEA100.do',
+              elemBefore: () => <FaBuilding />
+            },
+            {
+              title: '지원사업 조회(페이지 제작)',
+              itemId: '/board',
+              elemBefore: () => <FaBuilding />
+            },
+            {
+              title: '견적내기',
               itemId: 'http://13.124.141.28:9090/',
               elemBefore: () => <FaFileAlt />
             },
           ]}
-          
         />
       </div>
     </>
