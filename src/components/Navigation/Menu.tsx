@@ -181,12 +181,6 @@ export const Menu = () => {
               itemId: '/library',
               elemBefore: () => <FaArchive />
             },
-
-            {
-              title: '기업마당 지원사업조회',
-              itemId: '/exelTable',
-              // elemBefore: () => <FaFileAlt />
-            },
             
             {
               title: '지원사업 조회(링크)',
@@ -198,6 +192,7 @@ export const Menu = () => {
               itemId: '/board',
               elemBefore: () => <FaBuilding />
             },
+            
             {
               title: '견적내기',
               itemId: 'http://13.124.141.28:9090/',
