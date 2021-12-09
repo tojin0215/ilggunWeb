@@ -14,35 +14,48 @@ const Table = (props) => {
   console.log(data);
 
   const columns = [
+    //grow 크기 center 중앙 정렬
     {
       name: '번호',
       selector: (row, index) => row.number,
       sortable: true,
+      grow: 0.5,
+      center: true,
     },
     {
       name: '분야',
       selector: (row, index) => row.field,
       sortable: true,
+      grow: 0.5,
+      center: true,
     },
     {
       name: '지원사업명',
       selector: (row, index) => row.project,
       sortable: true,
+      grow: 50,
+      center: true,
     },
     {
       name: '신청기간',
       selector: (row, index) => row.period,
       sortable: true,
+      grow: 25,
+      center: true,
     },
     {
       name: '소관부처',
       selector: (row, index) => row.ministries,
       sortable: true,
+      grow: 10,
+      center: true,
     },
     {
       name: '등록일',
       selector: (row, index) => row.registration,
       sortable: true,
+      grow: 10,
+      center: true,
     },
   ];
 
@@ -76,7 +89,6 @@ const Table = (props) => {
 
   return (
     <DataTable
-      defaultSortField="name"
       defaultSortAsc={false}
       highlightOnHover
       pointerOnHover
