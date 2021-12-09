@@ -16,7 +16,9 @@ import { SERVER_URL } from '../../const/setting';
 
 import '../../styles/home/home.css';
 import { PC, Mobile } from '../../components/MediaQuery';
-{/* <script lang="javascript" src="dist/xlsx.full.min.js" /> */ }
+{
+  /* <script lang="javascript" src="dist/xlsx.full.min.js" /> */
+}
 // const xlsx = require("xlsx");
 // const excelFile = xlsx.readFile("지원사업조회.xls")
 // const sheetName = excelFile.SheetNames[0];
@@ -41,7 +43,6 @@ class Board extends Component {
               <h4 className="text-h5 text-bold">필터</h4>
             </div>
             <div className="sectionShadow">
-              <h4 className="text-h5 text-bold">게시판 내용</h4>
               <TableBoard data={boardData} />
               <div className="pt-2"></div>
             </div>
@@ -51,7 +52,6 @@ class Board extends Component {
               <h4 className="text-h5 text-bold">필터</h4>
             </div>
             <div className="sectionShadow">
-              <h4 className="text-h5 text-bold">게시판 내용</h4>
               <TableBoard data />
               <div className="pt-2"></div>
             </div>
