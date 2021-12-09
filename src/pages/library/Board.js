@@ -7,13 +7,20 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
-import Table from '../../components/Navigation/TableFile';
+import TableBoard from '../../components/Navigation/TableBoard';
+import boardData from '../../components/Navigation/boardData';
+
 import { getBase64 } from '../../action/api';
 import { upload, filelist, deleteFile } from '../../action/api';
 import { SERVER_URL } from '../../const/setting';
 
 import '../../styles/home/home.css';
 import { PC, Mobile } from '../../components/MediaQuery';
+{/* <script lang="javascript" src="dist/xlsx.full.min.js" /> */ }
+// const xlsx = require("xlsx");
+// const excelFile = xlsx.readFile("지원사업조회.xls")
+// const sheetName = excelFile.SheetNames[0];
+// console.log(sheetName)
 
 class Board extends Component {
   constructor(props) {
@@ -29,15 +36,26 @@ class Board extends Component {
         <Navigation goLogin={this.goLogin} />
         <div className="container">
           <Menu />
-          <div className="sectionShadow">
-            <h4 className="text-h5 text-bold">필터</h4>
-          </div>
-          <div className="sectionShadow">
-            <h4 className="text-h5 text-bold">게시판 내용</h4>
-            <PC></PC>
-            <Mobile></Mobile>
-            <div className="pt-2"></div>
-          </div>
+          <PC>
+            <div className="sectionShadow">
+              <h4 className="text-h5 text-bold">필터</h4>
+            </div>
+            <div className="sectionShadow">
+              <h4 className="text-h5 text-bold">게시판 내용</h4>
+              <TableBoard data={boardData} />
+              <div className="pt-2"></div>
+            </div>
+          </PC>
+          <Mobile>
+            <div className="sectionShadow">
+              <h4 className="text-h5 text-bold">필터</h4>
+            </div>
+            <div className="sectionShadow">
+              <h4 className="text-h5 text-bold">게시판 내용</h4>
+              <TableBoard data />
+              <div className="pt-2"></div>
+            </div>
+          </Mobile>
         </div>
         <Footer />
       </div>
