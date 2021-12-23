@@ -24,21 +24,24 @@ class Board extends Component {
       rssAraay: []
     }
 
-    // this.viewBizinfoRSS()
+    this.viewBizinfoRSS()
   }
 
 
-  // viewBizinfoRSS = () => {
-  //   bizinfoRSS()
-  //     .then((result) => result.json())
-  //     .then((result) => {
-  //       console.log(result.jsonArray)
-  //       console.log(result.jsonArray[0].industNm)
-  //       alert("30초 뒤 연결")
-  //       this.setState({ rssAraay: result.jsonArray })
-  //       console.log(this.state.rssArray)
-  //     })
-  // }
+  viewBizinfoRSS = () => {
+    alert("30초 뒤 연결")
+    bizinfoRSS()
+      .then((result) => result.json())
+      .then((result) => {
+        alert("연결")
+        this.setState({ rssArray: result.jsonArray })
+      })
+    return
+  }
+  goLogin = () => {
+    this.props.history.push('/');
+  };
+
 
 
 
@@ -54,10 +57,11 @@ class Board extends Component {
         <div className="container">
           <Menu />
           <PC>
-            <div className="sectionShadow">
+            {/* <div className="sectionShadow">
               <h4 className="text-h5 text-bold">필터</h4>
-            </div>
+            </div> */}
             <div className="sectionShadow">
+              {/* <TableBoard data={this.state.rssArray} /> */}
               <TableBoard data={rssData.jsonArray} />
               <div className="pt-2"></div>
             </div>
@@ -67,6 +71,7 @@ class Board extends Component {
               <h4 className="text-h5 text-bold">필터</h4>
             </div>
             <div className="sectionShadow">
+              {/* <TableBoard data={this.state.rssArray} /> */}
               <TableBoard data={rssData.jsonArray} />
               <div className="pt-2"></div>
             </div>
@@ -80,8 +85,7 @@ class Board extends Component {
 
 const BoardStateToProps = (state) => {
   return {
-    userinfo: state.authentication.userinfo,
-    //status: state.authentication.status
+    userinfo: state.authentication.userinfo
   };
 };
 

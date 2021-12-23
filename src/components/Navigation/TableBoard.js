@@ -15,54 +15,41 @@ const Table = (props) => {
   console.log(data);
 
 
+
   const columns = [
     //grow 크기 center 중앙 정렬
     {
-      name: '고유번호',
-      selector: (row, index) => row.inqireCo,
+      name: '번호',
       sortable: true,
       grow: 0.5,
       center: true,
     },
-    {
-      name: '분야',
-      selector: (row, index) => row.pldirSportRealmLclasCodeNm,
-      sortable: true,
-      grow: 0.5,
-      center: true,
-    },
-    // https://www.bizinfo.go.kr/${pblancUrl}
     {
       name: '지원사업명',
       selector: (row, index) => row.pblancNm,
-      cell: (row) => (
-        <button data-tag="allowRowEvents">
-          {row.pblancNm}
-        </button>
-      ),
       sortable: true,
-      grow: 50,
+      grow: 5,
       center: true,
     },
     {
       name: '신청기간',
       selector: (row, index) => '추후 공지',
       sortable: true,
-      grow: 25,
+      grow: 1,
       center: true,
     },
     {
       name: '소관부처',
       selector: (row, index) => row.jrsdInsttNm,
       sortable: true,
-      grow: 10,
+      grow: 1.4,
       center: true,
     },
     {
       name: '등록일',
-      selector: (row, index) => row.creatPnttm.split("T")[0],
+      selector: (row, index) => row.creatPnttm.split("T"),
       sortable: true,
-      // grow: 10,
+      grow: 1.4,
       center: true,
     },
   ];
@@ -98,7 +85,8 @@ const Table = (props) => {
   const onRowClicked = (row, event) => {
     console.log("row", row);
     let link = `https://www.bizinfo.go.kr/${row.pblancUrl}`
-    window.location.assign(link)
+    window.open(link)
+    // window.location.assign(link)
 
   };
 
@@ -113,7 +101,7 @@ const Table = (props) => {
       onRowClicked={onRowClicked}
       striped
       pagination
-      paginationPerPage={20}
+      paginationPerPage={10}
       subHeader
       subHeaderComponent={subHeaderComponent}
       noDataComponent="데이터가 없습니다"
