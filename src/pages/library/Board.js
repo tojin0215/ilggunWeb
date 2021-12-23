@@ -9,28 +9,43 @@ import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 import TableBoard from '../../components/Navigation/TableBoard';
 import boardData from '../../components/Navigation/boardData';
+import rssData from '../../components/Navigation/rssData';
 
-import { getBase64 } from '../../action/api';
-import { upload, filelist, deleteFile } from '../../action/api';
-import { SERVER_URL } from '../../const/setting';
+import { bizinfoRSS } from '../../action/api';
 
 import '../../styles/home/home.css';
 import { PC, Mobile } from '../../components/MediaQuery';
-{
-  /* <script lang="javascript" src="dist/xlsx.full.min.js" /> */
-}
-// const xlsx = require("xlsx");
-// const excelFile = xlsx.readFile("지원사업조회.xls")
-// const sheetName = excelFile.SheetNames[0];
-// console.log(sheetName)
+
 
 class Board extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      rssAraay: []
+    }
+
+    // this.viewBizinfoRSS()
   }
+
+
+  // viewBizinfoRSS = () => {
+  //   bizinfoRSS()
+  //     .then((result) => result.json())
+  //     .then((result) => {
+  //       console.log(result.jsonArray)
+  //       console.log(result.jsonArray[0].industNm)
+  //       alert("30초 뒤 연결")
+  //       this.setState({ rssAraay: result.jsonArray })
+  //       console.log(this.state.rssArray)
+  //     })
+  // }
+
+
+
 
   render() {
     const { userinfo } = this.props;
+    console.log(this.state.rssArray)
 
     return (
       <div className="wrap">
@@ -43,7 +58,7 @@ class Board extends Component {
               <h4 className="text-h5 text-bold">필터</h4>
             </div>
             <div className="sectionShadow">
-              <TableBoard data={boardData} />
+              <TableBoard data={rssData.jsonArray} />
               <div className="pt-2"></div>
             </div>
           </PC>
@@ -52,7 +67,7 @@ class Board extends Component {
               <h4 className="text-h5 text-bold">필터</h4>
             </div>
             <div className="sectionShadow">
-              <TableBoard data />
+              <TableBoard data={rssData.jsonArray} />
               <div className="pt-2"></div>
             </div>
           </Mobile>

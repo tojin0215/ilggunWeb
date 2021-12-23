@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -7,54 +7,62 @@ import FilterComponent2 from './FilterComponent2';
 
 import './table.css';
 import { red } from '@material-ui/core/colors';
+import { Button } from 'react-bootstrap';
 
 const Table = (props) => {
   const { data } = props;
   console.log('data');
   console.log(data);
 
+
   const columns = [
     //grow 크기 center 중앙 정렬
     {
-      name: '번호',
-      selector: (row, index) => row.number,
+      name: '고유번호',
+      selector: (row, index) => row.inqireCo,
       sortable: true,
       grow: 0.5,
       center: true,
     },
     {
       name: '분야',
-      selector: (row, index) => row.field,
+      selector: (row, index) => row.pldirSportRealmLclasCodeNm,
       sortable: true,
       grow: 0.5,
       center: true,
     },
+    // https://www.bizinfo.go.kr/${pblancUrl}
     {
       name: '지원사업명',
-      selector: (row, index) => row.project,
+      selector: (row, index) => row.pblancNm,
+      cell: (row) => (
+        <button data-tag="allowRowEvents">
+          {row.pblancNm}
+        </button>
+      ),
       sortable: true,
       grow: 50,
       center: true,
     },
     {
       name: '신청기간',
-      selector: (row, index) => row.period,
+      selector: (row, index) => '추후 공지',
       sortable: true,
       grow: 25,
       center: true,
     },
     {
       name: '소관부처',
-      selector: (row, index) => row.ministries,
+      selector: (row, index) => row.jrsdInsttNm,
       sortable: true,
       grow: 10,
       center: true,
     },
     {
       name: '등록일',
-      selector: (row, index) => row.registration,
+      selector: (row, index) => row.creatPnttm.split("T")[0],
       sortable: true,
-      grow: 10,
+      // grow: 10,
       center: true,
     },
   ];
@@ -67,7 +75,7 @@ const Table = (props) => {
   // );
 
   const filteredItems = props.data.filter(
-    (item) => item.project.indexOf(filterText) !== -1,
+    (item) => item.pblancNm.indexOf(filterText) !== -1,
   );
 
   const subHeaderComponent = useMemo(() => {
@@ -87,6 +95,13 @@ const Table = (props) => {
     );
   }, [filterText, resetPaginationToggle]);
 
+  const onRowClicked = (row, event) => {
+    console.log("row", row);
+    let link = `https://www.bizinfo.go.kr/${row.pblancUrl}`
+    window.location.assign(link)
+
+  };
+
   return (
     <DataTable
       defaultSortAsc={false}
@@ -95,9 +110,10 @@ const Table = (props) => {
       noHeader
       columns={columns}
       data={filteredItems}
+      onRowClicked={onRowClicked}
       striped
       pagination
-      paginationPerPage={5}
+      paginationPerPage={20}
       subHeader
       subHeaderComponent={subHeaderComponent}
       noDataComponent="데이터가 없습니다"

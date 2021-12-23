@@ -319,3 +319,9 @@ export function selectInsuranceYear(business_id, date) {
     const body = JSON.stringify({ bang: business_id, date: date })
     return fetch(`${SERVER_URL}/insurancePercentageYear`, _createPostInit(body))
 }
+
+
+export function bizinfoRSS() {
+    return fetch(`${SERVER_URL}/bizinfo`, _createGetInit())
+}
+
