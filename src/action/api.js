@@ -328,8 +328,7 @@ export function bizinfoRSSAll() {
 export function bizinfoRSS100() {
     return fetch(`${SERVER_URL}/bizinfo100`, _createGetInit())
 }
-
-export function bizinfoRSSSearch(searchLclasId, searchPldirJrsdCode, searchIndustCode, searchAreaCode) {
-    const body = JSON.stringify({ searchLclasId: searchLclasId, searchPldirJrsdCode: searchPldirJrsdCode, searchIndustCode: searchIndustCode, searchAreaCode: searchAreaCode })
-    return fetch(`${SERVER_URL}/bizinfoSearch`, _createGetInit(body))
+export function bizinfoRSSSearch(searchLclasId, searchPldirJrsdCode, searchIndustCode, searchAreaCode, searchCnt) {
+    return fetch(`${SERVER_URL}/bizinfoSearch?searchLclasId=${searchLclasId}&searchPldirJrsdCode=${searchPldirJrsdCode}&searchIndustCode=${searchIndustCode}&searchAreaCode=${searchAreaCode}&searchCnt=${searchCnt}`,
+        _createGetInit())
 }

@@ -40,18 +40,19 @@ class Board extends Component {
       .then((result) => result.json())
       .then((result) => {
         this.setState({ rssArray: result.jsonArray },
-          () => this.bizinfoRSSAll)
+          () => this.bizinfoRSSAll
+        )
       })
   }
   // searchLclasId:분야, searchPldirJrsdCode:소관, searchIndustCode:업종, searchAreaCode:지역
   // this.state.searchLclasId, this.state.searchPldirJrsdCode, this.state.searchIndustCode, this.state.searchAreaCode
   handleOnClick = () => {
-
-    bizinfoRSSSearch("all", "all", "all", "1100000000",)
+    bizinfoRSSSearch('all', 'all', 'all', '1100000000', '100')
       .then((result) => result.json())
       .then((result) => {
         alert("검색")
         this.setState({ rssArray: result.jsonArray })
+        console.log('서울', result)
       })
   }
 
@@ -73,7 +74,7 @@ class Board extends Component {
           <PC>
             <div className="sectionShadow">
               <h4 className="text-h5 text-bold">
-                <button className='button-solid py-3 px-5 font-bold' type="button" onClick={this.handleOnClick} >서울</button>
+                <button className='button-solid py-3 px-5 font-bold' type="button" onClick={this.handleOnClick}>검색</button>
               </h4>
             </div>
             <div className="sectionShadow">
