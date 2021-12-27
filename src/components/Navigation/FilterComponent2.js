@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Button from 'react-bootstrap/Button';
 
 const Input = styled.input.attrs(props => ({
   type: "text",
@@ -29,6 +30,7 @@ const ClearButton = styled.button`
   justify-content: center;
 `;
 
+
 const FilterComponent2 = ({ filterText, onFilter, onClear }) => (
   <>
     <Input
@@ -40,7 +42,12 @@ const FilterComponent2 = ({ filterText, onFilter, onClear }) => (
       onChange={onFilter}
     />
     <ClearButton onClick={onClear} className="clearButt">X</ClearButton>
+
   </>
 );
 
 export default FilterComponent2;
+
+
+
+

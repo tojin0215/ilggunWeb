@@ -8,10 +8,8 @@ import Footer from '../../components/Footer/Footer';
 import Navigation from '../../components/Navigation/Navigation';
 import Menu from '../../components/Navigation/Menu';
 import TableBoard from '../../components/Navigation/TableBoard';
-import boardData from '../../components/Navigation/boardData';
-import rssData from '../../components/Navigation/rssData';
 
-import { bizinfoRSS } from '../../action/api';
+import { bizinfoRSSAll, bizinfoRSS100, bizinfoRSSSearch } from '../../action/api';
 
 import '../../styles/home/home.css';
 import { PC, Mobile } from '../../components/MediaQuery';
@@ -21,30 +19,46 @@ class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rssAraay: []
+      rssArray: []
     }
 
-    this.viewBizinfoRSS()
+    this.bizinfoRSS100()
+    this.bizinfoRSSAll()
   }
-
-
-  viewBizinfoRSS = () => {
-    alert("30초 뒤 연결")
-    bizinfoRSS()
+  bizinfoRSSAll = () => {
+    bizinfoRSSAll()
       .then((result) => result.json())
       .then((result) => {
-        alert("연결")
+        this.setState({
+          rssArray: result.jsonArray
+        })
+      })
+  }
+
+  bizinfoRSS100 = () => {
+    bizinfoRSS100()
+      .then((result) => result.json())
+      .then((result) => {
+        this.setState({ rssArray: result.jsonArray },
+          () => this.bizinfoRSSAll)
+      })
+  }
+  // searchLclasId:분야, searchPldirJrsdCode:소관, searchIndustCode:업종, searchAreaCode:지역
+  // this.state.searchLclasId, this.state.searchPldirJrsdCode, this.state.searchIndustCode, this.state.searchAreaCode
+  handleOnClick = () => {
+
+    bizinfoRSSSearch("all", "all", "all", "1100000000",)
+      .then((result) => result.json())
+      .then((result) => {
+        alert("검색")
         this.setState({ rssArray: result.jsonArray })
       })
-    return
   }
+
+
   goLogin = () => {
     this.props.history.push('/');
   };
-
-
-
-
 
   render() {
     const { userinfo } = this.props;
@@ -57,12 +71,13 @@ class Board extends Component {
         <div className="container">
           <Menu />
           <PC>
-            {/* <div className="sectionShadow">
-              <h4 className="text-h5 text-bold">필터</h4>
-            </div> */}
             <div className="sectionShadow">
-              {/* <TableBoard data={this.state.rssArray} /> */}
-              <TableBoard data={rssData.jsonArray} />
+              <h4 className="text-h5 text-bold">
+                <button className='button-solid py-3 px-5 font-bold' type="button" onClick={this.handleOnClick} >서울</button>
+              </h4>
+            </div>
+            <div className="sectionShadow">
+              <TableBoard data={this.state.rssArray} />
               <div className="pt-2"></div>
             </div>
           </PC>
@@ -71,8 +86,7 @@ class Board extends Component {
               <h4 className="text-h5 text-bold">필터</h4>
             </div>
             <div className="sectionShadow">
-              {/* <TableBoard data={this.state.rssArray} /> */}
-              <TableBoard data={rssData.jsonArray} />
+              <TableBoard data={this.state.rssArray} />
               <div className="pt-2"></div>
             </div>
           </Mobile>

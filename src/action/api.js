@@ -321,7 +321,15 @@ export function selectInsuranceYear(business_id, date) {
 }
 
 
-export function bizinfoRSS() {
-    return fetch(`${SERVER_URL}/bizinfo`, _createGetInit())
+export function bizinfoRSSAll() {
+    return fetch(`${SERVER_URL}/bizinfoAll`, _createGetInit())
 }
 
+export function bizinfoRSS100() {
+    return fetch(`${SERVER_URL}/bizinfo100`, _createGetInit())
+}
+
+export function bizinfoRSSSearch(searchLclasId, searchPldirJrsdCode, searchIndustCode, searchAreaCode) {
+    const body = JSON.stringify({ searchLclasId: searchLclasId, searchPldirJrsdCode: searchPldirJrsdCode, searchIndustCode: searchIndustCode, searchAreaCode: searchAreaCode })
+    return fetch(`${SERVER_URL}/bizinfoSearch`, _createGetInit(body))
+}

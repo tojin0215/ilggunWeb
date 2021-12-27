@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import DataTable from 'react-data-table-component';
 import FilterComponent2 from './FilterComponent2';
+import FilterAreaNm from './FilterAreaNm';
 
 import './table.css';
 import { red } from '@material-ui/core/colors';
@@ -14,16 +15,8 @@ const Table = (props) => {
   console.log('data');
   console.log(data);
 
-
-
   const columns = [
-    //grow 크기 center 중앙 정렬
-    {
-      name: '번호',
-      sortable: true,
-      grow: 0.5,
-      center: true,
-    },
+    //grow 크기 center 중앙 정렬    
     {
       name: '지원사업명',
       selector: (row, index) => row.pblancNm,
@@ -33,9 +26,14 @@ const Table = (props) => {
     },
     {
       name: '신청기간',
-      selector: (row, index) => '추후 공지',
+      // selector: (row, index) => reqstBeginEndDe,
+      cell: row =>
+        row.reqstBeginEndDe.indexOf("~") > 0 ? row.reqstBeginEndDe.substr(0, 4) + "-" + row.reqstBeginEndDe.substr(4, 2) + "-" + row.reqstBeginEndDe.substr(6, 2) + " ~ "
+          + row.reqstBeginEndDe.substr(11, 4) + "-" + row.reqstBeginEndDe.substr(15, 2) + "-" + row.reqstBeginEndDe.substr(17, 2)
+          : row.reqstBeginEndDe
+      ,
       sortable: true,
-      grow: 1,
+      grow: 1.5,
       center: true,
     },
     {
@@ -47,7 +45,7 @@ const Table = (props) => {
     },
     {
       name: '등록일',
-      selector: (row, index) => row.creatPnttm.split("T"),
+      selector: (row, index) => row.creatPnttm.split(" ")[0],
       sortable: true,
       grow: 1.4,
       center: true,
@@ -81,6 +79,18 @@ const Table = (props) => {
       />
     );
   }, [filterText, resetPaginationToggle]);
+
+
+
+
+
+
+
+
+
+
+
+
 
   const onRowClicked = (row, event) => {
     console.log("row", row);
