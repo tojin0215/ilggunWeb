@@ -148,7 +148,7 @@ class PayManage extends Component {
     this.setState({
       checkboxGroup: obj
     })
-    console.log(obj)
+    // console.log(obj)
   }
   handleInsert = (e) => {
     this.setState({
