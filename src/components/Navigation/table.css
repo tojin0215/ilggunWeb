@@ -25,3 +25,16 @@
   top: 11px;
   right: 22px;
 }
+
+#column-1 > div,
+#column-2 > div,
+#column-3 > div,
+#column-4 > div {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.rdt_Pagination > div:nth-child(2) {
+  width: 45px;
+  font-size: 1rem;
+}

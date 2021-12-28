@@ -4,7 +4,7 @@ button {
 }
 
 .button-solid {
-  border: 0;
+  border: 1px solid #67c7b9;
   padding: 12px 60px;
   border-radius: 35px;
   background-color: #67c7b9;

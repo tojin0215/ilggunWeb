@@ -1,0 +1,23 @@
+.wrap > .container {
+  max-width: 100%;
+  width: calc(100% - 2rem);
+  margin: 0 1rem;
+}
+
+.boardcontainer > .sectionShadow {
+  padding: 20px 10px;
+}
+
+.boardfilterbox > div > div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.boardfilterbox > div > div > label {
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+}
+.boardfilterbox > div > div > label > input {
+  margin: 6px 4px;
+}

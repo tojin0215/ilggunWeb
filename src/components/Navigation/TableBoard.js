@@ -16,7 +16,7 @@ const Table = (props) => {
   console.log(data);
 
   const columns = [
-    //grow 크기 center 중앙 정렬    
+    //grow 크기 center 중앙 정렬
     {
       name: '지원사업명',
       selector: (row, index) => row.pblancNm,
@@ -27,13 +27,22 @@ const Table = (props) => {
     {
       name: '신청기간',
       // selector: (row, index) => reqstBeginEndDe,
-      cell: row =>
-        row.reqstBeginEndDe.indexOf("~") > 0 ? row.reqstBeginEndDe.substr(0, 4) + "-" + row.reqstBeginEndDe.substr(4, 2) + "-" + row.reqstBeginEndDe.substr(6, 2) + " ~ "
-          + row.reqstBeginEndDe.substr(11, 4) + "-" + row.reqstBeginEndDe.substr(15, 2) + "-" + row.reqstBeginEndDe.substr(17, 2)
-          : row.reqstBeginEndDe
-      ,
+      cell: (row) =>
+        row.reqstBeginEndDe.indexOf('~') > 0
+          ? row.reqstBeginEndDe.substr(0, 4) +
+            '-' +
+            row.reqstBeginEndDe.substr(4, 2) +
+            '-' +
+            row.reqstBeginEndDe.substr(6, 2) +
+            ' ~ ' +
+            row.reqstBeginEndDe.substr(11, 4) +
+            '-' +
+            row.reqstBeginEndDe.substr(15, 2) +
+            '-' +
+            row.reqstBeginEndDe.substr(17, 2)
+          : row.reqstBeginEndDe,
       sortable: true,
-      grow: 1.5,
+      grow: 1.6,
       center: true,
     },
     {
@@ -45,9 +54,9 @@ const Table = (props) => {
     },
     {
       name: '등록일',
-      selector: (row, index) => row.creatPnttm.split(" ")[0],
+      selector: (row, index) => row.creatPnttm.split(' ')[0],
       sortable: true,
-      grow: 1.4,
+      grow: 1,
       center: true,
     },
   ];
@@ -80,24 +89,11 @@ const Table = (props) => {
     );
   }, [filterText, resetPaginationToggle]);
 
-
-
-
-
-
-
-
-
-
-
-
-
   const onRowClicked = (row, event) => {
-    console.log("row", row);
-    let link = `https://www.bizinfo.go.kr/${row.pblancUrl}`
-    window.open(link)
+    console.log('row', row);
+    let link = `https://www.bizinfo.go.kr/${row.pblancUrl}`;
+    window.open(link);
     // window.location.assign(link)
-
   };
 
   return (
