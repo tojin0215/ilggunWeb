@@ -265,9 +265,7 @@ class Board extends Component {
   // searchLclasId:분야, searchPldirJrsdCode:소관, searchIndustCode:업종, searchAreaCode:지역, searchCnt: 개수
   // this.state.searchLclasId, this.state.searchPldirJrsdCode, this.state.searchIndustCode, this.state.searchAreaCode
   handleOnClick = () => {
-    if (this.state.pending) {
-      
-    }
+    if (this.state.pending) {}
     else {
       this.setState({
         rssArray: [],
@@ -440,7 +438,6 @@ class Board extends Component {
         )
           .then((result) => result.json())
           .then((result) => {
-            alert('검색');
             this.setState({ rssArray: result.jsonArray, pending: false });
             console.log('서울', result);
           });
