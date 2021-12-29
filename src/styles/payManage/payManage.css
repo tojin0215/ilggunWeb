@@ -1,3 +1,19 @@
+/*1200px 이상일때 가로 정렬*/
+.wrap-paymanage > .container > .sectionShadow > div {
+  width: 50%;
+}
+/*휴가 등록하기 사원 이름 검색 인풋 길이 확장*/
+.wrap-paymanage #search {
+  max-width: none;
+}
+.paymanageextra #search {
+  max-width: none;
+}
+/* 사유 입력 길이 확장 */
+.wrap-paymanage #reason {
+  width: 96%;
+}
+
 .wrap-paymanage h4 {
   margin-top: 70px;
 }
@@ -12,4 +28,14 @@
   left: 50%;
   bottom: 10px;
   transform: translateX(-50%);
+}
+
+@media screen and (max-width: 1200px) {
+  /* 1200px 에서 세로 정렬*/
+  .wrap-paymanage .todayleave > div {
+    flex: auto;
+  }
+  .wrap-paymanage > .container > .sectionShadow > div {
+    width: 100%;
+  }
 }

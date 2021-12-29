@@ -12,11 +12,22 @@ import Table from '../../components/Navigation/Table3';
 import { loginRequest } from '../../action/authentication';
 import { businessRequest, businessUpdate } from '../../action/authentication';
 import { setBusiness } from '../../action/userinfo';
-import { postBusinessGet, postSelectWorker, selectTimelog, selectWorkerByType, selectVacation } from '../../action/api';
-import {selectReceivedMessage} from '../../action/api';
-import {getUserInfo, setUserInfo, getUserInfoBusinessId, setUserInfoBusinessId, } from '../../util/cookie';
+import {
+  postBusinessGet,
+  postSelectWorker,
+  selectTimelog,
+  selectWorkerByType,
+  selectVacation,
+} from '../../action/api';
+import { selectReceivedMessage } from '../../action/api';
+import {
+  getUserInfo,
+  setUserInfo,
+  getUserInfoBusinessId,
+  setUserInfoBusinessId,
+} from '../../util/cookie';
 
-import { FaBell } from "react-icons/fa";
+import { FaBell } from 'react-icons/fa';
 
 import '../../styles/home/home.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -25,17 +36,17 @@ import 'react-calendar/dist/Calendar.css';
 import data from '../../components/Navigation/data';
 const clickhandler = (name) => console.log('delete', name);
 
-const day = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+const day = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      business_id: "",
+      business_id: '',
       worker: [],
       timelog: [],
       message_count: 0,
-      recv_message: []
+      recv_message: [],
     };
     this.curFetchWorker();
   }
@@ -46,74 +57,93 @@ class Home extends Component {
 
   handleSelectNewBusiness = () => {
     this.curFetchWorker();
-  }
-
+  };
 
   curFetchWorker = () => {
-    const d = new Date()
-    const business_id = (getUserInfoBusinessId())? getUserInfoBusinessId() : this.props.userinfo.business_name;
+    const d = new Date();
+    const business_id = getUserInfoBusinessId()
+      ? getUserInfoBusinessId()
+      : this.props.userinfo.business_name;
 
     selectWorkerByType(business_id, 2)
-    .then(result => result.json())
-    .then(selectWorkerByType_result => {
+      .then((result) => result.json())
+      .then((selectWorkerByType_result) => {
+        selectTimelog(
+          business_id,
+          d.getFullYear(),
+          d.getMonth() + 1,
+          d.getDate(),
+        )
+          .then((result) => result.json())
+          .then((result) => {
+            const selectTimelogResult = selectWorkerByType_result.map(
+              (item, index) => {
+                const timelog = result.find(
+                  (res) => res.workername == item.workername,
+                );
+                item['timelog'] = timelog;
+                return item;
+              },
+            );
 
-      selectTimelog(business_id, d.getFullYear(), d.getMonth()+1, d.getDate())
-      .then(result => result.json())
-      .then(result => {
-        const selectTimelogResult = selectWorkerByType_result.map((item, index) => {
-          const timelog = result.find((res) => res.workername == item.workername);
-          item["timelog"] = timelog;
-          return item;
-        })
+            selectVacation(business_id)
+              .then((result) => result.json())
+              .then((selectVacation_result) => {
+                selectVacation_result = selectVacation_result.map(
+                  (item, index) => {
+                    return {
+                      business_id: '' + item.bang,
+                      start_date: new Date(item.start_date),
+                      end_date: new Date(item.end_date),
+                      reason: '' + item.reason,
+                      vacation_type: 0 + item.vacation,
+                      worker_name: '' + item.workername,
+                      start_date_str: '' + item.start_date,
+                      end_date_str: '' + item.end_date,
+                      worker_id: null,
+                    };
+                  },
+                );
 
-        selectVacation(business_id)
-        .then(result => result.json())
-        .then(selectVacation_result => {
+                const d = new Date();
+                selectVacation_result = selectVacation_result.filter(
+                  (item) => item.end_date > d,
+                );
+                console.log(selectVacation_result);
 
-          selectVacation_result = selectVacation_result.map((item, index) => {return {
-            business_id: ""+item.bang,
-            start_date: new Date(item.start_date),
-            end_date: new Date(item.end_date),
-            reason: ""+item.reason,
-            vacation_type: 0+item.vacation,
-            worker_name: ""+item.workername,
-            start_date_str: ""+item.start_date,
-            end_date_str: ""+item.end_date,
-            worker_id: null,
-          }})
+                const workerResult = selectTimelogResult.map((item, index) => {
+                  const filtered = selectVacation_result.filter(
+                    (vac_item) => vac_item.worker_name === item.workername2,
+                  );
+                  if (filtered.length > 0) item['vacation'] = filtered[0];
+                  else item['vacation'] = null;
 
-          const d = new Date();
-          selectVacation_result = selectVacation_result.filter(item => item.end_date > d)
-          console.log(selectVacation_result)
+                  item['goToWork'] = item[day[new Date().getDay()]]
+                    ? item[day[new Date().getDay()]].slice(0, 2) +
+                      ':' +
+                      item[day[new Date().getDay()]].slice(2, 4)
+                    : '출근안함';
 
-          const workerResult = selectTimelogResult.map((item, index) => {
-            const filtered = selectVacation_result.filter(vac_item =>
-              vac_item.worker_name === item.workername2)
-            if (filtered.length > 0) item["vacation"] = filtered[0];
-            else item["vacation"] = null;
+                  item['goToHome'] = item[day[new Date().getDay()]]
+                    ? item[day[new Date().getDay()]].slice(4, 6) +
+                      ':' +
+                      item[day[new Date().getDay()]].slice(6, 8)
+                    : '출근안함';
 
-            item['goToWork'] = (item[day[new Date().getDay()]])
-            ? ( item[day[new Date().getDay()]].slice(0, 2) + ":" + item[day[new Date().getDay()]].slice(2, 4) )
-            : ( "출근안함" )
+                  return item;
+                });
 
-            item['goToHome'] = (item[day[new Date().getDay()]])
-            ? ( item[day[new Date().getDay()]].slice(4, 6) + ":" + item[day[new Date().getDay()]].slice(6, 8) )
-            : ( "출근안함")
-
-            return item
+                console.log(workerResult);
+                this.setState({ worker: workerResult });
+              });
+            // this.forceUpdate();
           })
-
-          console.log(workerResult)
-          this.setState({worker: workerResult})
-        })
-        // this.forceUpdate();
-      })
-      .catch(error => {
-        console.error("curFetchWorker",error);
-      })
-    })
-    console.log(this.props)
-  }
+          .catch((error) => {
+            console.error('curFetchWorker', error);
+          });
+      });
+    console.log(this.props);
+  };
 
   returnToLogin = () => {
     const loginData = {
@@ -125,46 +155,45 @@ class Home extends Component {
     // and notify
     alert('다시 로그인 바랍니다');
     this.props.history.push('/');
-  }
+  };
 
   initLoadMessageCount = () => {
     selectReceivedMessage(this.props.userinfo.id)
-    .then(result => result.json())
-    .then(result => {
-      result = result.filter(item => item.r === 0)
-      this.setState({message_count: result.length})
-    })
-  }
-
-  initLoadBusiness = (user_id, business_id) => {
-    this.props.businessRequest(user_id, business_id)
-    .then(v => {
-      postBusinessGet(user_id)
       .then((result) => result.json())
       .then((result) => {
-        const new_business_id = (!business_id &&result && result.length > 0) ? result[0].bname : '';
-
-        this.setState({ business: result });
-        this.setState({ business_id: new_business_id });
-        setUserInfoBusinessId(new_business_id)
-
-        this.curFetchWorker();
-        this.initLoadMessageCount();
+        result = result.filter((item) => item.r === 0);
+        this.setState({ message_count: result.length });
       });
+  };
+
+  initLoadBusiness = (user_id, business_id) => {
+    this.props.businessRequest(user_id, business_id).then((v) => {
+      postBusinessGet(user_id)
+        .then((result) => result.json())
+        .then((result) => {
+          const new_business_id =
+            !business_id && result && result.length > 0 ? result[0].bname : '';
+
+          this.setState({ business: result });
+          this.setState({ business_id: new_business_id });
+          setUserInfoBusinessId(new_business_id);
+
+          this.curFetchWorker();
+          this.initLoadMessageCount();
+        });
     });
-  }
+  };
 
   initLoadUserInfo = (id, pw) => {
-    this.props.loginRequest(id, pw)
-    .then(() => {
-      if (!this.props.status.isLoggedIn) this.returnToLogin(); 
+    this.props.loginRequest(id, pw).then(() => {
+      if (!this.props.status.isLoggedIn) this.returnToLogin();
       else {
-        const business_id = getUserInfoBusinessId()
-        setUserInfo(id, pw, null)
-        this.initLoadBusiness(id, business_id)
+        const business_id = getUserInfoBusinessId();
+        setUserInfo(id, pw, null);
+        this.initLoadBusiness(id, business_id);
       }
-    })
-  }
+    });
+  };
 
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
@@ -195,34 +224,37 @@ class Home extends Component {
 
     // page refreshed & has a session in cookie,
     // check whether this cookie is valid or not
-    this.initLoadUserInfo(loginData.id, loginData.pw)
+    this.initLoadUserInfo(loginData.id, loginData.pw);
   }
 
   render() {
     const { userinfo } = this.props;
     const alarms = this.state.recv_message.map((item, index) => {
-      return <li>{item.message}</li>
-    })
+      return <li>{item.message}</li>;
+    });
 
     return (
       <div className="wrap">
         <Header />
-        <Navigation goLogin={this.goLogin}  handleSelectNewBusiness={this.handleSelectNewBusiness}/>
+        <Navigation
+          goLogin={this.goLogin}
+          handleSelectNewBusiness={this.handleSelectNewBusiness}
+        />
         <Menu />
-        <div className='container'>
-          <article className='sectionShadow'>
-            <h4 className='text-h5 text-bold'>
-              <span className='color-point text-h5'>✔ </span>
-               알림
-              <p className='text-h6 p-3 mt-2 small-box text-medium'>{this.state.message_count} 개의 새로운 메시지가 있습니다.</p>
+        <div className="container">
+          <article className="sectionShadow">
+            <h4 className="text-h5 text-bold">
+              <span className="color-point text-h5">✔ </span>
+              알림
+              <p className="text-h6 p-3 mt-2 small-box text-medium fw-bold">
+                {this.state.message_count} 개의 새로운 메시지가 있습니다.
+              </p>
             </h4>
-            <ul>
-            {alarms}
-            </ul>
+            <ul>{alarms}</ul>
           </article>
-          <article className='sectionShadow'>
-            <h4 className='text-h5 text-bold'>
-              <span className='color-point text-h5'>✔ </span>
+          <article className="sectionShadow">
+            <h4 className="text-h5 text-bold">
+              <span className="color-point text-h5">✔ </span>
               오늘의 근무자
             </h4>
             <Table data={this.state.worker} click={clickhandler} />
@@ -252,7 +284,7 @@ const HomeDispatchToProps = (dispatch) => {
     },
     businessUpdate: (business_id) => {
       return dispatch(businessUpdate(business_id));
-    }
+    },
   };
 };
 export default connect(HomeStateToProps, HomeDispatchToProps)(Home);

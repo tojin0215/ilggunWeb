@@ -1,3 +1,10 @@
+@media screen and (max-width: 1200px) {
+  /*업무관리-근태관리 세로로 일렬정렬*/
+  .wrap_taskmanage .todayleave > div {
+    flex: auto;
+  }
+}
+
 .todayleave {
   display: flex;
   flex-wrap: wrap;

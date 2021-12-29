@@ -38,3 +38,30 @@
   width: 45px;
   font-size: 1rem;
 }
+
+/* 메인페이지 오늘의 근무자 해더 중앙 정렬*/
+.rdt_TableCol {
+  justify-content: center;
+}
+/* 헤더 솔트 버튼만큼 이동해서 중앙 정렬*/
+.rdt_TableCol > div {
+  /* margin-left: 22px; */
+  width: 100%;
+  justify-content: center;
+}
+/* 오늘의 근무자 셀 내용 중앙 정렬*/
+.rdt_TableCell {
+  justify-content: center;
+}
+/* 오늘의 근무자 셀 내용 안짤리도록 넓히기*/
+.rdt_TableCell > div {
+  width: 100%;
+  text-align: center;
+}
+/*직원관리-직원관리 테이블 헤더 QR, 퇴직처리 중앙 정렬*/
+.workerManageStaffWrap .rdt_TableCol > #column-2 {
+  margin-left: 0;
+}
+.workerManageStaffWrap .rdt_TableCol > #column-4 {
+  margin-left: 0;
+}

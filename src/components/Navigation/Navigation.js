@@ -11,10 +11,10 @@ import {
   businessUpdate,
   loginRequest,
 } from '../../action/authentication';
-import  { PC, Mobile } from '../MediaQuery';
+import { PC, Mobile } from '../MediaQuery';
 import './Navigation.css';
 
-import { FaSignOutAlt } from "react-icons/fa";
+import { FaSignOutAlt } from 'react-icons/fa';
 
 import { postBusinessGet } from '../../action/api';
 import {
@@ -114,10 +114,10 @@ class Navigation extends Component {
   render() {
     const { userinfo } = this.props;
     return (
-      <div className='flex justify-end'>
+      <div className="flex justify-end">
         <div className="navigation">
-      {/* <Nav className="mr-auto dropdownNav navitem"> */}
-      {/* <Nav>
+          {/* <Nav className="mr-auto dropdownNav navitem"> */}
+          {/* <Nav>
                   <NavLink exact to="/home">
                       <span className={styles.navitem}>
                           Home
@@ -129,33 +129,43 @@ class Navigation extends Component {
                       </span>
                   </NavLink>
               </Nav> */}
-          <Nav className='navUtill flex flex-auto flex-no-wrap justify-around items-center' onSelect={this.handleSelect}>
-            <Nav.Item className='flex items-center'>
+          <Nav
+            className="navUtill flex flex-auto flex-no-wrap justify-between items-center px-5"
+            onSelect={this.handleSelect}
+          >
+            <Nav.Item className="flex items-center">
               {/* 관리자 이름 */}
               {userinfo.id === '' ? null : (
-                <span className='navitem button-solid_white nav-name py-1 px-3 m-0'>
+                <span className="navitem button-solid_white nav-name py-1 px-3 m-0">
                   {userinfo.manager_name} 님
                 </span>
               )}
             </Nav.Item>
-            <NavDropdown 
+            <NavDropdown
               title={this.props.userinfo.business_name}
               id="nav-dropdown"
             >
               {this.state.business.map((business, index) => (
                 <NavDropdown.Item
-                  className='p-0 truncate' eventKey={business.bname} title={business.bname} key={index}>
+                  className="p-0 truncate"
+                  eventKey={business.bname}
+                  title={business.bname}
+                  key={index}
+                >
                   {business.bname}
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
             <PC>
               <Nav.Item eventKey="logout">
-                <button className="button-logout button-solid flex items-center py-1 px-3" onClick={this.handleLogout}>
-                  <FaSignOutAlt className='mr-2' />
-                  <span className='text-center'>나가기</span>
+                <button
+                  className="button-logout button-solid flex items-center py-1 px-3"
+                  onClick={this.handleLogout}
+                >
+                  <FaSignOutAlt className="mr-2" />
+                  <span className="text-center">나가기</span>
                 </button>
-                  {/* 로그아웃 */}
+                {/* 로그아웃 */}
                 {/* {userinfo.id === '' ? null : (
                   <button className="btnSolid" onClick={this.handleLogout}>
                     LOG-OUT
@@ -164,9 +174,12 @@ class Navigation extends Component {
               </Nav.Item>
             </PC>
             <Mobile>
-              <Nav.Item className='flex items-center' eventKey="logout">
-                <button className="button-logout button-solid items-center py-2 px-3" onClick={this.handleLogout}>
-                  <FaSignOutAlt className='' />
+              <Nav.Item className="flex items-center" eventKey="logout">
+                <button
+                  className="button-logout button-solid items-center py-2 px-3"
+                  onClick={this.handleLogout}
+                >
+                  <FaSignOutAlt className="" />
                 </button>
               </Nav.Item>
             </Mobile>
