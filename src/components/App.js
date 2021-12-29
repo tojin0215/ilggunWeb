@@ -19,7 +19,7 @@ import {
   Download,
   SelectBusiness,
   Library,
-  Board
+  Board,
 } from '../pages';
 
 import '../styles/basic/basic.css';
@@ -41,12 +41,20 @@ class App extends Component {
         <Route exact path="/selectBusiness" component={SelectBusiness} />
         <Route exact path="/workerManage" component={WorkerManage} />
         <Route exact path="/workerManage/staff" component={WorkerManageStaff} />
-        <Route exact path="/workerManage/contract" component={WorkerManageContract} />
+        <Route
+          exact
+          path="/workerManage/contract"
+          component={WorkerManageContract}
+        />
         <Route exact path="/taskManage" component={TaskManage} />
         <Route exact path="/payManage" component={PayManage} />
         <Route exact path="/payManage/extra" component={PayManageExtra} />
         <Route exact path="/payDocument" component={PayDocument} />
-        <Route exact path="/payDocument/details" component={PayDocumentDetails} />
+        <Route
+          exact
+          path="/payDocument/details"
+          component={PayDocumentDetails}
+        />
         <Route exact path="/message" component={Message} />
         <Route exact path="/message/sended" component={MessageSended} />
         <Route exact path="/message/sendMail" component={SendMail} />
