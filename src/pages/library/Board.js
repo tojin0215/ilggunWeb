@@ -20,10 +20,13 @@ import '../../styles/home/home.css';
 import '../../styles/library/board.css';
 import { PC, Mobile } from '../../components/MediaQuery';
 
+
 class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      pending: true,
+
       rssArray: [],
       checkboxGroup: {
         // _areaCode: true,
@@ -247,6 +250,7 @@ class Board extends Component {
       .then((result) => {
         this.setState({
           rssArray: result.jsonArray,
+          pending: false,
         });
       });
   };
@@ -255,183 +259,194 @@ class Board extends Component {
     bizinfoRSS100()
       .then((result) => result.json())
       .then((result) => {
-        this.setState({ rssArray: result.jsonArray }, () => this.bizinfoRSSAll);
+        this.setState({ rssArray: result.jsonArray, pending: false, }, () => this.bizinfoRSSAll);
       });
   };
   // searchLclasId:분야, searchPldirJrsdCode:소관, searchIndustCode:업종, searchAreaCode:지역, searchCnt: 개수
   // this.state.searchLclasId, this.state.searchPldirJrsdCode, this.state.searchIndustCode, this.state.searchAreaCode
   handleOnClick = () => {
-    bizinfoRSSSearch(
-      this.state.checkboxGroup4.LclasId01 == true
-        ? '01'
-        : this.state.checkboxGroup4.LclasId02 == true
-        ? '02'
-        : this.state.checkboxGroup4.LclasId03 == true
-        ? '03'
-        : this.state.checkboxGroup4.LclasId04 == true
-        ? '04'
-        : this.state.checkboxGroup4.LclasId05 == true
-        ? '05'
-        : this.state.checkboxGroup4.LclasId06 == true
-        ? '06'
-        : this.state.checkboxGroup4.LclasId07 == true
-        ? '07'
-        : this.state.checkboxGroup4.LclasId08 == true
-        ? '08'
-        : this.state.checkboxGroup4.LclasId09 == true
-        ? '09'
-        : 'all',
-      this.state.checkboxGroup3.PldirJrsdG33 == true
-        ? 'G33'
-        : this.state.checkboxGroup3.PldirJrsdG03 == true
-        ? 'G03'
-        : this.state.checkboxGroup3.PldirJrsdG14 == true
-        ? 'G14'
-        : this.state.checkboxGroup3.PldirJrsdG05 == true
-        ? 'G05'
-        : this.state.checkboxGroup3.PldirJrsdG07 == true
-        ? 'G07'
-        : this.state.checkboxGroup3.PldirJrsdG12 == true
-        ? 'G12'
-        : this.state.checkboxGroup3.PldirJrsdG45 == true
-        ? 'G45'
-        : this.state.checkboxGroup3.PldirJrsdG21 == true
-        ? 'G21'
-        : this.state.checkboxGroup3.PldirJrsdG06 == true
-        ? 'G06'
-        : this.state.checkboxGroup3.PldirJrsdG11 == true
-        ? 'G11'
-        : this.state.checkboxGroup3.PldirJrsdG30 == true
-        ? 'G30'
-        : this.state.checkboxGroup3.PldirJrsdG31 == true
-        ? 'G31'
-        : this.state.checkboxGroup3.PldirJrsdG32 == true
-        ? 'G32'
-        : this.state.checkboxGroup3.PldirJrsdG35 == true
-        ? 'G35'
-        : this.state.checkboxGroup3.PldirJrsdG08 == true
-        ? 'G08'
-        : this.state.checkboxGroup3.PldirJrsdG34 == true
-        ? 'G34'
-        : this.state.checkboxGroup3.PldirJrsdG10 == true
-        ? 'G10'
-        : this.state.checkboxGroup3.PldirJrsdG02 == true
-        ? 'G02'
-        : this.state.checkboxGroup3.PldirJrsdG13 == true
-        ? 'G13'
-        : this.state.checkboxGroup3.PldirJrsdG09 == true
-        ? 'G09'
-        : this.state.checkboxGroup3.PldirJrsdG22 == true
-        ? 'G22'
-        : this.state.checkboxGroup3.PldirJrsdG15 == true
-        ? 'G15'
-        : this.state.checkboxGroup3.PldirJrsdG20 == true
-        ? 'G20'
-        : this.state.checkboxGroup3.PldirJrsdG17 == true
-        ? 'G17'
-        : this.state.checkboxGroup3.PldirJrsdG16 == true
-        ? 'G16'
-        : this.state.checkboxGroup3.PldirJrsdG27 == true
-        ? 'G27'
-        : this.state.checkboxGroup3.PldirJrsdG01 == true
-        ? 'G01'
-        : this.state.checkboxGroup3.PldirJrsdG44 == true
-        ? 'G44'
-        : this.state.checkboxGroup3.PldirJrsdG42 == true
-        ? 'G42'
-        : this.state.checkboxGroup3.PldirJrsdG23 == true
-        ? 'G23'
-        : this.state.checkboxGroup3.PldirJrsdG26 == true
-        ? 'G26'
-        : this.state.checkboxGroup3.PldirJrsdG29 == true
-        ? 'G29'
-        : 'all',
-      this.state.checkboxGroup2.industNmA == true
-        ? 'A'
-        : this.state.checkboxGroup2.industNmB == true
-        ? 'B'
-        : this.state.checkboxGroup2.industNmC == true
-        ? 'C'
-        : this.state.checkboxGroup2.industNmD == true
-        ? 'D'
-        : this.state.checkboxGroup2.industNmE == true
-        ? 'E'
-        : this.state.checkboxGroup2.industNmF == true
-        ? 'F'
-        : this.state.checkboxGroup2.industNmG == true
-        ? 'G'
-        : this.state.checkboxGroup2.industNmH == true
-        ? 'H'
-        : this.state.checkboxGroup2.industNmI == true
-        ? 'I'
-        : this.state.checkboxGroup2.industNmJ == true
-        ? 'J'
-        : this.state.checkboxGroup2.industNmK == true
-        ? 'K'
-        : this.state.checkboxGroup2.industNmL == true
-        ? 'L'
-        : this.state.checkboxGroup2.industNmM == true
-        ? 'M'
-        : this.state.checkboxGroup2.industNmN == true
-        ? 'N'
-        : this.state.checkboxGroup2.industNmO == true
-        ? 'O'
-        : this.state.checkboxGroup2.industNmP == true
-        ? 'P'
-        : this.state.checkboxGroup2.industNmQ == true
-        ? 'Q'
-        : this.state.checkboxGroup2.industNmR == true
-        ? 'R'
-        : this.state.checkboxGroup2.industNmS == true
-        ? 'S'
-        : this.state.checkboxGroup2.industNmT == true
-        ? 'T'
-        : this.state.checkboxGroup2.industNmU == true
-        ? 'U'
-        : 'all',
-
-      this.state.checkboxGroup.areaCode1 == true
-        ? 1100000000
-        : this.state.checkboxGroup.areaCode2 == true
-        ? 2600000000
-        : this.state.checkboxGroup.areaCode3 == true
-        ? 2700000000
-        : this.state.checkboxGroup.areaCode4 == true
-        ? 2800000000
-        : this.state.checkboxGroup.areaCode5 == true
-        ? 2900000000
-        : this.state.checkboxGroup.areaCode6 == true
-        ? 3000000000
-        : this.state.checkboxGroup.areaCode7 == true
-        ? 3100000000
-        : this.state.checkboxGroup.areaCode8 == true
-        ? 3611000000
-        : this.state.checkboxGroup.areaCode9 == true
-        ? 4100000000
-        : this.state.checkboxGroup.areaCode10 == true
-        ? 4200000000
-        : this.state.checkboxGroup.areaCode11 == true
-        ? 4300000000
-        : this.state.checkboxGroup.areaCode12 == true
-        ? 4400000000
-        : this.state.checkboxGroup.areaCode13 == true
-        ? 4500000000
-        : this.state.checkboxGroup.areaCode14 == true
-        ? 4600000000
-        : this.state.checkboxGroup.areaCode15 == true
-        ? 4700000000
-        : this.state.checkboxGroup.areaCode16 == true
-        ? 4800000000
-        : this.state.checkboxGroup.areaCode17 == true
-        ? 5000000000
-        : 'all',
-    )
-      .then((result) => result.json())
-      .then((result) => {
-        alert('검색');
-        this.setState({ rssArray: result.jsonArray });
-        console.log('서울', result);
-      });
+    if (this.state.pending) {
+      
+    }
+    else {
+      this.setState({
+        rssArray: [],
+        pending: true
+      }, () => {
+        bizinfoRSSSearch(
+          this.state.checkboxGroup4.LclasId01 == true
+            ? '01'
+            : this.state.checkboxGroup4.LclasId02 == true
+            ? '02'
+            : this.state.checkboxGroup4.LclasId03 == true
+            ? '03'
+            : this.state.checkboxGroup4.LclasId04 == true
+            ? '04'
+            : this.state.checkboxGroup4.LclasId05 == true
+            ? '05'
+            : this.state.checkboxGroup4.LclasId06 == true
+            ? '06'
+            : this.state.checkboxGroup4.LclasId07 == true
+            ? '07'
+            : this.state.checkboxGroup4.LclasId08 == true
+            ? '08'
+            : this.state.checkboxGroup4.LclasId09 == true
+            ? '09'
+            : 'all',
+          this.state.checkboxGroup3.PldirJrsdG33 == true
+            ? 'G33'
+            : this.state.checkboxGroup3.PldirJrsdG03 == true
+            ? 'G03'
+            : this.state.checkboxGroup3.PldirJrsdG14 == true
+            ? 'G14'
+            : this.state.checkboxGroup3.PldirJrsdG05 == true
+            ? 'G05'
+            : this.state.checkboxGroup3.PldirJrsdG07 == true
+            ? 'G07'
+            : this.state.checkboxGroup3.PldirJrsdG12 == true
+            ? 'G12'
+            : this.state.checkboxGroup3.PldirJrsdG45 == true
+            ? 'G45'
+            : this.state.checkboxGroup3.PldirJrsdG21 == true
+            ? 'G21'
+            : this.state.checkboxGroup3.PldirJrsdG06 == true
+            ? 'G06'
+            : this.state.checkboxGroup3.PldirJrsdG11 == true
+            ? 'G11'
+            : this.state.checkboxGroup3.PldirJrsdG30 == true
+            ? 'G30'
+            : this.state.checkboxGroup3.PldirJrsdG31 == true
+            ? 'G31'
+            : this.state.checkboxGroup3.PldirJrsdG32 == true
+            ? 'G32'
+            : this.state.checkboxGroup3.PldirJrsdG35 == true
+            ? 'G35'
+            : this.state.checkboxGroup3.PldirJrsdG08 == true
+            ? 'G08'
+            : this.state.checkboxGroup3.PldirJrsdG34 == true
+            ? 'G34'
+            : this.state.checkboxGroup3.PldirJrsdG10 == true
+            ? 'G10'
+            : this.state.checkboxGroup3.PldirJrsdG02 == true
+            ? 'G02'
+            : this.state.checkboxGroup3.PldirJrsdG13 == true
+            ? 'G13'
+            : this.state.checkboxGroup3.PldirJrsdG09 == true
+            ? 'G09'
+            : this.state.checkboxGroup3.PldirJrsdG22 == true
+            ? 'G22'
+            : this.state.checkboxGroup3.PldirJrsdG15 == true
+            ? 'G15'
+            : this.state.checkboxGroup3.PldirJrsdG20 == true
+            ? 'G20'
+            : this.state.checkboxGroup3.PldirJrsdG17 == true
+            ? 'G17'
+            : this.state.checkboxGroup3.PldirJrsdG16 == true
+            ? 'G16'
+            : this.state.checkboxGroup3.PldirJrsdG27 == true
+            ? 'G27'
+            : this.state.checkboxGroup3.PldirJrsdG01 == true
+            ? 'G01'
+            : this.state.checkboxGroup3.PldirJrsdG44 == true
+            ? 'G44'
+            : this.state.checkboxGroup3.PldirJrsdG42 == true
+            ? 'G42'
+            : this.state.checkboxGroup3.PldirJrsdG23 == true
+            ? 'G23'
+            : this.state.checkboxGroup3.PldirJrsdG26 == true
+            ? 'G26'
+            : this.state.checkboxGroup3.PldirJrsdG29 == true
+            ? 'G29'
+            : 'all',
+          this.state.checkboxGroup2.industNmA == true
+            ? 'A'
+            : this.state.checkboxGroup2.industNmB == true
+            ? 'B'
+            : this.state.checkboxGroup2.industNmC == true
+            ? 'C'
+            : this.state.checkboxGroup2.industNmD == true
+            ? 'D'
+            : this.state.checkboxGroup2.industNmE == true
+            ? 'E'
+            : this.state.checkboxGroup2.industNmF == true
+            ? 'F'
+            : this.state.checkboxGroup2.industNmG == true
+            ? 'G'
+            : this.state.checkboxGroup2.industNmH == true
+            ? 'H'
+            : this.state.checkboxGroup2.industNmI == true
+            ? 'I'
+            : this.state.checkboxGroup2.industNmJ == true
+            ? 'J'
+            : this.state.checkboxGroup2.industNmK == true
+            ? 'K'
+            : this.state.checkboxGroup2.industNmL == true
+            ? 'L'
+            : this.state.checkboxGroup2.industNmM == true
+            ? 'M'
+            : this.state.checkboxGroup2.industNmN == true
+            ? 'N'
+            : this.state.checkboxGroup2.industNmO == true
+            ? 'O'
+            : this.state.checkboxGroup2.industNmP == true
+            ? 'P'
+            : this.state.checkboxGroup2.industNmQ == true
+            ? 'Q'
+            : this.state.checkboxGroup2.industNmR == true
+            ? 'R'
+            : this.state.checkboxGroup2.industNmS == true
+            ? 'S'
+            : this.state.checkboxGroup2.industNmT == true
+            ? 'T'
+            : this.state.checkboxGroup2.industNmU == true
+            ? 'U'
+            : 'all',
+    
+          this.state.checkboxGroup.areaCode1 == true
+            ? 1100000000
+            : this.state.checkboxGroup.areaCode2 == true
+            ? 2600000000
+            : this.state.checkboxGroup.areaCode3 == true
+            ? 2700000000
+            : this.state.checkboxGroup.areaCode4 == true
+            ? 2800000000
+            : this.state.checkboxGroup.areaCode5 == true
+            ? 2900000000
+            : this.state.checkboxGroup.areaCode6 == true
+            ? 3000000000
+            : this.state.checkboxGroup.areaCode7 == true
+            ? 3100000000
+            : this.state.checkboxGroup.areaCode8 == true
+            ? 3611000000
+            : this.state.checkboxGroup.areaCode9 == true
+            ? 4100000000
+            : this.state.checkboxGroup.areaCode10 == true
+            ? 4200000000
+            : this.state.checkboxGroup.areaCode11 == true
+            ? 4300000000
+            : this.state.checkboxGroup.areaCode12 == true
+            ? 4400000000
+            : this.state.checkboxGroup.areaCode13 == true
+            ? 4500000000
+            : this.state.checkboxGroup.areaCode14 == true
+            ? 4600000000
+            : this.state.checkboxGroup.areaCode15 == true
+            ? 4700000000
+            : this.state.checkboxGroup.areaCode16 == true
+            ? 4800000000
+            : this.state.checkboxGroup.areaCode17 == true
+            ? 5000000000
+            : 'all',
+        )
+          .then((result) => result.json())
+          .then((result) => {
+            alert('검색');
+            this.setState({ rssArray: result.jsonArray, pending: false });
+            console.log('서울', result);
+          });
+      })
+    }
+    
   };
 
   goLogin = () => {
