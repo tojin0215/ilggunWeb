@@ -75,5 +75,6 @@
     "@types/react-router-dom": "^5.1.8",
     "eslint-config-prettier": "^8.3.0",
     "ts-node": "^10.2.1"
-  }
+  },
+  "proxy": "http://13.124.141.28:3000"
 }
