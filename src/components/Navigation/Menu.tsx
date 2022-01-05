@@ -181,14 +181,8 @@ export const Menu = () => {
               itemId: '/library',
               elemBefore: () => <FaArchive />
             },
-            
             {
-              title: '지원사업 조회(링크)',
-              itemId: 'https://www.bizinfo.go.kr/see/seea/selectSEEA100.do',
-              elemBefore: () => <FaBuilding />
-            },
-            {
-              title: '지원사업 조회(페이지 제작)',
+              title: '지원사업 조회',
               itemId: '/board',
               elemBefore: () => <FaBuilding />
             },
