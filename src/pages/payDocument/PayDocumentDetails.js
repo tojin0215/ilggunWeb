@@ -52,7 +52,7 @@ class PayDocumentDetails extends Component {
       checkEtc: false,
       yearMonth: {
         year: new Date().getFullYear(),
-        month: new Date().getMonth(),
+        month: new Date().getMonth() + 1,
       },
       isVisibleMonthSelector: false,
       workers: [],
@@ -189,31 +189,31 @@ class PayDocumentDetails extends Component {
 
     const pay_document_data = show_pay_document
       ? {
-          name: this.state.workername2,
-          salary: this.state.salary,
-          taxFree: this.state.taxFree,
-          taxation: this.state.taxation,
+        name: this.state.workername2,
+        salary: this.state.salary,
+        taxFree: this.state.taxFree,
+        taxation: this.state.taxation,
 
-          nationalPension: Math.round(
-            (this.state.salary *
-              this.state.insurance.NationalPensionPercentage) /
-              100,
-          ),
-          employmentInsurance: Math.round(
-            (this.state.salary *
-              this.state.insurance.EmploymentInsurancePercentage) /
-              100,
-          ),
-          healthInsurance: Math.round(
-            (this.state.salary *
-              this.state.insurance.HealthInsurancePercentage) /
-              100,
-          ),
-          regularCare: Math.round(
-            (this.state.salary * this.state.insurance.RegularCarePercentage) /
-              100,
-          ),
-        }
+        nationalPension: Math.round(
+          (this.state.salary *
+            this.state.insurance.NationalPensionPercentage) /
+          100,
+        ),
+        employmentInsurance: Math.round(
+          (this.state.salary *
+            this.state.insurance.EmploymentInsurancePercentage) /
+          100,
+        ),
+        healthInsurance: Math.round(
+          (this.state.salary *
+            this.state.insurance.HealthInsurancePercentage) /
+          100,
+        ),
+        regularCare: Math.round(
+          (this.state.salary * this.state.insurance.RegularCarePercentage) /
+          100,
+        ),
+      }
       : {};
 
     if (show_pay_document) pay_document_data.origin = pay_document_data.salary;
