@@ -43,7 +43,10 @@ const Table = props => {
           <>
             <Button variant="danger" onClick={() => deleteWorker(null, row.workername)}>퇴사</Button>
           </>
-        ) : <><span>{(row.retire_date) ? row.retire_date : new Date().toLocaleDateString()}</span></>
+        )
+          : (row.state == 0) ?
+            (<span>미입사</span>)
+            : <><span>{(row.retire_date) ? row.retire_date : new Date().toLocaleDateString()} 퇴사 </span></>
     },
   ];
 

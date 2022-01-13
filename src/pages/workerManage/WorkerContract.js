@@ -8,11 +8,27 @@ import {
   StyleSheet,
   Font,
 } from '@react-pdf/renderer';
-import  { PC, Mobile } from '../../components/MediaQuery';
+import { PC, Mobile } from '../../components/MediaQuery';
 
 Font.register({
   family: 'Nanum Gothic',
-  src: 'https://fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.ttf',
+  fonts: [
+    {
+      src: 'https://fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.ttf',
+      fontStyle: 'normal',
+      fontWeight: 'medium',
+    },
+    {
+      src: 'https://fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Bold.ttf',
+      fontStyle: 'normal',
+      fontWeight: 'bold',
+    },
+    {
+      src: 'https://fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.ttf',
+      fontStyle: 'normal',
+      fontWeight: '900',
+    },
+  ],
 });
 
 // Create styles
@@ -34,6 +50,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'Nanum Gothic',
+    fontWeight: 'medium',
   },
 });
 
@@ -61,30 +78,74 @@ class WorkerContract extends Component {
     return (
       <Document>
         <Page size="A4" style={styles.page}>
-          <View className="d-flex justify-content-center px-5 my-3">
-            <View className="flex-wrap container w-100 sectionShadow px-5">
-              <Text className="text-h4 text-ct w-100 text-bold p-2">
+          <View
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              padding: '25px',
+              margin: '15px',
+            }}
+          >
+            <View
+              className="container sectionShadow"
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                width: '100%',
+                paddingHorizontal: '25px',
+              }}
+            >
+              <Text
+                className="text-h4 text-ct w-100 text-bold p-2"
+                style={{
+                  fontSize: '34px',
+                  textAlign: 'center',
+                  width: '100%',
+                  fontWeight: 'bold',
+                  padding: '5px',
+                  marginBottom: '15px',
+                }}
+              >
                 표준근로계약서
               </Text>
-              <Text className="text-ct w-100">
-                <Text className="text-bold">
+              <Text
+                className="text-ct w-100"
+                style={{
+                  textAlign: 'center',
+                  width: '100%',
+                }}
+              >
+                <Text className="text-bold" style={{ fontWeight: 'bold' }}>
                   {this.state.contract.Employer}
                 </Text>
-                <Text>(이하 "사업주"라 함) 과(와)</Text>
+                <Text style={styles.mainText}>(이하 "사업주"라 함) 과(와)</Text>
               </Text>
-              <Text className="text-ct w-100">
-                <Text className="text-bold">
+              <Text
+                className="text-ct w-100"
+                style={{ textAlign: 'center', width: '100%' }}
+              >
+                <Text className="text-bold" style={{ fontWeight: 'bold' }}>
                   {this.state.contract.Employee}
                 </Text>
                 <Text>(이하 "근로자"라 함) 은</Text>
               </Text>
-              <Text className="text-ct w-100">
+              <Text
+                className="text-ct w-100"
+                style={{ textAlign: 'center', width: '100%' }}
+              >
                 다음과 같이 근로계약을 체결한다.
               </Text>
-              <Text className="text-st w-100 text-bold text-h6">
+              <Text
+                style={{
+                  textAlign: 'left',
+                  width: '100%',
+                  fontWeight: 'bold',
+                  fontSize: '20px',
+                }}
+              >
                 1. 근로계약기간 :
               </Text>
-              <Text className="text-ct w-100">
+              <Text style={{ textAlign: 'center', width: '100%' }}>
                 <Text>{this.state.contract.StartYear}</Text>
                 <Text>년</Text>
                 <Text>{this.state.contract.StartMonth}</Text>
@@ -92,7 +153,7 @@ class WorkerContract extends Component {
                 <Text>{this.state.contract.StartDay}</Text>
                 <Text>일부터</Text>
               </Text>
-              <Text className="text-ct w-100">
+              <Text style={{ textAlign: 'center', width: '100%' }}>
                 <Text>
                   {this.state.contract.EndYear == null
                     ? '-'
@@ -112,22 +173,43 @@ class WorkerContract extends Component {
                 </Text>
                 <Text>일까지</Text>
               </Text>
-              <Text className="text-st w-100 text-bold text-h6">
-                2. 근 무 장 소 :
-                <Text className="text-medium">
+              <Text
+                style={{
+                  textAlign: 'left',
+                  width: '100%',
+                  fontWeight: 'bold',
+                  fontSize: '20px',
+                }}
+              >
+                2. 근무 장소 :
+                <Text style={{ fontWeight: 'medium' }}>
                   {this.state.contract.WorkPlace}
                 </Text>
               </Text>
-              <Text className="text-st w-100 text-bold text-h6">
+              <Text
+                style={{
+                  textAlign: 'left',
+                  width: '100%',
+                  fontWeight: 'bold',
+                  fontSize: '20px',
+                }}
+              >
                 3. 업무의 내용 :
-                <Text className="text-medium">
+                <Text style={{ fontWeight: 'medium' }}>
                   {this.state.contract.WorkReference}
                 </Text>
               </Text>
-              <Text className="text-st w-100 text-bold text-h6">
+              <Text
+                style={{
+                  textAlign: 'left',
+                  width: '100%',
+                  fontWeight: 'bold',
+                  fontSize: '20px',
+                }}
+              >
                 4. 소정근로시간 :
               </Text>
-              <Text className="text-ct w-100">
+              <Text style={{ textAlign: 'center', width: '100%' }}>
                 <Text>{this.state.contract.StartTimeHour}</Text>
                 <Text>시</Text>
                 <Text>{this.state.contract.StartTimeHMin}</Text>
@@ -137,7 +219,10 @@ class WorkerContract extends Component {
                 <Text>{this.state.contract.EndTimeHMin}</Text>
                 <Text>분까지</Text>
               </Text>
-              <Text className="text-ct w-100">
+              <Text
+                className="text-ct w-100"
+                style={{ textAlign: 'center', width: '100%' }}
+              >
                 <Text>( 휴게시간 : </Text>
                 <Text>{this.state.contract.BreakTimeStartHour}</Text>
                 <Text>시</Text>
@@ -148,34 +233,67 @@ class WorkerContract extends Component {
                 <Text>{this.state.contract.BreakTimeEndMin}</Text>
                 <Text>분 )</Text>
               </Text>
-              <Text className="text-st w-100 text-bold text-h6">
+              <Text
+                className="text-st w-100 text-bold text-h6"
+                style={{
+                  textAlign: 'left',
+                  width: '100%',
+                  fontWeight: 'bold',
+                  fontSize: '20px',
+                }}
+              >
                 5. 근무일/휴일 :
               </Text>
-              <Text className="text-ct w-100">
+              <Text
+                className="text-ct w-100"
+                style={{ textAlign: 'left', width: '100%' }}
+              >
                 <Text>매주 {this.state.contract.WorkingDays}</Text>
                 <Text>일(또는 매일단위)근무</Text>
               </Text>
-              <Text className="text-ct w-100">
+              <Text
+                className="text-ct w-100"
+                style={{ textAlign: 'left', width: '100%' }}
+              >
                 <Text>(</Text>
                 <Text>주휴일 : 매주</Text>
                 <Text>{this.state.contract.Holiday}</Text>
                 <Text>일</Text>
                 <Text>)</Text>
               </Text>
-              <Text className="text-st w-100 text-bold text-h6">6. 임 금</Text>
-              <Text className="text-st w-100">
-                <Text className="">- 월(일, 시간)급 : </Text>
+              <Text
+                className="text-st w-100 text-bold text-h6"
+                style={{
+                  textAlign: 'left',
+                  width: '100%',
+                  fontWeight: 'bold',
+                  fontSize: '20px',
+                }}
+              >
+                6. 임 금
+              </Text>
+              <Text
+                className="text-st w-100"
+                style={{ textAlign: 'left', width: '100%' }}
+              >
+                <Text>- 월(일, 시간)급 : </Text>
                 <Text>{this.state.contract.Salary}</Text>
                 <Text>원</Text>
               </Text>
-              <Text className="text-st w-100">
-                <Text className="">- 상여금 : </Text>
+              <Text
+                className="text-st w-100"
+                style={{ textAlign: 'left', width: '100%' }}
+              >
+                <Text>- 상여금 : </Text>
                 <Text>{this.state.contract.types1.toString()}</Text>
                 <Text>({this.state.contract.Bonus}</Text>
                 <Text>원)</Text>
               </Text>
-              <Text className="text-st w-100">
-                <Text className="">- 기타급여(제수당 등) : </Text>
+              <Text
+                className="text-st w-100"
+                style={{ textAlign: 'center', width: '100%' }}
+              >
+                <Text>- 기타급여(제수당 등) : </Text>
                 <Text for="bonus2Yes">
                   {this.state.contract.types2.toString()}
                 </Text>
@@ -190,7 +308,7 @@ class WorkerContract extends Component {
                 <Text>원 </Text>
                 <Text>)</Text>
               </Text>
-              <Text className='w-100'>
+              <Text className="w-100" style={{ width: '100%' }}>
                 <Text className="">- 급여산정기간 :</Text>
                 <Text>
                   {this.state.SalaryCalculationPeriodStart
@@ -205,7 +323,7 @@ class WorkerContract extends Component {
                 </Text>
                 <Text>일</Text>
               </Text>
-              <Text className='w-100'>
+              <Text className="w-100" style={{ width: '100%' }}>
                 <Text className="">- 임금지급일 : 매월</Text>
                 <Text>{this.state.contract.SalaryDay.toString()}</Text>
                 <Text>일 (휴일의 경우에는 전일 지급)</Text>
@@ -216,49 +334,91 @@ class WorkerContract extends Component {
                   {this.state.contract.types3.toString()}
                 </Text>
               </Text>
-              <Text className="text-st w-100 text-bold text-h6">
+              <Text
+                className="text-st w-100 text-bold text-h6"
+                style={{
+                  width: '100%',
+                  textAlign: 'left',
+                  fontWeight: 'bold',
+                  fontSize: '20px',
+                }}
+              >
                 7. 연차유급휴가
               </Text>
               <Text className="">
                 {' '}
                 - 연차유급휴가는 근로기준법에서 정하는 바에 따라 부여함.
               </Text>
-              <Text className="text-st w-100 text-bold text-h6">
+              <Text
+                className="text-st w-100 text-bold text-h6"
+                style={{
+                  width: '100%',
+                  textAlign: 'left',
+                  fontWeight: 'bold',
+                  fontSize: '20px',
+                }}
+              >
                 8. 사대보험 적용여부
               </Text>
               <PC>
-                <Text className="d-flex align-items-center">
+                <Text
+                  className="d-flex align-items-center"
+                  style={{ display: 'flex', alignItems: 'center' }}
+                >
                   <Text className="">
-                    - 고용보험 : {this.state.contract.types4[1] == 1 ? 'O' : 'X'}
+                    - 고용보험 :{' '}
+                    {this.state.contract.types4[1] == 1 ? 'O' : 'X'}
                   </Text>
                   <Text className="">
-                    - 산재보험 : {this.state.contract.types4[2] == 1 ? 'O' : 'X'}
+                    - 산재보험 :{' '}
+                    {this.state.contract.types4[2] == 1 ? 'O' : 'X'}
                   </Text>
                   <Text className="">
-                    - 국민연금 : {this.state.contract.types4[3] == 1 ? 'O' : 'X'}
+                    - 국민연금 :{' '}
+                    {this.state.contract.types4[3] == 1 ? 'O' : 'X'}
                   </Text>
                   <Text className="">
-                    - 건강보험 : {this.state.contract.types4[4] == 1 ? 'O' : 'X'}
+                    - 건강보험 :{' '}
+                    {this.state.contract.types4[4] == 1 ? 'O' : 'X'}
                   </Text>
                 </Text>
               </PC>
               <Mobile>
-                <Text className="d-flex align-items-center flex-col">
+                <Text
+                  className="d-flex align-items-center flex-col"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    flexDirection: 'column',
+                  }}
+                >
                   <Text className="">
-                    - 고용보험 : {this.state.contract.types4[1] == 1 ? 'O' : 'X'}
+                    - 고용보험 :{' '}
+                    {this.state.contract.types4[1] == 1 ? 'O' : 'X'}
                   </Text>
                   <Text className="">
-                    - 산재보험 : {this.state.contract.types4[2] == 1 ? 'O' : 'X'}
+                    - 산재보험 :{' '}
+                    {this.state.contract.types4[2] == 1 ? 'O' : 'X'}
                   </Text>
                   <Text className="">
-                    - 국민연금 : {this.state.contract.types4[3] == 1 ? 'O' : 'X'}
+                    - 국민연금 :{' '}
+                    {this.state.contract.types4[3] == 1 ? 'O' : 'X'}
                   </Text>
                   <Text className="">
-                    - 건강보험 : {this.state.contract.types4[4] == 1 ? 'O' : 'X'}
+                    - 건강보험 :{' '}
+                    {this.state.contract.types4[4] == 1 ? 'O' : 'X'}
                   </Text>
                 </Text>
               </Mobile>
-              <Text className="text-st w-100 text-bold text-h6">
+              <Text
+                className="text-st w-100 text-bold text-h6"
+                style={{
+                  textAlign: 'left',
+                  width: '100%',
+                  fontWeight: 'bold',
+                  fontSize: '20px',
+                }}
+              >
                 9. 근로계약서 교부
               </Text>
               <Text>
@@ -269,51 +429,94 @@ class WorkerContract extends Component {
                   제17조 이행)
                 </Text>
               </Text>
-              <Text className="text-st w-100 text-bold text-h6">10. 기타</Text>
+              <Text
+                className="text-st w-100 text-bold text-h6"
+                style={{
+                  textAlign: 'left',
+                  width: '100%',
+                  fontWeight: 'bold',
+                  fontSize: '20px',
+                }}
+              >
+                10. 기타
+              </Text>
               <Text>
                 <Text className="">
                   {' '}
                   - 이 계약에 정함이 없는 사항은 근로기준법령에 의함
                 </Text>
               </Text>
-              <Text className="text-ct w-100 py-5">
-                <Text className='text-h5'>{this.state.contract.ContractYear}</Text>
-                <Text className='text-h5'>년</Text>
-                <Text className='text-h5'>{this.state.contract.ContractMonth}</Text>
-                <Text className='text-h5'>월</Text>
-                <Text className='text-h5'>{this.state.contract.ContractDay}</Text>
-                <Text className='text-h5'>일</Text>
+              <Text
+                className="text-ct w-100 py-5"
+                style={{
+                  textAlign: 'center',
+                  width: '100%',
+                  paddingVertical: '5px',
+                }}
+              >
+                <Text className="text-h5" style={{ fontSize: '26px' }}>
+                  {this.state.contract.ContractYear}
+                </Text>
+                <Text className="text-h5" style={{ fontSize: '26px' }}>
+                  년
+                </Text>
+                <Text className="text-h5" style={{ fontSize: '26px' }}>
+                  {this.state.contract.ContractMonth}
+                </Text>
+                <Text className="text-h5" style={{ fontSize: '26px' }}>
+                  월
+                </Text>
+                <Text className="text-h5" style={{ fontSize: '26px' }}>
+                  {this.state.contract.ContractDay}
+                </Text>
+                <Text className="text-h5" style={{ fontSize: '26px' }}>
+                  일
+                </Text>
               </Text>
-              <Text className="w-100 text-bold text-h6">(사업주)</Text>
-              <Text className="w-100">
+              <Text
+                className="w-100 text-bold text-h6"
+                style={{ width: '100%', fontWeight: 'bold', fontSize: '20px' }}
+              >
+                (사업주)
+              </Text>
+              <Text className="w-100" style={{ width: '100%' }}>
                 <Text className="">사업체명 : </Text>
                 <Text>{this.state.contract.BusinessName}</Text>
               </Text>
-              <Text className="w-100">
+              <Text className="w-100" style={{ width: '100%' }}>
                 <Text className="">연락처 : </Text>
                 <Text>{this.state.contract.BusinessPhone}</Text>
               </Text>
-              <Text className="w-100">
+              <Text className="w-100" style={{ width: '100%' }}>
                 <Text className="">주 소 : </Text>
                 <Text>{this.state.contract.BusinessAddress}</Text>
               </Text>
-              <Text className="w-100">
+              <Text className="w-100" style={{ width: '100%' }}>
                 <Text className="">대 표 자 : </Text>
                 <Text>{this.state.contract.BusinessOwner1}</Text>
                 <Text>(서명){/* this.state.signOrStamp */}</Text>
               </Text>
-              <Text className="w-100">
-                <Text className="w-100 text-bold text-h6">(근로자)</Text>
+              <Text className="w-100" style={{ width: '100%' }}>
+                <Text
+                  className="w-100 text-bold text-h6"
+                  style={{
+                    width: '100%',
+                    fontWeight: 'bold',
+                    fontSize: '20px',
+                  }}
+                >
+                  (근로자)
+                </Text>
               </Text>
-              <Text className="w-100">
+              <Text className="w-100" style={{ width: '100%' }}>
                 <Text className="">주 소 : </Text>
                 <Text>{this.state.contract.EmployeeAddress}</Text>
               </Text>
-              <Text className="w-100">
+              <Text className="w-100" style={{ width: '100%' }}>
                 <Text className="">연 락 처 : </Text>
                 <Text>{this.state.contract.EmployeePhone}</Text>
               </Text>
-              <Text className="w-100">
+              <Text className="w-100" style={{ width: '100%' }}>
                 <Text className="">성 명 : </Text>
                 <Text>{this.state.contract.EmployeeName}</Text>
                 <Text>(서명)</Text>

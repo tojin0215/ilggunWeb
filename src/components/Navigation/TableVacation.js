@@ -89,7 +89,7 @@ const Table = props => {
       striped
       pagination
       paginationPerPage={4}
-      noDataComponent="데이터가 없습니다"
+      noDataComponent="휴가자가 없습니다"
     />
   );
 };

@@ -23,7 +23,7 @@ import {
 } from '../../action/api';
 
 import '../../styles/home/home.css';
-import  { PC, Mobile } from '../../components/MediaQuery';
+import { PC, Mobile } from '../../components/MediaQuery';
 
 const pickerLang = {
   months: [
@@ -52,7 +52,7 @@ class PayDocumentDetails extends Component {
       checkEtc: false,
       yearMonth: {
         year: new Date().getFullYear(),
-        month: new Date().getMonth(),
+        month: new Date().getMonth() + 1,
       },
       isVisibleMonthSelector: false,
       workers: [],
@@ -76,7 +76,9 @@ class PayDocumentDetails extends Component {
     selectWorkerByType(business_id, 2)
       .then((result) => result.json())
       .then((result) => {
-        const r = result.filter(item => !(item.state === "0" || item.state === "1"));
+        const r = result.filter(
+          (item) => !(item.state === '0' || item.state === '1'),
+        );
         this.setState({ workers: r });
       })
       .catch((error) => {
@@ -130,7 +132,7 @@ class PayDocumentDetails extends Component {
                 if (allowance.t_position)
                   taxation += Number(allowance.t_position);
                 if (allowance.t_etc) taxation += Number(allowance.t_etc);
-                new_state.taxation = taxation
+                new_state.taxation = taxation;
                 console.log('taxation', taxation);
 
                 let taxFree = 0;
@@ -139,16 +141,19 @@ class PayDocumentDetails extends Component {
                 if (allowance.f_childcareAllowance)
                   taxFree += Number(allowance.f_childcareAllowance);
                 if (allowance.f_meals) taxFree += Number(allowance.f_meals);
-                new_state.taxFree = taxFree
+                new_state.taxFree = taxFree;
                 console.log('taxFree', taxFree);
 
                 let salary = 0;
                 try {
                   if (allowance.salary) salary = allowance.Salary;
-                  else if (new_state.contract.Salary) salary = Number(new_state.contract.Salary)
-                } catch (e) {console.error(e)}
-                
-                new_state.salary = salary
+                  else if (new_state.contract.Salary)
+                    salary = Number(new_state.contract.Salary);
+                } catch (e) {
+                  console.error(e);
+                }
+
+                new_state.salary = salary;
                 console.log('salary', salary);
 
                 // this.setState({ salary, taxation, taxFree });
@@ -163,7 +168,10 @@ class PayDocumentDetails extends Component {
   };
 
   handleAMonthChange = (year, month) => {
-    if (this.state.selectedWorker) this.setState({ yearMonth: { year, month } }, () => this.handleSelectWorker(this.state.selectedWorker));
+    if (this.state.selectedWorker)
+      this.setState({ yearMonth: { year, month } }, () =>
+        this.handleSelectWorker(this.state.selectedWorker),
+      );
     else this.setState({ yearMonth: { year, month } });
 
     this.setState({ isVisibleMonthSelector: false });
@@ -181,31 +189,31 @@ class PayDocumentDetails extends Component {
 
     const pay_document_data = show_pay_document
       ? {
-          name: this.state.workername2,
-          salary: this.state.salary,
-          taxFree: this.state.taxFree,
-          taxation: this.state.taxation,
+        name: this.state.workername2,
+        salary: this.state.salary,
+        taxFree: this.state.taxFree,
+        taxation: this.state.taxation,
 
-          nationalPension: Math.round(
-            (this.state.salary *
-              this.state.insurance.NationalPensionPercentage) /
-              100,
-          ),
-          employmentInsurance: Math.round(
-            (this.state.salary *
-              this.state.insurance.EmploymentInsurancePercentage) /
-              100,
-          ),
-          healthInsurance: Math.round(
-            (this.state.salary *
-              this.state.insurance.HealthInsurancePercentage) /
-              100,
-          ),
-          regularCare: Math.round(
-            (this.state.salary * this.state.insurance.RegularCarePercentage) /
-              100,
-          ),
-        }
+        nationalPension: Math.round(
+          (this.state.salary *
+            this.state.insurance.NationalPensionPercentage) /
+          100,
+        ),
+        employmentInsurance: Math.round(
+          (this.state.salary *
+            this.state.insurance.EmploymentInsurancePercentage) /
+          100,
+        ),
+        healthInsurance: Math.round(
+          (this.state.salary *
+            this.state.insurance.HealthInsurancePercentage) /
+          100,
+        ),
+        regularCare: Math.round(
+          (this.state.salary * this.state.insurance.RegularCarePercentage) /
+          100,
+        ),
+      }
       : {};
 
     if (show_pay_document) pay_document_data.origin = pay_document_data.salary;
@@ -228,9 +236,9 @@ class PayDocumentDetails extends Component {
         <Navigation goLogin={this.goLogin} />
         <div className="container">
           <Menu />
-            <PC>
-          <h4 className="text-h5">급여명세서</h4>
-              <article className="flex todayleave sectionShadow m-5 px-2">
+          <PC>
+            <h4 className="text-h5">급여명세서</h4>
+            <article className="flex todayleave sectionShadow m-5 px-2">
               <div className="small-shadow">
                 {this.state.selectedWorker ? (
                   <div className="d-flex align-items-center justify-content-center h-100">
@@ -282,11 +290,11 @@ class PayDocumentDetails extends Component {
                   </div>
                 </Picker>
               </div>
-          </article>
-            </PC>
-            <Mobile>
-          <h4 className="text-h5 text-center">급여명세서</h4>
-              <article className="flex todayleave-col sectionShadow px-2 flex-auto">
+            </article>
+          </PC>
+          <Mobile>
+            <h4 className="text-h5 text-center">급여명세서</h4>
+            <article className="flex todayleave-col sectionShadow px-2 flex-auto">
               <div className="small-shadow w-100 flex-col">
                 {this.state.selectedWorker ? (
                   <div className="d-flex align-items-center justify-content-center h-100">
@@ -338,21 +346,22 @@ class PayDocumentDetails extends Component {
                   </div>
                 </Picker>
               </div>
-          </article>
-            </Mobile>
+            </article>
+          </Mobile>
           <div className="sectionShadow">
             {show_pay_document ? (
               <PDFDownloadLink
-              className='button-solid width-fit d-flex align-items-center mb-3'
-              document={<PayDocumentPDF forDownload={true} data={pay_document_data} />}
-              fileName="pay_detail.pdf"
-            >
-              {({ blob, url, loading, error }) =>
-                loading ? "Loading document..." : "다운받기"
-              }
-            </PDFDownloadLink>
-              ): null
-            }
+                className="button-solid width-fit d-flex align-items-center mb-3"
+                document={
+                  <PayDocumentPDF forDownload={true} data={pay_document_data} />
+                }
+                fileName="pay_detail.pdf"
+              >
+                {({ blob, url, loading, error }) =>
+                  loading ? 'Loading document...' : '다운받기'
+                }
+              </PDFDownloadLink>
+            ) : null}
             {show_pay_document ? (
               <div>
                 {/* 급여명세서 표시하는 공간입니다. */}
