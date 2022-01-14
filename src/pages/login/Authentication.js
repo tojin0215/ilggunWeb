@@ -10,9 +10,9 @@ class Authentication extends Component {
     super(props);
     this.state = {
       mode: false,
-      id: "",
-      password: ""
-    }
+      id: '',
+      password: '',
+    };
   }
 
   handleChange = (e) => {
@@ -59,14 +59,14 @@ class Authentication extends Component {
 
   render() {
     const inputBoxes = (
-      <div>
+      <div className="p-0">
         <PC>
           <div className="input-field input-underline input-id">
             <label>
               <div className="label-icon">
                 <img src={imgPerson} alt="로그인 아이콘" />
               </div>
-              <p className="color-point text-h5">아이디</p>
+              <p className="text-h5 text-bold">아이디</p>
               <input
                 name="id"
                 type="text"
@@ -77,11 +77,11 @@ class Authentication extends Component {
             </label>
           </div>
           <div className="input-field input-underline input-password">
-            <label className="color-point text-h5">
+            <label className="text-h5">
               <div className="label-icon">
                 <img src={imgPassword} alt="비밀번호 아이콘" />
               </div>
-              <p className="color-point text-h5">비밀번호</p>
+              <p className="text-h5 text-bold">비밀번호</p>
               <input
                 name="password"
                 type="password"
@@ -99,7 +99,7 @@ class Authentication extends Component {
               <div className="label-icon">
                 <img src={imgPerson} alt="로그인 아이콘" />
               </div>
-              <p className="color-point text-h6">아이디</p>
+              <p className="text-h6">아이디</p>
               <input
                 name="id"
                 type="text"
@@ -110,11 +110,11 @@ class Authentication extends Component {
             </label>
           </div>
           <div className="input-field input-underline input-password">
-            <label className="color-point text-h6">
+            <label className="text-h6">
               <div className="label-icon">
                 <img src={imgPassword} alt="비밀번호 아이콘" />
               </div>
-              <p className="color-point text-h6">비밀번호</p>
+              <p className="text-h6">비밀번호</p>
               <input
                 name="password"
                 type="password"
@@ -133,7 +133,12 @@ class Authentication extends Component {
         <div className="card-content">
           <div className="row">
             {inputBoxes}
-            <button className='button-solid text-h6 text-bold' onClick={this.handleLogin}>LOGIN</button>
+            <button
+              className="button-solid text-h5 text-bold mt-3"
+              onClick={this.handleLogin}
+            >
+              LOGIN
+            </button>
             {/* <button onClick={this.handleLogin}>로그인</button> */}
           </div>
         </div>
@@ -164,19 +169,23 @@ class Authentication extends Component {
 
     return (
       <div className="container auth">
-        <div>
+        <div className="">
           <PC>
-            <p className="text-bold text-h4">편리한 근태관리 서비스</p>
+            <p className="text-bold text-h4 pt-5">편리한 근태관리 서비스</p>
             <p className="text-h4">
               <span className="text-h3 color-point text-bold">일꾼</span>에 오신
               것을 환영합니다.
             </p>
           </PC>
           <Mobile>
-            <p className="text-bold text-h4 pt-2 text-center">편리한<br /> 근태관리 서비스</p>
+            <p className="text-bold text-h4 pt-2 text-center">
+              편리한
+              <br /> 근태관리 서비스
+            </p>
             <p className="text-h5 pt-2 text-center">
               <span className="text-h4 color-point text-bold">일꾼</span>에 오신
-              것을<br /> 환영합니다.
+              것을
+              <br /> 환영합니다.
             </p>
           </Mobile>
         </div>

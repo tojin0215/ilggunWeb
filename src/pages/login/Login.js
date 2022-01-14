@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import Authentication from '../login/Authentication';
 import Header from '../../components/Header/Header';
@@ -16,105 +16,99 @@ import '../../styles/login/login.css';
 import imgloginvisual from '../../img/loginVisual.png';
 import { PC, Mobile } from '../../components/MediaQuery';
 
-
 class Login extends Component {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    componentDidMount = () => {
-        this.checkAlreadyLogin();
-    }
+  componentDidMount = () => {
+    this.checkAlreadyLogin();
+  };
 
-    checkAlreadyLogin = () => {
-        const userInfo = getUserInfo();
-        if (userInfo.id) this.handleLogin(userInfo.id, userInfo.pw)
-    }
+  checkAlreadyLogin = () => {
+    const userInfo = getUserInfo();
+    if (userInfo.id) this.handleLogin(userInfo.id, userInfo.pw);
+  };
 
-    handleLogin = (id, pw) => {
-        return this.props.loginRequest(id, pw).then(
-            () => {
-                // console.log(this.props.status)
-                if (this.props.status === "SUCCESS") {
-                    // create session data
-                    let loginData = {
-                        isLoggedIn: true,
-                        id: id,
-                        pw: pw
-                    };
-                    document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-                    setUserInfo(id, pw, null);
-                    // this.props.history.push('/selectBusiness');
-                    this.props.history.push('/home');
-                    return true;
-                } else {
-                    alert('ID나 비밀번호를 확인해주세요.');
-                    return false;
-                }
-            }
-        );
-    }
+  handleLogin = (id, pw) => {
+    return this.props.loginRequest(id, pw).then(() => {
+      // console.log(this.props.status)
+      if (this.props.status === 'SUCCESS') {
+        // create session data
+        let loginData = {
+          isLoggedIn: true,
+          id: id,
+          pw: pw,
+        };
+        document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+        setUserInfo(id, pw, null);
+        // this.props.history.push('/selectBusiness');
+        this.props.history.push('/home');
+        return true;
+      } else {
+        alert('ID나 비밀번호를 확인해주세요.');
+        return false;
+      }
+    });
+  };
 
-    render() {
-        return (
-            <div className='wrap wrap_login'>
-                <Header />
-                {/* <Navigation /> */}
-                <div className='container'>
-                    <PC>
-                        <div className='sectionShadow container flex justify-around max-w-5xl items-center h-fit m-5'>
-                            <Authentication
-                                mode={true}
-                                onLogin={this.handleLogin} />
-                            <div className='card-visual'>
-                                <img src={imgloginvisual} alt='로그인 배경 이미지' />
-                            </div>
-                        </div>
-                    </PC>
-                    <Mobile>
-                        <div className='sectionShadow container flex justify-around max-w-5xl items-center h-fit m-5'>
-                            <Authentication
-                                mode={true}
-                                onLogin={this.handleLogin} />
-                        </div>
-                        <p className='text-base text-center'>해당 홈페이지는 PC 해상도에 최적화되어 있으며,<br /> 모바일 전용 앱이 제작되어 있습니다.</p>
-                    </Mobile>
-                </div>
-                <Footer />
+  render() {
+    return (
+      <div className="wrap wrap_login">
+        <Header />
+        {/* <Navigation /> */}
+        <div className="container">
+          <PC>
+            <div className="sectionShadow container flex justify-around max-w-5xl items-center h-fit m-5 py-5 bg-light">
+              <Authentication mode={true} onLogin={this.handleLogin} />
+              <div className="card-visual">
+                <img src={imgloginvisual} alt="로그인 배경 이미지" />
+              </div>
             </div>
-        );
-    }
-};
-
+          </PC>
+          <Mobile>
+            <div className="sectionShadow container flex justify-around max-w-5xl items-center h-fit m-5 py-5 bg-light">
+              <Authentication mode={true} onLogin={this.handleLogin} />
+            </div>
+            <p className="text-base text-center">
+              해당 홈페이지는 PC 해상도에 최적화되어 있으며,
+              <br /> 모바일 전용 앱이 제작되어 있습니다.
+            </p>
+          </Mobile>
+        </div>
+        {/* <Footer /> */}
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = (state) => {
-    return {
-        status: state.authentication.login.status
-    };
+  return {
+    status: state.authentication.login.status,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        loginRequest: (id, pw) => {
-            return dispatch(loginRequest(id, pw));
-        }
-    };
+  return {
+    loginRequest: (id, pw) => {
+      return dispatch(loginRequest(id, pw));
+    },
+  };
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 // const styles = {
 //     container: {
 //       width:'100vw',
-//       height: '100vh', 
+//       height: '100vh',
 //       display:'flex',
 //       justifyContent:'center',
 //       alignItems:'center',
 //       flexDirection:'column'
 //     },
 //     logoArea:{
-//       height: '52vh', 
+//       height: '52vh',
 //       display:'flex',
 //       alignItems:'center',
 //     },
@@ -130,7 +124,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Login);
 //       flexDirection:'column',
 //     },
 //     bottom:{
-//       display:'flex', 
+//       display:'flex',
 //       justifyContent:'center',
 //       paddingBottom:'0.3vw',
 //       borderColor:'white',

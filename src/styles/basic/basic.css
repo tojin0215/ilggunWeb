@@ -4,7 +4,7 @@ optgroup,
 select,
 textarea {
   border: 1px solid #aaa;
-  padding: 6px !important;
+  padding: 6px;
   border-radius: 12px;
 }
 
