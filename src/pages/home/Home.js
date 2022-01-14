@@ -18,8 +18,9 @@ import {
   selectTimelog,
   selectWorkerByType,
   selectVacation,
+  selectReceivedMessage,
+  addLoginHistory
 } from '../../action/api';
-import { selectReceivedMessage } from '../../action/api';
 import {
   getUserInfo,
   setUserInfo,
@@ -32,8 +33,10 @@ import { FaBell } from 'react-icons/fa';
 import '../../styles/home/home.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-calendar/dist/Calendar.css';
+//import data from '../../components/Navigation/data';
+import moment from 'moment';
+import 'moment/locale/ko';
 
-import data from '../../components/Navigation/data';
 const clickhandler = (name) => console.log('delete', name);
 
 const day = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
@@ -47,6 +50,9 @@ class Home extends Component {
       timelog: [],
       message_count: 0,
       recv_message: [],
+      login_time: moment().format('YYYY-MM-DD a h:mm:ss'),
+      lhistory: []
+
     };
     this.curFetchWorker();
   }
@@ -120,14 +126,14 @@ class Home extends Component {
 
                   item['goToWork'] = item[day[new Date().getDay()]]
                     ? item[day[new Date().getDay()]].slice(0, 2) +
-                      ':' +
-                      item[day[new Date().getDay()]].slice(2, 4)
+                    ':' +
+                    item[day[new Date().getDay()]].slice(2, 4)
                     : '출근안함';
 
                   item['goToHome'] = item[day[new Date().getDay()]]
                     ? item[day[new Date().getDay()]].slice(4, 6) +
-                      ':' +
-                      item[day[new Date().getDay()]].slice(6, 8)
+                    ':' +
+                    item[day[new Date().getDay()]].slice(6, 8)
                     : '출근안함';
 
                   return item;
@@ -135,6 +141,7 @@ class Home extends Component {
 
                 console.log(workerResult);
                 this.setState({ worker: workerResult });
+                this.loginHistory()
               });
             // this.forceUpdate();
           })
@@ -177,12 +184,19 @@ class Home extends Component {
           this.setState({ business: result });
           this.setState({ business_id: new_business_id });
           setUserInfoBusinessId(new_business_id);
-
           this.curFetchWorker();
           this.initLoadMessageCount();
         });
     });
   };
+
+  loginHistory = () => {
+    addLoginHistory(this.props.userinfo.business_name, this.state.login_time, this.state.worker.length)
+      .then((result) => result.json())
+      .then((result) => {
+        this.setState({ lhistory: result })
+      })
+  }
 
   initLoadUserInfo = (id, pw) => {
     this.props.loginRequest(id, pw).then(() => {
@@ -191,9 +205,11 @@ class Home extends Component {
         const business_id = getUserInfoBusinessId();
         setUserInfo(id, pw, null);
         this.initLoadBusiness(id, business_id);
+
       }
     });
   };
+
 
   componentDidMount() {
     //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인

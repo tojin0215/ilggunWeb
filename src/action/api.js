@@ -332,3 +332,9 @@ export function bizinfoRSSSearch(searchLclasId, searchPldirJrsdCode, searchIndus
     return fetch(`${SERVER_URL}/bizinfoSearch?searchLclasId=${searchLclasId}&searchPldirJrsdCode=${searchPldirJrsdCode}&searchIndustCode=${searchIndustCode}&searchAreaCode=${searchAreaCode}`,
         _createGetInit())
 }
+
+//loginHistory
+export function addLoginHistory(business_id, login_time, numberofworkers) {
+    const body = JSON.stringify({ bang: business_id, login_time: login_time, numberofworkers: numberofworkers })
+    return fetch(`${SERVER_URL}/addLoginHistory`, _createPostInit(body))
+}

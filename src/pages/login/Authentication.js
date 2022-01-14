@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import imgPerson from '../../img/person.png';
 import imgPassword from '../../img/password.png';
-import  { PC, Mobile } from '../../components/MediaQuery';
+import { PC, Mobile } from '../../components/MediaQuery';
 
 class Authentication extends Component {
   constructor(props) {
@@ -173,10 +173,10 @@ class Authentication extends Component {
             </p>
           </PC>
           <Mobile>
-            <p className="text-bold text-h4 pt-2 text-center">편리한<br/> 근태관리 서비스</p>
+            <p className="text-bold text-h4 pt-2 text-center">편리한<br /> 근태관리 서비스</p>
             <p className="text-h5 pt-2 text-center">
               <span className="text-h4 color-point text-bold">일꾼</span>에 오신
-              것을<br/> 환영합니다.
+              것을<br /> 환영합니다.
             </p>
           </Mobile>
         </div>

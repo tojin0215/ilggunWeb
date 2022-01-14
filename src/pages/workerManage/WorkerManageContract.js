@@ -619,7 +619,8 @@ class WorkerManageContract extends Component {
 
     data.BusinessName = this.props.userinfo.business_name;
 
-    console.log(data.value4);
+    console.log(data.value4)
+    delete data.signOrStamp;
 
     writeContractform(data).then((res) => {
       selectBusinessByName(this.state.bangcode)
