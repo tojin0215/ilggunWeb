@@ -49,6 +49,7 @@
   width: 100%;
   justify-content: center;
 }
+
 /* 오늘의 근무자 셀 내용 중앙 정렬*/
 .rdt_TableCell {
   justify-content: center;

@@ -18,6 +18,21 @@
   font-size: 1.16rem;
 }
 
+/* 사이드 내비게이션 좌측 보더 제거*/
+.side-navigation-panel
+  .side-navigation-panel-select
+  .side-navigation-panel-select-wrap
+  .side-navigation-panel-select-option {
+  border-left-width: 0;
+}
+.side-navigation-panel
+  .side-navigation-panel-select
+  .side-navigation-panel-select-inner
+  .side-navigation-panel-select-inner-wrap
+  .side-navigation-panel-select-inner-option {
+  border-left-width: 0;
+}
+
 /* 사이드 내비게이션 폰트 색상 */
 .side-navigation-panel *,
 .side-navigation-panel:after,
@@ -31,6 +46,7 @@
   .side-navigation-panel-select-wrap
   .side-navigation-panel-select-option-selected {
   background-color: rgba(58, 102, 100, var(--tw-bg-opacity));
+  border: 0;
 }
 
 /* 선택된 메뉴 */
@@ -57,4 +73,5 @@
   .side-navigation-panel-select-inner-wrap
   .side-navigation-panel-select-inner-option-selected {
   background-color: rgba(58, 102, 100, var(--tw-bg-opacity));
+  border: 0;
 }

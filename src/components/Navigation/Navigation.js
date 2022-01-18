@@ -136,7 +136,7 @@ class Navigation extends Component {
             <Nav.Item className="flex items-center">
               {/* 관리자 이름 */}
               {userinfo.id === '' ? null : (
-                <span className="navitem button-solid_white nav-name py-1 px-3 m-0">
+                <span className="navitem button-solid_white_text nav-name py-1 px-3 m-0">
                   {userinfo.manager_name} 님
                 </span>
               )}
@@ -147,7 +147,7 @@ class Navigation extends Component {
             >
               {this.state.business.map((business, index) => (
                 <NavDropdown.Item
-                  className="p-0 truncate"
+                  className="truncate text-center"
                   eventKey={business.bname}
                   title={business.bname}
                   key={index}

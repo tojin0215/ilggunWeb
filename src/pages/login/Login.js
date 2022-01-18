@@ -54,7 +54,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="wrap wrap_login">
+      <div className="wrap wrap_login bg-point-light">
         <Header />
         {/* <Navigation /> */}
         <div className="container">

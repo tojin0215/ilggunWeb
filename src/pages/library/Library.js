@@ -1,7 +1,7 @@
-import React, { Component, useRef  } from 'react';
+import React, { Component, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
 
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -10,10 +10,10 @@ import Menu from '../../components/Navigation/Menu';
 import Table from '../../components/Navigation/TableFile';
 import { getBase64 } from '../../action/api';
 import { upload, filelist, deleteFile } from '../../action/api';
-import {SERVER_URL} from '../../const/setting';
+import { SERVER_URL } from '../../const/setting';
 
 import '../../styles/home/home.css';
-import  { PC, Mobile } from '../../components/MediaQuery';
+import { PC, Mobile } from '../../components/MediaQuery';
 
 class Download extends Component {
   constructor(props) {
@@ -25,22 +25,26 @@ class Download extends Component {
       fileName: null,
       // inputRef: useRef<HTMLInputElement>(null)
     };
-    this.getBase64 = getBase64
+    this.getBase64 = getBase64;
     // this.initPage();
     this.curFetch();
   }
 
   curFetch = () => {
-    if (!this.props.userinfo.business_name) return
+    if (!this.props.userinfo.business_name) return;
     filelist(this.props.userinfo.business_name)
-    // filelist("undefined")
-    .then(r => r.json())
-    .then(result_file => {
-      console.log(result_file);
-      this.setState({file: result_file.file.map((item, index) => {return {name: item}})})
-    })
-    .catch(error => console.error(error));
-  }
+      // filelist("undefined")
+      .then((r) => r.json())
+      .then((result_file) => {
+        console.log(result_file);
+        this.setState({
+          file: result_file.file.map((item, index) => {
+            return { name: item };
+          }),
+        });
+      })
+      .catch((error) => console.error(error));
+  };
 
   goLogin = () => {
     this.props.history.push('/');
@@ -48,32 +52,47 @@ class Download extends Component {
 
   handleUpload = (e) => {
     if (!this.state.uploadFile) {
-      alert("먼저 파일을 선택하세요")
-      return
+      alert('먼저 파일을 선택하세요');
+      return;
     }
-    upload(this.props.userinfo.business_name, this.state.uploadFile)
-    .then(result => {
-      alert("업로드 성공");
-      console.log(result);
-      this.setState({uploadFile: null})
-      this.curFetch();
-    })
-  }
+    upload(this.props.userinfo.business_name, this.state.uploadFile).then(
+      (result) => {
+        alert('업로드 성공');
+        console.log(result);
+        this.setState({ uploadFile: null });
+        this.curFetch();
+      },
+    );
+  };
 
   handleFileInputChange = (e) => {
     // console.log(e.target.files[0]);
     let { file } = this.state;
 
     file = e.target.files[0];
-    if (!(file.type === "image/png" || file.type === "image/jpeg" || file.type === "application/pdf" || file.type === "text/plain" || file.type ===  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" || file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || file.type === "application/vnd.openxmlformats-officedocument.presentationml.presentation" || /.+\.hwp$/.exec(file.name))) {
-      alert("이미지나 문서만 업로드 가능합니다.")
+    if (
+      !(
+        file.type === 'image/png' ||
+        file.type === 'image/jpeg' ||
+        file.type === 'application/pdf' ||
+        file.type === 'text/plain' ||
+        file.type ===
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
+        file.type ===
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
+        file.type ===
+          'application/vnd.openxmlformats-officedocument.presentationml.presentation' ||
+        /.+\.hwp$/.exec(file.name)
+      )
+    ) {
+      alert('이미지나 문서만 업로드 가능합니다.');
       e.target.value = null;
-      return
+      return;
     }
-    if (file.size >= (30 * 1024 * 1024)) {
-      alert("업로드 제한을 초과하였습니다.")
+    if (file.size >= 30 * 1024 * 1024) {
+      alert('업로드 제한을 초과하였습니다.');
       e.target.value = null;
-      return
+      return;
     }
 
     // this.getBase64(file)
@@ -95,14 +114,18 @@ class Download extends Component {
   };
 
   downloadFile = (e) => {
-    window.open(`${SERVER_URL}/download/${this.props.userinfo.business_name}/${e.name}`, "_blank")
+    window.open(
+      `${SERVER_URL}/download/${this.props.userinfo.business_name}/${e.name}`,
+      '_blank',
+    );
     console.log(e);
-  }
+  };
 
   deleteFile = (e) => {
-    deleteFile(this.props.userinfo.business_name, e.name)
-    .then(r => this.curFetch())
-  }
+    deleteFile(this.props.userinfo.business_name, e.name).then((r) =>
+      this.curFetch(),
+    );
+  };
 
   render() {
     const { userinfo } = this.props;
@@ -113,9 +136,13 @@ class Download extends Component {
         <Navigation goLogin={this.goLogin} />
         <div className="container">
           <Menu />
-          <div className='sectionShadow'>
-            <h4 className='text-h5 text-bold'>🗃 자료실 목록</h4>
-            <Table data={this.state.file} downloadFile={this.downloadFile} deleteFile={this.deleteFile}></Table>
+          <div className="sectionShadow">
+            <h4 className="text-h5 text-bold">🗃 자료실 목록</h4>
+            <Table
+              data={this.state.file}
+              downloadFile={this.downloadFile}
+              deleteFile={this.deleteFile}
+            ></Table>
           </div>
           {/* <div className="m-3">
             <label className="mx-3">파일 선택:</label>
@@ -135,18 +162,32 @@ class Download extends Component {
               {this.state.file.name ? this.state.file.name : "업로드"}
             </button>
           </div> */}
-          <div className='sectionShadow'>
-            <h4 className='text-h5 text-bold'>💾 파일 올리기</h4>
+          <div className="sectionShadow">
+            <h4 className="text-h5 text-bold">💾 파일 올리기</h4>
             <PC>
               <label className="mx-3 text-bold text-h6">파일 선택 : </label>
-              <input type="file" name="file" onChange={this.handleFileInputChange}/>
+              <input
+                className="px-2 py-1"
+                type="file"
+                name="file"
+                onChange={this.handleFileInputChange}
+              />
             </PC>
             <Mobile>
-              <input className='inherit mt-4' type="file" name="file" onChange={this.handleFileInputChange}/>
+              <input
+                className="inherit mt-4 px-2 py-1"
+                type="file"
+                name="file"
+                onChange={this.handleFileInputChange}
+              />
             </Mobile>
-            <div className='d-flex justify-content-center flex-wrap pt-2'>
-              <Button className='px-5 mt-3' onClick={this.handleUpload}>업로드</Button>
-              <span className='text-p w-100 d-flex justify-content-center'>파일 업로드는 최대 30MB까지 가능합니다.</span>
+            <div className="d-flex justify-content-center flex-wrap pt-2">
+              <Button className="px-5 mt-3" onClick={this.handleUpload}>
+                업로드
+              </Button>
+              <span className="text-p w-100 d-flex justify-content-center">
+                파일 업로드는 최대 30MB까지 가능합니다.
+              </span>
             </div>
           </div>
         </div>

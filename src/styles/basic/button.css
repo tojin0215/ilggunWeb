@@ -29,6 +29,17 @@ button {
   color: #67c7b9;
 }
 
+.button-solid_white_text {
+  padding: 12px 60px;
+  border-radius: 35px;
+  color: #333;
+  background-color: rgba(255, 255, 255, 0.8);
+  font-weight: bold;
+  margin: 20px 0;
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+}
+
 .button-solid_white {
   border: 1px solid #67c7b9;
   padding: 12px 60px;
