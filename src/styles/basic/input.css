@@ -65,3 +65,10 @@ input[type='password'] {
   /* transform: translateX(-50%); */
   /* top: 100%; */
 }
+.react-calendar__navigation__arrow {
+  display: flex;
+  font-size: 40px;
+  line-height: 32px;
+  align-items: flex-start;
+  justify-content: center;
+}

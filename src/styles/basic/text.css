@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
 html * {
-  font-family: 'NanumSquare', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 18px;
   letter-spacing: -0.1rem;
 }
