@@ -159,7 +159,7 @@ class Navigation extends Component {
             <PC>
               <Nav.Item eventKey="logout">
                 <button
-                  className="button-logout button-solid flex items-center py-1 px-3"
+                  className="button-logout button-solid_black flex items-center py-1 px-3"
                   onClick={this.handleLogout}
                 >
                   <FaSignOutAlt className="mr-2" />

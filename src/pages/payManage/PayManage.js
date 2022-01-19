@@ -212,20 +212,24 @@ class PayManage extends Component {
           <Menu />
           <PC>
             <article className="todayleave">
-              <h4 className="w-100 text-h4">🏖 휴가중인 직원</h4>
+              <h4 className="text-h4 w-100 py-3 px-5 fw-bold sectionShadow">
+                🏖 휴가중인 직원
+              </h4>
               <Calendar
                 onChange={this.handleDate}
                 id="currentDate"
-                className="sectionShadow"
+                className="sectionShadow my-3 me-2"
               />
-              <div className="sectionShadow">
+              <div className="sectionShadow my-3 ms-2">
                 <TableVacation data={this.state.vacation} />
               </div>
             </article>
           </PC>
           <Mobile>
             <article className="todayleave">
-              <h4 className="w-100 text-h4 text-center">🏖 휴가중인 직원</h4>
+              <h4 className="text-h4 w-100 py-3 px-5 fw-bold sectionShadow">
+                🏖 휴가중인 직원
+              </h4>
               <Calendar
                 onChange={this.handleDate}
                 id="currentDate"
@@ -239,8 +243,10 @@ class PayManage extends Component {
             </article>
           </Mobile>
           <PC>
-            <h4 className="text-h4">🙋‍♀️ 휴가 등록하기</h4>
-            <article className="sectionShadow flex flex-wrap">
+            <h4 className="text-h4 w-100 py-3 px-5 fw-bold sectionShadow">
+              🙋‍♀️ 휴가 등록하기
+            </h4>
+            <article className="sectionShadow flex flex-wrap my-3">
               <div className="small-shadow pt-3 m-0">
                 {!this.state.selectedWorker ? (
                   <TableWorkerFilter
@@ -317,7 +323,9 @@ class PayManage extends Component {
             </article>
           </PC>
           <Mobile>
-            <h4 className="text-h4 text-center">🙋‍♀️ 휴가 등록하기</h4>
+            <h4 className="text-h4 w-100 py-3 px-5 fw-bold sectionShadow">
+              🙋‍♀️ 휴가 등록하기
+            </h4>
             <article className="sectionShadow flex flex-wrap">
               <div className="w-100 small-shadow pt-3 m-0">
                 {!this.state.selectedWorker ? (

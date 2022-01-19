@@ -1,15 +1,5 @@
 #root {
-  /* background: linear-gradient(
-    315deg,
-    #86a8e7,
-    #b9e8e1,
-    #b9e8e1,
-    #b9e8e1,
-    #7f7fd5,
-    #ef32d9
-  ); */
-  /* background: linear-gradient(315deg, #fff, #bdfff3, #b9e8e1, #fff); */
-  background-image: #b9e8e1;
+  /* background-image: #b9e8e1;
   background-image: radial-gradient(
       at 10% 16%,
       hsla(154, 64%, 74%, 1) 0,
@@ -22,6 +12,19 @@
     radial-gradient(at 18% 90%, hsla(180, 80%, 77%, 1) 0, transparent 58%),
     radial-gradient(at 65% 65%, hsla(228, 90%, 72%, 1) 0, transparent 45%),
     radial-gradient(at 93% 64%, hsla(154, 65%, 67%, 1) 0, transparent 48%);
+    */
+  background-image: #b9e8e1;
+  background-image: radial-gradient(
+      at 50% 22%,
+      hsla(192, 93%, 70%, 1) 0,
+      transparent 54%
+    ),
+    radial-gradient(at 27% 57%, hsla(182, 88%, 75%, 1) 0, transparent 96%),
+    radial-gradient(at 83% 19%, hsla(228, 71%, 77%, 1) 0, transparent 45%),
+    radial-gradient(at 71% 75%, hsla(207, 95%, 68%, 1) 0, transparent 78%),
+    radial-gradient(at 89% 90%, hsla(225, 88%, 74%, 1) 0, transparent 51%),
+    radial-gradient(at 10% 20%, hsla(180, 80%, 77%, 1) 0, transparent 56%),
+    radial-gradient(at 12% 77%, hsla(250, 76%, 66%, 1) 0, transparent 57%);
 }
 
 body {

@@ -15,7 +15,7 @@ import 'react-month-picker/css/month-picker.css';
 
 import '../../styles/payDocument/payDocument.css';
 import '../../styles/home/home.css';
-import  { PC, Mobile } from '../../components/MediaQuery';
+import { PC, Mobile } from '../../components/MediaQuery';
 import {
   otherAllowanceAll,
   selectContractformAll,
@@ -54,41 +54,48 @@ class PayDocument extends Component {
       month: '7',
       isVisibleMonthSelector: false,
 
-      PD: []
+      PD: [],
       //PayDocument(constractForm+insurancePercentage+otherAllance)
     };
     this.selectPayDocu();
   }
 
-
-
   selectPayDocu = () => {
-
-
     selectContractformAll(this.props.userinfo.business_name)
       .then((result) => result.json())
       .then((selectContractformAllResult) => {
-        // console.log(selectContractformAllResult);        
+        // console.log(selectContractformAllResult);
 
-        selectInsuranceYear(this.props.userinfo.business_name, this.state.yearMonth.year)
+        selectInsuranceYear(
+          this.props.userinfo.business_name,
+          this.state.yearMonth.year,
+        )
           .then((result) => result.json())
           .then((selectInsuranceYearResult) => {
             // console.log(selectInsuranceYearResult);
 
             selectContractformAllResult.map((item, index) => {
               const insurance = selectInsuranceYearResult.find(
-                (selectContractformAllResult) => selectContractformAllResult.bang == item.bang,
+                (selectContractformAllResult) =>
+                  selectContractformAllResult.bang == item.bang,
               );
               item['insurance'] = insurance;
               if (insurance) item['insurance'] = insurance;
-              else item['insurance'] = { HourlyWage: 0, NationalPensionPercentage: 0, EmploymentInsurancePercentage: 0, HealthInsurancePercentage: 0, RegularCarePercentage: 0 };
+              else
+                item['insurance'] = {
+                  HourlyWage: 0,
+                  NationalPensionPercentage: 0,
+                  EmploymentInsurancePercentage: 0,
+                  HealthInsurancePercentage: 0,
+                  RegularCarePercentage: 0,
+                };
               return item;
             });
 
             otherAllowanceAll(
               this.props.userinfo.business_name,
               this.state.yearMonth.year,
-              this.state.yearMonth.month
+              this.state.yearMonth.month,
             )
               .then((result) => result.json())
               .then((otherAllowanceAllResult) => {
@@ -96,14 +103,23 @@ class PayDocument extends Component {
                 this.setState({
                   PD: selectContractformAllResult.map((item, index) => {
                     const otherAllowance = otherAllowanceAllResult.find(
-                      (selectContractformAllResult) => selectContractformAllResult.id == item.id
+                      (selectContractformAllResult) =>
+                        selectContractformAllResult.id == item.id,
                     );
                     if (otherAllowance) item['otherAllowance'] = otherAllowance;
-                    else item['otherAllowance'] = { t_bonus: 0, t_extension: 0, t_position: 0, t_etc: 0, f_carMaintenanceFee: 0, f_childcareAllowance: 0, f_meals: 0 };
+                    else
+                      item['otherAllowance'] = {
+                        t_bonus: 0,
+                        t_extension: 0,
+                        t_position: 0,
+                        t_etc: 0,
+                        f_carMaintenanceFee: 0,
+                        f_childcareAllowance: 0,
+                        f_meals: 0,
+                      };
                     // console.log("item");
                     // console.log(item);
                     return item;
-
                   }),
                 });
               });
@@ -135,11 +151,8 @@ class PayDocument extends Component {
     // console.log('userinfo : ', userinfo);
     this.pickAMonth = React.createRef();
 
-    const view_pay_document =
-      this.state.PD !== null;
+    const view_pay_document = this.state.PD !== null;
     // this.state.insurance !== null && this.state.otherAllowance !== null;
-
-
 
     return (
       <div className="wrap wrap-paydocument">
@@ -148,45 +161,49 @@ class PayDocument extends Component {
         <div className="container">
           <Menu />
           <PC>
-          <article className="sectionShadow">
-            <div className="w-100 flex justify-content-between align-items-center">
-              <h4 className="text-h5 text-bold">
-                {this.state.yearMonth.year}년 {this.state.yearMonth.month}월
-                급여대장
-              </h4>
-              {/* <input
+            <article className="sectionShadow">
+              <div className="w-100 flex justify-content-between align-items-center">
+                <h4 className="text-h5 text-bold flex align-items-center">
+                  <Picker
+                    className="py-0 px-1 m-0 d-flex"
+                    ref={this.pickAMonth}
+                    value={this.state.yearMonth}
+                    lang={pickerLang.months}
+                    show={this.state.isVisibleMonthSelector}
+                    onChange={this.handleAMonthChange}
+                    onDismiss={this.handleAMonthDissmis}
+                  >
+                    <div
+                      onClick={() => this.pickAMonth.current.show()}
+                      className="button-solid_white-0 py-2 px-5 my-0 mx-1 w-100 text-center cursor-pointer text-h5"
+                    >
+                      {this.state.yearMonth.year}년 {this.state.yearMonth.month}
+                      월
+                    </div>
+                  </Picker>
+                  {/* {this.state.yearMonth.year}년 {this.state.yearMonth.month}월 */}
+                  급여대장
+                </h4>
+                {/* <input
                 placeholder='월 선택 캘린더'
                 type="date"
                 value={this.state.value}
                 onChange={(v) => this.setState({value: v.target.value})}
               >
               </input> */}
-              <Picker
-                className="py-2 ps-4 pe-0 my-0 mx-1 d-flex"
-                ref={this.pickAMonth}
-                value={this.state.yearMonth}
-                lang={pickerLang.months}
-                show={this.state.isVisibleMonthSelector}
-                onChange={this.handleAMonthChange}
-                onDismiss={this.handleAMonthDissmis}
-              >
-                <div
-                  onClick={() => this.pickAMonth.current.show()}
-                  className="button-solid_white-0 py-2 px-5 my-0 mx-1 w-100 text-center cursor-pointer text-h5"
-                >
-                  {this.state.yearMonth.year}년 {this.state.yearMonth.month}월
-                </div>
-              </Picker>
-            </div>
-            <div>
-            </div>
-            {/* <TablePay data={this.state.PDdata} /> */}
-            {view_pay_document ? (
-              <TablePay data={this.state.PD} />
-            ) : this.state.yearMonth.year + "년 " + this.state.yearMonth.month + "월 " + "달 급여대장은 없습니다."
-            }
-
-          </article>
+              </div>
+              <div></div>
+              {/* <TablePay data={this.state.PDdata} /> */}
+              {view_pay_document ? (
+                <TablePay data={this.state.PD} />
+              ) : (
+                this.state.yearMonth.year +
+                '년 ' +
+                this.state.yearMonth.month +
+                '월 ' +
+                '달 급여대장은 없습니다.'
+              )}
+            </article>
           </PC>
           <Mobile>
             <article className="sectionShadow">
@@ -202,9 +219,7 @@ class PayDocument extends Component {
                   onChange={(v) => this.setState({value: v.target.value})}
                 >
                 </input> */}
-                <p className='pt-3'>
-                  해당 월을 선택하세요.
-                </p>
+                <p className="pt-3">해당 월을 선택하세요.</p>
                 <Picker
                   className="py-2 ps-4 pe-0 my-0 mx-1 d-flex"
                   ref={this.pickAMonth}
@@ -222,14 +237,17 @@ class PayDocument extends Component {
                   </div>
                 </Picker>
               </div>
-              <div>
-              </div>
+              <div></div>
               {/* <TablePay data={this.state.PDdata} /> */}
               {view_pay_document ? (
                 <TablePay data={this.state.PD} />
-              ) : this.state.yearMonth.year + "년 " + this.state.yearMonth.month + "월 " + "달 급여대장은 없습니다."
-              }
-
+              ) : (
+                this.state.yearMonth.year +
+                '년 ' +
+                this.state.yearMonth.month +
+                '월 ' +
+                '달 급여대장은 없습니다.'
+              )}
             </article>
           </Mobile>
         </div>

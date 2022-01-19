@@ -56,3 +56,12 @@ input[type='password'] {
   width: auto;
   height: 100%;
 }
+
+/*캘린더 피커 위치*/
+.month-picker > .rmp-container.show {
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 100%;
+}

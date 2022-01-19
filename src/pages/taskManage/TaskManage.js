@@ -178,7 +178,7 @@ class TaskManage extends Component {
           <Menu />
           <PC>
             <article className="todayleave">
-              <h4 className="text-h4 w-100 px-5">
+              <h4 className="text-h4 w-100 py-3 px-5 fw-bold sectionShadow">
                 {/* <span className='color-point text-h5'>✔ </span> */}
                 🏖 오늘의 휴가자
               </h4>
@@ -197,16 +197,16 @@ class TaskManage extends Component {
                 onChange={this.handleDate}
                 id="currentDate"
                 // value={this.state.yearMonth.currentDate}
-                className="sectionShadow"
+                className="sectionShadow my-3 me-2"
               />
-              <div className="sectionShadow">
+              <div className="sectionShadow my-3 ms-2">
                 <TableVacation data={this.state.DA} />
               </div>
             </article>
           </PC>
           <Mobile>
             <article className="todayleave">
-              <h4 className="text-h4 w-100 px-5">
+              <h4 className="text-h4 w-100 py-3 px-5 fw-bold sectionShadow">
                 {/* <span className='color-point text-h5'>✔ </span> */}
                 🏖 오늘의 휴가자
               </h4>
@@ -235,7 +235,7 @@ class TaskManage extends Component {
             </article>
           </Mobile>
           <article className="sectionShadow">
-            <h4 className="text-h4 px-4">🗿 오늘의 근무자</h4>
+            <h4 className="text-h4 px-4 fw-bold">🗿 오늘의 근무자</h4>
             <Table3 data={this.state.worker} click={clickhandler} />
           </article>
         </div>

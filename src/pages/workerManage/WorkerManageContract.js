@@ -619,7 +619,7 @@ class WorkerManageContract extends Component {
 
     data.BusinessName = this.props.userinfo.business_name;
 
-    console.log(data.value4)
+    console.log(data.value4);
     delete data.signOrStamp;
 
     writeContractform(data).then((res) => {
@@ -661,7 +661,7 @@ class WorkerManageContract extends Component {
           <div className="d-flex justify-content-between px-5">
             <div>
               <PC>
-                <div className="small-shadow py-3 px-5 flex align-ct js-ct worker-name width-fit m-0">
+                <div className="small-shadow py-3 px-5 flex align-ct js-ct worker-name width-fit m-0 bg-white">
                   <span className="text-h6 text-bold">
                     {this.props.location.state.worker.workername2}
                   </span>

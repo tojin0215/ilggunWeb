@@ -134,7 +134,7 @@ class Authentication extends Component {
           <div className="row">
             {inputBoxes}
             <button
-              className="button-solid text-h5 text-bold mt-3"
+              className="button-solid text-h5 text-bold mt-3 py-2"
               onClick={this.handleLogin}
             >
               LOGIN
