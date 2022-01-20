@@ -10,7 +10,7 @@ import imgsearch from '../../img/close_white.png'
 
 const Table = props => {
   const { data } = props;
-  console.log(data)
+  // console.log(data)
   const columns = [
     {
       name: "이름",
