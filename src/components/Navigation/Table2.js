@@ -14,6 +14,7 @@ const Table = (props) => {
     },
     {
       name: 'QR',
+      maxWidth: '8rem',
       Button: true,
       cell: (row) =>
         row.state == 2 ? (
@@ -31,6 +32,7 @@ const Table = (props) => {
 
     {
       name: '입사일',
+      maxWidth: '10rem',
       selector: (row, index) => row.startdate,
       sortable: true,
     },
@@ -42,6 +44,7 @@ const Table = (props) => {
     // },
     {
       name: '퇴직처리',
+      // maxWidth: '16rem',
       Button: true,
       cell: (row) =>
         row.state == 2 ? (
