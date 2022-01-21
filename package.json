@@ -77,5 +77,5 @@
     "eslint-config-prettier": "^8.3.0",
     "ts-node": "^10.2.1"
   },
-  "proxy": "http://13.124.141.28:3000"
+  "proxy": "https://xn--zv0bj46b.kr"
 }

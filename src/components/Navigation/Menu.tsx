@@ -72,7 +72,7 @@ export const Menu = () => {
           // you can use your own router's api to get pathname
           activeItemId={location.pathname}
           onSelect={({ itemId }) => {
-            if (itemId==="http://13.124.141.28:9090/") window.open("http://13.124.141.28:9090/", "_blank")
+            if (itemId==="/home?backref=http://13.124.141.28:9090/") {window.open("http://13.124.141.28:9090/", "_blank"); history.push("/home")}
             if (itemId==="https://www.bizinfo.go.kr/see/seea/selectSEEA100.do") window.open("https://www.bizinfo.go.kr/see/seea/selectSEEA100.do", "_blank")
             else history.push(itemId);
             setIsSidebarOpen(false);
@@ -189,7 +189,7 @@ export const Menu = () => {
             
             {
               title: '견적내기',
-              itemId: 'http://13.124.141.28:9090/',
+              itemId: '/home?backref=http://13.124.141.28:9090/',
               elemBefore: () => <FaFileAlt />
             },
             
