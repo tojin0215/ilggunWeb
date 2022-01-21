@@ -189,31 +189,31 @@ class PayDocumentDetails extends Component {
 
     const pay_document_data = show_pay_document
       ? {
-        name: this.state.workername2,
-        salary: this.state.salary,
-        taxFree: this.state.taxFree,
-        taxation: this.state.taxation,
+          name: this.state.workername2,
+          salary: this.state.salary,
+          taxFree: this.state.taxFree,
+          taxation: this.state.taxation,
 
-        nationalPension: Math.round(
-          (this.state.salary *
-            this.state.insurance.NationalPensionPercentage) /
-          100,
-        ),
-        employmentInsurance: Math.round(
-          (this.state.salary *
-            this.state.insurance.EmploymentInsurancePercentage) /
-          100,
-        ),
-        healthInsurance: Math.round(
-          (this.state.salary *
-            this.state.insurance.HealthInsurancePercentage) /
-          100,
-        ),
-        regularCare: Math.round(
-          (this.state.salary * this.state.insurance.RegularCarePercentage) /
-          100,
-        ),
-      }
+          nationalPension: Math.round(
+            (this.state.salary *
+              this.state.insurance.NationalPensionPercentage) /
+              100,
+          ),
+          employmentInsurance: Math.round(
+            (this.state.salary *
+              this.state.insurance.EmploymentInsurancePercentage) /
+              100,
+          ),
+          healthInsurance: Math.round(
+            (this.state.salary *
+              this.state.insurance.HealthInsurancePercentage) /
+              100,
+          ),
+          regularCare: Math.round(
+            (this.state.salary * this.state.insurance.RegularCarePercentage) /
+              100,
+          ),
+        }
       : {};
 
     if (show_pay_document) pay_document_data.origin = pay_document_data.salary;
@@ -237,7 +237,9 @@ class PayDocumentDetails extends Component {
         <div className="container">
           <Menu />
           <PC>
-            <h4 className="text-h5">급여명세서</h4>
+            <h4 className="text-h4 w-100 py-3 px-5 fw-bold sectionShadow">
+              급여명세서
+            </h4>
             <article className="flex todayleave sectionShadow m-5 px-2">
               <div className="small-shadow">
                 {this.state.selectedWorker ? (
@@ -293,7 +295,9 @@ class PayDocumentDetails extends Component {
             </article>
           </PC>
           <Mobile>
-            <h4 className="text-h5 text-center">급여명세서</h4>
+            <h4 className="text-h4 w-100 py-3 px-5 fw-bold sectionShadow">
+              급여명세서
+            </h4>
             <article className="flex todayleave-col sectionShadow px-2 flex-auto">
               <div className="small-shadow w-100 flex-col">
                 {this.state.selectedWorker ? (

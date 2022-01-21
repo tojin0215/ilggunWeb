@@ -55,6 +55,9 @@
   justify-content: center;
 }
 /* 오늘의 근무자 셀 내용 안짤리도록 넓히기*/
+.rdt_TableCell {
+  /* width: auto; */
+}
 .rdt_TableCell > div {
   width: 100%;
   text-align: center;

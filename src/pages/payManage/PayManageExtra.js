@@ -115,8 +115,8 @@ class PayManageExtra extends Component {
 
                 item['worker_id'] = item.id;
                 item['id'] = index;
-                console.log('item');
-                console.log(item);
+                // console.log('item');
+                // console.log(item);
 
                 return item;
               }),
@@ -142,8 +142,13 @@ class PayManageExtra extends Component {
     this.setState({ isVisibleMonthSelector: false });
   };
   handleClickMonthBox = (e) => {
+    this.pickAMonth.current.show()
     this.setState({ isVisibleMonthSelector: true });
-    console.debug(this.state.isVisibleMonthSelector);
+  };
+
+  handleClickMonthBox2 = (e) => {
+    this.pickAMonth2.current.show()
+    this.setState({ isVisibleMonthSelector: true });
   };
 
   goLogin = () => {
@@ -194,7 +199,7 @@ class PayManageExtra extends Component {
       )
         .then((result) => result.json())
         .then((result) => {
-          console.log(result);
+          // console.log(result);
           alert('추가 수당 저장 완료.');
           this.setState({ addAllowance: result });
           this.selectAlloWance();
@@ -275,6 +280,7 @@ class PayManageExtra extends Component {
             <h4 className="text-h4 w-100 py-3 px-5 fw-bold sectionShadow">
               💰 추가수당 지급 확인
             </h4>
+
             <div className="sectionShadow me-2 my-3">
               <Picker
                 ref={this.pickAMonth}
@@ -282,10 +288,12 @@ class PayManageExtra extends Component {
                 lang={pickerLang.months}
                 onChange={this.handleAMonthChange}
                 onDismiss={this.handleAMonthDissmis}
+                show={this.state.isVisibleMonthSelector}
               >
                 <div
                   className="small-shadow text-bold text-h5 text-center cursor-pointer"
-                  onClick={() => this.pickAMonth.current.show()}
+                  //onClick={() => this.pickAMonth.current.show()}                  
+                  onClick={this.handleClickMonthBox}
                 >
                   {this.state.yearMonth.year}년 {this.state.yearMonth.month}월
                 </div>
@@ -328,10 +336,11 @@ class PayManageExtra extends Component {
                     lang={pickerLang.months}
                     onChange={this.handleAMonthChange}
                     onDismiss={this.handleAMonthDissmis}
+                    show={this.state.isVisibleMonthSelector}
                   >
                     <div
                       className="small-shadow text-bold text-h5 text-center cursor-pointer"
-                      onClick={() => this.pickAMonth2.current.show()}
+                      onClick={this.handleClickMonthBox2}
                     >
                       {this.state.yearMonth.year}년 {this.state.yearMonth.month}
                       월
@@ -562,7 +571,8 @@ class PayManageExtra extends Component {
                   >
                     <div
                       className="small-shadow text-bold text-h5 text-center cursor-pointer"
-                      onClick={() => this.pickAMonth2.current.show()}
+                      // onClick={() => this.pickAMonth2.current.show()}
+                      onClick={this.handleClickMonthBox2}
                     >
                       {this.state.yearMonth.year}년 {this.state.yearMonth.month}
                       월

@@ -99,7 +99,7 @@ body {
   margin: 0 auto;
   align-items: center;
   border-radius: 20px;
-  box-shadow: 3px 5px 9.6px 4.4px rgba(64, 171, 153, 0.7);
+  /* box-shadow: 3px 5px 9.6px 4.4px rgba(64, 171, 153, 0.7); */
 }
 /* .logo::before {
   border-radius: 20px;

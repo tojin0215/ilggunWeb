@@ -59,9 +59,16 @@ input[type='password'] {
 
 /*캘린더 피커 위치*/
 .month-picker > .rmp-container.show {
-  position: absolute;
-  width: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 100%;
+  /* position: absolute; */
+  /* width: 100%; */
+  left: 50px;
+  /* transform: translateX(-50%); */
+  /* top: 100%; */
+}
+.react-calendar__navigation__arrow {
+  display: flex;
+  font-size: 40px;
+  line-height: 32px;
+  align-items: flex-start;
+  justify-content: center;
 }

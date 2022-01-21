@@ -59,7 +59,7 @@ class Login extends Component {
         {/* <Navigation /> */}
         <div className="container">
           <PC>
-            <div className="sectionShadow container flex justify-around max-w-5xl items-center h-fit m-5 py-5 bg-light">
+            <div className="sectionShadow container flex justify-around max-w-5xl items-center h-fit m-5 py-5 bg-white">
               <Authentication mode={true} onLogin={this.handleLogin} />
               <div className="card-visual">
                 <img src={imgloginvisual} alt="로그인 배경 이미지" />
